@@ -1,0 +1,48 @@
+@import './variables';
+
+@mixin flex ($a: center, $b: center) {
+  display: flex;
+  justify-content: $a;
+  align-items: $b;
+}
+
+@mixin border($color: $colorGrey) {
+  border: 1px solid $color;
+}
+
+@mixin button-icon($color: $colorWhite, $hoverColor: $colorGrey, $borderRadius: $buttonBorderRadius) {
+  @include flex;
+
+  width: 45px;
+  background-color: $color;
+  height: 45px;
+  border-radius: $borderRadius;
+  transition: background-color $animationDuration;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hoverColor;
+  }
+}
+
+@mixin button(
+  $color: $colorWhite,
+  $borderColor: $colorGrey,
+  $hoverColor: $colorGrey,
+  $width: 120px,
+  $height: 45px,
+) {
+    @include flex;
+    @include border($borderColor);
+
+    width: $width;
+    height: $height;
+    background-color: $color;
+    border-radius: $buttonBorderRadius;
+    transition: background-color $animationDuration;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $hoverColor;
+    }
+}
