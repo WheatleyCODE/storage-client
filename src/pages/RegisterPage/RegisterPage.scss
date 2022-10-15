@@ -1,0 +1,8 @@
+@import 'styles/templates.scss';
+
+.register-page {
+  padding: $paddingVertical $paddingHorizontal;
+  background: $homePageGradient;
+  height: calc(100vh - 200px);
+  min-height: $minHomePageHeigth;
+}

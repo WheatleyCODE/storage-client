@@ -1,0 +1,30 @@
+@import 'styles/templates.scss';
+
+.login-page {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: $homePageGradient;
+  height: calc(100vh - 80px);
+  padding: $paddingVertical $paddingHorizontal;
+  background: $homePageGradient;
+  min-height: $minHomePageHeigth;
+
+
+  .stars {
+    top: 10vh;
+    z-index: 5;
+  }
+  
+  .mountains {
+    bottom: 0;
+    z-index: 10;
+  }
+
+  .hills {
+    bottom: 0;
+    z-index: 15;
+  }
+}

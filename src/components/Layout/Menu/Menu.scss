@@ -1,0 +1,19 @@
+@import 'styles/templates.scss';
+
+.menu {
+  margin-left: 20px;
+
+  li {
+    list-style: none;
+  }
+
+  ul {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .menu {
+    display: none;
+  }
+}

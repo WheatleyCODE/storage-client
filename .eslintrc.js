@@ -30,7 +30,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-param-reassign': 'off',
     'default-param-last': 'off',
-    'max-len': ['error', 110],
+    'max-len': ['error', 100],
     'react-hooks/exhaustive-deps': ['warn'],
     'react/function-component-definition': [
       'error',
@@ -44,13 +44,14 @@ module.exports = {
     'default-param-last': 'off',
     '@typescript-eslint/default-param-last': 'off',
     'no-underscore-dangle': 'off',
+    'react/jsx-props-no-spreading': 'off',
     quotes: [2, 'single'],
 
     'prettier/prettier': [
       'error',
       {
         singleQuote: true,
-        printWidth: 110,
+        printWidth: 100,
       },
     ],
   },

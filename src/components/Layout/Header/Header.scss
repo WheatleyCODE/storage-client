@@ -1,0 +1,34 @@
+@import 'styles/templates.scss';
+
+.header {
+  @include flex;
+  padding: $paddingVertical $paddingHorizontal;
+  justify-content: space-between;
+  height: $headerHeight;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background-color: $colorWhite;
+
+  &__menu {
+    display: flex;
+    align-items: center;
+  }
+
+  &__burger {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .header__user {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .header__burger {
+    display: block;
+    margin-right: 20px;
+  }
+}

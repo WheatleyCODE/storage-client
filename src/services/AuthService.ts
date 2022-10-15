@@ -27,7 +27,10 @@ export class AuthService {
     return $api.post<IResetPasswordData>('/api/auth/reset/password', { email });
   }
 
-  static async changePassword(password: string, link: string): Promise<AxiosResponse<IChangePasswordData>> {
+  static async changePassword(
+    password: string,
+    link: string
+  ): Promise<AxiosResponse<IChangePasswordData>> {
     return $api.post<IChangePasswordData>('/api/auth/change/password', {
       password,
       resetPasswordLink: link,

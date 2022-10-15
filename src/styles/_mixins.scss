@@ -10,39 +10,63 @@
   border: 1px solid $color;
 }
 
-@mixin button-icon($color: $colorWhite, $hoverColor: $colorGrey, $borderRadius: $buttonBorderRadius) {
+@mixin button-icon(
+  $color: $colorBlack,
+  $colorBg: $colorWhite,
+  $hoverColor: $colorWhite,
+  $hoverColorBg: $colorLightGrey,
+  $borderRadius: $buttonBorderRadius
+) {
   @include flex;
-
+  @include border($colorWhite);
   width: 45px;
-  background-color: $color;
+  color: $color;
+  background-color: $colorBg;
   height: 45px;
   border-radius: $borderRadius;
-  transition: background-color $animationDuration;
+  transition: all $animationDuration;
   cursor: pointer;
 
+  svg {
+    font-size: 2rem;
+  }
+
   &:hover {
-    background-color: $hoverColor;
+    background-color: $hoverColorBg;
+    color: $hoverColor;
   }
 }
 
 @mixin button(
-  $color: $colorWhite,
+  $color: $colorBlack,
+  $colorBg: $colorWhite,
   $borderColor: $colorGrey,
-  $hoverColor: $colorGrey,
-  $width: 120px,
-  $height: 45px,
+  $hoverColor: $colorWhite,
+  $hoverColorBg: $colorGrey,
+  $hoverColorAc: $colorDarkGrey,
+  $p1: 10px,
+  $p2: 14px,
 ) {
     @include flex;
     @include border($borderColor);
-
-    width: $width;
-    height: $height;
-    background-color: $color;
+    padding: $p1 $p2;
+    color: $color;
+    background-color: $colorBg;
     border-radius: $buttonBorderRadius;
-    transition: background-color $animationDuration;
+    transition: all $animationDuration;
     cursor: pointer;
 
+    svg {
+      font-size: $iconFontSize;
+      margin-right: 10px;
+    }
+
     &:hover {
-      background-color: $hoverColor;
+      background-color: $hoverColorBg;
+      color: $hoverColor;
+    }
+
+    &:active {
+      background-color: $hoverColorAc;
     }
 }

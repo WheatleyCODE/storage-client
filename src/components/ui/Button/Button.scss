@@ -1,0 +1,25 @@
+@import 'styles/templates.scss';
+
+.button {
+  &__icon {
+    @include flex;
+  }
+}
+
+.button.default.outline.blue {
+  @include button($colorBlue, $colorWhite, $colorBlue, $colorWhite, $colorBlue, $colorDarkBlue);
+}
+
+.button.icon.outline {
+  @include button-icon($colorBlack, $colorWhite, $colorBlack, $colorLightGrey3);
+}
+
+.button.default.fill.blue {
+  @include button($colorWhite, $colorBlue, $colorWhite, $colorWhite, $colorLightBlue, $colorDarkBlue);
+  font-size: 1.1rem;
+}
+
+.button.default.fill.orange {
+  @include button($colorWhite, $colorOrange, $colorWhite, $colorWhite, $colorLightOrange, $colorDarkOrange);
+  font-size: 1.1rem;
+}

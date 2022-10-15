@@ -1,22 +1,22 @@
 $colorRed: #dc3545;
-$colorOrange: #ff7300;
+$colorOrange: #ff7e14;
 $colorYellow: #ffeb34;
-$colorGreen: #20d630;
-$colorBlue: #0d6efd;
+$colorGreen: #20d52f;
+$colorBlue: #1573ff;
 $colorViolet: #6133b4;
 
 $colorLightRed: #dc3545;
-$colorLightOrange: #ff7300;
+$colorLightOrange: #ff8928;
 $colorLightYellow: #ffeb34;
 $colorLightGreen: #20d630;
-$colorLigthBlue: #2ad2ef;
-$colorLightViolet: #6133b4;
+$colorLightBlue: #3b89ff;
+$colorLightViolet: #8b55f0;
 
 $colorDarkRed: #dc3545;
-$colorDarkOrange: #ff7300;
+$colorDarkOrange: #df6400;
 $colorDarkYellow: #ffeb34;
 $colorDarkGreen: #20d630;
-$colorDarkBlue: #0d6efd;
+$colorDarkBlue: #0052ce;
 $colorDarkViolet: #6133b4;
 
 $colorWhite: white;
@@ -26,21 +26,23 @@ $colorGrey: #909090;
 $colorLightGrey: #a3a3a3;
 $colorLightGrey1: #acacac;
 $colorLightGrey2: #c9c9c9;
-$colorLightGrey3: #d4d4d4;
+$colorLightGrey3: #e0e0e0;
 
 $colorDarkGrey:#767676;
 $colorDarkGrey1:#666666;
 $colorDarkGrey2:#555555;
-$colorDarkGrey2:#434343;
+$colorDarkGrey3:#434343;
 
 $homePageGradient: linear-gradient(0deg, $colorViolet 0%, $colorViolet 20%, $colorWhite 100%);
 
 $headerHeight: 80px;
-$footerHeight: 120px;
+$footerHeight: 420px;
+$minHomePageHeigth: 500px;
 
 $paddingVertical: 20px;
 $paddingHorizontal: 30px;
 
-$animationDuration: 0.2s;
+$animationDuration: 0.15s;
 $buttonBorderRadius: 5px;
+$iconFontSize: 1.2rem;
 

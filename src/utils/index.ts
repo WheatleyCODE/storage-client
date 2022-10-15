@@ -1,0 +1,1 @@
+export { getSimpleMotionProps } from './getMotionProps';

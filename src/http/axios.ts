@@ -24,7 +24,9 @@ axiosIstance.interceptors.response.use(
       originalRequest._isRetry = true;
 
       try {
-        const res = await axios.get<IAuthData>(`${BASE_URL}/api/auth/refresh`, { withCredentials: true });
+        const res = await axios.get<IAuthData>(`${BASE_URL}/api/auth/refresh`, {
+          withCredentials: true,
+        });
         const authResponse = res.data;
         localStorage.setItem(LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken);
 
