@@ -1,0 +1,66 @@
+@import 'styles/templates.scss';
+
+.input {
+  position: relative;
+  height: 45px;
+  width: 100%;
+  min-width: 260px;
+
+  &__icon {
+    @include flex;
+    cursor: text;
+    position: absolute;
+    height: 45px;
+    padding-left: 15px;
+    font-size: 1.5rem;
+    color: $colorDarkGrey2;
+  }
+
+  &__textfild {
+    @include input;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__placeholder, &__valid-error {
+    padding: 0 5px;
+    position: absolute;
+    background-color: $colorWhite;
+  }
+
+  &__placeholder {
+    font-size: 1rem;
+    border-radius: 50%;
+    top: 13px;
+    left: 20px;
+    color: $colorDarkGrey2;
+  }
+
+  &__valid-error {
+    font-size: 0.9rem;
+    top: -8px;
+    right: 10px;
+    color: $colorRed;
+  }
+}
+
+.input.error {
+  .input__textfild {
+    outline: 1px solid $colorRed;
+  }
+}
+
+
+.input:hover .input__textfild {
+  outline: 1px solid $colorBlue;
+}
+
+.input.icon {
+  .input__textfild {
+    padding-left: 50px;
+  }
+
+  .input__placeholder {
+    left: 47px;
+  }
+}

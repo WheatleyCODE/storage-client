@@ -1,10 +1,14 @@
 import React from 'react';
+import { Hills, Mountains, RegisterForm, Stars } from 'components';
 import './RegisterPage.scss';
 
 export const RegisterPage = () => {
   return (
     <div className="register-page">
-      <h1>RegisterPage</h1>
+      <RegisterForm />
+      <Stars />
+      <Mountains />
+      <Hills />
     </div>
   );
 };

@@ -1,6 +1,12 @@
 export { App } from './App/App';
 export { Layout } from './Layout/Layout';
-export { Button } from './ui/Button/Button';
+export { Button } from './UI/Button/Button';
+export { Input } from './UI/Input/Input';
 export { Hills } from './design/Hills/Hills';
 export { Mountains } from './design/Mountains/Mountains';
 export { Stars } from './design/Stars/Stars';
+export { Form } from './Forms/Form/Form';
+export { RegisterForm } from './Forms/RegisterForm/RegisterForm';
+export { LoginForm } from './Forms/LoginForm/LoginForm';
+export { Link } from './UI/Link/Link';
+export { Checkbox } from './UI/Checkbox/Checkbox';

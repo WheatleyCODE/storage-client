@@ -1,0 +1,59 @@
+@import 'styles/templates.scss';
+
+.login-form {
+  position: relative;
+  z-index: 29;
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  background-color: $colorWhite;
+
+  .input {
+    margin-bottom: 15px;
+  }
+
+  &__hr {
+    margin: 20px 0;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $colorLightGrey3;
+  }
+
+  .links {
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 10px 0 20px 0;
+    display: flex;
+    justify-content: space-between;
+
+    &__block {
+      display: flex;
+      align-items: center;
+    }
+
+    &__block:last-child {
+      justify-content: flex-end;
+    }
+  }
+
+  &__buttons {
+    width: 100%;
+
+    .button {
+      width: 100%;
+      height: 45px;
+    }
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .login-form {
+    -webkit-box-shadow: 3px 3px 6px 0px $colorShadow;
+    -moz-box-shadow: 3px 3px 6px 0px $colorShadow;
+    box-shadow: 3px 3px 6px 0px $colorShadow;
+
+    .links {
+      font-size: 1rem;
+    }
+  }
+}

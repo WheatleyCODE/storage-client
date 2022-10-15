@@ -1,0 +1,46 @@
+@import 'styles/templates.scss';
+
+.checkbox {
+  height: 25px;
+  display: flex;
+  align-items: center;
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__textfild {
+    display: none;
+  }
+
+  &__text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left: 10px;
+    height: 100%;
+    margin-bottom: -1px
+  }
+
+  &__check {
+    @include flex;
+  }
+
+  &__square {
+    @include flex;
+    transition: outline $animationDuration;
+    height: 20px;
+    width: 20px;
+    border: 1px solid $colorLightGrey;
+    border-radius: 3px;
+  }
+
+  &__square.active {
+    outline: 1px solid $colorBlue;
+  }
+}

@@ -1,0 +1,25 @@
+@import 'styles/templates.scss';
+
+.form {
+  width: 100%;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 100;
+  background-color: $colorWhite;
+  max-width: 600px;
+  border-radius: 10px;
+  padding: 20px;
+
+  &__title {
+    width: 100%;
+    margin-bottom: 30px;
+
+    h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+  }
+}

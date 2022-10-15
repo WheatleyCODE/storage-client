@@ -70,3 +70,18 @@
       background-color: $hoverColorAc;
     }
 }
+
+@mixin input {
+  border: 1px solid $colorLightGrey3;
+  border-radius: 3px;
+  transition: $animationDuration;
+  padding: 10px 10px 10px 20px;
+
+  &:hover {
+    outline: 1px solid $colorLightBlue;
+  }
+
+  &:focus {
+    outline: 1px solid $colorBlue;
+  }
+}

@@ -1,0 +1,15 @@
+@import 'styles/templates.scss';
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: $colorBlue;
+  padding-bottom: 1px;
+  border-bottom: 1px solid $colorBlue;
+  transition: all $animationDuration;
+  cursor: pointer;
+
+  &:hover {
+    border-bottom: 1px solid $colorWhite;
+  }
+}

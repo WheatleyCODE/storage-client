@@ -1,4 +1,4 @@
-import React, { ComponentProps, ElementType, FC, memo } from 'react';
+import React, { FC, memo } from 'react';
 import { IconType } from 'react-icons';
 import './Button.scss';
 
@@ -13,7 +13,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disable?: boolean;
 }
 
-export const Button: FC<ButtonProps> = (props) => {
+export const Button: FC<ButtonProps> = memo((props) => {
   const {
     text,
     type = 'default',
@@ -44,4 +44,4 @@ export const Button: FC<ButtonProps> = (props) => {
       {text}
     </button>
   );
-};
+});

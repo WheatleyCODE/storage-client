@@ -1,1 +1,1 @@
-export { getSimpleMotionProps } from './getMotionProps';
+export { getPassError, isEqual } from './auth';

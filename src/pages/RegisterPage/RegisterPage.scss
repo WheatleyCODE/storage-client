@@ -1,8 +1,41 @@
 @import 'styles/templates.scss';
 
 .register-page {
-  padding: $paddingVertical $paddingHorizontal;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   background: $homePageGradient;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 80px);
+  background: $homePageGradient;
   min-height: $minHomePageHeigth;
+
+  .stars {
+    top: 10vh;
+    z-index: 5;
+  }
+  
+  .mountains {
+    bottom: 0;
+    z-index: 10;
+  }
+
+  .hills {
+    bottom: 0;
+    z-index: 15;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .register-page {
+    align-items: center;
+
+    .register-form {
+      margin-top: -30vh;
+      height: auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  }
 }
