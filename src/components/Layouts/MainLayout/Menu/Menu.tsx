@@ -1,15 +1,15 @@
 import { headerMenu } from 'consts';
-import React from 'react';
+import React, { FC } from 'react';
 import { MenuItem } from './MenuItem/MenuItem';
 import './Menu.scss';
 
-export const Menu = () => {
+export const Menu: FC = () => {
   return (
     <div className="menu">
       <ul>
         {headerMenu.map((item) => (
-          <li>
-            <MenuItem key={item.path} title={item.title} path={item.path} />
+          <li key={item.path}>
+            <MenuItem title={item.title} path={item.path} />
           </li>
         ))}
       </ul>

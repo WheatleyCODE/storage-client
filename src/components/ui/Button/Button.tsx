@@ -2,7 +2,7 @@ import React, { FC, memo } from 'react';
 import { IconType } from 'react-icons';
 import './Button.scss';
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   text?: string;
   type?: 'icon' | 'default';
   outline?: 'fill' | 'outline';
@@ -13,7 +13,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disable?: boolean;
 }
 
-export const Button: FC<ButtonProps> = memo((props) => {
+export const Button: FC<IButtonProps> = memo((props) => {
   const {
     text,
     type = 'default',

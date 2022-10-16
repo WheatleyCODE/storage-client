@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Stars.scss';
 
-export const Stars = () => <div className="stars" />;
+export const Stars: FC = () => <div className="stars" />;

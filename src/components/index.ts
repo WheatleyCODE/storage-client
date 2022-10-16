@@ -1,5 +1,6 @@
 export { App } from './App/App';
-export { Layout } from './Layout/Layout';
+export { MainLayout } from './Layouts/MainLayout/MainLayout';
+export { AuthLayout } from './Layouts/AuthLayout/AuthLayout';
 export { Button } from './UI/Button/Button';
 export { Input } from './UI/Input/Input';
 export { Hills } from './design/Hills/Hills';

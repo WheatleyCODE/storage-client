@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Stars, Mountains, Hills } from 'components';
 import './Footer.scss';
 
-export const Footer = () => {
+export const Footer: FC = () => {
   return (
     <footer className="footer">
       <Stars />

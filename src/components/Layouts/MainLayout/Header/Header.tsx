@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
 import { Button } from 'components';
 import { FaRegUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
@@ -8,7 +8,7 @@ import './Header.scss';
 import { Menu } from '../Menu/Menu';
 import { Logo } from '../Logo/Logo';
 
-export const Header = () => {
+export const Header: FC = () => {
   const navigate = useNavigate();
 
   const navigateToLogin = useCallback(() => {

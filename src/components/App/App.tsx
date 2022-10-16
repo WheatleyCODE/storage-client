@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from 'store';
-import { HomePage, RegisterPage, LoginPage } from 'pages';
-import { Layout } from 'components';
+import { MainLayout } from 'components';
+import { routes } from 'routes';
 import './App.scss';
 
 export const App: FC = () => {
@@ -13,10 +13,10 @@ export const App: FC = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+            <Route path="/" element={<MainLayout />}>
+              {routes.map((route) => (
+                <Route key={route.path} path={route.path} element={<route.Page />} />
+              ))}
             </Route>
           </Routes>
         </PersistGate>

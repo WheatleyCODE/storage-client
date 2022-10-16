@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { PathRoutes } from 'types';
 import { Footer } from './Footer/Footer';
 import { Header } from './Header/Header';
-import './Layout.scss';
+import './MainLayout.scss';
 
-export const Layout = () => {
+export const MainLayout: FC = () => {
   const location = useLocation();
   const isFooter = location.pathname === PathRoutes.HOME;
 
