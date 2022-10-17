@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
-// ! Плохо
-export type GetValidatorOptions = {
+export interface IValidatorOptions {
   noEmpty?: {
     value: boolean;
     textError: string;
@@ -20,9 +19,9 @@ export type GetValidatorOptions = {
     value: boolean;
     textError: string;
   };
-};
+}
 
-export const getValidator = (options: GetValidatorOptions) => {
+export const getValidator = (options: IValidatorOptions) => {
   const { email, noEmpty, minLength, maxLength } = options;
 
   const re =

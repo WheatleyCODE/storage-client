@@ -7,9 +7,10 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  z-index: 100;
+  z-index: 29;
   background-color: $colorWhite;
   max-width: 600px;
+  min-width: 280;
   border-radius: 10px;
   padding: 20px;
 

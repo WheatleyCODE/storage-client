@@ -19,7 +19,7 @@ export const Checkbox: FC<ICheckboxProps> = memo(({ label, value, onClick }) => 
     }
 
     checkControls.start('hidden');
-  }, [value]);
+  }, [value, checkControls]);
 
   return (
     <div className="checkbox">

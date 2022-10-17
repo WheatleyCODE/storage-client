@@ -59,7 +59,7 @@ export const Input: FC<IInputProps> = memo((props) => {
     }
 
     placeholderControls.start('default');
-  }, [isActive, isErrorActive]);
+  }, [isActive, isErrorActive, placeholderControls]);
 
   return (
     <div className={`input ${isIcon && 'icon'} ${isErrorActive && 'error'} `}>

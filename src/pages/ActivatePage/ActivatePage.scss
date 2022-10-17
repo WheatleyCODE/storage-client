@@ -1,3 +1,19 @@
 @import 'styles/templates.scss';
 
-.activate-page {}
+.activate-page {
+  .auth-layout {
+    @include flex;
+    flex-direction: column;
+    padding-top: 0;
+  }
+
+  &__title {
+    margin: 0;
+    margin-bottom: 20px;
+    margin-top: -15vh;
+    font-size: 2.5rem;
+    text-align: center;
+    color: $colorWhite;
+    text-shadow: 1px 1px 5px $colorDarkGrey3; 
+  }
+}

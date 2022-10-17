@@ -1,11 +1,10 @@
 import React, { FC, useCallback, useState } from 'react';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { MdOutlineMailOutline } from 'react-icons/md';
-import { Input, Checkbox, Link, Button } from 'components';
+import { Input, AuthForm } from 'components';
 import { emailValidator, passValidator } from 'helpers';
 import { useValidInput } from 'hooks';
 import { PathRoutes } from 'types';
-import { Form } from '../Form/Form';
 import './LoginForm.scss';
 
 export const LoginForm: FC = () => {
@@ -27,7 +26,16 @@ export const LoginForm: FC = () => {
 
   return (
     <div className="login-form">
-      <Form title="Вход">
+      <AuthForm
+        title="Вход"
+        buttonText="Войти"
+        buttonAction={login}
+        buttonIsDisable={isDisable}
+        linkText="Нет аккаунта? Регистрация"
+        linkPath={PathRoutes.REGISTER}
+        checkboxValue={showPass}
+        checkboxAction={changeShowPass}
+      >
         <Input
           Icon={MdOutlineMailOutline}
           value={emailInput.value}
@@ -41,31 +49,14 @@ export const LoginForm: FC = () => {
         <Input
           Icon={RiLockPasswordLine}
           value={passInput.value}
-          type="password"
+          type={showPass ? 'text' : 'password'}
           placeholder="Пароль"
           onChange={passInput.onChange}
           onBlur={passInput.onBlur}
           isError={passInput.isError}
           validError={passInput.validError}
         />
-        <div className="login-form__links links">
-          <div className="links__block">
-            <Checkbox value={showPass} onClick={changeShowPass} label="Показать пароль" />
-          </div>
-          <div className="links__block">
-            <Link text="Забыли пароль?" href={PathRoutes.RESET_PASSWORD} />
-          </div>
-        </div>
-        <div className="login-form__buttons">
-          <Button onClick={login} outline="fill" color="blue" text="Войти" />
-        </div>
-        <hr className="login-form__hr" />
-        <div className="login-form__auth auth">
-          <div className="auth__block">
-            <Link text="Нет аккаунта? Регистрация" href={PathRoutes.REGISTER} />
-          </div>
-        </div>
-      </Form>
+      </AuthForm>
     </div>
   );
 };

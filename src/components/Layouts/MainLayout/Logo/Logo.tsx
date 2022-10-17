@@ -20,7 +20,7 @@ export const Logo: FC<ILogoProps> = ({ isName = true }) => {
     }
 
     navigate(PathRoutes.HOME);
-  }, [navigate]);
+  }, [navigate, location.pathname]);
 
   return (
     <div aria-hidden onClick={onClick} className="logo">

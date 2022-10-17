@@ -1,16 +1,13 @@
 import React, { FC, useCallback, useState } from 'react';
 import { RiLockPasswordLine } from 'react-icons/ri';
-import { MdOutlineMailOutline } from 'react-icons/md';
 import { Input, AuthForm } from 'components';
 import { useValidInput } from 'hooks';
-import { emailValidator, nickValidator, passValidator } from 'helpers';
+import { passValidator } from 'helpers';
 import { PathRoutes } from 'types';
 import { getPassError, isEqual } from 'utils';
-import './RegisterForm.scss';
+import './ChangePasswordForm.scss';
 
-export const RegisterForm: FC = () => {
-  const nickInput = useValidInput([nickValidator]);
-  const emailInput = useValidInput([emailValidator]);
+export const ChangePasswordForm: FC = () => {
   const passInput = useValidInput([passValidator]);
   const repPassInput = useValidInput([passValidator]);
   const [showPass, setShowPass] = useState(false);
@@ -21,49 +18,27 @@ export const RegisterForm: FC = () => {
   const isEqPass = isEqual(passInput.value, repPassInput.value);
   const passError = getPassError(isEqPass, passInput.isTouched, repPassInput.isTouched);
 
-  const register = () => {
-    if (emailInput.isError || passInput.isError) return;
-    if (nickInput.isError || passError) return;
-    if (!nickInput.value || !emailInput.value) return;
-    if (!passInput.value) return;
+  const changePassword = () => {
+    // if
 
     // setIsDisable(true);
-    // registration(nickNameInput.value, emailInput.value, passInput.value);
-    console.log('ok', nickInput.value, emailInput.value, passInput.value);
+    // changePassword('id', passInput.value);
+    console.log('ok', 'id', passInput.value);
   };
 
   return (
     <div className="register-form">
       <AuthForm
-        title="Регистрация"
-        buttonText="Регистрация"
-        buttonAction={register}
+        title="Изменение пароля"
+        buttonText="Изменить паролль"
+        buttonAction={changePassword}
         buttonIsDisable={isDisable}
-        linkText="Есть аккаунт? Войти"
+        linkText="Войти в аккаунт"
         linkPath={PathRoutes.LOGIN}
         checkboxValue={showPass}
         checkboxAction={changeShowPass}
+        hideResetPassword
       >
-        <Input
-          Icon={MdOutlineMailOutline}
-          value={nickInput.value}
-          type="Имя пользователя"
-          placeholder="Пользователь"
-          onChange={nickInput.onChange}
-          onBlur={nickInput.onBlur}
-          isError={nickInput.isError}
-          validError={nickInput.validError}
-        />
-        <Input
-          Icon={MdOutlineMailOutline}
-          value={emailInput.value}
-          type="email"
-          placeholder="Почта"
-          onChange={emailInput.onChange}
-          onBlur={emailInput.onBlur}
-          isError={emailInput.isError}
-          validError={emailInput.validError}
-        />
         <Input
           Icon={RiLockPasswordLine}
           value={passInput.value}
