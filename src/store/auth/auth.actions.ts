@@ -21,8 +21,8 @@ export const login = createAsyncThunk<IAuthData, ILoginFilds>(
     try {
       const { data } = await AuthService.login(email, password);
       return data;
-    } catch (e) {
-      console.warn(e);
+    } catch (e: any) {
+      console.log(e.response.data);
       return thunkAPI.rejectWithValue(e);
     }
   }

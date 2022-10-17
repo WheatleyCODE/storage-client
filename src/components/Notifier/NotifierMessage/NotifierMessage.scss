@@ -1,0 +1,17 @@
+@import 'styles/templates.scss';
+
+.notifier-message.default {
+  @include notifier-message($colorLightGrey4, $colorDarkGrey3);
+}
+
+.notifier-message.red {
+  @include notifier-message($colorLightRed1, $colorLightRed);
+}
+
+.notifier-message.yellow {
+  @include notifier-message($colorLightYellow1, $colorLightYellow);
+}
+
+.notifier-message.green {
+  @include notifier-message($colorLightGreen1, $colorLightGreen);
+}

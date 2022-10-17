@@ -14,3 +14,5 @@ export { ChangePasswordForm } from './Forms/ChangePasswordForm/ChangePasswordFor
 export { LoginForm } from './Forms/LoginForm/LoginForm';
 export { Link } from './UI/Link/Link';
 export { Checkbox } from './UI/Checkbox/Checkbox';
+export { Portal } from './Portal/Portal';
+export { Notifier } from './Notifier/Notifier';

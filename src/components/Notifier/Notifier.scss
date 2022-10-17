@@ -1,0 +1,9 @@
+@import 'styles/templates.scss';
+
+.notifier {
+  position: fixed;
+  z-index: 31;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  bottom: 0;
+}
