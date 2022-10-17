@@ -1,11 +1,13 @@
+import React, { FC, useCallback, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useTypedDispatch } from 'hooks';
-import React, { FC, useCallback } from 'react';
 import { FaCheck, FaExclamationTriangle, FaInfoCircle, FaFireAlt, FaTimes } from 'react-icons/fa';
 import { notifierSlice } from 'store';
+import { MessageColor } from 'types';
 import './NotifierMessage.scss';
 
 export interface INotifierMessageProps {
-  color: 'green' | 'yellow' | 'red' | 'default';
+  color: MessageColor;
   message: string;
   id: number;
 }
@@ -17,8 +19,20 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id 
     dispath(notifierSlice.actions.notifierRemoveMessage(id));
   }, [dispath, id]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      removeMessage();
+    }, 5000);
+  }, [removeMessage]);
+
   return (
-    <div className={`notifier-message ${color}`}>
+    <motion.div
+      initial={{ opacity: 0, translateX: -300 }}
+      animate={{ opacity: 1, translateX: 0 }}
+      exit={{ opacity: 0, translateX: -300 }}
+      transition={{ duration: 0.5 }}
+      className={`notifier-message ${color}`}
+    >
       <div className="notifier-message__icon">
         {color === 'green' && <FaCheck />}
         {color === 'yellow' && <FaExclamationTriangle />}
@@ -29,6 +43,6 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id 
       <div aria-hidden onClick={removeMessage} className="notifier-message__close">
         <FaTimes />
       </div>
-    </div>
+    </motion.div>
   );
 };

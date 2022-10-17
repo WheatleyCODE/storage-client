@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { emitMessage } from 'helpers';
 import { AuthService } from 'services';
 import { IAuthData, ILoginFilds, IRegisterFilds } from 'types';
 
@@ -20,9 +21,19 @@ export const login = createAsyncThunk<IAuthData, ILoginFilds>(
   async ({ email, password }, thunkAPI) => {
     try {
       const { data } = await AuthService.login(email, password);
+
+      emitMessage({
+        color: 'green',
+        message: 'Вы успешно вошли в систему',
+      });
+
       return data;
     } catch (e: any) {
-      console.log(e.response.data);
+      emitMessage({
+        color: 'red',
+        message: e.response.data.message,
+      });
+
       return thunkAPI.rejectWithValue(e);
     }
   }

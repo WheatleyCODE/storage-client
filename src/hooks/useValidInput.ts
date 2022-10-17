@@ -25,7 +25,7 @@ export const useValidInput = (validators: IValidator[]): IValidInputOpts => {
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
 
-    if (couter === 0 && e.target.value.length > 2) {
+    if (couter === 0 && e.target.value.length !== 1) {
       setIsTouched(true);
     }
 

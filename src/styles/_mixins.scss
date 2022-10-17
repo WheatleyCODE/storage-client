@@ -47,28 +47,28 @@
   $p1: 10px,
   $p2: 14px,
 ) {
-    @include flex;
-    @include border($borderColor);
-    padding: $p1 $p2;
-    color: $color;
-    background-color: $colorBg;
-    border-radius: $buttonBorderRadius;
-    transition: all $animationDuration;
-    cursor: pointer;
+  @include border($borderColor);
+  @include flex;
+  padding: $p1 $p2;
+  color: $color;
+  background-color: $colorBg;
+  border-radius: $buttonBorderRadius;
+  transition: all $animationDuration;
+  cursor: pointer;
 
-    svg {
-      font-size: $iconFontSize;
-      margin-right: 10px;
-    }
+  svg {
+    font-size: $iconFontSize;
+    margin-right: 10px;
+  }
 
-    &:hover {
-      background-color: $hoverColorBg;
-      color: $hoverColor;
-    }
+  &:hover {
+    background-color: $hoverColorBg;
+    color: $hoverColor;
+  }
 
-    &:active {
-      background-color: $hoverColorAc;
-    }
+  &:active {
+    background-color: $hoverColorAc;
+  }
 }
 
 @mixin input {

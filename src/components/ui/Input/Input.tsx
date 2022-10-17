@@ -53,13 +53,13 @@ export const Input: FC<IInputProps> = memo((props) => {
   );
 
   useEffect(() => {
-    if (isActive) {
+    if (isActive || value) {
       placeholderControls.start('active');
       return;
     }
 
     placeholderControls.start('default');
-  }, [isActive, isErrorActive, placeholderControls]);
+  }, [isActive, isErrorActive, placeholderControls, value]);
 
   return (
     <div className={`input ${isIcon && 'icon'} ${isErrorActive && 'error'} `}>
