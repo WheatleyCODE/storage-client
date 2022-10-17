@@ -29,6 +29,7 @@
 
   &__check {
     @include flex;
+    padding-left: 2px
   }
 
   &__square {

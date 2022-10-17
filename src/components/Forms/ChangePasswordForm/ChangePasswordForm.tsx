@@ -30,7 +30,7 @@ export const ChangePasswordForm: FC = () => {
     <div className="register-form">
       <AuthForm
         title="Изменение пароля"
-        buttonText="Изменить паролль"
+        buttonText="Изменить пароль"
         buttonAction={changePassword}
         buttonIsDisable={isDisable}
         linkText="Войти в аккаунт"
