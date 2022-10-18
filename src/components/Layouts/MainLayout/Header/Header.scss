@@ -17,6 +17,12 @@
 
   &__burger {
     display: none;
+
+    .button.icon {
+      .button__icon {
+        font-size: 2.5rem;
+      }
+    }
   }
 }
 
@@ -27,6 +33,9 @@
 }
 
 @media screen and (max-width: 680px) {
+  .header {
+    padding: 20px;
+  }
   .header__burger {
     display: block;
     margin-right: 20px;

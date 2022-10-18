@@ -3,6 +3,15 @@
 .button {
   &__icon {
     @include flex;
+    font-size: $iconFontSize;
+    margin-right: 10px;
+  }
+}
+
+.button.icon {
+  .button__icon {
+    font-size: 2rem;
+    margin-right: 0px;
   }
 }
 

@@ -27,10 +27,6 @@
   transition: all $animationDuration;
   cursor: pointer;
 
-  svg {
-    font-size: 2rem;
-  }
-
   &:hover {
     background-color: $hoverColorBg;
     color: $hoverColor;
@@ -55,11 +51,6 @@
   border-radius: $buttonBorderRadius;
   transition: all $animationDuration;
   cursor: pointer;
-
-  svg {
-    font-size: $iconFontSize;
-    margin-right: 10px;
-  }
 
   &:hover {
     background-color: $hoverColorBg;
@@ -90,7 +81,6 @@
   position: relative;
   display: flex;
   margin-top: 10px;
-  font-size: 1.1rem;
   max-width: 500px;
   border-radius: $buttonBorderRadius;
   background-color: $colorBgMessage;
@@ -101,15 +91,8 @@
     @include flex;
     font-size: 1.2rem;
     color: $colorWhite;
-    min-height: 30px;
-    min-width: 45px;
     border-radius: $buttonBorderRadius 0 0 $buttonBorderRadius;
     background-color: $colorBgIcon;
-  }
-
-  .notifier-message__text {
-    padding: 18px 30px;
-    padding-left: 35px
   }
 
   .notifier-message__close {
