@@ -1,7 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { emitMessage } from 'helpers';
 import { AuthService } from 'services';
-import { IAuthData, ILoginFilds, IRegisterFilds } from 'types';
+import {
+  IAuthData,
+  IChangePasswordData,
+  IChangePassworrdFilds,
+  ILoginFilds,
+  IRegisterFilds,
+  IResetPasswordData,
+} from 'types';
 
 export const register = createAsyncThunk<IAuthData, IRegisterFilds>(
   'auth/register',
@@ -58,6 +65,52 @@ export const activateAndLogin = createAsyncThunk<IAuthData, string>(
       emitMessage({
         color: 'green',
         message: 'Вы успешно активировали аккаунт',
+      });
+
+      return data;
+    } catch (e: any) {
+      emitMessage({
+        color: 'red',
+        message: e.response.data.message,
+      });
+
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk<IResetPasswordData, string>(
+  'auth/resetPassword',
+  async (email, thunkAPI) => {
+    try {
+      const { data } = await AuthService.resetPassword(email);
+
+      emitMessage({
+        color: 'yellow',
+        message: `На вашу почту: ${email} было выслано письмо с ссылкой для сброса пароля`,
+      });
+
+      return data;
+    } catch (e: any) {
+      emitMessage({
+        color: 'red',
+        message: e.response.data.message,
+      });
+
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk<IChangePasswordData, IChangePassworrdFilds>(
+  'auth/changePassword',
+  async ({ password, link }, thunkAPI) => {
+    try {
+      const { data } = await AuthService.changePassword(password, link);
+
+      emitMessage({
+        color: 'green',
+        message: 'Ваш пароль успешно изменён',
       });
 
       return data;

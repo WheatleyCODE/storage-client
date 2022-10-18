@@ -1,21 +1,21 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { Input, AuthForm } from 'components';
 import { emailValidator } from 'helpers';
-import { useValidInput } from 'hooks';
+import { useActions, useValidInput } from 'hooks';
 import { PathRoutes } from 'types';
 import './ResetPasswordForm.scss';
 
 export const ResetPasswordForm: FC = () => {
   const emailInput = useValidInput([emailValidator]);
   const [isDisable, setIsDisable] = useState(false);
+  const { resetPassword } = useActions();
 
-  const resetPassword = () => {
+  const resetPasswordHandlerr = () => {
     if (emailInput.isError || !emailInput.value) return;
 
     // setIsDisable(true);
-    // reset(emailInput.value);
-    console.log('ok', emailInput.value);
+    resetPassword(emailInput.value);
   };
 
   return (
@@ -23,7 +23,7 @@ export const ResetPasswordForm: FC = () => {
       <AuthForm
         title="Сброс пароля"
         buttonText="Сбросить пароль"
-        buttonAction={resetPassword}
+        buttonAction={resetPasswordHandlerr}
         buttonIsDisable={isDisable}
         linkText="Нет аккаунта? Регистрация"
         linkPath={PathRoutes.REGISTER}

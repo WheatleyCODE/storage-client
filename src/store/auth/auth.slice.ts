@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from 'types';
-import { login, register, activateAndLogin } from './auth.actions';
+import { login, register, activateAndLogin, resetPassword, changePassword } from './auth.actions';
 import { IAuthState } from './auth.interface';
 
 const initialState: IAuthState = {
@@ -74,6 +74,26 @@ export const authSlice = createSlice({
         state.user = {} as IUser;
         state.accessToken = '';
         state.refreshToken = '';
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.message = null;
+        state.isLoading = true;
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(resetPassword.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(changePassword.pending, (state) => {
+        state.message = null;
+        state.isLoading = true;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(changePassword.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });

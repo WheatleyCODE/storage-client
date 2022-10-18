@@ -1,3 +1,5 @@
+import { AsyncThunkAction } from '@reduxjs/toolkit';
+
 export const getPassError = (isEqual: boolean, isTouchOne: boolean, isTouchTwo: boolean) => {
   if (!isEqual && isTouchOne && isTouchTwo) {
     return 'Пароли не совпадают';
@@ -16,8 +18,11 @@ export const isEqual = (a: IEqualParam, b: IEqualParam): boolean => {
   return a === b;
 };
 
-export const checkRequestStatus = (data: any): boolean => {
-  if (data?.meta?.requestStatus === 'fulfilled') return true;
+export const checkRequestStatus = (data: AsyncThunkAction<any, any, any>): boolean => {
+  // * Посмотреть типизацию
+  const thunkData = data as any;
+
+  if (thunkData?.meta?.requestStatus === 'fulfilled') return true;
 
   return false;
 };

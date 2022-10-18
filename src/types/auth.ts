@@ -9,6 +9,11 @@ export interface IRegisterFilds extends ILoginFilds {
   name: string;
 }
 
+export interface IChangePassworrdFilds {
+  password: string;
+  link: string;
+}
+
 export interface IAuthData {
   accessToken: string;
   refreshToken: string;

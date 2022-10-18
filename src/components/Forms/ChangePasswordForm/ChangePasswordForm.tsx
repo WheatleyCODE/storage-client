@@ -1,10 +1,11 @@
 import React, { FC, useCallback, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { Input, AuthForm } from 'components';
-import { useValidInput } from 'hooks';
+import { useActions, useValidInput } from 'hooks';
 import { passValidator } from 'helpers';
 import { PathRoutes } from 'types';
-import { getPassError, isEqual } from 'utils';
+import { checkRequestStatus, getPassError, isEqual } from 'utils';
 import './ChangePasswordForm.scss';
 
 export const ChangePasswordForm: FC = () => {
@@ -12,18 +13,29 @@ export const ChangePasswordForm: FC = () => {
   const repPassInput = useValidInput([passValidator]);
   const [showPass, setShowPass] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
+  const params = useParams();
+  const navigate = useNavigate();
+  const { changePassword } = useActions();
 
   const changeShowPass = useCallback(() => setShowPass((p) => !p), []);
 
   const isEqPass = isEqual(passInput.value, repPassInput.value);
   const passError = getPassError(isEqPass, passInput.isTouched, repPassInput.isTouched);
 
-  const changePassword = () => {
-    // if
+  const changePasswordHandler = async () => {
+    if (passInput.isError || repPassInput.isError) return;
+    if (!passInput.value || !repPassInput.value) return;
+    if (passError) return;
 
     // setIsDisable(true);
-    // changePassword('id', passInput.value);
-    console.log('ok', 'id', passInput.value);
+    const data = await changePassword({
+      password: passInput.value,
+      link: params.link || '',
+    });
+
+    if (checkRequestStatus(data)) {
+      navigate(PathRoutes.LOGIN);
+    }
   };
 
   return (
@@ -31,7 +43,7 @@ export const ChangePasswordForm: FC = () => {
       <AuthForm
         title="Изменение пароля"
         buttonText="Изменить пароль"
-        buttonAction={changePassword}
+        buttonAction={changePasswordHandler}
         buttonIsDisable={isDisable}
         linkText="Войти в аккаунт"
         linkPath={PathRoutes.LOGIN}
