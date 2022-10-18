@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from 'react';
+import React, { FC, useCallback, useEffect, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useTypedDispatch } from 'hooks';
 import { FaCheck, FaExclamationTriangle, FaInfoCircle, FaFireAlt, FaTimes } from 'react-icons/fa';
@@ -25,6 +25,12 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id 
     }, 10000);
   }, [removeMessage]);
 
+  const MemoFaCheck = memo(FaCheck);
+  const MemoFaExclamation = memo(FaExclamationTriangle);
+  const MemoFaFireAlt = memo(FaFireAlt);
+  const MemoFaInfoCircle = memo(FaInfoCircle);
+  const MemoFaTimes = memo(FaTimes);
+
   return (
     <motion.div
       initial={{ opacity: 0, translateX: -300 }}
@@ -38,14 +44,14 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id 
       className={`notifier-message ${color}`}
     >
       <div className="notifier-message__icon">
-        {color === 'green' && <FaCheck />}
-        {color === 'yellow' && <FaExclamationTriangle />}
-        {color === 'red' && <FaFireAlt />}
-        {color === 'default' && <FaInfoCircle />}
+        {color === 'green' && <MemoFaCheck />}
+        {color === 'yellow' && <MemoFaExclamation />}
+        {color === 'red' && <MemoFaFireAlt />}
+        {color === 'default' && <MemoFaInfoCircle />}
       </div>
       <div className="notifier-message__text">{message}</div>
       <div aria-hidden onClick={removeMessage} className="notifier-message__close">
-        <FaTimes />
+        <MemoFaTimes />
       </div>
     </motion.div>
   );

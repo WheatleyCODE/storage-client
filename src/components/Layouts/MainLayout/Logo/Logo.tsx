@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, memo } from 'react';
 import { GiAcidBlob } from 'react-icons/gi';
 import { animateScroll } from 'react-scroll';
 import { useLocation, useNavigate } from 'react-router';
@@ -22,9 +22,11 @@ export const Logo: FC<ILogoProps> = ({ isName = true }) => {
     navigate(PathRoutes.HOME);
   }, [navigate, location.pathname]);
 
+  const MemoIcon = memo(GiAcidBlob);
+
   return (
     <div aria-hidden onClick={onClick} className="logo">
-      <GiAcidBlob className="logo__icon" />
+      <MemoIcon className="logo__icon" />
       {isName && <span className="logo__name">Storage</span>}
     </div>
   );

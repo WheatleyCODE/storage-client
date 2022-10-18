@@ -1,9 +1,9 @@
 import { headerMenu } from 'consts';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { MenuItem } from './MenuItem/MenuItem';
 import './Menu.scss';
 
-export const Menu: FC = () => {
+export const Menu: FC = memo(() => {
   return (
     <div className="menu">
       <ul>
@@ -15,4 +15,4 @@ export const Menu: FC = () => {
       </ul>
     </div>
   );
-};
+});

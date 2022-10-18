@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, memo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Portal } from 'components';
 import { notifierSlice } from 'store';
@@ -7,7 +7,7 @@ import { emitter, EventNames } from 'helpers';
 import { NotifierMessage } from './NotifierMessage/NotifierMessage';
 import './Notifier.scss';
 
-export const Notifier: FC = () => {
+export const Notifier: FC = memo(() => {
   const dispatch = useTypedDispatch();
   const { currentMessages } = useTypedSelector((state) => state.notifier);
 
@@ -28,4 +28,4 @@ export const Notifier: FC = () => {
       </div>
     </Portal>
   );
-};
+});
