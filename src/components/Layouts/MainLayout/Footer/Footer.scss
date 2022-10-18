@@ -7,11 +7,8 @@
   justify-content: center;
   align-items: flex-start;
   background: $homePageGradient;
-  padding-bottom: 100px;
-
-  padding: $paddingVertical $paddingHorizontal;
   background: $homePageGradient;
-  height: 800px;
+  height: auto;
   min-height: $minHomePageHeigth;
 
 
@@ -28,5 +25,24 @@
   .hills {
     bottom: 0;
     z-index: 15;
+  }
+
+  .register-form {
+    background-color: $colorWhite;
+    padding-top: 1vh;  
+    padding-bottom: 12vh;
+    z-index: 20;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .footer {
+    height: calc(100vh - 80px);
+
+    .register-form {
+      background-color: transparent;
+      padding-top: 15vh;
+      padding-bottom: 0px;
+    }
   }
 }

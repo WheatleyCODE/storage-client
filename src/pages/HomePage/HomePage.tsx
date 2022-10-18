@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Element } from 'react-scroll';
-import { useNavigate } from 'react-router';
+import { Element, scroller } from 'react-scroll';
+import { useLocation, useNavigate } from 'react-router';
 import { BsChevronDoubleDown } from 'react-icons/bs';
 import { Button } from 'components';
 import { PathRoutes } from 'types';
@@ -10,16 +10,23 @@ import './HomePage.scss';
 
 export const HomePage: FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navigateToLogin = useCallback(() => navigate(PathRoutes.LOGIN), [navigate]);
   const navigateToRegister = useCallback(() => navigate(PathRoutes.REGISTER), [navigate]);
 
+  useEffect(() => {
+    if (location.hash) {
+      scroller.scrollTo(location.hash, { duration: 500 });
+    }
+  }, []);
+
   return (
     <div className="home-page">
-      <Element name={PathRoutes.HOME} className="home-page__block block">
+      <Element name={PathRoutes.HOME_REVIEW} className="home-page__block block">
         <motion.div
           animate={{ translateY: 20 }}
-          transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+          transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
           className="block__anhor"
         >
           <BsChevronDoubleDown />
@@ -28,7 +35,7 @@ export const HomePage: FC = () => {
           <motion.h2
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="block__title"
           >
             STORAGE PROJECT
@@ -38,7 +45,7 @@ export const HomePage: FC = () => {
               <motion.img
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
                 className="content__image"
                 src="https://lh3.googleusercontent.com/6MmVl3TEiBeEJCFIIfzO5DIgengYGPCdhEe8M6lXA6_Eh_xsKHDL_K4CLC31dETfiCue1hFOEf30IkIqlbOStvTfYbY_G85oEtJHQqjgz6OSXco8Aw=w0-l80-sg-rj-c0xffffff"
                 alt="storage"
@@ -48,7 +55,7 @@ export const HomePage: FC = () => {
               <motion.h2
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 className="content__title"
               >
                 STORAGE PROJECT
@@ -56,7 +63,7 @@ export const HomePage: FC = () => {
               <motion.div
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 className="content__info"
               >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis magni reiciendis
@@ -64,7 +71,7 @@ export const HomePage: FC = () => {
                 magni reiciendis quisquam hic.
               </motion.div>
               <motion.div
-                initial={{ y: 50, opacity: 0 }}
+                initial={{ y: 25, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.9 }}
                 className="content__buttons buttons"
@@ -90,7 +97,7 @@ export const HomePage: FC = () => {
           <motion.h2
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="block__title mobile"
           >
             Возможности
@@ -98,9 +105,9 @@ export const HomePage: FC = () => {
           <div className="content">
             <div className="content__section image">
               <motion.img
-                initial={{ x: 100, opacity: 0 }}
+                initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
                 className="content__image"
                 src="https://lh3.googleusercontent.com/KmMK86vU4Q4_etBMCy-VI7O9D08C-xqdXYFxjdxvAKXhLk8AUDcgwCV27ykWNu3H4gCf8QNLEYCJcSQsUjMD0qr6KgF0AbZywYS2kQGcW7p9lipDa4_q=w0-l80-sg-rj-c0xffffff"
                 alt="storage"
@@ -108,17 +115,17 @@ export const HomePage: FC = () => {
             </div>
             <div className="content__section text">
               <motion.h2
-                initial={{ x: -100, opacity: 0 }}
+                initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 className="content__title"
               >
                 Возможности
               </motion.h2>
               <motion.div
-                initial={{ x: -100, opacity: 0 }}
+                initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 className="content__info"
               >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis magni reiciendis
@@ -137,7 +144,7 @@ export const HomePage: FC = () => {
           <motion.h2
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="block__title mobile"
           >
             Больше
@@ -147,7 +154,7 @@ export const HomePage: FC = () => {
               <motion.img
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
                 className="content__image"
                 src="https://lh3.googleusercontent.com/yCtJQGVMT5x-OVFBA4pAG3aUkGM5-KOl9Nb8w5Ah0ipsKP4Vupp0yRyWGOaQOx4ey5FsSxQLh8_KqMViHegT9uHmhb0elqAjXW27UU8zsQmC57wMRQ=w0-l80-sg-rj-c0xffffff"
                 alt="storage"
@@ -157,7 +164,7 @@ export const HomePage: FC = () => {
               <motion.h2
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 className="content__title"
               >
                 Больше
@@ -165,7 +172,7 @@ export const HomePage: FC = () => {
               <motion.div
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 className="content__info"
               >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis magni reiciendis
