@@ -19,6 +19,10 @@ export class AuthService {
     });
   }
 
+  static async activateAndLogin(link: string): Promise<AxiosResponse<IAuthData>> {
+    return $api.get<IAuthData>(`/api/auth/activate/${link}`);
+  }
+
   static async logout(): Promise<void> {
     return $api.post('/api/auth/logout');
   }

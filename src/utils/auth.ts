@@ -15,3 +15,9 @@ export const isEqual = (a: IEqualParam, b: IEqualParam): boolean => {
 
   return a === b;
 };
+
+export const checkRequestStatus = (data: any): boolean => {
+  if (data?.meta?.requestStatus === 'fulfilled') return true;
+
+  return false;
+};

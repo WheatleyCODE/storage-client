@@ -22,7 +22,7 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id 
   useEffect(() => {
     setTimeout(() => {
       removeMessage();
-    }, 5000);
+    }, 10000);
   }, [removeMessage]);
 
   return (

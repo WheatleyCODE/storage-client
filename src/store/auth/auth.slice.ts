@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from 'types';
-import { login, register } from './auth.actions';
+import { login, register, activateAndLogin } from './auth.actions';
 import { IAuthState } from './auth.interface';
 
 const initialState: IAuthState = {
@@ -26,6 +26,7 @@ export const authSlice = createSlice({
         const { user, accessToken, refreshToken } = payload;
         state.isLoading = false;
 
+        state.isAuth = true;
         state.user = user;
         state.accessToken = accessToken;
         state.refreshToken = refreshToken;
@@ -49,6 +50,25 @@ export const authSlice = createSlice({
         state.refreshToken = refreshToken;
       })
       .addCase(login.rejected, (state) => {
+        state.isAuth = false;
+        state.isLoading = false;
+        state.user = {} as IUser;
+        state.accessToken = '';
+        state.refreshToken = '';
+      })
+      .addCase(activateAndLogin.pending, (state) => {
+        state.message = null;
+        state.isLoading = true;
+      })
+      .addCase(activateAndLogin.fulfilled, (state, { payload }) => {
+        const { user, accessToken, refreshToken } = payload;
+        state.isLoading = false;
+        state.isAuth = true;
+        state.user = user;
+        state.accessToken = accessToken;
+        state.refreshToken = refreshToken;
+      })
+      .addCase(activateAndLogin.rejected, (state) => {
         state.isAuth = false;
         state.isLoading = false;
         state.user = {} as IUser;

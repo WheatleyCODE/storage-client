@@ -8,9 +8,19 @@ export const register = createAsyncThunk<IAuthData, IRegisterFilds>(
   async ({ name, email, password }, thunkAPI) => {
     try {
       const { data } = await AuthService.registration(name, email, password);
+
+      emitMessage({
+        color: 'yellow',
+        message: `На вашу: ${email} почту было выслано письмо для активации аккаунта`,
+      });
+
       return data;
-    } catch (e) {
-      console.warn(e);
+    } catch (e: any) {
+      emitMessage({
+        color: 'red',
+        message: e.response.data.message,
+      });
+
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -25,6 +35,29 @@ export const login = createAsyncThunk<IAuthData, ILoginFilds>(
       emitMessage({
         color: 'green',
         message: 'Вы успешно вошли в систему',
+      });
+
+      return data;
+    } catch (e: any) {
+      emitMessage({
+        color: 'red',
+        message: e.response.data.message,
+      });
+
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+export const activateAndLogin = createAsyncThunk<IAuthData, string>(
+  'auth/activateAndLogin',
+  async (link, thunkAPI) => {
+    try {
+      const { data } = await AuthService.activateAndLogin(link);
+
+      emitMessage({
+        color: 'green',
+        message: 'Вы успешно активировали аккаунт',
       });
 
       return data;

@@ -1,9 +1,11 @@
 import React, { FC, useCallback, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { Input, AuthForm } from 'components';
 import { emailValidator, passValidator } from 'helpers';
 import { useActions, useValidInput } from 'hooks';
+import { checkRequestStatus } from 'utils';
 import { PathRoutes } from 'types';
 import './LoginForm.scss';
 
@@ -13,17 +15,22 @@ export const LoginForm: FC = () => {
   const { login } = useActions();
   const [showPass, setShowPass] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
+  const navigate = useNavigate();
 
   const changeShowPass = useCallback(() => setShowPass((p) => !p), []);
 
-  const loginHandler = () => {
+  const loginHandler = async () => {
     if (emailInput.isError || passInput.isError) return;
     if (!emailInput.value || !passInput.value) return;
 
-    login({
+    const data = await login({
       email: emailInput.value,
       password: passInput.value,
     });
+
+    if (checkRequestStatus(data)) {
+      navigate(PathRoutes.STORAGE);
+    }
   };
 
   return (

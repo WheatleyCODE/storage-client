@@ -1,1 +1,1 @@
-export { getPassError, isEqual } from './auth';
+export { getPassError, isEqual, checkRequestStatus } from './auth';

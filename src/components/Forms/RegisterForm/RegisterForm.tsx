@@ -2,7 +2,7 @@ import React, { FC, useCallback, useState } from 'react';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { Input, AuthForm } from 'components';
-import { useValidInput } from 'hooks';
+import { useActions, useValidInput } from 'hooks';
 import { emailValidator, nickValidator, passValidator } from 'helpers';
 import { PathRoutes } from 'types';
 import { getPassError, isEqual } from 'utils';
@@ -15,21 +15,24 @@ export const RegisterForm: FC = () => {
   const repPassInput = useValidInput([passValidator]);
   const [showPass, setShowPass] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
+  const { register } = useActions();
 
   const changeShowPass = useCallback(() => setShowPass((p) => !p), []);
 
   const isEqPass = isEqual(passInput.value, repPassInput.value);
   const passError = getPassError(isEqPass, passInput.isTouched, repPassInput.isTouched);
 
-  const register = () => {
+  const registerHandler = () => {
     if (emailInput.isError || passInput.isError) return;
     if (nickInput.isError || passError) return;
     if (!nickInput.value || !emailInput.value) return;
     if (!passInput.value) return;
 
-    // setIsDisable(true);
-    // registration(nickNameInput.value, emailInput.value, passInput.value);
-    console.log('ok', nickInput.value, emailInput.value, passInput.value);
+    register({
+      name: nickInput.value,
+      email: emailInput.value,
+      password: passInput.value,
+    });
   };
 
   return (
@@ -37,7 +40,7 @@ export const RegisterForm: FC = () => {
       <AuthForm
         title="Регистрация"
         buttonText="Регистрация"
-        buttonAction={register}
+        buttonAction={registerHandler}
         buttonIsDisable={isDisable}
         linkText="Есть аккаунт? Войти"
         linkPath={PathRoutes.LOGIN}
