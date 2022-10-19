@@ -1,7 +1,7 @@
 import { HomePage } from 'pages';
 import { PathRoutes } from 'types';
 
-export const routesAuth = [
+export const authRoutes = [
   {
     path: PathRoutes.HOME,
     Page: HomePage,

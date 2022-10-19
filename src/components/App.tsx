@@ -3,8 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { store } from 'store';
 import { MainLayout, Notifier } from 'components';
-import { routes } from 'routes';
-import './App.scss';
+import { noAuthRoutes } from 'routes';
 
 export const App: FC = () => {
   return (
@@ -12,7 +11,7 @@ export const App: FC = () => {
       <Provider store={store}>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            {routes.map((route) => (
+            {noAuthRoutes.map((route) => (
               <Route key={route.path} path={route.path} element={<route.Page />} />
             ))}
           </Route>

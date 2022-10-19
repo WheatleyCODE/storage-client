@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser } from 'types';
+import { IUser, IAuthState } from 'types';
 import { login, register, activateAndLogin, resetPassword, changePassword } from './auth.actions';
-import { IAuthState } from './auth.interface';
 
 const initialState: IAuthState = {
   user: {} as IUser,

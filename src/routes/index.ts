@@ -1,2 +1,2 @@
-export { routes } from './routes';
-export { routesAuth } from './routesAuth';
+export { noAuthRoutes } from './no-auth.routes';
+export { authRoutes } from './auth.routes';

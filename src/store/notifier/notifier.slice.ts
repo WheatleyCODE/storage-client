@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { INotifierMessage } from 'types';
-import { INotifierState } from './notifier.interface';
+import { INotifierMessage, INotifierState } from 'types';
 
 const initialState: INotifierState = {
   currentMessages: [],

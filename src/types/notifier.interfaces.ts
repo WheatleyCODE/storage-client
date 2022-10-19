@@ -4,3 +4,7 @@ export interface INotifierMessage {
   color: MessageColor;
   message: string;
 }
+
+export interface INotifierState {
+  currentMessages: INotifierMessage[];
+}

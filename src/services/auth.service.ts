@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { IAuthData, IResetPasswordData, IChangePasswordData } from 'types';
-import { $api } from '../http';
+import { $api } from '../api';
 
 export class AuthService {
   static async login(email: string, password: string): Promise<AxiosResponse<IAuthData>> {

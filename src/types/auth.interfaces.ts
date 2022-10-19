@@ -1,4 +1,4 @@
-import { IUser } from './user';
+import { IUser } from './user.interfaces';
 
 export interface ILoginFilds {
   email: string;
@@ -32,4 +32,10 @@ export interface IChangePasswordData {
 export interface IAuthMessage {
   color: 'green' | 'yellow' | 'red';
   text: string;
+}
+
+export interface IAuthState extends IAuthData {
+  isLoading: boolean;
+  isAuth: boolean;
+  message: null | IAuthMessage;
 }
