@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { Checkbox, Link, Button } from 'components';
+import { Checkbox, Link, Button, Form } from 'components';
 import { PathRoutes } from 'types';
-import { Form } from '../Form/Form';
 import './AuthForm.scss';
 
 export interface IAuthFormProps {

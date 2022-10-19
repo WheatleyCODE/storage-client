@@ -1,7 +1,7 @@
 import React from 'react';
 import { LoginForm } from 'components';
 import './LoginPage.scss';
-import { AuthLayout } from 'components/Layouts/AuthLayout/AuthLayout';
+import { AuthLayout } from 'components/layouts/auth-layout/AuthLayout';
 
 export const LoginPage = () => {
   return (

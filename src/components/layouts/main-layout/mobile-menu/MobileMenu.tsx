@@ -5,8 +5,8 @@ import { FaTimes } from 'react-icons/fa';
 import { Button } from 'components';
 import { headerMenu, mobileMenu } from 'consts';
 import { PathRoutes } from 'types';
-import { MobileMenuItem } from './MobileMenuItem/MobileMenuItem';
-import { Logo } from '../Logo/Logo';
+import { MobileMenuItem } from './mobile-menu-item/MobileMenuItem';
+import { Logo } from '../logo/Logo';
 import './MobileMenu.scss';
 
 export interface IMobileMenu {

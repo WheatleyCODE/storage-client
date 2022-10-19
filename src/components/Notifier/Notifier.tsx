@@ -4,7 +4,7 @@ import { Portal } from 'components';
 import { notifierSlice } from 'store';
 import { useTypedDispatch, useTypedSelector } from 'hooks';
 import { emitter, EventNames } from 'helpers';
-import { NotifierMessage } from './NotifierMessage/NotifierMessage';
+import { NotifierMessage } from './notifier-message/NotifierMessage';
 import './Notifier.scss';
 
 export const Notifier: FC = memo(() => {

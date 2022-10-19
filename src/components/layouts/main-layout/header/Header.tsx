@@ -5,9 +5,9 @@ import { MdMenu } from 'react-icons/md';
 import { Button, Portal, Backdrop } from 'components';
 import { PathRoutes } from 'types';
 import { useNavigate } from 'react-router';
-import { Menu } from '../Menu/Menu';
-import { Logo } from '../Logo/Logo';
-import { MobileMenu } from '../MobileMenu/MobileMenu';
+import { Menu } from '../menu/Menu';
+import { Logo } from '../logo/Logo';
+import { MobileMenu } from '../mobile-menu/MobileMenu';
 import './Header.scss';
 
 export const Header: FC = () => {

@@ -1,6 +1,6 @@
 import { headerMenu } from 'consts';
 import React, { FC, memo } from 'react';
-import { MenuItem } from './MenuItem/MenuItem';
+import { MenuItem } from './menu-item/MenuItem';
 import './Menu.scss';
 
 export const Menu: FC = memo(() => {

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { PathRoutes } from 'types';
-import { Footer } from './Footer/Footer';
-import { Header } from './Header/Header';
+import { Footer } from './footer/Footer';
+import { Header } from './header/Header';
 import './MainLayout.scss';
 
 export const MainLayout: FC = () => {
