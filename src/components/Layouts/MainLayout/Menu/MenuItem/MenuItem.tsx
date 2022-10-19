@@ -29,7 +29,7 @@ export const MenuItem: FC<IMenuItemProps> = ({ title, path }) => {
       to={path}
       spy
       smooth
-      duration={500}
+      duration={350}
     >
       {title}
     </Link>

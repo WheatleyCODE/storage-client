@@ -17,7 +17,13 @@ export const HomePage: FC = () => {
 
   useEffect(() => {
     if (location.hash) {
-      scroller.scrollTo(location.hash, { duration: 500 });
+      scroller.scrollTo(location.hash, {
+        saveHashHistory: true,
+        hashSpy: true,
+        spy: true,
+        smooth: true,
+        duration: 350,
+      });
     }
   }, []);
 

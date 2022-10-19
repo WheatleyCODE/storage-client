@@ -1,0 +1,13 @@
+@import 'styles/templates.scss';
+
+.mobile-menu-item {
+  display: block;
+  padding: 15px 30px;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+  transition: all $animationDuration;
+}
+
+.mobile-menu-item.active {
+  color: $colorBlue;
+}

@@ -1,0 +1,61 @@
+@import 'styles/templates.scss';
+
+.mobile-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background-color: $colorWhite;
+
+  &__close {
+    @include flex;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+    margin-top: 15px;
+    font-size: 1.8rem;
+
+  }
+
+  &__ul {
+    height: calc(100vh - 215px);
+    overflow: auto;
+    list-style: none;
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+
+  &__buttons {
+    width: 100%;
+    padding: 10px;
+    padding-top: 12px;
+    border-top: 1px solid $colorLightGrey3;
+
+    .button {
+      width: 100%;
+      height: 50px;
+    }
+
+    .button:first-child {
+      margin-bottom: 12px;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    padding: 10px 30px;
+    border-bottom: 1px solid $colorLightGrey3;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mobile-menu {
+    width: 100%;
+  }
+}

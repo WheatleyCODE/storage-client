@@ -1,15 +1,21 @@
-import React, { FC, useCallback } from 'react';
-import { Button } from 'components';
+import React, { FC, useCallback, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { FaRegUser } from 'react-icons/fa';
-import { useNavigate } from 'react-router';
 import { MdMenu } from 'react-icons/md';
+import { Button, Portal, Backdrop } from 'components';
 import { PathRoutes } from 'types';
-import './Header.scss';
+import { useNavigate } from 'react-router';
 import { Menu } from '../Menu/Menu';
 import { Logo } from '../Logo/Logo';
+import { MobileMenu } from '../MobileMenu/MobileMenu';
+import './Header.scss';
 
 export const Header: FC = () => {
   const navigate = useNavigate();
+  const [showMenu, setShowMenu] = useState(false);
+
+  const closeMenu = useCallback(() => setShowMenu(false), []);
+  const openMenu = useCallback(() => setShowMenu(true), []);
 
   const navigateToLogin = useCallback(() => {
     navigate(PathRoutes.LOGIN);
@@ -19,7 +25,7 @@ export const Header: FC = () => {
     <header className="header">
       <div className="header__menu">
         <div className="header__burger">
-          <Button type="icon" color="blue" Icon={MdMenu} />
+          <Button onClick={openMenu} type="icon" color="blue" Icon={MdMenu} />
         </div>
         <Logo />
         <Menu />
@@ -27,6 +33,16 @@ export const Header: FC = () => {
       <div className="header__user">
         <Button onClick={navigateToLogin} color="blue" Icon={FaRegUser} text="Войти" />
       </div>
+
+      <AnimatePresence>
+        {showMenu && (
+          <Portal>
+            <Backdrop onClose={closeMenu}>
+              <MobileMenu onClose={closeMenu} />
+            </Backdrop>
+          </Portal>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

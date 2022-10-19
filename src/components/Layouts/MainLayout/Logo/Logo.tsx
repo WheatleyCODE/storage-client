@@ -15,8 +15,7 @@ export const Logo: FC<ILogoProps> = ({ isName = true }) => {
 
   const onClick = useCallback(() => {
     if (location.pathname === PathRoutes.HOME) {
-      animateScroll.scrollToTop();
-      return;
+      animateScroll.scrollToTop({ duration: 350 });
     }
 
     navigate(PathRoutes.HOME);

@@ -16,3 +16,4 @@ export { Link } from './ui/Link/Link';
 export { Checkbox } from './ui/Checkbox/Checkbox';
 export { Portal } from './Portal/Portal';
 export { Notifier } from './Notifier/Notifier';
+export { Backdrop } from './Modals/Backdrop/Backdrop';
