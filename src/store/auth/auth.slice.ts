@@ -1,6 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser, IAuthState } from 'types';
-import { login, register, activateAndLogin, resetPassword, changePassword } from './auth.actions';
+import {
+  login,
+  register,
+  activateAndLogin,
+  resetPassword,
+  changePassword,
+  logout,
+  checkAuth,
+} from './auth.actions';
 
 const initialState: IAuthState = {
   user: {} as IUser,
@@ -32,9 +40,6 @@ export const authSlice = createSlice({
       })
       .addCase(register.rejected, (state) => {
         state.isLoading = false;
-        state.user = {} as IUser;
-        state.accessToken = '';
-        state.refreshToken = '';
       })
       .addCase(login.pending, (state) => {
         state.message = null;
@@ -49,11 +54,7 @@ export const authSlice = createSlice({
         state.refreshToken = refreshToken;
       })
       .addCase(login.rejected, (state) => {
-        state.isAuth = false;
         state.isLoading = false;
-        state.user = {} as IUser;
-        state.accessToken = '';
-        state.refreshToken = '';
       })
       .addCase(activateAndLogin.pending, (state) => {
         state.message = null;
@@ -68,11 +69,7 @@ export const authSlice = createSlice({
         state.refreshToken = refreshToken;
       })
       .addCase(activateAndLogin.rejected, (state) => {
-        state.isAuth = false;
         state.isLoading = false;
-        state.user = {} as IUser;
-        state.accessToken = '';
-        state.refreshToken = '';
       })
       .addCase(resetPassword.pending, (state) => {
         state.message = null;
@@ -93,6 +90,42 @@ export const authSlice = createSlice({
       })
       .addCase(changePassword.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.message = null;
+        state.isLoading = false;
+        state.accessToken = '';
+        state.refreshToken = '';
+        state.isAuth = false;
+        state.user = {} as IUser;
+      })
+      .addCase(logout.rejected, (state) => {
+        state.message = null;
+        state.isLoading = false;
+        state.accessToken = '';
+        state.refreshToken = '';
+        state.isAuth = false;
+        state.user = {} as IUser;
+      })
+      .addCase(checkAuth.pending, (state) => {
+        state.message = null;
+        state.isLoading = true;
+      })
+      .addCase(checkAuth.fulfilled, (state, { payload }) => {
+        const { user, accessToken, refreshToken } = payload;
+        state.isLoading = false;
+        state.isAuth = true;
+        state.user = user;
+        state.accessToken = accessToken;
+        state.refreshToken = refreshToken;
+      })
+      .addCase(checkAuth.rejected, (state) => {
+        state.message = null;
+        state.isLoading = false;
+        state.accessToken = '';
+        state.refreshToken = '';
+        state.isAuth = false;
+        state.user = {} as IUser;
       });
   },
 });

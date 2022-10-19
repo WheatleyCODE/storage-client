@@ -31,6 +31,10 @@ export class AuthService {
     return $api.post<IResetPasswordData>('/api/auth/reset/password', { email });
   }
 
+  static async refresh(): Promise<AxiosResponse<IAuthData>> {
+    return $api.get<IAuthData>('/api/auth/refresh', { withCredentials: true });
+  }
+
   static async changePassword(
     password: string,
     link: string

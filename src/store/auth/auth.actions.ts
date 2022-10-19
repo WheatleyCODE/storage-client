@@ -9,6 +9,7 @@ import {
   IRegisterFilds,
   IResetPasswordData,
 } from 'types';
+import { removeToken, setToken } from 'utils';
 
 export const register = createAsyncThunk<IAuthData, IRegisterFilds>(
   'auth/register',
@@ -39,6 +40,8 @@ export const login = createAsyncThunk<IAuthData, ILoginFilds>(
     try {
       const { data } = await AuthService.login(email, password);
 
+      setToken(data.accessToken);
+
       emitMessage({
         color: 'green',
         message: 'Вы успешно вошли в систему',
@@ -56,11 +59,48 @@ export const login = createAsyncThunk<IAuthData, ILoginFilds>(
   }
 );
 
+export const checkAuth = createAsyncThunk<IAuthData>('auth/checkAuth', async (_, thunkAPI) => {
+  try {
+    const { data } = await AuthService.refresh();
+
+    setToken(data.accessToken);
+
+    emitMessage({
+      color: 'green',
+      message: 'Вы успешно вошли в систему',
+    });
+
+    return data;
+  } catch (e: any) {
+    return thunkAPI.rejectWithValue(e);
+  }
+});
+
+export const logout = createAsyncThunk<void>('auth/logout', async () => {
+  try {
+    await AuthService.logout();
+
+    removeToken();
+
+    emitMessage({
+      color: 'default',
+      message: 'Вы вышли из системы',
+    });
+  } catch (e: any) {
+    emitMessage({
+      color: 'red',
+      message: e.response.data.message,
+    });
+  }
+});
+
 export const activateAndLogin = createAsyncThunk<IAuthData, string>(
   'auth/activateAndLogin',
   async (link, thunkAPI) => {
     try {
       const { data } = await AuthService.activateAndLogin(link);
+
+      setToken(data.accessToken);
 
       emitMessage({
         color: 'green',

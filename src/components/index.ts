@@ -17,3 +17,4 @@ export { Checkbox } from './ui/checkbox/Checkbox';
 export { Portal } from './hoc/Portal';
 export { Notifier } from './notifier/Notifier';
 export { Backdrop } from './modals/backdrop/Backdrop';
+export { AppProvider } from './provider/AppProvider';

@@ -5,12 +5,14 @@ import { MdMenu } from 'react-icons/md';
 import { Button, Portal, Backdrop } from 'components';
 import { PathRoutes } from 'types';
 import { useNavigate } from 'react-router';
+import { useActions } from 'hooks';
 import { Menu } from '../menu/Menu';
 import { Logo } from '../logo/Logo';
 import { MobileMenu } from '../mobile-menu/MobileMenu';
 import './Header.scss';
 
 export const Header: FC = () => {
+  const { logout } = useActions();
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -32,6 +34,8 @@ export const Header: FC = () => {
       </div>
       <div className="header__user">
         <Button onClick={navigateToLogin} color="blue" Icon={FaRegUser} text="Войти" />
+        {/* !! Test */}
+        <Button onClick={() => logout()} color="blue" Icon={FaRegUser} text="Выйти" />
       </div>
 
       <AnimatePresence>
