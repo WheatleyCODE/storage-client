@@ -1,12 +1,9 @@
-import {
-  HomePage,
-  LoginPage,
-  RegisterPage,
-  ResetPasswordPage,
-  ChangePasswordPage,
-  ActivatePage,
-} from 'pages';
+import { lazy } from 'react';
+import { HomePage, LoginPage, RegisterPage, ResetPasswordPage } from 'pages';
 import { PathRoutes } from 'types';
+
+const ActivatePage = lazy(() => import('pages/activate-page/ActivatePage'));
+const ChangePasswordPage = lazy(() => import('pages/change-password-page/ChangePasswordPage'));
 
 export const noAuthRoutes = [
   {

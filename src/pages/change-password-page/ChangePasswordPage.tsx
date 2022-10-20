@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { ChangePasswordForm, AuthLayout } from 'components';
 import './ChangePasswordPage.scss';
 
-export const ChangePasswordPage: FC = () => {
+const ChangePasswordPage: FC = () => {
   return (
     <div className="change-password-page">
       <AuthLayout>
@@ -11,3 +11,5 @@ export const ChangePasswordPage: FC = () => {
     </div>
   );
 };
+
+export default ChangePasswordPage;

@@ -6,7 +6,7 @@ import { PathRoutes } from 'types';
 import { checkRequestStatus } from 'utils';
 import './ActivatePage.scss';
 
-export const ActivatePage: FC = () => {
+const ActivatePage: FC = () => {
   const { activateAndLogin } = useActions();
   const params = useParams();
   const navigate = useNavigate();
@@ -34,3 +34,5 @@ export const ActivatePage: FC = () => {
     </div>
   );
 };
+
+export default ActivatePage;
