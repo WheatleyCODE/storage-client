@@ -13,6 +13,7 @@ export { ResetPasswordForm } from './forms/reset-password-from/ResetPasswordForm
 export { ChangePasswordForm } from './forms/change-password-form/ChangePasswordForm';
 export { LoginForm } from './forms/login-form/LoginForm';
 export { Link } from './ui/link/Link';
+export { AppLoader } from './ui/loaders/app-loader/AppLoader';
 export { Checkbox } from './ui/checkbox/Checkbox';
 export { Portal } from './hoc/Portal';
 export { Notifier } from './notifier/Notifier';

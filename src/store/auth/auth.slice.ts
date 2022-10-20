@@ -13,6 +13,7 @@ import {
 const initialState: IAuthState = {
   user: {} as IUser,
   isAuth: false,
+  loadNoAuthChunk: false,
   isLoading: false,
   accessToken: '',
   refreshToken: '',
@@ -94,6 +95,7 @@ export const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.message = null;
         state.isLoading = false;
+        state.loadNoAuthChunk = true;
         state.accessToken = '';
         state.refreshToken = '';
         state.isAuth = false;
@@ -102,6 +104,7 @@ export const authSlice = createSlice({
       .addCase(logout.rejected, (state) => {
         state.message = null;
         state.isLoading = false;
+        state.loadNoAuthChunk = true;
         state.accessToken = '';
         state.refreshToken = '';
         state.isAuth = false;
@@ -115,6 +118,7 @@ export const authSlice = createSlice({
         const { user, accessToken, refreshToken } = payload;
         state.isLoading = false;
         state.isAuth = true;
+        state.loadNoAuthChunk = false;
         state.user = user;
         state.accessToken = accessToken;
         state.refreshToken = refreshToken;
@@ -122,6 +126,7 @@ export const authSlice = createSlice({
       .addCase(checkAuth.rejected, (state) => {
         state.message = null;
         state.isLoading = false;
+        state.loadNoAuthChunk = true;
         state.accessToken = '';
         state.refreshToken = '';
         state.isAuth = false;

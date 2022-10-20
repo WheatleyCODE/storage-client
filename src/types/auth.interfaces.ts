@@ -37,5 +37,6 @@ export interface IAuthMessage {
 export interface IAuthState extends IAuthData {
   isLoading: boolean;
   isAuth: boolean;
+  loadNoAuthChunk: boolean;
   message: null | IAuthMessage;
 }

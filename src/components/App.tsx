@@ -1,44 +1,30 @@
-import React, { FC, useEffect } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { MainLayout, Notifier } from 'components';
-import { authRoutes, noAuthRoutes } from 'routes';
-import { PathRoutes } from 'types';
+import React, { FC, useEffect, lazy, Suspense } from 'react';
+import { Notifier, AppLoader, Portal } from 'components';
 import { useActions, useTypedSelector } from 'hooks';
-import { checkToken } from 'utils';
+
+const AuthChunk = lazy(() => import('./chunks/AuthChunk'));
+const NoAuthChunk = lazy(() => import('./chunks/NoAuthChunk'));
 
 export const App: FC = () => {
-  const navigate = useNavigate();
-  const { isAuth } = useTypedSelector((state) => state.auth);
+  const { isAuth, loadNoAuthChunk, isLoading } = useTypedSelector((state) => state.auth);
   const { checkAuth } = useActions();
 
   useEffect(() => {
-    if (checkToken() && !isAuth) {
-      checkAuth();
-    }
-
-    if (isAuth) {
-      navigate(PathRoutes.STORAGE);
-    }
-  }, [isAuth]);
-
-  const routes = isAuth ? authRoutes : noAuthRoutes;
+    checkAuth();
+  }, []);
 
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          {routes.map((route) => (
-            <Route key={route.path} path={route.path} element={<route.Page />} />
-          ))}
+    <Suspense>
+      {isAuth && <AuthChunk />}
+      {!isAuth && loadNoAuthChunk && <NoAuthChunk />}
 
-          {isAuth ? (
-            <Route path="*" element={<Navigate to={PathRoutes.STORAGE} replace />} />
-          ) : (
-            <Route path="*" element={<Navigate to={PathRoutes.HOME} replace />} />
-          )}
-        </Route>
-      </Routes>
       <Notifier />
-    </>
+
+      {isLoading && (
+        <Portal>
+          <AppLoader />
+        </Portal>
+      )}
+    </Suspense>
   );
 };
