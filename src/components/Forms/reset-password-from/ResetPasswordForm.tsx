@@ -11,11 +11,14 @@ export const ResetPasswordForm: FC = () => {
   const [isDisable, setIsDisable] = useState(false);
   const { resetPassword } = useActions();
 
-  const resetPasswordHandlerr = () => {
+  const resetPasswordHandlerr = async () => {
     if (emailInput.isError || !emailInput.value) return;
 
-    // setIsDisable(true);
-    resetPassword(emailInput.value);
+    setIsDisable(true);
+
+    await resetPassword(emailInput.value);
+
+    setIsDisable(false);
   };
 
   return (

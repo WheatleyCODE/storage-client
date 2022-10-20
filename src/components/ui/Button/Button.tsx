@@ -34,6 +34,7 @@ export const Button: FC<IButtonProps> = memo((props) => {
         disable ? 'disable' : ''
       } ${className}`}
       type="button"
+      disabled={disable}
       {...otherProps}
     >
       {MemoIcon && (

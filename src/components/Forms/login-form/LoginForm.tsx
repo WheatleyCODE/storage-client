@@ -23,10 +23,14 @@ export const LoginForm: FC = () => {
     if (emailInput.isError || passInput.isError) return;
     if (!emailInput.value || !passInput.value) return;
 
+    setIsDisable(true);
+
     const data = await login({
       email: emailInput.value,
       password: passInput.value,
     });
+
+    setIsDisable(false);
 
     if (checkRequestStatus(data)) {
       navigate(PathRoutes.STORAGE);

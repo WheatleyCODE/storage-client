@@ -27,11 +27,14 @@ export const ChangePasswordForm: FC = () => {
     if (!passInput.value || !repPassInput.value) return;
     if (passError) return;
 
-    // setIsDisable(true);
+    setIsDisable(true);
+
     const data = await changePassword({
       password: passInput.value,
       link: params.link || '',
     });
+
+    setIsDisable(true);
 
     if (checkRequestStatus(data)) {
       navigate(PathRoutes.LOGIN);

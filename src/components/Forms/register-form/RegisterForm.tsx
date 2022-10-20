@@ -28,11 +28,15 @@ export const RegisterForm: FC = () => {
     if (!nickInput.value || !emailInput.value) return;
     if (!passInput.value) return;
 
+    setIsDisable(true);
+
     register({
       name: nickInput.value,
       email: emailInput.value,
       password: passInput.value,
     });
+
+    setIsDisable(false);
   };
 
   return (
