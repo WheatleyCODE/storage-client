@@ -1,9 +1,29 @@
 @import 'styles/templates.scss';
 
 .storage-menu {
-  background-color: rgb(238, 255, 176);
+
   width: 250px;
   margin-right: $storageMargin;
+
+  &__create-button {
+    font-size: 1.2rem;
+    margin-left: 5px;
+    min-width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    
+    .button__icon {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+  }
+
+  &__create-button.open {
+    width: 240px;
+    .button__icon {
+      margin-right: 10px;
+    }
+  }
 }
 
 @media screen and (max-width: 1000px) {

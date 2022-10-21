@@ -1,11 +1,17 @@
 @import 'styles/templates.scss';
 
 .button {
+  border-radius: $buttonBorderRadius;
+
   &__icon {
     @include flex;
     font-size: $iconFontSize;
     margin-right: 10px;
   }
+}
+
+.button.rounded {
+  border-radius: 50px;
 }
 
 .button.icon {
@@ -17,6 +23,10 @@
 
 .button.default.outline.blue {
   @include button($colorBlue, $colorWhite, $colorBlue, $colorWhite, $colorBlue, $colorDarkBlue);
+}
+
+.button.default.outline.orange {
+  @include button($colorOrange, $colorWhite, $colorOrange, $colorWhite, $colorOrange, $colorDarkOrange);
 }
 
 .button.icon.outline {

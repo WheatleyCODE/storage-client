@@ -1,8 +1,8 @@
 import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import { ITEM_WIDTH } from 'consts';
 import { StorageLastItem } from './storage-last-item/StorageLastItem';
 import './StorageLast.scss';
 
-const ITEM_WIDTH = 190;
 const arr = Array(7)
   .fill(null)
   .map((_, i) => i);
