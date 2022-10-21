@@ -1,0 +1,8 @@
+@import 'styles/templates.scss';
+
+.storage-sorter {
+  top: 0;
+  position: sticky;
+  background-color: rgb(155, 255, 130);
+  height: $storageSorterHeight;
+}

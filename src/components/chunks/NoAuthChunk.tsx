@@ -1,6 +1,6 @@
-import { MainLayout } from 'components/layouts/main-layout/MainLayout';
 import React, { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
+import { MainLayout } from 'components';
 import { noAuthRoutes } from 'routes';
 import { PathRoutes } from 'types';
 

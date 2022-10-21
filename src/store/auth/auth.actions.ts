@@ -71,7 +71,7 @@ export const checkAuth = createAsyncThunk<IAuthData>('auth/checkAuth', async (_,
     });
 
     return data;
-  } catch (e: any) {
+  } catch (e) {
     return thunkAPI.rejectWithValue(e);
   }
 });

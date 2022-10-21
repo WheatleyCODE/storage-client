@@ -1,0 +1,16 @@
+@import 'styles/templates.scss';
+
+.mobile-menu-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background-color: $colorWhite;
+}
+
+@media screen and (max-width: 500px) {
+  .mobile-menu-modal {
+    width: 100%;
+  }
+}

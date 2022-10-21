@@ -1,0 +1,41 @@
+@import 'styles/templates.scss';
+
+.storage-logo {
+  padding-left: $storagePadding;
+  display: flex;
+  align-items: center;
+  // background-color: rgb(132, 255, 152);
+  width: 250px;
+  margin-right: $storageMargin;
+
+  &__mobile-logo {
+    display: none;
+  }
+
+  &__desctop-logo {
+    display: block;
+  }
+
+  &__menu {
+    display: none;
+    margin-right: $storageMargin;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .storage-logo {
+    min-width: 250px;
+
+    &__menu {
+      display: block;
+    }
+
+    &__mobile-logo {
+      display: block;
+    }
+  
+    &__desctop-logo {
+      display: none;
+    }
+  }
+}

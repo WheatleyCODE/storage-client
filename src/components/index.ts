@@ -1,6 +1,7 @@
 export { App } from './App';
 export { MainLayout } from './layouts/main-layout/MainLayout';
 export { AuthLayout } from './layouts/auth-layout/AuthLayout';
+export { StorageLayout } from './layouts/storage-layout/StorageLayout';
 export { Button } from './ui/button/Button';
 export { Input } from './ui/input/Input';
 export { Hills } from './design/hills/Hills';
@@ -18,4 +19,9 @@ export { Checkbox } from './ui/checkbox/Checkbox';
 export { Portal } from './hoc/Portal';
 export { Notifier } from './notifier/Notifier';
 export { Backdrop } from './modals/backdrop/Backdrop';
-export { AppProvider } from './provider/AppProvider';
+export { MobileMenuModal } from './modals/mobile-menu-modal/MobileMenuModal';
+export { AppProvider } from './hoc/AppProvider';
+export { StoragePath } from './storage/storage-path/StoragePath';
+export { StorageSorter } from './storage/storage-sorter/StorageSorter';
+export { StorageLast } from './storage/storage-last/StorageLast';
+export { Logo } from './layouts/main-layout/logo/Logo';

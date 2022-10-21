@@ -1,0 +1,13 @@
+@import 'styles/templates.scss';
+
+.storage-menu {
+  background-color: rgb(238, 255, 176);
+  width: 250px;
+  margin-right: $storageMargin;
+}
+
+@media screen and (max-width: 1000px) {
+  .storage-menu {
+    display: none;
+  }
+}

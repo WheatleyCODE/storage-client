@@ -1,0 +1,13 @@
+@import 'styles/templates.scss';
+
+.storage-page {
+  flex: 1 1 auto;
+  background-color: grey;
+  
+
+  &__block {
+    height: 400px;
+    margin-bottom: 20px;
+    background-color: rgb(124, 229, 255);
+  }
+}

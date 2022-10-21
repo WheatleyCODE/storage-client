@@ -1,0 +1,30 @@
+@import 'styles/templates.scss';
+
+.storage-layout {
+  height: 100vh;
+  padding: $storagePadding;
+  transition: all $animationDuration;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    height: $storageHeaderHeight;
+    margin-bottom: $storageMargin;
+  }
+
+  &__header__block {
+    display: flex;
+    flex: 1 1 auto;
+  }
+
+  &__main {
+    display: flex;
+    justify-content: space-between;
+    height: Calc(100% - ($storageHeaderHeight + $storageMargin));
+  }
+
+  &__main__block {
+    flex: 1 1 auto;
+    display: flex;
+  }
+}

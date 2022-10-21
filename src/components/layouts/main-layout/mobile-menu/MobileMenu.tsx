@@ -1,9 +1,8 @@
 import React, { FC, memo, useMemo, useCallback } from 'react';
-import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router';
 import { FaTimes } from 'react-icons/fa';
-import { Button } from 'components';
-import { headerMenu, mobileMenu } from 'consts';
+import { Button, MobileMenuModal } from 'components';
+import { noAuthDesctopMenu, noAuthMobileMenu } from 'consts';
 import { PathRoutes } from 'types';
 import { MobileMenuItem } from './mobile-menu-item/MobileMenuItem';
 import { Logo } from '../logo/Logo';
@@ -17,11 +16,7 @@ export const MobileMenu: FC<IMobileMenu> = ({ onClose }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const mobileNoAuthMenu = useMemo(() => [...headerMenu, ...mobileMenu], []);
-
-  const stopPropagation = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
-  };
+  const mobileNoAuthMenu = useMemo(() => [...noAuthDesctopMenu, ...noAuthMobileMenu], []);
 
   const toLogin = useCallback(() => {
     onClose();
@@ -36,14 +31,7 @@ export const MobileMenu: FC<IMobileMenu> = ({ onClose }) => {
   const MemoIcon = memo(FaTimes);
 
   return (
-    <motion.div
-      onClick={stopPropagation}
-      initial={{ translateX: -400, borderRadius: '0 10% 10% 0' }}
-      animate={{ translateX: 0, borderRadius: 0 }}
-      transition={{ duration: 0.3 }}
-      exit={{ translateX: -400, borderRadius: '0 10% 10% 0' }}
-      className="mobile-menu"
-    >
+    <MobileMenuModal>
       <div className="mobile-menu__logo">
         <Logo />
       </div>
@@ -66,6 +54,6 @@ export const MobileMenu: FC<IMobileMenu> = ({ onClose }) => {
         <Button onClick={toRegister} outline="fill" color="blue" text="Попробовать" />
         <Button onClick={toLogin} text="Войти" />
       </div>
-    </motion.div>
+    </MobileMenuModal>
   );
 };

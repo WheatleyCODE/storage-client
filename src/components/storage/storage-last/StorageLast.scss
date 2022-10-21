@@ -1,0 +1,11 @@
+@import 'styles/templates.scss';
+
+.storage-last {
+  display: flex;
+  height: $storageLastHeight;
+  background-color: rgb(203, 148, 255);
+
+  .storage-last-item:last-child {
+    margin: 0;
+  }
+}

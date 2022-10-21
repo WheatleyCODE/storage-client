@@ -9,7 +9,7 @@ interface ILogoProps {
   isName?: boolean;
 }
 
-export const Logo: FC<ILogoProps> = ({ isName = true }) => {
+export const Logo: FC<ILogoProps> = memo(({ isName = true }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,4 +29,4 @@ export const Logo: FC<ILogoProps> = ({ isName = true }) => {
       {isName && <span className="logo__name">Storage</span>}
     </div>
   );
-};
+});

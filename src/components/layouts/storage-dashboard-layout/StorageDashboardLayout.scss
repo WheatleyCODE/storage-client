@@ -1,0 +1,27 @@
+@import 'styles/templates.scss';
+
+.storage-dashboard-layout {
+  position: relative;
+  background-color: yellow;
+
+  flex: 1 1 auto;
+
+  &__content {
+    overflow: auto;
+    height: Calc(100% - $storagePathHeight);
+  }
+
+  &__content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &__content::-webkit-scrollbar-track {
+    background: $colorWhite;
+  }
+
+  &__content::-webkit-scrollbar-thumb {
+    background-color: $colorDarkGrey;
+    border: 1px solid $colorLightGrey2;
+    border-radius: 3px;
+  }
+}
