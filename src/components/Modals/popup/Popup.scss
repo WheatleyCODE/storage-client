@@ -1,0 +1,14 @@
+@import 'styles/templates.scss';
+
+.popup {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  box-shadow: 0px 2px 5px 2px $colorShadow;
+  border: 1px solid $colorLightGrey4;
+  background-color: $colorWhite;
+  border-radius: 10px;
+  width: 300px;
+  z-index: 100;
+  padding: 35px 0;
+}

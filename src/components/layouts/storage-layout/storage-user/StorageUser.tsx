@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 import { AnimationControls, motion } from 'framer-motion';
+import { User } from 'components';
 import './StorageUser.scss';
 
 export interface IStorageUserProps {
@@ -17,10 +18,9 @@ export const StorageUser: FC<IStorageUserProps> = memo(({ isOpen, toggleOpen, co
         open: { width: 200 },
         close: { width: 50 },
       }}
-      onClick={toggleOpen}
       className="storage-user "
     >
-      <div>user</div>
+      <User />
     </motion.div>
   );
 });

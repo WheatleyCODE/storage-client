@@ -26,3 +26,5 @@ export { StorageSorter } from './storage/storage-sorter/StorageSorter';
 export { StorageLast } from './storage/storage-last/StorageLast';
 export { StorageSize } from './storage/storage-size/StorageSize';
 export { Logo } from './logo/Logo';
+export { User } from './user/User';
+export { Popup } from './modals/popup/Popup';

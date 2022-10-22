@@ -26,3 +26,7 @@ export const checkRequestStatus = (data: AsyncThunkAction<any, any, any>): boole
 
   return false;
 };
+
+export const getFirstLetter = (str: string): string => {
+  return str.split('')[0].toLocaleUpperCase();
+};

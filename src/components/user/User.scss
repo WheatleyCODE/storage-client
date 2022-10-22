@@ -1,0 +1,23 @@
+@import 'styles/templates.scss';
+
+.user {
+  position: relative;
+  
+  &__auth {
+    @include flex;
+    @include no-select;
+    font-size: 1.5rem;
+    color: $colorWhite;
+    transition: all $animationDuration;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: $colorOrange;
+    border: 1px solid $colorDarkOrange;
+  }
+
+  &__auth:hover {
+    border: 1px solid $colorWhite;
+  }
+}

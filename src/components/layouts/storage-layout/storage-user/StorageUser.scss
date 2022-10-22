@@ -1,8 +1,10 @@
 @import 'styles/templates.scss';
 
 .storage-user {
-  background-color: rgb(182, 73, 255);
+  display: flex;
+  align-items: center;
   min-width: 50px;
+  padding-left: 4px;
   margin-left: $storageMargin;
 }
 
