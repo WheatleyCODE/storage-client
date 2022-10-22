@@ -1,9 +1,8 @@
 import React, { FC, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { MdMenu } from 'react-icons/md';
-import { Button, Portal, Backdrop } from 'components';
+import { Button, Portal, Backdrop, Logo } from 'components';
 import { Menu } from '../menu/Menu';
-import { Logo } from '../logo/Logo';
 import { User } from '../user/User';
 import { MobileMenu } from '../mobile-menu/MobileMenu';
 import './Header.scss';

@@ -1,28 +1,56 @@
 @import 'styles/templates.scss';
 
 .storage-menu {
-
+  padding-top: 5px;
   width: 250px;
   margin-right: $storageMargin;
 
   &__create-button {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-left: 5px;
-    min-width: 50px;
-    height: 50px;
+    min-width: 45px;
+    height: 45px;
     margin-bottom: 10px;
     
     .button__icon {
       margin: 0;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
     }
   }
 
   &__create-button.open {
     width: 240px;
     .button__icon {
-      margin-right: 10px;
+      margin-right: $storageMargin;
     }
+  }
+
+  &__toggle-button {
+    margin-top: 5px;
+    position: relative;
+    width: 100%;
+  }
+
+  &__toggle {
+    position: absolute;
+    right: 7px;
+
+    .button__icon {
+      transition: all $animationDuration;
+      color: $colorDarkGrey3;
+    }
+  }
+
+  &__toggle.open {
+    .button__icon {
+      transition: all $animationDuration;
+      transform: rotate(90deg);
+    }
+  }
+
+  &__size {
+    margin-top: 80px;
+    padding: 0 5px;
   }
 }
 

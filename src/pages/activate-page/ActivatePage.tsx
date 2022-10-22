@@ -15,7 +15,7 @@ const ActivatePage: FC = () => {
     const data = await activateAndLogin(params.link || '');
 
     if (checkRequestStatus(data)) {
-      navigate(PathRoutes.STORAGE);
+      navigate(PathRoutes.STORAGE_MY_DRIVE);
       return;
     }
 

@@ -1,6 +1,7 @@
 @import 'styles/templates.scss';
 
-.storage-menu-item {
+.storage-mobile-menu-item {
+  text-decoration: none;
   color: $colorBlack;
   transition: color $animationDuration;
   display: flex;
@@ -22,18 +23,12 @@
     min-width: 60px;
     color: $colorDarkGrey3;
   }
-
-  &__title {
-    position: absolute;
-    left: 70px;
-    font-size: 1rem;
-  }
 }
 
-.storage-menu-item.active {
+.storage-mobile-menu-item.active {
   color: $colorBlue;
 
-  .storage-menu-item__icon {
+  .storage-mobile-menu-item__icon {
     color: $colorBlue;
   }
 }

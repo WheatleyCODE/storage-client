@@ -24,4 +24,5 @@ export { AppProvider } from './hoc/AppProvider';
 export { StoragePath } from './storage/storage-path/StoragePath';
 export { StorageSorter } from './storage/storage-sorter/StorageSorter';
 export { StorageLast } from './storage/storage-last/StorageLast';
-export { Logo } from './layouts/main-layout/logo/Logo';
+export { StorageSize } from './storage/storage-size/StorageSize';
+export { Logo } from './logo/Logo';

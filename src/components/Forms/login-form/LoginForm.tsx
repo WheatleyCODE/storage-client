@@ -33,7 +33,7 @@ export const LoginForm: FC = () => {
     setIsDisable(false);
 
     if (checkRequestStatus(data)) {
-      navigate(PathRoutes.STORAGE);
+      navigate(PathRoutes.STORAGE_MY_DRIVE);
     }
   };
 

@@ -1,0 +1,26 @@
+@import 'styles/templates.scss';
+
+.storage-mobile-menu {
+  padding: 10px;
+
+  &__ul {
+    padding-top: 10px;
+  }
+
+  &__size {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px 20px;
+
+    .storage-size {
+      position: relative;
+      width: 100%;
+
+      .button {
+        height: 45px;
+      }
+    }
+  }
+}

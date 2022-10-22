@@ -2,6 +2,7 @@ import React, { FC, useCallback, memo } from 'react';
 import { GiAcidBlob } from 'react-icons/gi';
 import { animateScroll } from 'react-scroll';
 import { useLocation, useNavigate } from 'react-router';
+import { useTypedSelector } from 'hooks';
 import { PathRoutes } from 'types';
 import './Logo.scss';
 
@@ -10,16 +11,22 @@ interface ILogoProps {
 }
 
 export const Logo: FC<ILogoProps> = memo(({ isName = true }) => {
+  const { isAuth } = useTypedSelector((state) => state.auth);
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onClick = useCallback(() => {
-    if (location.pathname === PathRoutes.HOME) {
+    if (pathname === PathRoutes.HOME) {
       animateScroll.scrollToTop({ duration: 350 });
     }
 
+    if (isAuth) {
+      navigate(PathRoutes.STORAGE_MY_DRIVE);
+      return;
+    }
+
     navigate(PathRoutes.HOME);
-  }, [navigate, location.pathname]);
+  }, [navigate, pathname, isAuth]);
 
   const MemoIcon = memo(GiAcidBlob);
 

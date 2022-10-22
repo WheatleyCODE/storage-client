@@ -13,7 +13,7 @@ export const AuthChunk: FC = () => {
         ))}
       </Route>
 
-      <Route path="*" element={<Navigate to={PathRoutes.STORAGE} replace />} />
+      <Route path="*" element={<Navigate to={PathRoutes.STORAGE_MY_DRIVE} replace />} />
     </Routes>
   );
 };

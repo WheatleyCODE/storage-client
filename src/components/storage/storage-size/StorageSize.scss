@@ -1,0 +1,47 @@
+@import 'styles/templates.scss';
+
+.storage-size {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  .icon {
+    font-size: 1.6rem;
+    margin-right: 8px;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .button {
+    margin-top: $storageMargin;
+    width: 100%;
+    height: 42px;
+  }
+
+  &__progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: $colorLightGrey4;
+    border-radius: 10px;
+  }
+
+  &__value {
+    width: 10%;
+    height: 5px;
+    background-color: $colorBlue;
+    border-radius: 10px;
+  }
+
+  &__size-info {
+    padding: 10px 0;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+  }
+}
