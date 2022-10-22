@@ -40,14 +40,14 @@ export const StorageLayout: FC = () => {
   return (
     <div className="storage-layout">
       <div className="storage-layout__header">
-        <div className="storage-layout__header__block">
+        <div className="storage-layout__header-block">
           <StorageLogo controls={menuControls} isOpen={isOpenMenu} toggleOpen={toggleMenu} />
           <StorageSearch />
         </div>
         <StorageUser controls={asideControls} isOpen={isOpenAside} toggleOpen={toggleAside} />
       </div>
       <div className="storage-layout__main">
-        <div className="storage-layout__main__block">
+        <div className="storage-layout__main-block">
           <StorageMenu controls={menuControls} isOpen={isOpenMenu} toggleOpen={toggleMenu} />
           <StorageDashboardLayout>
             <Outlet />

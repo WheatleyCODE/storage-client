@@ -5,3 +5,9 @@
   min-width: 50px;
   margin-left: $storageMargin;
 }
+
+@media screen and (max-width: 560px) {
+  .storage-user {
+    display: none !important;
+  }
+}

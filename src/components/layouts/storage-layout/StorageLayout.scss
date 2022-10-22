@@ -12,7 +12,7 @@
     margin-bottom: $storageMargin;
   }
 
-  &__header__block {
+  &__header-block {
     display: flex;
     flex: 1 1 auto;
   }
@@ -23,7 +23,7 @@
     height: Calc(100% - ($storageHeaderHeight + $storageMargin));
   }
 
-  &__main__block {
+  &__main-block {
     flex: 1 1 auto;
     display: flex;
   }
