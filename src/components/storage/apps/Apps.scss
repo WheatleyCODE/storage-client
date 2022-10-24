@@ -1,0 +1,13 @@
+@import 'styles/templates.scss';
+
+.apps {
+  position: relative;
+
+  .popup {
+    width: 300px;
+  }
+
+  .button.open {
+    background-color: $colorLightGrey4;
+  }
+}

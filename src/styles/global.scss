@@ -9,8 +9,12 @@ body.win, body.mac {
   overflow: hidden;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: 'RubikRegular';
-  letter-spacing: -0.4px;
+  letter-spacing: -0.5px;
   font-size: 1rem;
 }

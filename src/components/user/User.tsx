@@ -18,30 +18,28 @@ export const User: FC = () => {
     navigate(PathRoutes.LOGIN);
   }, [navigate]);
 
-  const closePopup = useCallback(() => {
-    setShowPopup(false);
-    console.log('User closePopup');
-  }, []);
+  const closePopup = useCallback(() => setShowPopup(false), []);
+
+  const openPopup = useCallback(() => {
+    if (!showPopup) {
+      setTimeout(() => {
+        setShowPopup(true);
+      }, 0);
+    }
+  }, [showPopup]);
 
   return (
     <div className="user">
       {!isAuth && <Button onClick={navigateToLogin} color="blue" Icon={FaRegUser} text="Войти" />}
       {isAuth && (
-        <div
-          aria-hidden
-          onClick={(e) => {
-            setShowPopup((p) => !p);
-            e.stopPropagation();
-          }}
-          className="user__auth"
-        >
+        <div aria-hidden onClick={openPopup} className="user__auth">
           <div>{getFirstLetter(user.name)}</div>
         </div>
       )}
 
       <AnimatePresence>
         {showPopup && (
-          <Popup height={300} onClose={closePopup}>
+          <Popup height={270} onClose={closePopup}>
             <UserInfo />
           </Popup>
         )}

@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
-import { FaThLarge, FaCog, FaSearch } from 'react-icons/fa';
-import { User, Button, Search } from 'components';
+import { FaSearch } from 'react-icons/fa';
+import { User, Button, Search, Apps, Settings } from 'components';
 import './StorageSearch.scss';
 
 export const StorageSearch: FC = memo(() => {
@@ -10,10 +10,10 @@ export const StorageSearch: FC = memo(() => {
         <User />
       </div>
       <div className="storage-search__apps-icon">
-        <Button type="icon" Icon={FaThLarge} />
+        <Apps />
       </div>
       <div className="storage-search__settings-icon">
-        <Button type="icon" Icon={FaCog} />
+        <Settings />
       </div>
       <div className="storage-search__search-icon">
         <Button type="icon" Icon={FaSearch} />

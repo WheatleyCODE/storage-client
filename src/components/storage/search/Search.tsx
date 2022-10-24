@@ -27,7 +27,7 @@ export const Search: FC = memo(() => {
       <AnimatePresence>
         {search.value && search.isFocus && (
           <Popup onClose={() => {}} height={200}>
-            <h1>Hello!</h1>
+            <h2>Hello!</h2>
           </Popup>
         )}
       </AnimatePresence>

@@ -1,4 +1,5 @@
 import { FaRegHdd, FaRegShareSquare, FaRegClock, FaRegStar, FaRegTrashAlt } from 'react-icons/fa';
+import { GiAcidBlob, GiVideoCamera, GiMusicSpell } from 'react-icons/gi';
 import { PathRoutes } from 'types';
 
 export const ITEM_WIDTH = 190;
@@ -12,4 +13,22 @@ export const storageMenu = [
   { title: 'Недавние', path: PathRoutes.STORAGE_RECENT, Icon: FaRegClock },
   { title: 'Отмеченные', path: PathRoutes.STORAGE_STARRED, Icon: FaRegStar },
   { title: 'Корзина', path: PathRoutes.STORAGE_TRASH, Icon: FaRegTrashAlt },
+];
+
+export const allApps = [
+  {
+    Icon: GiAcidBlob,
+    title: 'Storage',
+    path: PathRoutes.STORAGE_MY_DRIVE,
+  },
+  {
+    Icon: GiVideoCamera,
+    title: 'VideoTube',
+    path: PathRoutes.STORAGE_MY_DRIVE,
+  },
+  {
+    Icon: GiMusicSpell,
+    title: 'MusicSpot',
+    path: PathRoutes.STORAGE_MY_DRIVE,
+  },
 ];
