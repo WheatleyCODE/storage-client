@@ -9,6 +9,8 @@ export enum PathRoutes {
   CHANGE_PASSWORD = '/change/password/:link',
   ACTIVATE = '/activate/:link',
   STORAGE = '/storage',
+  STORAGE_SETTINGS = '#settings',
+  STORAGE_HOTKEYS = '#hotkeys',
   STORAGE_MY_DRIVE = '/storage/my-drive',
   STORAGE_SHARED = '/storage/chared',
   STORAGE_RECENT = '/storage/recent',

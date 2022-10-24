@@ -27,7 +27,9 @@ export { StorageSorter } from './layouts/storage-dashboard-layout/storage-sorter
 export { StorageLast } from './layouts/storage-dashboard-layout/storage-last/StorageLast';
 export { StorageSize } from './storage/storage-size/StorageSize';
 export { Apps } from './storage/apps/Apps';
+export { SearchMobile } from './storage/search-mobile/SearchMobile';
 export { Settings } from './storage/settings/Settings';
 export { Logo } from './storage/logo/Logo';
-export { User } from './user/User';
+export { User } from './storage/user/User';
 export { Popup } from './modals/popup/Popup';
+export { Modal } from './modals/modal/Modal';

@@ -32,3 +32,11 @@ export const allApps = [
     path: PathRoutes.STORAGE_MY_DRIVE,
   },
 ];
+
+export const settingsAndHotkeysStoragePages: string[] = [
+  PathRoutes.STORAGE_MY_DRIVE,
+  PathRoutes.STORAGE_RECENT,
+  PathRoutes.STORAGE_SHARED,
+  PathRoutes.STORAGE_STARRED,
+  PathRoutes.STORAGE_TRASH,
+];
