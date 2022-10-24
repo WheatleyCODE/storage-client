@@ -14,7 +14,7 @@
   $color: $colorBlack,
   $colorBg: $colorWhite,
   $hoverColor: $colorWhite,
-  $hoverColorBg: $colorLightGrey,
+  $hoverColorBg: $colorLightGrey4,
   $borderRadius: $buttonBorderRadius
 ) {
   @include flex;
@@ -30,6 +30,10 @@
   &:hover {
     background-color: $hoverColorBg;
     color: $hoverColor;
+  }
+
+  &:active {
+    background-color: $colorLightGrey3;
   }
 }
 

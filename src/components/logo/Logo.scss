@@ -17,16 +17,3 @@
     margin-left: 8px;
   }
 }
-
-@media screen and (max-width: 500px) {
-  .logo {
-    &__icon {
-      font-size: 2.6rem;
-    }
-  
-    &__name {
-      font-size: 1.5rem;
-      margin-left: 8px;
-    }
-  }
-}

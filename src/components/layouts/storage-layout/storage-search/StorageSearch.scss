@@ -1,6 +1,68 @@
 @import 'styles/templates.scss';
 
 .storage-search {
-  background-color: rgb(132, 181, 255);
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  // background-color: rgb(132, 181, 255);
   flex: 1 1 auto;
+
+  &__user-icon {
+    display: none;
+    padding-left: 5px;
+  }
+
+  &__user-icon,  &__apps-icon,  &__settings-icon, &__search-icon {
+    margin-left: 5px;
+
+    .button.icon .button__icon {
+      font-size: 1.3rem;
+      color: $colorDarkGrey3;
+    }
+  }
+
+  &__search-input {
+    display: flex;
+    width: 100%;
+
+    .search {
+      width: 100%;
+      max-width: 500px;
+    }
+  }
+
+  &__search-icon {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .storage-search {
+
+    &__search-input {
+      padding-left: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 685px) {
+  .storage-search {
+
+    &__search-input {
+      display: none;
+    }
+
+    &__search-icon {
+      display: block;
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .storage-search {
+
+    &__user-icon {
+      display: flex;
+    }
+  }
 }

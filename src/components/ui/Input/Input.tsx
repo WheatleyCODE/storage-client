@@ -14,7 +14,7 @@ export interface IInputProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 export const Input: FC<IInputProps> = memo((props) => {
-  const { Icon, isError, validError, onBlur, onFocus, onChange, placeholder, value, type } = props;
+  const { Icon, isError, validError, onBlur, onFocus, onChange, placeholder, value, type, ...anotherProps } = props;
   const ref = useRef<null | HTMLInputElement>(null);
   const placeholderControls = useAnimation();
   const [isActive, setIsActive] = useState(false);
@@ -77,6 +77,7 @@ export const Input: FC<IInputProps> = memo((props) => {
         onChange={onChange}
         onFocus={onFocusInput}
         onBlur={onBlurInput}
+        {...anotherProps}
       />
 
       {isErrorActive && (

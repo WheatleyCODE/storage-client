@@ -16,6 +16,7 @@ export { LoginForm } from './forms/login-form/LoginForm';
 export { Link } from './ui/link/Link';
 export { AppLoader } from './ui/loaders/app-loader/AppLoader';
 export { Checkbox } from './ui/checkbox/Checkbox';
+export { Search } from './ui/search/Search';
 export { Portal } from './hoc/Portal';
 export { Notifier } from './notifier/Notifier';
 export { Backdrop } from './modals/backdrop/Backdrop';

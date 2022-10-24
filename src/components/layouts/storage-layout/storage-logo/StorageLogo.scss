@@ -40,14 +40,13 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .storage-logo {
-    min-width: 190px;
-    max-width: 190px;
+    min-width: 60px;
+    max-width: 60px;
 
-    &__menu {
-      margin-right: 8px;
-      display: block;
+    &__mobile-logo {
+      display: none;
     }
   }
 }
