@@ -58,8 +58,12 @@ export const RegisterForm: FC = () => {
           placeholder="Пользователь"
           onChange={nickInput.onChange}
           onBlur={nickInput.onBlur}
+          onFocus={nickInput.onFocus}
           isError={nickInput.isError}
           validError={nickInput.validError}
+          isActive={nickInput.isActive}
+          changeFocus={nickInput.changeFocus}
+          changeActive={nickInput.changeActive}
         />
         <Input
           Icon={MdOutlineMailOutline}
@@ -68,8 +72,12 @@ export const RegisterForm: FC = () => {
           placeholder="Почта"
           onChange={emailInput.onChange}
           onBlur={emailInput.onBlur}
+          onFocus={emailInput.onFocus}
           isError={emailInput.isError}
           validError={emailInput.validError}
+          isActive={emailInput.isActive}
+          changeFocus={emailInput.changeFocus}
+          changeActive={emailInput.changeActive}
         />
         <Input
           Icon={RiLockPasswordLine}
@@ -78,8 +86,12 @@ export const RegisterForm: FC = () => {
           placeholder="Пароль"
           onChange={passInput.onChange}
           onBlur={passInput.onBlur}
+          onFocus={passInput.onFocus}
           isError={passInput.isError || !!passError}
           validError={passInput.validError || passError}
+          isActive={passInput.isActive}
+          changeFocus={passInput.changeFocus}
+          changeActive={passInput.changeActive}
         />
         <Input
           Icon={RiLockPasswordLine}
@@ -88,8 +100,12 @@ export const RegisterForm: FC = () => {
           placeholder="Пароль"
           onChange={repPassInput.onChange}
           onBlur={repPassInput.onBlur}
+          onFocus={repPassInput.onFocus}
           isError={repPassInput.isError || !!passError}
           validError={repPassInput.validError || passError}
+          isActive={repPassInput.isActive}
+          changeFocus={repPassInput.changeFocus}
+          changeActive={repPassInput.changeActive}
         />
       </AuthForm>
     </div>

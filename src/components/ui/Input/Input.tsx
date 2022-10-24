@@ -1,23 +1,35 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable max-len */
-import React, { FC, memo, useCallback, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useCallback, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { IconType } from 'react-icons';
 import './Input.scss';
 
 export interface IInputProps extends React.HTMLAttributes<HTMLInputElement> {
-  value?: string;
+  value: string;
   Icon?: IconType;
-  type?: string;
-  isError?: boolean;
-  validError?: string | null;
+  type: string;
+  isError: boolean;
+  isActive: boolean;
+  validError: string | null;
+  changeFocus: (boolean: boolean) => void;
+  changeActive: (boolean: boolean) => void;
 }
 
 export const Input: FC<IInputProps> = memo((props) => {
-  const { Icon, isError, validError, onBlur, onFocus, onChange, placeholder, value, type, ...anotherProps } = props;
+  const {
+    Icon,
+    isError,
+    isActive,
+    validError,
+    placeholder,
+    value,
+    type,
+    changeActive,
+    changeFocus,
+    ...anotherProps
+  } = props;
+
   const ref = useRef<null | HTMLInputElement>(null);
   const placeholderControls = useAnimation();
-  const [isActive, setIsActive] = useState(false);
   const isErrorActive = !!(isError && validError);
   const MemoIcon = Icon && memo(Icon);
   const isIcon = !!MemoIcon;
@@ -25,32 +37,8 @@ export const Input: FC<IInputProps> = memo((props) => {
   const focusOnInput = useCallback(() => {
     if (ref.current) {
       ref.current.focus();
-      setIsActive(true);
     }
   }, []);
-
-  const onFocusInput = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
-      if (ref.current) {
-        ref.current.focus();
-        setIsActive(true);
-
-        if (onFocus) onFocus(e);
-      }
-    },
-    [onFocus]
-  );
-
-  const onBlurInput = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
-      if (!value) {
-        setIsActive(false);
-      }
-
-      if (onBlur) onBlur(e);
-    },
-    [onBlur, value]
-  );
 
   useEffect(() => {
     if (isActive || value) {
@@ -69,16 +57,7 @@ export const Input: FC<IInputProps> = memo((props) => {
         </div>
       )}
 
-      <input
-        className="input__textfild"
-        ref={ref}
-        value={value}
-        type={type}
-        onChange={onChange}
-        onFocus={onFocusInput}
-        onBlur={onBlurInput}
-        {...anotherProps}
-      />
+      <input className="input__textfild" ref={ref} value={value} type={type} {...anotherProps} />
 
       {isErrorActive && (
         <motion.div
@@ -100,7 +79,9 @@ export const Input: FC<IInputProps> = memo((props) => {
           initial="default"
           transition={{ duration: 0.15 }}
           variants={{
-            active: isIcon ? { translateY: -23, translateX: -27, scale: 0.9 } : { translateY: -23, translateX: -10, scale: 0.9 },
+            active: isIcon
+              ? { translateY: -23, translateX: -27, scale: 0.9 }
+              : { translateY: -23, translateX: -10, scale: 0.9 },
             default: { translateY: 0, translateX: 0, scale: 1 },
           }}
         >

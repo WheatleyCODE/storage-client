@@ -61,8 +61,12 @@ export const ChangePasswordForm: FC = () => {
           placeholder="Пароль"
           onChange={passInput.onChange}
           onBlur={passInput.onBlur}
+          onFocus={passInput.onFocus}
           isError={passInput.isError || !!passError}
           validError={passInput.validError || passError}
+          isActive={passInput.isActive}
+          changeFocus={passInput.changeFocus}
+          changeActive={passInput.changeActive}
         />
         <Input
           Icon={RiLockPasswordLine}
@@ -71,8 +75,12 @@ export const ChangePasswordForm: FC = () => {
           placeholder="Пароль"
           onChange={repPassInput.onChange}
           onBlur={repPassInput.onBlur}
+          onFocus={repPassInput.onFocus}
           isError={repPassInput.isError || !!passError}
           validError={repPassInput.validError || passError}
+          isActive={repPassInput.isActive}
+          changeFocus={repPassInput.changeFocus}
+          changeActive={repPassInput.changeActive}
         />
       </AuthForm>
     </div>

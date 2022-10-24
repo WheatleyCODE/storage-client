@@ -39,8 +39,12 @@ export const ResetPasswordForm: FC = () => {
           placeholder="Почта"
           onChange={emailInput.onChange}
           onBlur={emailInput.onBlur}
+          onFocus={emailInput.onFocus}
           isError={emailInput.isError}
           validError={emailInput.validError}
+          isActive={emailInput.isActive}
+          changeFocus={emailInput.changeFocus}
+          changeActive={emailInput.changeActive}
         />
       </AuthForm>
     </div>

@@ -56,8 +56,12 @@ export const LoginForm: FC = () => {
           placeholder="Почта"
           onChange={emailInput.onChange}
           onBlur={emailInput.onBlur}
+          onFocus={emailInput.onFocus}
           isError={emailInput.isError}
           validError={emailInput.validError}
+          isActive={emailInput.isActive}
+          changeFocus={emailInput.changeFocus}
+          changeActive={emailInput.changeActive}
         />
         <Input
           Icon={RiLockPasswordLine}
@@ -66,8 +70,12 @@ export const LoginForm: FC = () => {
           placeholder="Пароль"
           onChange={passInput.onChange}
           onBlur={passInput.onBlur}
+          onFocus={passInput.onFocus}
           isError={passInput.isError}
           validError={passInput.validError}
+          isActive={passInput.isActive}
+          changeFocus={passInput.changeFocus}
+          changeActive={passInput.changeActive}
         />
       </AuthForm>
     </div>
