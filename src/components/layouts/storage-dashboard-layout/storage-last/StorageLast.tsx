@@ -30,6 +30,7 @@ export const StorageLast: FC = memo(() => {
 
   return (
     <div ref={ref} className="storage-last">
+      <div className="storage-last__title">Последние измененные</div>
       {items.map((item) => (
         <StorageLastItem key={item} />
       ))}

@@ -15,8 +15,8 @@ export const StorageAside: FC<IStorageAsideProps> = memo(({ isOpen, toggleOpen, 
       animate={controls}
       transition={{ duration: 0.15 }}
       variants={{
-        open: { width: 200 },
-        close: { width: 50 },
+        open: { width: 300 },
+        close: { width: 70 },
       }}
       className="storage-aside"
     >

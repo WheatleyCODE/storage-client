@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import { AnimationControls, motion } from 'framer-motion';
-import { FaPlus } from 'react-icons/fa';
+import { AiOutlinePlus } from 'react-icons/ai';
 import { MdHorizontalRule } from 'react-icons/md';
 import { Button, StorageSize } from 'components';
 import { storageMenu } from 'consts';
@@ -21,14 +21,14 @@ export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, togg
       animate={controls}
       transition={{ duration: 0.15 }}
       variants={{
-        open: { width: 250 },
-        close: { width: 60 },
+        open: { width: 270 },
+        close: { width: 80 },
       }}
       className="storage-menu"
     >
       <Button
         className={`storage-menu__create-button ${openClassName}`}
-        Icon={FaPlus}
+        Icon={AiOutlinePlus}
         radius="rounded"
         color="blue"
         text={isOpen ? 'Cоздать' : undefined}

@@ -1,5 +1,5 @@
 import React, { FC, memo, useCallback, useState } from 'react';
-import { FaThLarge } from 'react-icons/fa';
+import { FcOrgUnit } from 'react-icons/fc';
 import { AnimatePresence } from 'framer-motion';
 import { Popup, Button } from 'components';
 import { AppsPopup } from './apps-popup/AppsPopup';
@@ -24,12 +24,12 @@ export const Apps: FC = memo(() => {
         className={showPopup ? 'open' : ''}
         onClick={openPopup}
         type="icon"
-        Icon={FaThLarge}
+        Icon={FcOrgUnit}
       />
 
       <AnimatePresence>
         {showPopup && (
-          <Popup onClose={closePopup} height={130}>
+          <Popup onClose={closePopup} height={120}>
             <AppsPopup onClose={closePopup} />
           </Popup>
         )}

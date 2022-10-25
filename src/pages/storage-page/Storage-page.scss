@@ -2,12 +2,13 @@
 
 .storage-page {
   flex: 1 1 auto;
-  background-color: grey;
+  padding: $storagePadding 20px;
   
 
   &__block {
-    height: 400px;
-    margin-bottom: 20px;
-    background-color: rgb(124, 229, 255);
+    display: flex;
+    align-items: center;
+    height: 45px;
+    border-bottom: $storageBorder;
   }
 }

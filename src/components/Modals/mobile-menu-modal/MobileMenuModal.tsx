@@ -1,6 +1,6 @@
 import React, { FC, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
-import { FaTimes } from 'react-icons/fa';
+import { CgClose } from 'react-icons/cg';
 import { Logo } from 'components';
 import './MobileMenuModal.scss';
 
@@ -14,7 +14,7 @@ export const MobileMenuModal: FC<IMobileMenuModal> = ({ children, onClose }) => 
     e.stopPropagation();
   }, []);
 
-  const MemoIcon = memo(FaTimes);
+  const MemoIcon = memo(CgClose);
 
   return (
     <motion.div

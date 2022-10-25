@@ -9,7 +9,7 @@
     cursor: pointer;
     padding-top: 60px;
     position: absolute;
-    top: -$storageHeaderHeight;
+    top: -65px;
     right: 0px;
     width: calc(100% - 50px);
     padding-left: 10px;
@@ -24,7 +24,7 @@
     position: absolute;
     right: 0;
     top: 0px;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     transition: all $animationDuration;
 
     &:hover {

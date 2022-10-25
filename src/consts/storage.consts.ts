@@ -1,6 +1,16 @@
-import { FaRegHdd, FaRegShareSquare, FaRegClock, FaRegStar, FaRegTrashAlt } from 'react-icons/fa';
-import { FcCalendar, FcIdea, FcOk } from 'react-icons/fc';
-import { GiAcidBlob, GiVideoCamera, GiMusicSpell } from 'react-icons/gi';
+import {
+  FcCalendar,
+  FcIdea,
+  FcOk,
+  FcClock,
+  FcEmptyTrash,
+  FcMultipleDevices,
+  FcShare,
+  FcSafe,
+  FcMusic,
+  FcBookmark,
+  FcVideoCall,
+} from 'react-icons/fc';
 import { AdditionTypes, PathRoutes } from 'types';
 
 export const ITEM_WIDTH = 190;
@@ -9,26 +19,26 @@ export const COLOR_YELLOW = '#ffc934';
 export const COLOR_RED = '#f7192f';
 
 export const storageMenu = [
-  { title: 'Мой диск', path: PathRoutes.STORAGE_MY_DRIVE, Icon: FaRegHdd },
-  { title: 'Доступные мне', path: PathRoutes.STORAGE_SHARED, Icon: FaRegShareSquare },
-  { title: 'Недавние', path: PathRoutes.STORAGE_RECENT, Icon: FaRegClock },
-  { title: 'Отмеченные', path: PathRoutes.STORAGE_STARRED, Icon: FaRegStar },
-  { title: 'Корзина', path: PathRoutes.STORAGE_TRASH, Icon: FaRegTrashAlt },
+  { title: 'Мой диск', path: PathRoutes.STORAGE_MY_DRIVE, Icon: FcMultipleDevices },
+  { title: 'Доступные мне', path: PathRoutes.STORAGE_SHARED, Icon: FcShare },
+  { title: 'Недавние', path: PathRoutes.STORAGE_RECENT, Icon: FcClock },
+  { title: 'Отмеченные', path: PathRoutes.STORAGE_STARRED, Icon: FcBookmark },
+  { title: 'Корзина', path: PathRoutes.STORAGE_TRASH, Icon: FcEmptyTrash },
 ];
 
 export const allApps = [
   {
-    Icon: GiAcidBlob,
+    Icon: FcSafe,
     title: 'Storage',
     path: PathRoutes.STORAGE_MY_DRIVE,
   },
   {
-    Icon: GiVideoCamera,
+    Icon: FcVideoCall,
     title: 'VideoTube',
     path: PathRoutes.STORAGE_MY_DRIVE,
   },
   {
-    Icon: GiMusicSpell,
+    Icon: FcMusic,
     title: 'MusicSpot',
     path: PathRoutes.STORAGE_MY_DRIVE,
   },

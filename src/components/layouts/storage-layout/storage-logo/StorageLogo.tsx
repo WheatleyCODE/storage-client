@@ -23,8 +23,8 @@ export const StorageLogo: FC<IStorageLogoProps> = memo(({ isOpen, controls, togg
         animate={controls}
         transition={{ duration: 0.15 }}
         variants={{
-          open: { width: 250 },
-          close: { width: 60 },
+          open: { width: 260 },
+          close: { width: 70 },
         }}
         className="storage-logo"
       >

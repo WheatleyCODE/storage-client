@@ -1,5 +1,5 @@
 import React, { FC, useCallback, memo } from 'react';
-import { GiAcidBlob } from 'react-icons/gi';
+import { FcSafe } from 'react-icons/fc';
 import { animateScroll } from 'react-scroll';
 import { useLocation, useNavigate } from 'react-router';
 import { useTypedSelector } from 'hooks';
@@ -28,7 +28,7 @@ export const Logo: FC<ILogoProps> = memo(({ isName = true }) => {
     navigate(PathRoutes.HOME);
   }, [navigate, pathname, isAuth]);
 
-  const MemoIcon = memo(GiAcidBlob);
+  const MemoIcon = memo(FcSafe);
 
   return (
     <div aria-hidden onClick={onClick} className="logo">

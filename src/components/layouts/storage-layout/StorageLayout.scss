@@ -2,14 +2,14 @@
 
 .storage-layout {
   height: 100vh;
-  padding: $storagePadding;
   transition: all $animationDuration;
 
   &__header {
     display: flex;
     justify-content: space-between;
     height: $storageHeaderHeight;
-    margin-bottom: $storageMargin;
+    padding: $storagePadding;
+    border-bottom: $storageBorder;
   }
 
   &__header-block {

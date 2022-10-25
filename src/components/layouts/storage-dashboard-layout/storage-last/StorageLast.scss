@@ -1,11 +1,22 @@
 @import 'styles/templates.scss';
 
 .storage-last {
+  position: relative;
   display: flex;
+  width: 100%;
   height: $storageLastHeight;
-  background-color: rgb(203, 148, 255);
+  padding: $storagePadding;
+  padding-bottom: 15px;
+  padding-top: 50px;
 
   .storage-last-item:last-child {
     margin: 0;
+  }
+
+  &__title {
+    top: 5px;
+    position: absolute;
+    padding-bottom: 20px;
+    padding-top: 10px;
   }
 }

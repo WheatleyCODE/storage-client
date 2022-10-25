@@ -1,5 +1,5 @@
 $colorRed: #f7192f;
-$colorOrange: #ff7e14;
+$colorOrange: #ff7300;
 $colorYellow: #ffc934;
 $colorGreen: #20d52f;
 $colorBlue: #1573ff;
@@ -56,10 +56,12 @@ $animationDuration: 0.15s;
 $buttonBorderRadius: 5px;
 $iconFontSize: 1.2rem;
 
-$storageHeaderHeight: 60px;
+$storageHeaderHeight: 70px;
 $storagePathHeight: 50px;
-$storageSorterHeight: 50px;
-$storageLastHeight: 140px;
+$storageSorterHeight: 45px;
+$storageLastHeight: 170px;
 
 $storageMargin: 10px;
 $storagePadding: 10px;
+
+$storageBorder: 1px solid $colorLightGrey3;

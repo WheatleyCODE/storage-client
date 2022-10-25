@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { AnimationControls } from 'framer-motion';
-import { FaTimes } from 'react-icons/fa';
+import { CgClose } from 'react-icons/cg';
 import { Calendar, Keep, Todo } from 'components';
 import { additionIcons } from 'consts';
 import { AdditionTypes } from 'types';
@@ -43,7 +43,7 @@ export const StorageAdditions: FC<IStorageAdditionsProps> = memo((props) => {
     [isOpen, toggleOpen, active]
   );
 
-  const MemoIcon = memo(FaTimes);
+  const MemoIcon = memo(CgClose);
 
   return (
     <div className="storage-additions">

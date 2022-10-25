@@ -3,6 +3,8 @@
 .storage-sorter {
   top: 0;
   position: sticky;
-  background-color: rgb(155, 255, 130);
+  background-color: $colorWhite;
   height: $storageSorterHeight;
+  padding: $storagePadding;
+  border-bottom: $storageBorder;
 }

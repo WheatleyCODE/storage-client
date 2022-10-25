@@ -1,27 +1,27 @@
 @import 'styles/templates.scss';
 
 .storage-menu {
-  padding-top: 5px;
   width: 250px;
-  margin-right: $storageMargin;
+  padding: 0 $storagePadding;
+  padding-top: 20px;
 
   &__create-button {
     font-size: 1.1rem;
     margin-left: 5px;
-    min-width: 45px;
+    width: 45px;
     height: 45px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     
     .button__icon {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1.7rem;
     }
   }
 
   &__create-button.open {
     width: 240px;
     .button__icon {
-      margin-right: $storageMargin;
+      margin-right: 5px;
     }
   }
 
@@ -38,6 +38,7 @@
     .button__icon {
       transition: all $animationDuration;
       color: $colorDarkGrey3;
+      font-size: 1.8rem !important;
     }
   }
 
@@ -49,8 +50,15 @@
   }
 
   &__size {
+    position: relative;
     margin-top: 80px;
+    width: 250px;
     padding: 0 5px;
+
+    .storage-size {
+      top: 0;
+      left: 5px;
+    }
   }
 }
 

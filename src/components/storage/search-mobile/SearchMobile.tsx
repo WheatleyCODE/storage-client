@@ -1,5 +1,5 @@
 import React, { FC, memo, useCallback, useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { FcSearch } from 'react-icons/fc';
 import { AnimatePresence } from 'framer-motion';
 import { Button, Portal, Modal, Backdrop } from 'components';
 import './SearchMobile.scss';
@@ -12,7 +12,7 @@ export const SearchMobile: FC = memo(() => {
 
   return (
     <div className="search-mobile">
-      <Button onClick={openModal} type="icon" Icon={FaSearch} />
+      <Button onClick={openModal} type="icon" Icon={FcSearch} />
 
       <AnimatePresence>
         {showModal && (

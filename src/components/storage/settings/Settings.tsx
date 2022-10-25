@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { FaCog } from 'react-icons/fa';
+import { FcSettings } from 'react-icons/fc';
 import { Popup, Button } from 'components';
 import { SettingsPopup } from './settings-popup/SettingsPopup';
 import './Settings.scss';
@@ -20,11 +20,16 @@ export const Settings: FC = memo(() => {
 
   return (
     <div className="settings">
-      <Button className={showPopup ? 'open' : ''} onClick={openPopup} type="icon" Icon={FaCog} />
+      <Button
+        className={showPopup ? 'open' : ''}
+        onClick={openPopup}
+        type="icon"
+        Icon={FcSettings}
+      />
 
       <AnimatePresence>
         {showPopup && (
-          <Popup onClose={closePopup} height={120}>
+          <Popup onClose={closePopup} height={110}>
             <SettingsPopup onClose={closePopup} />
           </Popup>
         )}

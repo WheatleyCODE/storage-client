@@ -2,7 +2,9 @@
 
 .storage-last-item {
   height: 100%;
-  background-color: rgb(253, 56, 211);
+  padding: $storagePadding;
   width: 100%;
   margin-right: 10px;
+  border: $storageBorder;
+  border-radius: 10px;
 }
