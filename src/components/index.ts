@@ -31,5 +31,8 @@ export { SearchMobile } from './storage/search-mobile/SearchMobile';
 export { Settings } from './storage/settings/Settings';
 export { Logo } from './storage/logo/Logo';
 export { User } from './storage/user/User';
+export { Calendar } from './storage/calendar/Calendar';
+export { Keep } from './storage/keep/Keep';
+export { Todo } from './storage/todo/Todo';
 export { Popup } from './modals/popup/Popup';
 export { Modal } from './modals/modal/Modal';

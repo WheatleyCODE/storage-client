@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 import { AnimationControls, motion } from 'framer-motion';
+import { StorageAdditions } from '../storage-additions/StorageAdditions';
 import './StorageAside.scss';
 
 export interface IStorageAsideProps {
@@ -17,10 +18,9 @@ export const StorageAside: FC<IStorageAsideProps> = memo(({ isOpen, toggleOpen, 
         open: { width: 200 },
         close: { width: 50 },
       }}
-      onClick={toggleOpen}
       className="storage-aside"
     >
-      <div>aside</div>
+      <StorageAdditions controls={controls} isOpen={isOpen} toggleOpen={toggleOpen} />
     </motion.div>
   );
 });

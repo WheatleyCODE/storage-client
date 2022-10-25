@@ -1,6 +1,7 @@
 import { FaRegHdd, FaRegShareSquare, FaRegClock, FaRegStar, FaRegTrashAlt } from 'react-icons/fa';
+import { FcCalendar, FcIdea, FcOk } from 'react-icons/fc';
 import { GiAcidBlob, GiVideoCamera, GiMusicSpell } from 'react-icons/gi';
-import { PathRoutes } from 'types';
+import { AdditionTypes, PathRoutes } from 'types';
 
 export const ITEM_WIDTH = 190;
 export const COLOR_BLUE = '#1573ff';
@@ -39,4 +40,19 @@ export const settingsAndHotkeysStoragePages: string[] = [
   PathRoutes.STORAGE_SHARED,
   PathRoutes.STORAGE_STARRED,
   PathRoutes.STORAGE_TRASH,
+];
+
+export const additionIcons = [
+  {
+    Icon: FcCalendar,
+    type: AdditionTypes.CALENDAR,
+  },
+  {
+    Icon: FcIdea,
+    type: AdditionTypes.KEEP,
+  },
+  {
+    Icon: FcOk,
+    type: AdditionTypes.TODO,
+  },
 ];
