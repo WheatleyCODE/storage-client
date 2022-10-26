@@ -122,3 +122,28 @@
   grid-gap: 10px;
   grid-template-columns: 1fr 100px 130px 110px;
 }
+
+@mixin button-el {
+  @include no-select;
+  cursor: pointer;
+  transition: all $animationDuration;
+
+  &:hover {
+    background-color: $colorLightGrey4;
+  }
+
+  &:active {
+    background-color: $colorLightGrey3;
+  }
+}
+
+@mixin button-el-active {
+  @include button-el;
+  border: 1px solid $colorWhite;
+
+  &.active {
+    background-color: $colorLightBlue2;
+    border: 1px solid $colorLightBlue1;
+    color: $colorDarkBlue;
+  }
+}

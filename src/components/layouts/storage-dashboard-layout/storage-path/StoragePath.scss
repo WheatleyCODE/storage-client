@@ -9,24 +9,14 @@
   border-bottom: $storageBorder;
 
   &__my-drive {
-    @include no-select;
-    transition: all $animationDuration;
-    color: $colorDarkGrey2;
-    cursor: pointer;
+    @include button-el;
     display: flex;
+    color: $colorDarkGrey2;
     align-items: center;
     font-size: 1.1rem;
     height: 35px;
     padding: 0 5px;
     border-radius: 5px;
-  
-    &:hover {
-      background-color: $colorLightGrey4;
-    }
-
-    &:active {
-      background-color: $colorLightGrey3;
-    }
   }
 
   &__right {

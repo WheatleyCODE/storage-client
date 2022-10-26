@@ -2,16 +2,12 @@
 
 .path-more {
   @include flex;
-  @include no-select;
+  @include button-el-active;
   position: absolute;
-  cursor: pointer;
   padding: 5px;
   height: 35px;
   width: 35px;
-  border-radius: 50%;
   border-radius: 5px;
-  border: 1px solid $colorWhite;
-  transition: all $animationDuration;
 
   &__icon {
     font-size: 2rem;
@@ -25,20 +21,9 @@
     z-index: 100;
   }
 
-  &:hover {
-    background-color: $colorLightGrey4;
-  }
-
-  &:active {
-    background-color: $colorLightGrey3;
-  }
-}
-
-.path-more.active {
-  background-color: $colorLightBlue2;
-  border: 1px solid $colorLightBlue1;
-
-  .path-more__icon {
-    color: $colorDarkBlue;
+  &.active {
+    .path-more__icon {
+      color: $colorDarkBlue;
+    }
   }
 }

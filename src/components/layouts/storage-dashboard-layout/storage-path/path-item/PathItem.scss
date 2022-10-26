@@ -1,9 +1,7 @@
 @import 'styles/templates.scss';
 
 .path-item {
-  @include no-select;
-  transition: all $animationDuration;
-  cursor: pointer;
+  @include button-el-active;
   display: flex;
   align-items: center;
   font-size: 1.1rem;
@@ -12,15 +10,7 @@
   border-radius: 5px;
   color: $colorDarkGrey3;
   border: 1px solid $colorWhite;
-  flex:  0 0 auto;
-
-  &:hover {
-    background-color: $colorLightGrey4;
-  }
-
-  &:active {
-    background-color: $colorLightGrey3;
-  }
+  flex: 0 0 auto;
   
   &__icon {
     @include flex;
@@ -31,12 +21,6 @@
     margin-left: 2px;
     color: $colorDarkGrey1;
   }
-}
-
-.path-item.active {
-  background-color: $colorLightBlue2;
-  color: $colorDarkBlue;
-  border: 1px solid $colorLightBlue1;
 }
 
 .path-item.last {
