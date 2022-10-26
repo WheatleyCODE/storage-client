@@ -4,6 +4,7 @@
   min-width: 50px;
   padding: $storagePadding;
   border-left: $storageBorder;
+  background-color: $colorWhite;
 }
 
 @media screen and (max-width: 560px) {

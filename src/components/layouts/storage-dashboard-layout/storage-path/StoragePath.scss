@@ -1,7 +1,7 @@
 @import 'styles/templates.scss';
 
 .storage-path {
-  overflow: hidden;
+  position: relative;
   display: flex;
   align-items: center;
   padding: $storagePadding;
@@ -29,5 +29,12 @@
     @include flex;
     min-width: 40px;
     height: 35px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .storage-path {
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
 }

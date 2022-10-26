@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaTimes } from 'react-icons/fa';
+import { CgClose } from 'react-icons/cg';
 import './Modal.scss';
 
 export interface IModalProps {
@@ -24,7 +24,7 @@ export const Modal: FC<IModalProps> = ({ children, onClose }) => {
     };
   }, []);
 
-  const MemoIcon = memo(FaTimes);
+  const MemoIcon = memo(CgClose);
 
   const stopPropagation = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();

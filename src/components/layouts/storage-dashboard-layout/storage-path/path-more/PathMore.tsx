@@ -1,5 +1,6 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { IconType } from 'react-icons';
 import { BsThreeDots } from 'react-icons/bs';
 import { Popup, PopupMenu } from 'components';
 import { POPUP_MENU_ITEM_HEIGHT, POPUP_MENU_PADDING } from 'consts';
@@ -7,7 +8,7 @@ import { PathRoutes } from 'types';
 import './PathMore.scss';
 
 export interface PathMoreProps {
-  folders: { title: string }[];
+  folders: { title: string; Icon: IconType }[];
 }
 
 export const PathMore: FC<PathMoreProps> = memo(({ folders }) => {

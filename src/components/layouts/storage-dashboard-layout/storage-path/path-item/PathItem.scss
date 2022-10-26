@@ -10,7 +10,6 @@
   border-radius: 5px;
   color: $colorDarkGrey3;
   border: 1px solid $colorWhite;
-  flex: 0 0 auto;
   
   &__icon {
     @include flex;

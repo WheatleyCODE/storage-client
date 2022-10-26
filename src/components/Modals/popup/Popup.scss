@@ -12,3 +12,17 @@
   z-index: 49;
   padding: 15px 0;
 }
+
+.popup-modal {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .popup {
+    display: none;
+  }
+
+  .popup-modal {
+    display: flex;
+  }
+}

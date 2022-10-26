@@ -5,9 +5,10 @@ import './Backdrop.scss';
 export interface IBackdropProps {
   onClose: () => void;
   children?: React.ReactNode;
+  className?: string;
 }
 
-export const Backdrop: FC<IBackdropProps> = ({ onClose, children }) => (
+export const Backdrop: FC<IBackdropProps> = ({ onClose, children, className }) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -15,7 +16,7 @@ export const Backdrop: FC<IBackdropProps> = ({ onClose, children }) => (
     transition={{ duration: 0.3 }}
     aria-hidden
     onClick={onClose}
-    className="backdrop"
+    className={`backdrop ${className || ''}`}
   >
     {children}
   </motion.div>

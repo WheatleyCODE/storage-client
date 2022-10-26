@@ -1,6 +1,7 @@
 import React, { FC, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useClickOutside } from 'hooks';
+import { Portal, Backdrop, Modal } from 'components';
 import './Popup.scss';
 
 export interface IPopupProps {
@@ -24,6 +25,11 @@ export const Popup: FC<IPopupProps> = ({ children, onClose, height }) => {
       className="popup"
     >
       {children}
+      <Portal>
+        <Backdrop className="popup-modal" onClose={onClose}>
+          <Modal onClose={onClose}>{children}</Modal>
+        </Backdrop>
+      </Portal>
     </motion.div>
   );
 };

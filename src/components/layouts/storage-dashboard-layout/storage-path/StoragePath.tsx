@@ -1,4 +1,5 @@
 import React, { FC, memo } from 'react';
+import { FcFolder } from 'react-icons/fc';
 import { HiChevronRight } from 'react-icons/hi';
 import { PathItem } from './path-item/PathItem';
 import { PathMore } from './path-more/PathMore';
@@ -8,12 +9,15 @@ export const StoragePath: FC = memo(() => {
   const folders = [
     {
       title: 'Новая папка',
+      Icon: FcFolder,
     },
     {
       title: 'Лучшая папка',
+      Icon: FcFolder,
     },
     {
       title: 'Старая папка',
+      Icon: FcFolder,
     },
   ];
 
