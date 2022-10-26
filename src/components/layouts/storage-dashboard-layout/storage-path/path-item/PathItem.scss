@@ -1,0 +1,46 @@
+@import 'styles/templates.scss';
+
+.path-item {
+  @include no-select;
+  transition: all $animationDuration;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  height: 35px;
+  padding: 0 6px;
+  border-radius: 5px;
+  color: $colorDarkGrey3;
+  border: 1px solid $colorWhite;
+  flex:  0 0 auto;
+
+  &:hover {
+    background-color: $colorLightGrey4;
+  }
+
+  &:active {
+    background-color: $colorLightGrey3;
+  }
+  
+  &__icon {
+    @include flex;
+    display: none;
+    font-size: 1.1rem;
+    width: 18px;
+    height: 18px;
+    margin-left: 2px;
+    color: $colorDarkGrey1;
+  }
+}
+
+.path-item.active {
+  background-color: $colorLightBlue2;
+  color: $colorDarkBlue;
+  border: 1px solid $colorLightBlue1;
+}
+
+.path-item.last {
+   .path-item__icon {
+      display: flex;
+  }
+}

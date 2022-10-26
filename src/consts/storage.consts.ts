@@ -18,6 +18,9 @@ export const COLOR_BLUE = '#1573ff';
 export const COLOR_YELLOW = '#ffc934';
 export const COLOR_RED = '#f7192f';
 
+export const POPUP_MENU_ITEM_HEIGHT = 40;
+export const POPUP_MENU_PADDING = 30;
+
 export const storageMenu = [
   { title: 'Мой диск', path: PathRoutes.STORAGE_MY_DRIVE, Icon: FcMultipleDevices },
   { title: 'Доступные мне', path: PathRoutes.STORAGE_SHARED, Icon: FcShare },
@@ -41,6 +44,17 @@ export const allApps = [
     Icon: FcMusic,
     title: 'MusicSpot',
     path: PathRoutes.STORAGE_MY_DRIVE,
+  },
+];
+
+export const storageSettings = [
+  {
+    title: 'Настройки',
+    hash: PathRoutes.STORAGE_SETTINGS,
+  },
+  {
+    title: 'Горячие клавиши',
+    hash: PathRoutes.STORAGE_HOTKEYS,
   },
 ];
 

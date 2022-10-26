@@ -1,0 +1,17 @@
+@import 'styles/templates.scss';
+
+.sort-item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  
+  &__icon {
+    @include flex;
+    font-size: 1.4rem;
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+    color: $colorDarkGrey1;
+  }
+}

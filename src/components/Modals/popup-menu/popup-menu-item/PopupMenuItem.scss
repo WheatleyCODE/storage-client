@@ -1,0 +1,19 @@
+@import 'styles/templates.scss';
+
+.popup-menu-item {
+  color: $colorBlack;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  transition: all $animationDuration;
+  padding-left: 30px;
+
+  &:hover {
+    background-color: $colorLightGrey4;
+  }
+
+  &:active {
+    background-color: $colorLightGrey3;
+  }
+}

@@ -1,12 +1,14 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router';
 import { FcSettings } from 'react-icons/fc';
-import { Popup, Button } from 'components';
-import { SettingsPopup } from './settings-popup/SettingsPopup';
+import { Popup, Button, PopupMenu } from 'components';
+import { POPUP_MENU_ITEM_HEIGHT, POPUP_MENU_PADDING, storageSettings } from 'consts';
 import './Settings.scss';
 
 export const Settings: FC = memo(() => {
   const [showPopup, setShowPopup] = useState(false);
+  const { pathname } = useLocation();
 
   const closePopup = useCallback(() => setShowPopup(false), []);
 
@@ -17,6 +19,8 @@ export const Settings: FC = memo(() => {
       }, 0);
     }
   }, [showPopup]);
+
+  const items = storageSettings.map((item) => ({ ...item, path: `${pathname}${item.hash}` }));
 
   return (
     <div className="settings">
@@ -29,8 +33,11 @@ export const Settings: FC = memo(() => {
 
       <AnimatePresence>
         {showPopup && (
-          <Popup onClose={closePopup} height={110}>
-            <SettingsPopup onClose={closePopup} />
+          <Popup
+            onClose={closePopup}
+            height={items.length * POPUP_MENU_ITEM_HEIGHT + POPUP_MENU_PADDING}
+          >
+            <PopupMenu items={items} onClose={closePopup} />
           </Popup>
         )}
       </AnimatePresence>

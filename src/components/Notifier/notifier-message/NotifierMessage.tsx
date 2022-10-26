@@ -37,10 +37,6 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id 
       animate={{ opacity: 1, translateX: 0 }}
       exit={{ opacity: 0, translateX: -300 }}
       transition={{ duration: 0.3 }}
-      whileHover={{
-        scale: 1.1,
-        translateX: 25,
-      }}
       className={`notifier-message ${color}`}
     >
       <div className="notifier-message__icon">

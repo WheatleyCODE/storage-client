@@ -15,7 +15,7 @@ export const StorageUser: FC<IStorageUserProps> = memo(({ isOpen, toggleOpen, co
       animate={controls}
       transition={{ duration: 0.15 }}
       variants={{
-        open: { width: 300 },
+        open: { width: 280 },
         close: { width: 50 },
       }}
       className="storage-user "

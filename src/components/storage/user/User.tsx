@@ -32,7 +32,7 @@ export const User: FC = () => {
     <div className="user">
       {!isAuth && <Button onClick={navigateToLogin} color="blue" Icon={FaRegUser} text="Войти" />}
       {isAuth && (
-        <div aria-hidden onClick={openPopup} className="user__auth">
+        <div aria-hidden onClick={openPopup} className={`user__auth ${showPopup ? 'active' : ''}`}>
           <div>{getFirstLetter(user.name)}</div>
         </div>
       )}

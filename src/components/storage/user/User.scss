@@ -2,6 +2,8 @@
 
 .user {
   position: relative;
+  display: flex;
+  align-items: center;
   
   &__auth {
     @include flex;
@@ -10,15 +12,19 @@
     color: $colorWhite;
     transition: all $animationDuration;
     cursor: pointer;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: $colorOrange;
-    border: 1px solid $colorDarkOrange;
+    padding: 5px;
   }
 
   &__auth:hover {
-    border: 1px solid $colorWhite;
+    outline: 5px solid $colorLightGrey4;
+  }
+
+  &__auth.active {
+    outline: 5px solid $colorLightBlue2;
   }
 
  .popup {
