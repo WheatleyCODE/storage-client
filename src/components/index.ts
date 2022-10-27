@@ -35,5 +35,6 @@ export { Calendar } from './storage/calendar/Calendar';
 export { Keep } from './storage/keep/Keep';
 export { Todo } from './storage/todo/Todo';
 export { Popup } from './modals/popup/Popup';
-export { PopupMenu } from './modals/popup-menu/PopupMenu';
+export { Drawer } from './modals/drawer/Drawer';
+export { PopupMenu } from './modals/popup/popup-menu/PopupMenu';
 export { Modal } from './modals/modal/Modal';

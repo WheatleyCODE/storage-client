@@ -1,13 +1,6 @@
 @import 'styles/templates.scss';
 
 .mobile-menu-modal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 400px;
-  height: 100%;
-  background-color: $colorWhite;
-
   &__close {
     @include flex;
     cursor: pointer;
@@ -27,11 +20,5 @@
     height: 80px;
     padding: 10px 30px;
     border-bottom: 1px solid $colorLightGrey3;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .mobile-menu-modal {
-    width: 100%;
   }
 }

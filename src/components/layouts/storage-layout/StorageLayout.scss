@@ -1,6 +1,7 @@
 @import 'styles/templates.scss';
 
 .storage-layout {
+  overflow: hidden;
   height: 100vh;
   transition: all $animationDuration;
 
