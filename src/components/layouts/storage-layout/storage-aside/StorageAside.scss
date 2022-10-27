@@ -1,14 +1,52 @@
 @import 'styles/templates.scss';
 
 .storage-aside {
-  min-width: 50px;
   padding: $storagePadding;
   border-left: $storageBorder;
   background-color: $colorWhite;
+
+  &__desctop {
+    min-width: 50px;
+    background-color: $colorWhite;
+  }
+
+  &__mobile {
+    display: none;
+    min-width: 50px;
+    background-color: $colorWhite;
+  }
 }
 
-@media screen and (max-width: 560px) {
+.storage-aside-modal {
+  padding: 10px;
+  padding-left: 10px;
+  padding-top: 80px;
+  height: 100%;
+}
+
+.backdrop.storage-aside {
+  display: none;
+}
+
+
+@media screen and (max-width: 1270px) {
   .storage-aside {
-    display: none !important;
+    &__desctop {
+      display: none !important;
+    }
+
+    &__mobile {
+      display: block;
+    }
+  }
+
+  .backdrop.storage-aside {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .storage-aside {
+    padding: 5px;
   }
 }

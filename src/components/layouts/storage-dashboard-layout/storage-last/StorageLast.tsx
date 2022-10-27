@@ -29,11 +29,22 @@ export const StorageLast: FC = memo(() => {
   }, []);
 
   return (
-    <div ref={ref} className="storage-last">
+    <div className="storage-last">
       <div className="storage-last__title">Последние открытые</div>
-      {items.map((item) => (
-        <StorageLastItem key={item} />
-      ))}
+      <div ref={ref} className="storage-last__items-desctop">
+        {items.map((item) => (
+          <StorageLastItem key={item} />
+        ))}
+      </div>
+
+      <div className="storage-last__visual right" />
+      <div className="storage-last__visual left" />
+
+      <div className="storage-last__items-mobile">
+        {arr.map((item) => (
+          <StorageLastItem key={item} />
+        ))}
+      </div>
     </div>
   );
 });

@@ -9,6 +9,8 @@ export interface IStorageDashboardLayoutProps {
 export const StorageDashboardLayout: FC<IStorageDashboardLayoutProps> = ({ children }) => {
   return (
     <div onContextMenu={() => console.log('first')} className="storage-dashboard-layout">
+      <div className="storage-dashboard-layout__storage-path-visual right" />
+      <div className="storage-dashboard-layout__storage-path-visual left" />
       <StoragePath />
       <div className="storage-dashboard-layout__content">
         <StorageLast />

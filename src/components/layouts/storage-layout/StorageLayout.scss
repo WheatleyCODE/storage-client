@@ -27,5 +27,14 @@
   &__main-block {
     flex: 1 1 auto;
     display: flex;
+    overflow: hidden;
   }
+}
+
+@media screen and (max-width: 500px) {
+  .storage-layout {
+    &__header {
+      height: $storageHeaderHeight - 6px;
+    }
+  }  
 }

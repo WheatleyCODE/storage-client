@@ -7,28 +7,24 @@
 
   &__content {
     cursor: pointer;
-    padding-top: 60px;
+    padding-top: 10px;
     position: absolute;
     top: -65px;
     right: 0px;
     width: calc(100% - 50px);
-    padding-left: 10px;
+    padding-left: 20px;
     height: 100%;
   }
 
   &__close {
+    @include button-el;
     @include flex;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     position: absolute;
     right: 0;
     top: 0px;
-    font-size: 1.4rem;
-    transition: all $animationDuration;
-
-    &:hover {
-      background-color: $colorLightGrey4;
-    }
+    font-size: 1.6rem;
   }
 }

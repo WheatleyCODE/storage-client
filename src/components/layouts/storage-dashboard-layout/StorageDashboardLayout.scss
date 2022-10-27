@@ -2,6 +2,7 @@
 
 .storage-dashboard-layout {
   position: relative;
+  overflow: hidden;
   flex: 1 1 auto;
 
   &__content {
@@ -9,23 +10,50 @@
     height: Calc(100% - $storagePathHeight);
   }
 
-  &__content::-webkit-scrollbar {
-    width: 8px;
-  }
+  &__storage-path-visual {
+    display: none;
+    position: absolute;
+    z-index: 49;
+    width: 10px;
+    height: $storagePathHeight - 10px;
+    top: 0;
 
-  &__content::-webkit-scrollbar-track {
-    background: $colorWhite;
-  }
+    &.right {
+      background: linear-gradient(90deg, rgb(0, 0, 0, 0) 0%, $colorWhite 50%, $colorWhite 100%);
+      right: 0;
+    }
 
-  &__content::-webkit-scrollbar-thumb {
-    background-color: $colorDarkGrey;
-    border: 1px solid $colorLightGrey2;
-    border-radius: 3px;
+    &.left {
+      background: linear-gradient(-90deg, rgb(0, 0, 0, 0) 0%, $colorWhite 50%, $colorWhite 100%);
+      left: 20px;
+    }
   }
 }
 
 @media screen and (max-width: 1000px) {
   .storage-dashboard-layout {
     padding-left: 20px;
+
+    &__storage-path-visual {
+      display: block;
+    }
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .storage-dashboard-layout {
+    &__content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &__content::-webkit-scrollbar-track {
+      background: $colorWhite;
+      width: 10px;
+    }
+
+    &__content::-webkit-scrollbar-thumb {
+      background-color: $colorLightGrey2;
+      border: 1px solid $colorWhite;
+    }
   }
 }

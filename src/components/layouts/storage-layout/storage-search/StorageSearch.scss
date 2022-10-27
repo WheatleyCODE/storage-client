@@ -9,10 +9,12 @@
 
   &__user-icon {
     display: none;
-    padding-left: 5px;
+    padding-top: 1px;
+    margin-right: 5px;
+    margin-left: 15px;
   }
 
-  &__user-icon,  &__apps-icon,  &__settings-icon, &__search-icon {
+  &__apps-icon,  &__settings-icon, &__search-icon {
     margin-left: 5px;
 
     .button.icon .button__icon {
@@ -53,11 +55,18 @@
   }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 1270px) {
   .storage-search {
-
     &__user-icon {
       display: flex;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .storage-search {
+    &__user-icon {
+      margin-right: 0;
     }
   }
 }

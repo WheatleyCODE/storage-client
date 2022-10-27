@@ -6,7 +6,7 @@
   align-items: center;
   font-size: 1.1rem;
   height: 35px;
-  padding: 0 6px;
+  padding: 0 5px;
   border-radius: 5px;
   color: $colorDarkGrey3;
   border: 1px solid $colorWhite;
@@ -15,8 +15,8 @@
     @include flex;
     display: none;
     font-size: 1.1rem;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 1px;
     margin-left: 2px;
     color: $colorDarkGrey1;
   }
@@ -26,4 +26,10 @@
    .path-item__icon {
       display: flex;
   }
+}
+
+@media screen and (max-width: 500px) {
+  .path-item {
+    font-size: 1rem;
+  }  
 }

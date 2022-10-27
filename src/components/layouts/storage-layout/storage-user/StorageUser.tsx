@@ -15,10 +15,10 @@ export const StorageUser: FC<IStorageUserProps> = memo(({ isOpen, toggleOpen, co
       animate={controls}
       transition={{ duration: 0.15 }}
       variants={{
-        open: { width: 280 },
+        open: { width: 380 },
         close: { width: 50 },
       }}
-      className="storage-user "
+      className={`storage-user ${isOpen ? 'open' : ''}`}
     >
       <User />
     </motion.div>

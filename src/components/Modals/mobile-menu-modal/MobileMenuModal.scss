@@ -3,15 +3,16 @@
 .mobile-menu-modal {
   &__close {
     @include flex;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
+    @include button-el;
+    width: 45px;
+    height: 45px;
     position: absolute;
     right: 0;
     top: 0;
     margin-right: 10px;
     margin-top: 15px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    border-radius: 50%;
   }
 
   &__logo {

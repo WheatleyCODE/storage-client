@@ -5,9 +5,15 @@
   min-width: 50px;
   padding-left: 5px;
   margin-left: $storageMargin;
+
+  &.open {
+    .popup {
+      left: 0;
+    }
+  }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 1270px) {
   .storage-user {
     display: none !important;
   }

@@ -1,14 +1,14 @@
 @import 'styles/templates.scss';
 
 .storage-path {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
   display: flex;
   align-items: center;
   padding: $storagePadding;
+  padding-left: 5px;
   height: $storagePathHeight;
   border-bottom: $storageBorder;
+  overflow-y: hidden;
+  overflow-x: auto;
 
   & > * {
     flex: 0 0 auto;
@@ -29,6 +29,7 @@
     @include flex;
     color: $colorDarkGrey;
     font-size: 1.3rem;
+    width: 20px;
   }
 
   &__more {
@@ -38,9 +39,17 @@
   }
 }
 
-// @media screen and (max-width: 500px) {
-//   .storage-path {
-//     overflow-x: scroll;
-//     overflow-y: hidden;
-//   }
-// }
+@media screen and (max-width: 500px) {
+  .storage-path {
+    height: $storagePathHeight - 6px;
+
+    &__my-drive {
+      font-size: 1rem;
+    }
+
+    &__more {
+      position: relative;
+      z-index: 49;
+    }
+  }  
+}

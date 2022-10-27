@@ -1,5 +1,4 @@
-import React, { FC, memo, useCallback, useState } from 'react';
-import { AnimationControls } from 'framer-motion';
+import React, { FC, memo } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { Calendar, Keep, Todo } from 'components';
 import { additionIcons } from 'consts';
@@ -9,13 +8,13 @@ import './StorageAdditions.scss';
 
 export interface IStorageAdditionsProps {
   isOpen: boolean;
-  controls: AnimationControls;
+  active: AdditionTypes;
+  changeActive: (type: AdditionTypes) => void;
   toggleOpen: () => void;
 }
 
 export const StorageAdditions: FC<IStorageAdditionsProps> = memo((props) => {
-  const { isOpen, toggleOpen, controls } = props;
-  const [active, setActive] = useState<AdditionTypes>(AdditionTypes.CALENDAR);
+  const { isOpen, changeActive, active, toggleOpen } = props;
 
   const additionContent = {
     [AdditionTypes.CALENDAR]: Calendar,
@@ -24,24 +23,6 @@ export const StorageAdditions: FC<IStorageAdditionsProps> = memo((props) => {
   };
 
   const ActiveContent = additionContent[active];
-
-  const changeActive = useCallback(
-    (type: AdditionTypes) => {
-      if (type === active) {
-        toggleOpen();
-        return;
-      }
-
-      if (isOpen) {
-        setActive(type);
-        return;
-      }
-
-      toggleOpen();
-      setActive(type);
-    },
-    [isOpen, toggleOpen, active]
-  );
 
   const MemoIcon = memo(CgClose);
 
