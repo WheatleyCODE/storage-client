@@ -1,13 +1,6 @@
 @import 'styles/templates.scss';
 
 .mobile-menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 400px;
-  height: 100%;
-  background-color: $colorWhite;
-
   &__ul {
     height: calc(100vh - 215px);
     overflow: auto;

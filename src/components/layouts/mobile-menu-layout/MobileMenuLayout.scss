@@ -1,6 +1,6 @@
 @import 'styles/templates.scss';
 
-.mobile-menu-modal {
+.mobile-menu-layout {
   &__close {
     @include flex;
     @include button-el;

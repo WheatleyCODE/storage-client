@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { MdMenu } from 'react-icons/md';
-import { Button, Portal, Backdrop, Logo, User } from 'components';
+import { Button, Portal, Backdrop, Logo, User, Drawer, MobileMenuLayout } from 'components';
 import { Menu } from '../menu/Menu';
 import { MobileMenu } from '../mobile-menu/MobileMenu';
 import './Header.scss';
@@ -29,7 +29,11 @@ export const Header: FC = () => {
         {showMenu && (
           <Portal>
             <Backdrop onClose={closeMenu}>
-              <MobileMenu onClose={closeMenu} />
+              <Drawer open="left">
+                <MobileMenuLayout onClose={closeMenu}>
+                  <MobileMenu onClose={closeMenu} />
+                </MobileMenuLayout>
+              </Drawer>
             </Backdrop>
           </Portal>
         )}

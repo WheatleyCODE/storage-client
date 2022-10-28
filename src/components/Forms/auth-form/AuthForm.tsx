@@ -31,12 +31,13 @@ export const AuthForm: FC<IAuthFormProps> = (props) => {
     hideResetPassword = false,
     children,
   } = props;
+
   return (
     <div className="auth-form">
       <Form title={title}>
         {children}
 
-        {!hideLinks ? (
+        {!hideLinks && (
           <div className="auth-form__links links">
             <div className="links__block">
               <Checkbox value={checkboxValue} onClick={checkboxAction} label="Показать пароль" />
@@ -47,9 +48,9 @@ export const AuthForm: FC<IAuthFormProps> = (props) => {
               )}
             </div>
           </div>
-        ) : (
-          <div className="auth-form__padding" />
         )}
+
+        {hideLinks && <div className="auth-form__padding" />}
 
         <div className="auth-form__buttons">
           <Button

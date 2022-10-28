@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { Button, MobileMenuModal } from 'components';
+import { Button } from 'components';
 import { noAuthDesctopMenu, noAuthMobileMenu } from 'consts';
 import { PathRoutes } from 'types';
 import { MobileMenuItem } from './mobile-menu-item/MobileMenuItem';
@@ -19,15 +19,15 @@ export const MobileMenu: FC<IMobileMenu> = ({ onClose }) => {
   const toLogin = useCallback(() => {
     onClose();
     navigate(PathRoutes.LOGIN);
-  }, [onClose]);
+  }, [navigate, onClose]);
 
   const toRegister = useCallback(() => {
     onClose();
     navigate(PathRoutes.REGISTER);
-  }, [onClose]);
+  }, [navigate, onClose]);
 
   return (
-    <MobileMenuModal onClose={onClose}>
+    <div className="mobile-menu">
       <ul className="mobile-menu__ul">
         {mobileNoAuthMenu.map((item) => (
           <li key={item.path}>
@@ -44,6 +44,6 @@ export const MobileMenu: FC<IMobileMenu> = ({ onClose }) => {
         <Button onClick={toRegister} outline="fill" color="blue" text="Попробовать" />
         <Button onClick={toLogin} text="Войти" />
       </div>
-    </MobileMenuModal>
+    </div>
   );
 };

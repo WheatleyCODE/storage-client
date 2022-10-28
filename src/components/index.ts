@@ -20,7 +20,7 @@ export { Search } from './storage/search/Search';
 export { Portal } from './hoc/Portal';
 export { Notifier } from './notifier/Notifier';
 export { Backdrop } from './modals/backdrop/Backdrop';
-export { MobileMenuModal } from './modals/mobile-menu-modal/MobileMenuModal';
+export { MobileMenuLayout } from './layouts/mobile-menu-layout/MobileMenuLayout';
 export { AppProvider } from './hoc/AppProvider';
 export { StoragePath } from './layouts/storage-dashboard-layout/storage-path/StoragePath';
 export { StorageSorter } from './layouts/storage-dashboard-layout/storage-sorter/StorageSorter';

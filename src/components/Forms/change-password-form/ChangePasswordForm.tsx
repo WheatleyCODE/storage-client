@@ -34,7 +34,7 @@ export const ChangePasswordForm: FC = () => {
       link: params.link || '',
     });
 
-    setIsDisable(true);
+    setIsDisable(false);
 
     if (checkRequestStatus(data)) {
       navigate(PathRoutes.LOGIN);
