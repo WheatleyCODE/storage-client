@@ -1,6 +1,6 @@
 @import 'styles/templates.scss';
 
-.storage-layout {
+.storage-page-layout {
   overflow: hidden;
   height: 100vh;
   transition: all $animationDuration;
@@ -32,7 +32,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .storage-layout {
+  .storage-page-layout {
     &__header {
       height: $storageHeaderHeight - 6px;
     }
