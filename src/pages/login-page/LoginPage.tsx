@@ -1,14 +1,13 @@
 import React from 'react';
-import { LoginForm } from 'components';
+import { LoginForm, AuthPageLayout } from 'components';
 import './LoginPage.scss';
-import { AuthLayout } from 'components/layouts/auth-layout/AuthLayout';
 
 export const LoginPage = () => {
   return (
     <div className="login-page">
-      <AuthLayout>
+      <AuthPageLayout>
         <LoginForm />
-      </AuthLayout>
+      </AuthPageLayout>
     </div>
   );
 };

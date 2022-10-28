@@ -1,6 +1,6 @@
 export { App } from './App';
 export { MainLayout } from './layouts/main-layout/MainLayout';
-export { AuthLayout } from './layouts/auth-layout/AuthLayout';
+export { AuthPageLayout } from './layouts/auth-page-layout/AuthPageLayout';
 export { StorageLayout } from './layouts/storage-layout/StorageLayout';
 export { Button } from './ui/button/Button';
 export { Input } from './ui/input/Input';

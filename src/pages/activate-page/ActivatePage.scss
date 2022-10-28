@@ -1,7 +1,7 @@
 @import 'styles/templates.scss';
 
 .activate-page {
-  .auth-layout {
+  .auth-page-layout {
     @include flex;
     flex-direction: column;
     padding-top: 0;

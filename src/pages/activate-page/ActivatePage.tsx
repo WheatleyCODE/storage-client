@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { AuthLayout } from 'components';
+import { AuthPageLayout } from 'components';
 import { useActions } from 'hooks';
 import { PathRoutes } from 'types';
 import { checkRequestStatus } from 'utils';
@@ -28,9 +28,9 @@ const ActivatePage: FC = () => {
 
   return (
     <div className="activate-page">
-      <AuthLayout>
+      <AuthPageLayout>
         <h1 className="activate-page__title">Активация аккаунта...</h1>
-      </AuthLayout>
+      </AuthPageLayout>
     </div>
   );
 };

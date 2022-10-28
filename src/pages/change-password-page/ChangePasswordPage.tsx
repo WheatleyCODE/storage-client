@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
-import { ChangePasswordForm, AuthLayout } from 'components';
+import { ChangePasswordForm, AuthPageLayout } from 'components';
 import './ChangePasswordPage.scss';
 
 const ChangePasswordPage: FC = () => {
   return (
     <div className="change-password-page">
-      <AuthLayout>
+      <AuthPageLayout>
         <ChangePasswordForm />
-      </AuthLayout>
+      </AuthPageLayout>
     </div>
   );
 };

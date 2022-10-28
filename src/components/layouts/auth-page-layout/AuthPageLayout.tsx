@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { Stars, Mountains, Hills } from 'components';
-import './AuthLayout.scss';
+import './AuthPageLayout.scss';
 
-export interface IAuthLayoutProps {
+export interface IAuthPageLayoutProps {
   children: React.ReactNode;
 }
 
-export const AuthLayout: FC<IAuthLayoutProps> = ({ children }) => {
+export const AuthPageLayout: FC<IAuthPageLayoutProps> = ({ children }) => {
   return (
-    <div className="auth-layout">
+    <div className="auth-page-layout">
       {children}
       <Stars />
       <Mountains />
