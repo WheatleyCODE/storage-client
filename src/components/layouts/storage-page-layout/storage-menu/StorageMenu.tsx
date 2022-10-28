@@ -46,6 +46,7 @@ export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, togg
           type="icon"
         />
       </div>
+
       {isOpen && (
         <div className="storage-menu__size">
           <StorageSize diskSpace={1024} usedSpace={900} />

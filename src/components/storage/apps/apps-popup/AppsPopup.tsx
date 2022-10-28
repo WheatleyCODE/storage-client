@@ -3,11 +3,11 @@ import React, { FC, memo } from 'react';
 import { AppsPopupItem } from './apps-popup-item/AppsPopupItem';
 import './AppsPopup.scss';
 
-export interface AppsPopupProps {
+export interface IAppsPopupProps {
   onClose: () => void;
 }
 
-export const AppsPopup: FC<AppsPopupProps> = memo(({ onClose }) => {
+export const AppsPopup: FC<IAppsPopupProps> = memo(({ onClose }) => {
   return (
     <div className="apps-popup">
       {allApps.map(({ Icon, title, path }) => (

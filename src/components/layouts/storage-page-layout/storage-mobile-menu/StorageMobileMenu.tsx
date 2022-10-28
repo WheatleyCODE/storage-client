@@ -1,8 +1,8 @@
 import React, { FC, memo } from 'react';
 import { StorageSize } from 'components';
-import './StorageMobileMenu.scss';
 import { storageMenu } from 'consts';
 import { StorageMobileMenuItem } from './storage-mobile-menu-item/StorageMobileMenuItem';
+import './StorageMobileMenu.scss';
 
 export interface IStorageMobileMenuProps {
   onClose: () => void;

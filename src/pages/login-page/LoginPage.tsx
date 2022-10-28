@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { LoginForm, AuthPageLayout } from 'components';
 import './LoginPage.scss';
 
-export const LoginPage = () => {
+export const LoginPage: FC = () => {
   return (
     <div className="login-page">
       <AuthPageLayout>

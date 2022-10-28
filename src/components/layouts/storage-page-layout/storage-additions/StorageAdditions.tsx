@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { Calendar, Keep, Todo } from 'components';
 import { additionIcons } from 'consts';
@@ -16,11 +16,14 @@ export interface IStorageAdditionsProps {
 export const StorageAdditions: FC<IStorageAdditionsProps> = memo((props) => {
   const { isOpen, changeActive, active, toggleOpen } = props;
 
-  const additionContent = {
-    [AdditionTypes.CALENDAR]: Calendar,
-    [AdditionTypes.KEEP]: Keep,
-    [AdditionTypes.TODO]: Todo,
-  };
+  const additionContent = useMemo(
+    () => ({
+      [AdditionTypes.CALENDAR]: Calendar,
+      [AdditionTypes.KEEP]: Keep,
+      [AdditionTypes.TODO]: Todo,
+    }),
+    []
+  );
 
   const ActiveContent = additionContent[active];
 
@@ -39,6 +42,7 @@ export const StorageAdditions: FC<IStorageAdditionsProps> = memo((props) => {
           />
         ))}
       </div>
+
       {isOpen && (
         <div className="storage-additions__content">
           <div aria-hidden onClick={toggleOpen} className="storage-additions__close">

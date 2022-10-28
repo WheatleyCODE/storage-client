@@ -1,7 +1,6 @@
 import React, { FC, memo } from 'react';
 import { IconType } from 'react-icons';
 import { PopupMenuItem } from './popup-menu-item/PopupMenuItem';
-import './PopupMenu.scss';
 
 export interface PopupMenuProps {
   items: {

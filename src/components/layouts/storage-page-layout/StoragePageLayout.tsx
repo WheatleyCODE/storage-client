@@ -45,11 +45,12 @@ export const StoragePageLayout: FC = () => {
     <div onContextMenu={lockContextMenu} className="storage-page-layout">
       <div className="storage-page-layout__header">
         <div className="storage-page-layout__header-block">
-          <StorageLogo controls={menuControls} isOpen={isOpenMenu} toggleOpen={toggleMenu} />
+          <StorageLogo controls={menuControls} isOpen={isOpenMenu} />
           <StorageSearch />
         </div>
-        <StorageUser controls={asideControls} isOpen={isOpenAside} toggleOpen={toggleAside} />
+        <StorageUser controls={asideControls} isOpen={isOpenAside} />
       </div>
+
       <div className="storage-page-layout__main">
         <div className="storage-page-layout__main-block">
           <StorageMenu controls={menuControls} isOpen={isOpenMenu} toggleOpen={toggleMenu} />

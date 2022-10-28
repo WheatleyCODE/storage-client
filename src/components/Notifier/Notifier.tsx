@@ -11,6 +11,7 @@ export const Notifier: FC = memo(() => {
   const dispatch = useTypedDispatch();
   const { currentMessages } = useTypedSelector((state) => state.notifier);
 
+  // todo check
   useEffect(() => {
     emitter.subscribe(EventNames.DISPATCH_MESSAGE, (message) => {
       dispatch(notifierSlice.actions.notifierAddMessage(message));

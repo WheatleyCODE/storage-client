@@ -12,11 +12,8 @@ export const Modal: FC<IModalProps> = ({ children, onClose }) => {
   useEffect(() => {
     const { platform } = window.navigator;
 
-    if (platform === 'Win32') {
-      document.body.classList.add('win');
-    } else {
-      document.body.classList.add('mac');
-    }
+    if (platform === 'Win32') document.body.classList.add('win');
+    if (platform !== 'Win32') document.body.classList.add('mac');
 
     return () => {
       document.body.classList.remove('win');

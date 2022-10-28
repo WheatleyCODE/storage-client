@@ -4,12 +4,12 @@ import { Button } from 'components';
 import { getPercent, getProgressColor, formatSize } from 'utils';
 import './StorageSize.scss';
 
-export type StorageSizeProps = {
+export interface IStorageSizeProps {
   diskSpace: number;
   usedSpace: number;
-};
+}
 
-export const StorageSize: FC<StorageSizeProps> = memo(({ diskSpace, usedSpace }) => {
+export const StorageSize: FC<IStorageSizeProps> = memo(({ diskSpace, usedSpace }) => {
   const percent = getPercent(diskSpace, usedSpace);
   const color = getProgressColor(percent);
   const MemoIcon = memo(AiOutlineCloud);

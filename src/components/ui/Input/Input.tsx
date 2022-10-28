@@ -35,9 +35,7 @@ export const Input: FC<IInputProps> = memo((props) => {
   const isIcon = !!MemoIcon;
 
   const focusOnInput = useCallback(() => {
-    if (ref.current) {
-      ref.current.focus();
-    }
+    if (ref.current) ref.current.focus();
   }, []);
 
   useEffect(() => {

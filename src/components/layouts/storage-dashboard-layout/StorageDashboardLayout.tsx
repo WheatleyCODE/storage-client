@@ -45,6 +45,7 @@ export const StorageDashboardLayout: FC<IStorageDashboardLayoutProps> = ({ child
         <StorageSorter />
         {children}
       </div>
+
       <AnimatePresence>
         {show && (
           <Portal>

@@ -57,6 +57,7 @@ export const StorageSearch: FC = memo(() => {
             </Backdrop>
           </Portal>
         )}
+
         {showHotkeys && (
           <Portal>
             <Backdrop onClose={closeHotkeys}>

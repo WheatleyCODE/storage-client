@@ -24,6 +24,7 @@ export const Search: FC = memo(() => {
         changeFocus={search.changeFocus}
         changeActive={search.changeActive}
       />
+
       <AnimatePresence>
         {search.value && search.isFocus && (
           <Popup onClose={() => {}} height={200}>

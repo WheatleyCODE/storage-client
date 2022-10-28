@@ -19,12 +19,9 @@ export const User: FC = () => {
   }, [navigate]);
 
   const closePopup = useCallback(() => setShowPopup(false), []);
-
   const openPopup = useCallback(() => {
     if (!showPopup) {
-      setTimeout(() => {
-        setShowPopup(true);
-      }, 0);
+      setTimeout(() => setShowPopup(true), 0);
     }
   }, [showPopup]);
 

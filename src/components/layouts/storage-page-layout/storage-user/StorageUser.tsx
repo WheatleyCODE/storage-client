@@ -6,10 +6,9 @@ import './StorageUser.scss';
 export interface IStorageUserProps {
   isOpen: boolean;
   controls: AnimationControls;
-  toggleOpen: () => void;
 }
 
-export const StorageUser: FC<IStorageUserProps> = memo(({ isOpen, toggleOpen, controls }) => {
+export const StorageUser: FC<IStorageUserProps> = memo(({ isOpen, controls }) => {
   return (
     <motion.div
       animate={controls}

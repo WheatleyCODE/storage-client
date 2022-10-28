@@ -8,36 +8,34 @@ import './StorageLogo.scss';
 export interface IStorageLogoProps {
   isOpen: boolean;
   controls: AnimationControls;
-  toggleOpen: () => void;
 }
 
-export const StorageLogo: FC<IStorageLogoProps> = memo(({ isOpen, controls, toggleOpen }) => {
+export const StorageLogo: FC<IStorageLogoProps> = memo(({ isOpen, controls }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const closeMenu = useCallback(() => setShowMenu(false), []);
   const openMenu = useCallback(() => setShowMenu(true), []);
 
   return (
-    <>
-      <motion.div
-        animate={controls}
-        transition={{ duration: 0.15 }}
-        variants={{
-          open: { width: 260 },
-          close: { width: 70 },
-        }}
-        className="storage-logo"
-      >
-        <div className="storage-logo__menu">
-          <Button onClick={openMenu} type="icon" color="blue" Icon={MdMenu} />
-        </div>
-        <div className="storage-logo__mobile-logo">
-          <Logo />
-        </div>
-        <div className="storage-logo__desctop-logo">
-          <Logo isName={isOpen} />
-        </div>
-      </motion.div>
+    <motion.div
+      animate={controls}
+      transition={{ duration: 0.15 }}
+      variants={{
+        open: { width: 260 },
+        close: { width: 70 },
+      }}
+      className="storage-logo"
+    >
+      <div className="storage-logo__menu">
+        <Button onClick={openMenu} type="icon" color="blue" Icon={MdMenu} />
+      </div>
+      <div className="storage-logo__mobile-logo">
+        <Logo />
+      </div>
+      <div className="storage-logo__desctop-logo">
+        <Logo isName={isOpen} />
+      </div>
+
       <AnimatePresence>
         {showMenu && (
           <Portal>
@@ -51,6 +49,6 @@ export const StorageLogo: FC<IStorageLogoProps> = memo(({ isOpen, controls, togg
           </Portal>
         )}
       </AnimatePresence>
-    </>
+    </motion.div>
   );
 });
