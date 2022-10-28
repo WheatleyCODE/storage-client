@@ -3,3 +3,10 @@ export enum AdditionTypes {
   KEEP = 'KEEP',
   TODO = 'TODO',
 }
+
+export interface ICoords {
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+}

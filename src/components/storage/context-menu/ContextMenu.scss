@@ -1,0 +1,18 @@
+@import 'styles/templates.scss';
+
+.context-menu {
+  overflow: hidden;
+  padding: 15px 0;
+  border-radius: 5px;
+  z-index: 100;
+  position: absolute;
+  width: 320px;
+  background-color: $colorWhite;
+  box-shadow: 0px 0px 8px 2px $colorShadow;
+  border: 1px solid $colorLightGrey3;
+
+  &__br {
+    border-bottom: $storageBorder;
+    margin: 5px 0;
+  }
+}

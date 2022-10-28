@@ -36,9 +36,13 @@ export const StorageLayout: FC = () => {
 
   const toggleAside = useCallback(() => setIsOpenAside((p) => !p), []);
   const toggleMenu = useCallback(() => setIsOpenMenu((p) => !p), []);
+  const lockContextMenu = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => e.preventDefault(),
+    []
+  );
 
   return (
-    <div className="storage-layout">
+    <div onContextMenu={lockContextMenu} className="storage-layout">
       <div className="storage-layout__header">
         <div className="storage-layout__header-block">
           <StorageLogo controls={menuControls} isOpen={isOpenMenu} toggleOpen={toggleMenu} />

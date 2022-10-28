@@ -6,7 +6,7 @@ import { Input, Popup } from 'components';
 import './Search.scss';
 
 export const Search: FC = memo(() => {
-  const search = useValidInput([]);
+  const search = useValidInput();
 
   return (
     <div className="search">

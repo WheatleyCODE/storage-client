@@ -20,6 +20,7 @@ export const COLOR_RED = '#f7192f';
 
 export const POPUP_MENU_ITEM_HEIGHT = 40;
 export const POPUP_MENU_PADDING = 30;
+export const POPUP_MENU_BR_HEIGHT = 11;
 
 export const storageMenu = [
   { title: 'Мой диск', path: PathRoutes.STORAGE_MY_DRIVE, Icon: FcMultipleDevices },

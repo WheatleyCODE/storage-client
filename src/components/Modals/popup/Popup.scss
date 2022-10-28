@@ -1,10 +1,11 @@
 @import 'styles/templates.scss';
 
 .popup {
+  overflow: hidden;
   position: absolute;
   right: 0;
   top: 50px;
-  box-shadow: 0px 0px 4px 1px $colorShadow;
+  box-shadow: 0px 0px 6px 1px $colorShadow;
   border: 1px solid $colorLightGrey3;
   background-color: $colorWhite;
   border-radius: 5px;

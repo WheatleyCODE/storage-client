@@ -1,9 +1,11 @@
 import { RefObject, useEffect } from 'react';
 
+export type EventTypes = 'click' | 'contextmenu';
+
 export const useClickOutside = <T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,
   handler: (event: MouseEvent) => void,
-  eventType: 'click' | 'contextmenu' = 'click'
+  eventTypes: EventTypes[] = ['click']
 ) => {
   useEffect(() => {
     const fn = (event: MouseEvent) => {
@@ -16,10 +18,14 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
       handler(event);
     };
 
-    document.body.addEventListener(eventType, fn);
+    eventTypes.forEach((event) => {
+      document.body.addEventListener(event, fn);
+    });
 
     return () => {
-      document.body.removeEventListener(eventType, fn);
+      eventTypes.forEach((event) => {
+        document.body.removeEventListener(event, fn);
+      });
     };
-  }, [eventType, handler, ref]);
+  }, [eventTypes, handler, ref]);
 };

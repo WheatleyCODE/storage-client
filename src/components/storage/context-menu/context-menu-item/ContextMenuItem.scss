@@ -1,0 +1,17 @@
+@import 'styles/templates.scss';
+
+.context-menu-item {
+  @include button-el;
+  padding-left: 30px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    @include flex;
+    width: 30px;
+    margin-right: 15px;
+    font-size: 1.6rem;
+    color: $colorDarkGrey3;
+  }
+}

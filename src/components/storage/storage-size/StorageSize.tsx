@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react';
 import { AiOutlineCloud } from 'react-icons/ai';
 import { Button } from 'components';
-import { getPercent, getProgressColor, sizeFormat } from 'utils';
+import { getPercent, getProgressColor, formatSize } from 'utils';
 import './StorageSize.scss';
 
 export type StorageSizeProps = {
@@ -27,7 +27,7 @@ export const StorageSize: FC<StorageSizeProps> = memo(({ diskSpace, usedSpace })
         />
       </div>
       <div className="storage-size__size-info">
-        {sizeFormat(usedSpace)} из {sizeFormat(diskSpace)}
+        {formatSize(usedSpace)} из {formatSize(diskSpace)}
       </div>
       <Button outline="outline" color="orange" text="Купить больше места" />
     </div>

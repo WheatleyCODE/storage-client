@@ -17,7 +17,7 @@ export interface IValidInputOpts {
 
 export type IValidator = (str: string) => string | null;
 
-export const useValidInput = (validators: IValidator[]): IValidInputOpts => {
+export const useValidInput = (validators: IValidator[] = []): IValidInputOpts => {
   const [value, setValue] = useState('');
   const [isFocus, setIsFocus] = useState(false);
   const [isActive, setIsActive] = useState(false);

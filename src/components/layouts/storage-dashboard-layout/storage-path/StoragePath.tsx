@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useCallback, useMemo } from 'react';
 import { FcFolder } from 'react-icons/fc';
 import { HiChevronRight } from 'react-icons/hi';
 import { PathItem } from './path-item/PathItem';
@@ -6,24 +6,27 @@ import { PathMore } from './path-more/PathMore';
 import './StoragePath.scss';
 
 export const StoragePath: FC = memo(() => {
-  const folders = [
-    {
-      title: 'Новая папка',
-      Icon: FcFolder,
-    },
-    {
-      title: 'Лучшая папка',
-      Icon: FcFolder,
-    },
-    {
-      title: 'Старая папка',
-      Icon: FcFolder,
-    },
-  ];
+  const folders = useMemo(
+    () => [
+      {
+        title: 'Новая папка',
+        Icon: FcFolder,
+      },
+      {
+        title: 'Лучшая папка',
+        Icon: FcFolder,
+      },
+      {
+        title: 'Старая папка',
+        Icon: FcFolder,
+      },
+    ],
+    []
+  );
 
   const MemoIcon = memo(HiChevronRight);
 
-  const getDefaultPath = () => {
+  const getDefaultPath = useCallback(() => {
     return folders.map(({ title }, i) => (
       <>
         <div className="storage-path__right">
@@ -32,9 +35,9 @@ export const StoragePath: FC = memo(() => {
         <PathItem isLast={folders.length === i + 1} title={title} />
       </>
     ));
-  };
+  }, [MemoIcon, folders]);
 
-  const getMorePath = () => {
+  const getMorePath = useCallback(() => {
     const copyFolders = [...folders];
     copyFolders.pop();
 
@@ -52,7 +55,7 @@ export const StoragePath: FC = memo(() => {
         <PathItem isLast title={folders[folders.length - 1].title} />
       </>
     );
-  };
+  }, [MemoIcon, folders]);
 
   const pathItems = folders.length >= 3 ? getMorePath() : getDefaultPath();
 
