@@ -1,3 +1,4 @@
+import { type } from 'os';
 import { IAlbum } from './album.interface';
 import { IFile } from './file.interface';
 import { IFolder } from './folder.interface';
@@ -18,6 +19,7 @@ export interface ICoords {
 
 export interface IStorageState {
   id: string;
+  currentArr: WorkplaceItem[];
   name: string;
   user: string;
   diskSpace: number;
@@ -27,3 +29,5 @@ export interface IStorageState {
   albums: IAlbum[];
   tracks: ITrack[];
 }
+
+export type WorkplaceItem = IFolder | IFile | IAlbum | ITrack;

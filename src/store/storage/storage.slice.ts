@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { IStorageState } from 'types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IStorageState, WorkplaceItem } from 'types';
 import { fetchStorage } from './storage.actions';
 
 const initialState: IStorageState = {
+  currentArr: [],
   id: '',
   name: '',
   user: '',
@@ -17,7 +18,12 @@ const initialState: IStorageState = {
 export const storageSlice = createSlice({
   name: 'storage',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrent: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
+      state.currentArr = payload;
+    },
+  },
+
   extraReducers(builder) {
     builder.addCase(fetchStorage.fulfilled, (state, { payload }) => {
       state.id = payload.id;

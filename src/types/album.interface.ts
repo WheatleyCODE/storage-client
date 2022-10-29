@@ -1,4 +1,4 @@
-import { AccessTypes, ItemTypes } from './storage-items.intarface';
+import { AccessTypes, ItemTypes } from './storage-workplace.intarface';
 
 export interface IAlbum {
   id: string;

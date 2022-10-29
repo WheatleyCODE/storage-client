@@ -15,7 +15,7 @@ export const StorageMenuItem: FC<IStorageMenuItemProps> = memo(({ title, path, I
   const MemoIcon = memo(Icon);
 
   return (
-    <NavLink to={path} className="storage-menu-item ">
+    <NavLink to={path} className={`storage-menu-item ${!isOpen ? 'close' : ''}`}>
       <div className="storage-menu-item__icon">
         <MemoIcon />
       </div>

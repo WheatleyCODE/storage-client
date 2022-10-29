@@ -1,0 +1,43 @@
+@import 'styles/templates.scss';
+
+.storage-workplace-item {
+  @include button-el;
+  @include workplace-grid;
+  color: $colorDarkGrey2;
+  font-size: 0.9rem;
+  height: 45px;
+  padding-left: 20px;
+  padding-right: 10px;
+  border-bottom: $storageBorder;
+
+  &__name, &__access, &__open-date, &__size {
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
+    color: $colorDarkGrey3;
+    font-size: 1rem;
+  }
+
+  &__icon {
+    font-size: 1.7rem;
+    color: $colorDarkGrey2;
+    margin-right: 15px;
+  }
+
+  &__no-size {
+    border-bottom: 2px solid $colorDarkGrey2;
+    width: 30px;
+  }
+
+  &.active {
+    color: $colorDarkBlue;
+    background-color: $colorLightBlue2;
+    border-bottom: 1px solid $colorLightBlue1;
+
+    .storage-workplace-item__name {
+      color: $colorDarkBlue;
+    }
+  }
+}

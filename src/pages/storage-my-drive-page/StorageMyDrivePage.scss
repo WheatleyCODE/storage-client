@@ -2,13 +2,4 @@
 
 .storage-my-drive-page {
   flex: 1 1 auto;
-  padding: $storagePadding;
-  
-
-  &__block {
-    display: flex;
-    align-items: center;
-    height: 45px;
-    border-bottom: $storageBorder;
-  }
 }

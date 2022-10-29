@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 import { StorageSize } from 'components';
+import { useTypedSelector } from 'hooks';
 import { storageMenu } from 'consts';
 import { StorageMobileMenuItem } from './storage-mobile-menu-item/StorageMobileMenuItem';
 import './StorageMobileMenu.scss';
@@ -9,6 +10,8 @@ export interface IStorageMobileMenuProps {
 }
 
 export const StorageMobileMenu: FC<IStorageMobileMenuProps> = memo(({ onClose }) => {
+  const { diskSpace, usedSpace } = useTypedSelector((state) => state.storage);
+
   return (
     <div className="storage-mobile-menu">
       <ul className="storage-mobile-menu__ul">
@@ -19,7 +22,7 @@ export const StorageMobileMenu: FC<IStorageMobileMenuProps> = memo(({ onClose })
         ))}
       </ul>
       <div className="storage-mobile-menu__size">
-        <StorageSize usedSpace={900} diskSpace={1024} />
+        <StorageSize usedSpace={usedSpace} diskSpace={diskSpace} />
       </div>
     </div>
   );

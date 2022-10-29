@@ -2,10 +2,13 @@
 
 .storage-menu-item {
   color: $colorBlack;
-  transition: color $animationDuration;
+  transition: all $animationDuration;
+  border: 1px solid $colorWhite;
   display: flex;
   align-items: center;
   height: 45px;
+  margin-top: 3px;
+  margin-left: 7.5px;
 
   &:hover {
     color: $colorDarkBlue;
@@ -19,14 +22,25 @@
     @include flex;
     transition: color $animationDuration;
     font-size: 1.7rem;
-    min-width: 60px;
     color: $colorDarkGrey3;
+    margin-left: 7.5px;
   }
 
   &__title {
     position: absolute;
     left: 70px;
     font-size: 1rem;
+  }
+
+  &.close {
+    // @include flex;
+    @include button-el-active;
+    height: 45px;
+    width: 45px;
+    border-radius: 5px;
+    // border-radius: 50%;
+    // padding: 0 10px;
+    margin-left: 7.5px;
   }
 }
 

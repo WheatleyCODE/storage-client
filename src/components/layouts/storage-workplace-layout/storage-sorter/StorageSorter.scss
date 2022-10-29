@@ -1,12 +1,13 @@
 @import 'styles/templates.scss';
 
 .storage-sorter {
-  @include dashboard-grid;
+  @include workplace-grid;
   top: 0;
   position: sticky;
   background-color: $colorWhite;
   height: $storageSorterHeight;
   padding: $storagePadding;
+  padding-left: 20px;
   border-bottom: $storageBorder;
 }
 

@@ -3,6 +3,7 @@ import { AnimationControls, motion } from 'framer-motion';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdHorizontalRule } from 'react-icons/md';
 import { Button, StorageSize } from 'components';
+import { useTypedSelector } from 'hooks';
 import { storageMenu } from 'consts';
 import { StorageMenuItem } from './storage-menu-item/StorageMenuItem';
 import './StorageMenu.scss';
@@ -14,6 +15,7 @@ export interface IStorageMenuProps {
 }
 
 export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, toggleOpen }) => {
+  const { diskSpace, usedSpace } = useTypedSelector((state) => state.storage);
   const openClassName = isOpen ? 'open' : '';
 
   return (
@@ -49,7 +51,7 @@ export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, togg
 
       {isOpen && (
         <div className="storage-menu__size">
-          <StorageSize diskSpace={1024} usedSpace={900} />
+          <StorageSize diskSpace={diskSpace} usedSpace={usedSpace} />
         </div>
       )}
     </motion.div>

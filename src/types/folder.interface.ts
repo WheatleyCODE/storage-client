@@ -1,4 +1,4 @@
-import { ItemTypes, AccessTypes } from './storage-items.intarface';
+import { ItemTypes, AccessTypes } from './storage-workplace.intarface';
 
 export enum FolderColors {
   GREY = 'GREY',
