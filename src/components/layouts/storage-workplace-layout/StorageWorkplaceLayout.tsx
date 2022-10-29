@@ -4,13 +4,13 @@ import { StorageSorter, StoragePath, StorageLast, ContextMenu, Portal } from 'co
 import { useClickOutside } from 'hooks';
 import { getContextMenuCoords, sleep } from 'utils';
 import { ICoords } from 'types';
-import './StorageDashboardLayout.scss';
+import './StorageWorkplaceLayout.scss';
 
-export interface IStorageDashboardLayoutProps {
+export interface IStorageWorkplaceLayoutProps {
   children: React.ReactNode;
 }
 
-export const StorageDashboardLayout: FC<IStorageDashboardLayoutProps> = ({ children }) => {
+export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = ({ children }) => {
   const [show, setShow] = useState(false);
   const [coords, setCoords] = useState<ICoords>({});
   const ref = useRef<null | HTMLDivElement>(null);
@@ -36,11 +36,11 @@ export const StorageDashboardLayout: FC<IStorageDashboardLayoutProps> = ({ child
   useClickOutside(ref, closeContextMenu, ['click', 'contextmenu']);
 
   return (
-    <div className="storage-dashboard-layout">
-      <div className="storage-dashboard-layout__storage-path-visual right" />
-      <div className="storage-dashboard-layout__storage-path-visual left" />
+    <div className="storage-workplace-layout">
+      <div className="storage-workplace-layout__storage-path-visual right" />
+      <div className="storage-workplace-layout__storage-path-visual left" />
       <StoragePath />
-      <div onContextMenu={openContextMenu} className="storage-dashboard-layout__content">
+      <div onContextMenu={openContextMenu} className="storage-workplace-layout__content">
         <StorageLast />
         <StorageSorter />
         {children}

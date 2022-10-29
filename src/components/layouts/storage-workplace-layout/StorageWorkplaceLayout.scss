@@ -1,6 +1,6 @@
 @import 'styles/templates.scss';
 
-.storage-dashboard-layout {
+.storage-workplace-layout {
   position: relative;
   overflow: hidden;
   flex: 1 1 auto;
@@ -31,7 +31,7 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .storage-dashboard-layout {
+  .storage-workplace-layout {
     padding-left: 20px;
 
     &__storage-path-visual {
@@ -41,7 +41,7 @@
 }
 
 @media screen and (min-width: 500px) {
-  .storage-dashboard-layout {
+  .storage-workplace-layout {
     &__content::-webkit-scrollbar {
       width: 8px;
     }

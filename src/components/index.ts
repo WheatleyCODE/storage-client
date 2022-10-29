@@ -2,9 +2,9 @@ export { MainLayout } from './layouts/main-layout/MainLayout';
 export { AuthPageLayout } from './layouts/auth-page-layout/AuthPageLayout';
 export { StoragePageLayout } from './layouts/storage-page-layout/StoragePageLayout';
 export { MobileMenuLayout } from './layouts/mobile-menu-layout/MobileMenuLayout';
-export { StoragePath } from './layouts/storage-dashboard-layout/storage-path/StoragePath';
-export { StorageSorter } from './layouts/storage-dashboard-layout/storage-sorter/StorageSorter';
-export { StorageLast } from './layouts/storage-dashboard-layout/storage-last/StorageLast';
+export { StoragePath } from './layouts/storage-workplace-layout/storage-path/StoragePath';
+export { StorageSorter } from './layouts/storage-workplace-layout/storage-sorter/StorageSorter';
+export { StorageLast } from './layouts/storage-workplace-layout/storage-last/StorageLast';
 
 export { Button } from './ui/button/Button';
 export { Input } from './ui/input/Input';

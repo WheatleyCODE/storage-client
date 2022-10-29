@@ -1,30 +1,36 @@
-import { StoragePage } from 'pages';
+import {
+  StorageMyDrivePage,
+  StorageRecentPage,
+  StorageSharedPage,
+  StorageStarredPage,
+  StorageTrashPage,
+} from 'pages';
 import { PathRoutes } from 'types';
 
 export const authRoutes = [
   {
     path: PathRoutes.STORAGE_MY_DRIVE,
-    Page: StoragePage,
+    Page: StorageMyDrivePage,
     childs: [],
   },
   {
     path: PathRoutes.STORAGE_SHARED,
-    Page: StoragePage,
+    Page: StorageSharedPage,
     childs: [],
   },
   {
     path: PathRoutes.STORAGE_RECENT,
-    Page: StoragePage,
+    Page: StorageRecentPage,
     childs: [],
   },
   {
     path: PathRoutes.STORAGE_STARRED,
-    Page: StoragePage,
+    Page: StorageStarredPage,
     childs: [],
   },
   {
     path: PathRoutes.STORAGE_TRASH,
-    Page: StoragePage,
+    Page: StorageTrashPage,
     childs: [],
   },
 ];

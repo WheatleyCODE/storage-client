@@ -2,7 +2,7 @@ import { useAnimation } from 'framer-motion';
 import { useActions } from 'hooks';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
-import { StorageDashboardLayout } from '../storage-dashboard-layout/StorageDashboardLayout';
+import { StorageWorkplaceLayout } from '../storage-workplace-layout/StorageWorkplaceLayout';
 import { StorageAside } from './storage-aside/StorageAside';
 import { StorageLogo } from './storage-logo/StorageLogo';
 import { StorageMenu } from './storage-menu/StorageMenu';
@@ -60,9 +60,9 @@ export const StoragePageLayout: FC = () => {
       <div className="storage-page-layout__main">
         <div className="storage-page-layout__main-block">
           <StorageMenu controls={menuControls} isOpen={isOpenMenu} toggleOpen={toggleMenu} />
-          <StorageDashboardLayout>
+          <StorageWorkplaceLayout>
             <Outlet />
-          </StorageDashboardLayout>
+          </StorageWorkplaceLayout>
         </div>
         <StorageAside controls={asideControls} isOpen={isOpenAside} toggleOpen={toggleAside} />
       </div>
