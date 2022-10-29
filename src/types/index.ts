@@ -5,3 +5,4 @@ export * from './local-storage.interfaces';
 export * from './routes.interfaces';
 export * from './notifier.interfaces';
 export * from './storage.interface';
+export * from './storage-items.intarface';

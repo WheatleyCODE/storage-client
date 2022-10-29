@@ -1,4 +1,5 @@
 import { useAnimation } from 'framer-motion';
+import { useActions } from 'hooks';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
 import { StorageDashboardLayout } from '../storage-dashboard-layout/StorageDashboardLayout';
@@ -12,9 +13,14 @@ import './StoragePageLayout.scss';
 export const StoragePageLayout: FC = () => {
   const [isOpenAside, setIsOpenAside] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(true);
+  const { fetchStorage } = useActions();
 
   const asideControls = useAnimation();
   const menuControls = useAnimation();
+
+  useEffect(() => {
+    fetchStorage();
+  }, []);
 
   useEffect(() => {
     if (isOpenAside) {
