@@ -24,12 +24,7 @@ export const register = createAsyncThunk<IAuthData, IRegisterFilds>(
 
       return data;
     } catch (e: any) {
-      emitMessage({
-        color: 'red',
-        message: e.response.data.message,
-      });
-
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
   }
 );
@@ -49,12 +44,7 @@ export const login = createAsyncThunk<IAuthData, ILoginFilds>(
 
       return data;
     } catch (e: any) {
-      emitMessage({
-        color: 'red',
-        message: e.response.data.message,
-      });
-
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
   }
 );
@@ -71,26 +61,23 @@ export const checkAuth = createAsyncThunk<IAuthData>('auth/checkAuth', async (_,
     });
 
     return data;
-  } catch (e) {
-    return thunkAPI.rejectWithValue(e);
+  } catch (e: any) {
+    return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
   }
 });
 
-export const logout = createAsyncThunk<void>('auth/logout', async () => {
+export const logout = createAsyncThunk<void>('auth/logout', async (_, thunkAPI) => {
   try {
     await AuthService.logout();
 
     removeToken();
 
-    emitMessage({
+    return emitMessage({
       color: 'default',
       message: 'Вы вышли из системы',
     });
   } catch (e: any) {
-    emitMessage({
-      color: 'red',
-      message: e.response.data.message,
-    });
+    return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
   }
 });
 
@@ -109,12 +96,7 @@ export const activateAndLogin = createAsyncThunk<IAuthData, string>(
 
       return data;
     } catch (e: any) {
-      emitMessage({
-        color: 'red',
-        message: e.response.data.message,
-      });
-
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
   }
 );
@@ -132,12 +114,7 @@ export const resetPassword = createAsyncThunk<IResetPasswordData, string>(
 
       return data;
     } catch (e: any) {
-      emitMessage({
-        color: 'red',
-        message: e.response.data.message,
-      });
-
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
   }
 );
@@ -155,12 +132,7 @@ export const changePassword = createAsyncThunk<IChangePasswordData, IChangePassw
 
       return data;
     } catch (e: any) {
-      emitMessage({
-        color: 'red',
-        message: e.response.data.message,
-      });
-
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
   }
 );

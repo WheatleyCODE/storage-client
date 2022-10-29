@@ -33,7 +33,6 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, { payload }) => {
         const { user, accessToken, refreshToken } = payload;
         state.isLoading = false;
-
         state.isAuth = true;
         state.user = user;
         state.accessToken = accessToken;
@@ -42,6 +41,7 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state) => {
         state.isLoading = false;
       })
+
       .addCase(login.pending, (state) => {
         state.message = null;
         state.isLoading = true;
@@ -57,6 +57,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state) => {
         state.isLoading = false;
       })
+
       .addCase(activateAndLogin.pending, (state) => {
         state.message = null;
         state.isLoading = true;
@@ -72,6 +73,7 @@ export const authSlice = createSlice({
       .addCase(activateAndLogin.rejected, (state) => {
         state.isLoading = false;
       })
+
       .addCase(resetPassword.pending, (state) => {
         state.message = null;
         state.isLoading = true;
@@ -82,6 +84,7 @@ export const authSlice = createSlice({
       .addCase(resetPassword.rejected, (state) => {
         state.isLoading = false;
       })
+
       .addCase(changePassword.pending, (state) => {
         state.message = null;
         state.isLoading = true;
@@ -92,6 +95,7 @@ export const authSlice = createSlice({
       .addCase(changePassword.rejected, (state) => {
         state.isLoading = false;
       })
+
       .addCase(logout.fulfilled, (state) => {
         state.message = null;
         state.isLoading = false;
@@ -110,6 +114,7 @@ export const authSlice = createSlice({
         state.isAuth = false;
         state.user = {} as IUser;
       })
+
       .addCase(checkAuth.pending, (state) => {
         state.message = null;
         state.isLoading = true;
@@ -134,3 +139,5 @@ export const authSlice = createSlice({
       });
   },
 });
+
+export const authActions = authSlice.actions;

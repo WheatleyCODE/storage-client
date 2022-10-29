@@ -1,7 +1,7 @@
 import { INotifierMessage, MessageColor } from 'types';
 
 export enum EventNames {
-  DISPATCH_MESSAGE = 'DISPATCH_MESSAGE',
+  ADD_MESSAGE = 'ADD_MESSAGE',
 }
 
 class Emitter {
@@ -26,7 +26,7 @@ class Emitter {
 export const emitter = new Emitter();
 
 export const emitMessage = ({ color, message }: { color: MessageColor; message: string }) => {
-  emitter.emit(EventNames.DISPATCH_MESSAGE, {
+  emitter.emit(EventNames.ADD_MESSAGE, {
     color,
     id: Date.now(),
     message,

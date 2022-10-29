@@ -20,3 +20,5 @@ export const notifierSlice = createSlice({
     },
   },
 });
+
+export const notifierActions = notifierSlice.actions;
