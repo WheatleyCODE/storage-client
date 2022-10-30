@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { StorageSorter, StoragePath, StorageLast, ContextMenu, Portal } from 'components';
-import { useClickOutside } from 'hooks';
+import { useClickOutside, useTypedSelector } from 'hooks';
 import { getContextMenuCoords, sleep } from 'utils';
 import { ICoords } from 'types';
 import './StorageWorkplaceLayout.scss';
@@ -11,6 +11,7 @@ export interface IStorageWorkplaceLayoutProps {
 }
 
 export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = ({ children }) => {
+  const { lastItems } = useTypedSelector((state) => state.storage);
   const [show, setShow] = useState(false);
   const [coords, setCoords] = useState<ICoords>({});
   const ref = useRef<null | HTMLDivElement>(null);
@@ -41,7 +42,7 @@ export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = ({ child
       <div className="storage-workplace-layout__storage-path-visual left" />
       <StoragePath />
       <div onContextMenu={openContextMenu} className="storage-workplace-layout__content">
-        <StorageLast />
+        <StorageLast lastItems={lastItems} />
         <StorageSorter />
         {children}
       </div>

@@ -3,8 +3,11 @@ import { IStorageState, WorkplaceItem } from 'types';
 import { fetchStorage } from './storage.actions';
 
 const initialState: IStorageState = {
-  currentArr: [],
   id: '',
+  currentItems: [],
+  workplaceItems: [],
+  allItems: [],
+  lastItems: [],
   name: '',
   user: '',
   diskSpace: 0,
@@ -13,29 +16,70 @@ const initialState: IStorageState = {
   tracks: [],
   files: [],
   albums: [],
+  loading: true,
 };
 
 export const storageSlice = createSlice({
   name: 'storage',
   initialState,
+
   reducers: {
     setCurrent: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
-      state.currentArr = payload;
+      if (JSON.stringify(state.currentItems) !== JSON.stringify(payload)) {
+        state.currentItems = payload;
+      }
+    },
+
+    addCurrent: (state, { payload }: PayloadAction<WorkplaceItem>) => {
+      if (!state.currentItems.find((item) => item.id === payload.id)) {
+        state.currentItems = [...state.currentItems, payload];
+      }
+    },
+
+    setWorkplace: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
+      state.workplaceItems = payload;
     },
   },
 
   extraReducers(builder) {
-    builder.addCase(fetchStorage.fulfilled, (state, { payload }) => {
-      state.id = payload.id;
-      state.name = payload.name;
-      state.user = payload.user;
-      state.diskSpace = payload.diskSpace;
-      state.usedSpace = payload.usedSpace;
-      state.folders = payload.folders;
-      state.tracks = payload.tracks;
-      state.files = payload.files;
-      state.albums = payload.albums;
-    });
+    builder
+      .addCase(fetchStorage.pending, (state) => {
+        state.loading = true;
+        state.id = '';
+        state.name = '';
+        state.user = '';
+        state.diskSpace = 0;
+        state.usedSpace = 0;
+        state.folders = [];
+        state.tracks = [];
+        state.files = [];
+        state.albums = [];
+        state.allItems = [];
+        state.lastItems = [];
+      })
+      .addCase(fetchStorage.fulfilled, (state, { payload }) => {
+        const { id, name, user, diskSpace, usedSpace, folders, tracks, files, albums } = payload;
+
+        state.loading = false;
+        state.id = id;
+        state.name = name;
+        state.user = user;
+        state.diskSpace = diskSpace;
+        state.usedSpace = usedSpace;
+        state.folders = folders;
+        state.tracks = tracks;
+        state.files = files;
+        state.albums = albums;
+        state.allItems = [...folders, ...tracks, ...files, ...albums];
+
+        state.lastItems = [...folders, ...tracks, ...files, ...albums]
+          .filter((item) => !item.isTrash)
+          .sort((a, b) => a.openDate - b.openDate)
+          .splice(0);
+      })
+      .addCase(fetchStorage.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 

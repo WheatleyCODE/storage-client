@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { Input, AuthForm } from 'components';
-import { emailValidator, passValidator } from 'helpers';
+import { emailValidator, passValidator, setAppLoader } from 'helpers';
 import { useActions, useValidInput } from 'hooks';
 import { checkRequestStatus } from 'utils';
 import { PathRoutes } from 'types';
@@ -33,6 +33,7 @@ export const LoginForm: FC = () => {
     setIsDisable(false);
 
     if (checkRequestStatus(data)) {
+      setAppLoader(true);
       navigate(PathRoutes.STORAGE_MY_DRIVE);
     }
   };

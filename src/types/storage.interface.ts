@@ -19,7 +19,10 @@ export interface ICoords {
 
 export interface IStorageState {
   id: string;
-  currentArr: WorkplaceItem[];
+  currentItems: WorkplaceItem[];
+  workplaceItems: WorkplaceItem[];
+  allItems: WorkplaceItem[];
+  lastItems: WorkplaceItem[];
   name: string;
   user: string;
   diskSpace: number;
@@ -28,6 +31,7 @@ export interface IStorageState {
   files: IFile[];
   albums: IAlbum[];
   tracks: ITrack[];
+  loading: boolean;
 }
 
 export type WorkplaceItem = IFolder | IFile | IAlbum | ITrack;

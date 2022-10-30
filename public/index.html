@@ -9,10 +9,97 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
     <title>Gamify</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <div id="app-loader">
+      <div class="app-loader__main">
+        <div class="circle">
+          <div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
+        </div>
+      </div>
+    </div>
   </body>
+
+  <style type="text/css">
+    body {
+      font-family: 'Rubik', sans-serif;
+    }
+
+    #app-loader {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      background-color: white;
+      z-index: 300;
+      top: 0;
+      left: 0; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+    }
+    @keyframes circle {
+      0% { transform: rotate(0deg) }
+      100% { transform: rotate(360deg) }
+    }
+    .circle > div > div {
+      transform-origin: 100px 100px;
+      animation: circle 3s linear infinite;
+      opacity: 0.8
+    }
+    .circle > div > div > div {
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 70px 0 0 0;
+      transform-origin: 100px 100px
+    }.circle > div div:nth-child(1) {
+      animation-duration: 0.75s
+    }
+    .circle > div div:nth-child(1) > div {
+      background: #e15b64;
+      transform: rotate(0deg);
+    }.circle > div div:nth-child(2) {
+      animation-duration: 1s
+    }
+    .circle > div div:nth-child(2) > div {
+      background: #f47e60;
+      transform: rotate(0deg);
+    }.circle > div div:nth-child(3) {
+      animation-duration: 1.5s
+    }
+    .circle > div div:nth-child(3) > div {
+      background: #f8b26a;
+      transform: rotate(0deg);
+    }.circle > div div:nth-child(4) {
+      animation-duration: 3s
+    }
+    .circle > div div:nth-child(4) > div {
+      background: #abbd81;
+      transform: rotate(0deg);
+    }
+    .app-loader__main {
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      overflow: hidden;
+    }
+    .circle {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform: translateZ(0) scale(1);
+      backface-visibility: hidden;
+      transform-origin: 0 0;
+    }
+    .circle div { box-sizing: content-box; }
+  </style>
 </html>

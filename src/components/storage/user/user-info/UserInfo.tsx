@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { Button } from 'components';
 import { useActions, useTypedSelector } from 'hooks';
+import { setAppLoader } from 'helpers';
 import { getFirstLetter } from 'utils';
 import './UserInfo.scss';
 
@@ -8,7 +9,10 @@ export const UserInfo: FC = () => {
   const { logout } = useActions();
   const { user, isAuth } = useTypedSelector((state) => state.auth);
 
-  const logoutHandler = useCallback(() => logout(), []);
+  const logoutHandler = useCallback(() => {
+    setAppLoader(true);
+    logout();
+  }, []);
 
   return (
     <div className="user-info">

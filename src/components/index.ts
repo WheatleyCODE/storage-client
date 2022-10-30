@@ -9,7 +9,6 @@ export { StorageLast } from './layouts/storage-workplace-layout/storage-last/Sto
 export { Button } from './ui/button/Button';
 export { Input } from './ui/input/Input';
 export { Link } from './ui/link/Link';
-export { AppLoader } from './ui/loaders/app-loader/AppLoader';
 export { Checkbox } from './ui/checkbox/Checkbox';
 
 export { Hills } from './design/hills/Hills';

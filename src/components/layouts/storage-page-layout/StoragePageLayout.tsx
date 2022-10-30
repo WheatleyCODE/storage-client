@@ -1,7 +1,8 @@
-import { useAnimation } from 'framer-motion';
-import { useActions } from 'hooks';
 import React, { FC, useCallback, useEffect, useState } from 'react';
+import { useAnimation } from 'framer-motion';
 import { Outlet } from 'react-router';
+import { useActions, useTypedSelector } from 'hooks';
+import { setAppLoader } from 'helpers';
 import { StorageWorkplaceLayout } from '../storage-workplace-layout/StorageWorkplaceLayout';
 import { StorageAside } from './storage-aside/StorageAside';
 import { StorageLogo } from './storage-logo/StorageLogo';
@@ -11,6 +12,7 @@ import { StorageUser } from './storage-user/StorageUser';
 import './StoragePageLayout.scss';
 
 export const StoragePageLayout: FC = () => {
+  const { loading } = useTypedSelector((state) => state.storage);
   const [isOpenAside, setIsOpenAside] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(true);
   const { fetchStorage } = useActions();
@@ -46,6 +48,10 @@ export const StoragePageLayout: FC = () => {
     (e: React.MouseEvent<HTMLDivElement>) => e.preventDefault(),
     []
   );
+
+  useEffect(() => {
+    setAppLoader(loading);
+  }, [loading]);
 
   return (
     <div onContextMenu={lockContextMenu} className="storage-page-layout">

@@ -16,7 +16,7 @@ export const Notifier: FC = memo(() => {
     emitter.subscribe(EventNames.ADD_MESSAGE, (message) => {
       dispatch(notifierActions.notifierAddMessage(message));
     });
-  }, [dispatch]);
+  }, []);
 
   return (
     <Portal>

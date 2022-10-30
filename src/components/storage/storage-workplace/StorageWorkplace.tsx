@@ -1,57 +1,81 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef, useState, memo } from 'react';
 import { useClickOutside, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
 import { WorkplaceItem } from 'types';
 import { StorageWorkplaceItem } from './storage-workplace-item/StorageWorkplaceItem';
 import './StorageWorkplace.scss';
 
-export interface IStorageWorkplaceProps {
-  items: WorkplaceItem[];
+export interface IStorageWorkplace {
+  workplaceItems: WorkplaceItem[];
 }
 
-export const StorageWorkplace: FC<IStorageWorkplaceProps> = ({ items }) => {
-  const [activeArr, setActiveArr] = useState<number[]>([]);
+export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems }) => {
+  const [activeItems, setActiveItems] = useState<number[]>([]);
   const ref = useRef<null | HTMLDivElement>(null);
   const dispatch = useTypedDispatch();
 
-  const changeActive = useCallback((i: number) => setActiveArr([i]), []);
-  const resetActive = useCallback(() => setActiveArr([]), []);
-  const addActive = useCallback((i: number) => setActiveArr((p) => [...p, i]), []);
+  const changeActive = useCallback(
+    (i: number) => {
+      setTimeout(() => {
+        dispatch(storageActions.setCurrent([workplaceItems[i]]));
+        setActiveItems([i]);
+      }, 0);
+    },
+    [workplaceItems]
+  );
 
-  const addActiveShift = (i: number) => {
-    const indexes: number[] = [];
-    const side = activeArr[activeArr.length - 1] >= i;
-    const res = activeArr[activeArr.length - 1] - i;
-    const iter = side ? res : res * -1;
-
-    for (let j = 0; j <= iter; j += 1) {
-      indexes.push(i + (side ? j : -j));
+  const resetActive = useCallback(() => {
+    if (activeItems.length) {
+      setActiveItems([]);
+      dispatch(storageActions.setCurrent([]));
     }
+  }, [activeItems.length]);
 
-    setActiveArr(indexes);
-  };
+  const addActive = useCallback(
+    (i: number) => {
+      dispatch(storageActions.addCurrent(workplaceItems[i]));
+      setActiveItems((p) => {
+        if (!p.includes(i)) return [...p, i];
+        return p;
+      });
+    },
+    [workplaceItems]
+  );
+
+  const addActiveShift = useCallback(
+    (i: number) => {
+      const indexes: number[] = [];
+      const side = activeItems[activeItems.length - 1] >= i;
+      const res = activeItems[activeItems.length - 1] - i;
+      const iter = side ? res : res * -1;
+
+      for (let j = 0; j <= iter; j += 1) {
+        indexes.push(i + (side ? j : -j));
+      }
+
+      const newCurrentItems = indexes.map((num) => workplaceItems[num]);
+
+      dispatch(storageActions.setCurrent(newCurrentItems));
+      setActiveItems(indexes);
+    },
+    [activeItems, workplaceItems]
+  );
 
   useClickOutside(ref, resetActive);
 
-  useEffect(() => {
-    const activeItems = activeArr.map((index) => items[index]);
-
-    dispatch(storageActions.setCurrent(activeItems));
-  }, [activeArr, items]);
-
   return (
     <div ref={ref} className="storage-workplace">
-      {items.map((item, i) => (
+      {workplaceItems.map((item, i) => (
         <StorageWorkplaceItem
           changeActive={changeActive}
           addActive={addActive}
           addActiveShift={addActiveShift}
           key={item.id}
-          isActive={activeArr.includes(i)}
+          isActive={activeItems.includes(i)}
           item={item}
           index={i}
         />
       ))}
     </div>
   );
-};
+});

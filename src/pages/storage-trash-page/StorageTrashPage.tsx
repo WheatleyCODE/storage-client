@@ -1,10 +1,21 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useTypedDispatch, useTypedSelector } from 'hooks';
+import { storageActions } from 'store';
+import { StorageWorkplace } from 'components';
 import './StorageTrashPage.scss';
 
 export const StorageTrashPage: FC = () => {
+  const { allItems, workplaceItems } = useTypedSelector((state) => state.storage);
+  const dispatch = useTypedDispatch();
+
+  useEffect(() => {
+    const newItems = allItems.filter((item) => item.isTrash);
+    dispatch(storageActions.setWorkplace(newItems));
+  }, [allItems]);
+
   return (
     <div className="storage-trash-page">
-      <h1>StorageTrashPage</h1>
+      <StorageWorkplace workplaceItems={workplaceItems} />
     </div>
   );
 };

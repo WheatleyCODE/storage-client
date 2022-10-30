@@ -1,19 +1,21 @@
+import React, { FC, useEffect } from 'react';
+import { storageActions } from 'store';
+import { useTypedDispatch, useTypedSelector } from 'hooks';
 import { StorageWorkplace } from 'components';
-import { useTypedSelector } from 'hooks';
-import React, { FC, useMemo } from 'react';
 import './StorageMyDrivePage.scss';
 
 export const StorageMyDrivePage: FC = () => {
-  const { albums, files, folders, tracks } = useTypedSelector((state) => state.storage);
+  const { allItems, workplaceItems } = useTypedSelector((state) => state.storage);
+  const dispatch = useTypedDispatch();
 
-  const items = useMemo(
-    () => [...folders, ...files, ...albums, ...tracks],
-    [albums, files, folders, tracks]
-  );
+  useEffect(() => {
+    const newItems = allItems.filter((item) => !item.isTrash);
+    dispatch(storageActions.setWorkplace(newItems));
+  }, [allItems]);
 
   return (
     <div className="storage-my-drive-page">
-      <StorageWorkplace items={items} />
+      <StorageWorkplace workplaceItems={workplaceItems} />
     </div>
   );
 };
