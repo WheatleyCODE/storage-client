@@ -3,6 +3,8 @@ import { useAnimation } from 'framer-motion';
 import { Outlet } from 'react-router';
 import { useActions, useTypedSelector } from 'hooks';
 import { setAppLoader } from 'helpers';
+import { getContextMenuCoords, sleep } from 'utils';
+import { ICoords } from 'types';
 import { StorageWorkplaceLayout } from '../storage-workplace-layout/StorageWorkplaceLayout';
 import { StorageAside } from './storage-aside/StorageAside';
 import { StorageLogo } from './storage-logo/StorageLogo';
@@ -15,10 +17,33 @@ export const StoragePageLayout: FC = () => {
   const { loading } = useTypedSelector((state) => state.storage);
   const [isOpenAside, setIsOpenAside] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(true);
+  const [isContextMenu, setIsContextMenu] = useState(false);
+  const [coords, setCoords] = useState<ICoords>({});
   const { fetchStorage } = useActions();
 
   const asideControls = useAnimation();
   const menuControls = useAnimation();
+
+  const openContextMenu = useCallback(
+    async (e: React.MouseEvent<HTMLDivElement>) => {
+      e.preventDefault();
+
+      if (isContextMenu) {
+        setIsContextMenu(false);
+        await sleep(150);
+      }
+
+      setTimeout(() => {
+        setCoords(getContextMenuCoords(e));
+        setIsContextMenu(true);
+      }, 0);
+    },
+    [isContextMenu]
+  );
+
+  const closeContextMenu = useCallback(() => {
+    setIsContextMenu(false);
+  }, []);
 
   useEffect(() => {
     fetchStorage();
@@ -44,17 +69,23 @@ export const StoragePageLayout: FC = () => {
 
   const toggleAside = useCallback(() => setIsOpenAside((p) => !p), []);
   const toggleMenu = useCallback(() => setIsOpenMenu((p) => !p), []);
-  const lockContextMenu = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => e.preventDefault(),
-    []
-  );
+
+  const lockContextMenu = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    closeContextMenu();
+  }, []);
 
   useEffect(() => {
     setAppLoader(loading);
   }, [loading]);
 
   return (
-    <div onContextMenu={lockContextMenu} className="storage-page-layout">
+    <div
+      aria-hidden
+      onClick={closeContextMenu}
+      onContextMenu={lockContextMenu}
+      className="storage-page-layout"
+    >
       <div className="storage-page-layout__header">
         <div className="storage-page-layout__header-block">
           <StorageLogo controls={menuControls} isOpen={isOpenMenu} />
@@ -66,7 +97,12 @@ export const StoragePageLayout: FC = () => {
       <div className="storage-page-layout__main">
         <div className="storage-page-layout__main-block">
           <StorageMenu controls={menuControls} isOpen={isOpenMenu} toggleOpen={toggleMenu} />
-          <StorageWorkplaceLayout>
+          <StorageWorkplaceLayout
+            coords={coords}
+            openContextMenu={openContextMenu}
+            closeContextMenu={closeContextMenu}
+            isContextMenu={isContextMenu}
+          >
             <Outlet />
           </StorageWorkplaceLayout>
         </div>
