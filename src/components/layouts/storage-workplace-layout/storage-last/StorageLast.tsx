@@ -54,7 +54,7 @@ export const StorageLast: FC<IStorageLastProps> = ({ lastItems }) => {
     }
   }, [activeItems.length]);
 
-  useClickOutside(ref, resetActive);
+  useClickOutside(ref, resetActive, ['click', 'contextmenu']);
 
   return (
     <div className="storage-last">

@@ -61,7 +61,7 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
     [activeItems, workplaceItems]
   );
 
-  useClickOutside(ref, resetActive);
+  useClickOutside(ref, resetActive, ['click', 'contextmenu']);
 
   return (
     <div ref={ref} className="storage-workplace">

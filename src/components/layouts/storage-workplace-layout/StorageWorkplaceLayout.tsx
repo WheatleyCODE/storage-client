@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { StorageSorter, StoragePath, StorageLast, ContextMenu, Portal } from 'components';
-import { useClickOutside, useTypedSelector } from 'hooks';
+import { useTypedSelector } from 'hooks';
 import { getContextMenuCoords, sleep } from 'utils';
 import { ICoords } from 'types';
 import './StorageWorkplaceLayout.scss';
@@ -33,11 +33,12 @@ export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = ({ child
     [show]
   );
 
-  const closeContextMenu = useCallback(() => setShow(false), []);
-  useClickOutside(ref, closeContextMenu, ['click', 'contextmenu']);
+  const closeContextMenu = useCallback(() => {
+    setShow(false);
+  }, []);
 
   return (
-    <div className="storage-workplace-layout">
+    <div aria-hidden onClick={closeContextMenu} className="storage-workplace-layout">
       <div className="storage-workplace-layout__storage-path-visual right" />
       <div className="storage-workplace-layout__storage-path-visual left" />
       <StoragePath />
@@ -50,7 +51,7 @@ export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = ({ child
       <AnimatePresence>
         {show && (
           <Portal>
-            <div ref={ref}>
+            <div aria-hidden onClick={(e) => e.stopPropagation()} ref={ref}>
               <ContextMenu onClose={closeContextMenu} coords={coords} />
             </div>
           </Portal>

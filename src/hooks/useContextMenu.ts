@@ -8,6 +8,7 @@ import {
   MdOutlineOpenWith,
   MdOutlinePalette,
   MdRestore,
+  MdSettingsSuggest,
 } from 'react-icons/md';
 import { BiDownload, BiInfoCircle, BiTrash } from 'react-icons/bi';
 import { IconType } from 'react-icons';
@@ -23,6 +24,7 @@ export interface IContextMenuItem {
 }
 
 export interface IContextMenu {
+  delete: IContextMenuItem[];
   default: IContextMenuItem[];
   trash: IContextMenuItem[];
   workplace: {
@@ -44,9 +46,30 @@ export const useContextMenu = (): IUseContextMenu => {
   const { currentItems } = useTypedSelector((state) => state.storage);
 
   const types = Array.from(new Set(currentItems.map((item) => item.type)));
-  console.log(types, 'types');
+
+  if (types.length === 0) {
+    return {
+      contextMenuItems: [
+        {
+          title: 'Меню создания',
+          Icon: BiTrash,
+          handler: logout,
+        },
+      ],
+      itemsCount: 1,
+      brCount: 0,
+    };
+  }
 
   const contextMenu: IContextMenu = {
+    delete: [
+      {
+        title: 'Удалить',
+        Icon: BiTrash,
+        handler: logout,
+        brAfter: true,
+      },
+    ],
     default: [
       {
         title: 'Открыть',
@@ -118,14 +141,63 @@ export const useContextMenu = (): IUseContextMenu => {
           handler: logout,
         },
       ],
-      [ItemTypes.ALBUM]: [],
-      [ItemTypes.TRACK]: [],
+      [ItemTypes.ALBUM]: [
+        {
+          title: 'Редактироввать',
+          Icon: MdSettingsSuggest,
+          handler: logout,
+        },
+        {
+          title: 'Создать копию',
+          Icon: MdContentCopy,
+          handler: logout,
+          brAfter: true,
+        },
+        {
+          title: 'Скачать',
+          Icon: BiDownload,
+          handler: logout,
+        },
+      ],
+      [ItemTypes.TRACK]: [
+        {
+          title: 'Редактироввать',
+          Icon: MdSettingsSuggest,
+          handler: logout,
+        },
+        {
+          title: 'Создать копию',
+          Icon: MdContentCopy,
+          handler: logout,
+          brAfter: true,
+        },
+        {
+          title: 'Скачать',
+          Icon: BiDownload,
+          handler: logout,
+        },
+      ],
     },
   };
 
+  const createContextMenuOne = (type: ItemTypes): IContextMenuItem[] => {
+    const { default: def, delete: del, workplace } = contextMenu;
+
+    return [...def, ...workplace[type], ...del];
+  };
+
+  const createContextMenuMore = (type: ItemTypes[]): IContextMenuItem[] => {
+    const { default: def, delete: del, workplace } = contextMenu;
+
+    return [...del];
+  };
+
+  const contextMenuItems =
+    types.length === 1 ? createContextMenuOne(types[0]) : createContextMenuMore(types);
+
   return {
-    contextMenuItems: contextMenu.default,
-    itemsCount: contextMenu.default.length,
-    brCount: contextMenu.default.filter(({ brAfter, brBefore }) => brAfter || brBefore).length,
+    contextMenuItems,
+    itemsCount: contextMenuItems.length,
+    brCount: contextMenuItems.filter(({ brAfter, brBefore }) => brAfter || brBefore).length,
   };
 };

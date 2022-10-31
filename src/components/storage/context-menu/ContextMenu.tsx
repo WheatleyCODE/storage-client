@@ -17,7 +17,7 @@ export interface IContextMenuProps {
 
 export const ContextMenu: FC<IContextMenuProps> = memo(({ coords, onClose }) => {
   const { left, right, top, bottom } = coords;
-  const { contextMenuItems, itemsCount, brCount } = useContextMenu();
+  const { contextMenuItems, itemsCount, brCount } = useContextMenu(onClose);
 
   return (
     <motion.div
