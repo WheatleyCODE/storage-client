@@ -13,9 +13,11 @@ export const Notifier: FC = memo(() => {
 
   // todo check
   useEffect(() => {
-    emitter.subscribe(EventNames.ADD_MESSAGE, (message) => {
+    const unsub = emitter.subscribe(EventNames.ADD_MESSAGE, (message) => {
       dispatch(notifierActions.notifierAddMessage(message));
     });
+
+    return unsub;
   }, []);
 
   return (

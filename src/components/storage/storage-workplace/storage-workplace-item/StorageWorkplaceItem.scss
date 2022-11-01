@@ -41,3 +41,33 @@
     }
   }
 }
+
+@media screen and (max-width: 750px) {
+  .storage-workplace-item {
+    grid-template-columns: 1fr 100px 130px;
+ 
+    &__size {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .storage-workplace-item {
+    grid-template-columns: 1fr 100px;
+
+    &__open-date {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .storage-workplace-item {
+    grid-template-columns: 1fr;
+
+    &__access {
+      display: none;
+    }
+  }
+}
