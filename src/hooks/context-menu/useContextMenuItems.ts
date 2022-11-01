@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { HiOutlineUserAdd } from 'react-icons/hi';
 import {
   MdAudiotrack,
@@ -16,7 +17,7 @@ import {
 } from 'react-icons/md';
 import { BiDownload, BiInfoCircle, BiTrash } from 'react-icons/bi';
 import { IconType } from 'react-icons';
-import { useActions, useTypedSelector } from 'hooks';
+import { useActions } from 'hooks';
 import { ItemTypes } from 'types';
 
 export interface IContextMenuItem {
@@ -27,86 +28,46 @@ export interface IContextMenuItem {
   brBefore?: boolean;
 }
 
-export interface IContextMenu {
-  delete: IContextMenuItem[];
-  default: IContextMenuItem[];
-  trash: IContextMenuItem[];
-  workplace: {
-    [ItemTypes.FOLDER]: IContextMenuItem[];
-    [ItemTypes.FILE]: IContextMenuItem[];
-    [ItemTypes.ALBUM]: IContextMenuItem[];
-    [ItemTypes.TRACK]: IContextMenuItem[];
-  };
-  workplaceMore: {
-    [ItemTypes.FOLDER]: IContextMenuItem[];
-    [ItemTypes.FILE]: IContextMenuItem[];
-    [ItemTypes.ALBUM]: IContextMenuItem[];
-    [ItemTypes.TRACK]: IContextMenuItem[];
-  };
-  defaultMore: IContextMenuItem[];
+export interface IWorkplaceCMI {
+  [ItemTypes.FOLDER]: IContextMenuItem[];
+  [ItemTypes.FILE]: IContextMenuItem[];
+  [ItemTypes.ALBUM]: IContextMenuItem[];
+  [ItemTypes.TRACK]: IContextMenuItem[];
 }
 
-export interface IUseContextMenu {
-  contextMenuItems: IContextMenuItem[];
-  itemsCount: number;
-  brCount: number;
-}
-
-// ! Временно так
-// Todo переделать после корректировки сервера
-// Todo сделать корректное генерирование
-// Todo добавить скачку сущностей которые в данный момент не доступны
-
-// Todo одновременно с фиксом методов сервера пофиксить и генерацию с запросами
-// * (-_-)... ♪
-
-export const useContextMenu = (): IUseContextMenu => {
+export const useContextMenuItems = () => {
   const { logout } = useActions();
-  const { currentItems } = useTypedSelector((state) => state.storage);
 
-  const types = currentItems.map((item) => item.type);
-
-  if (types.length === 0) {
-    return {
-      contextMenuItems: [
-        {
-          title: 'Создать папку',
-          Icon: MdOutlineCreateNewFolder,
-          handler: logout,
-          brBefore: true,
-        },
-        {
-          title: 'Создать альбом',
-          Icon: MdLibraryMusic,
-          handler: logout,
-        },
-        {
-          title: 'Создать трек',
-          Icon: MdAudiotrack,
-          handler: logout,
-        },
-        {
-          title: 'Загрузить фалы',
-          Icon: MdUploadFile,
-          handler: logout,
-          brAfter: true,
-        },
-      ],
-      itemsCount: 4,
-      brCount: 2,
-    };
-  }
-
-  const contextMenu: IContextMenu = {
-    delete: [
+  const createCMI: IContextMenuItem[] = useMemo(
+    () => [
       {
-        title: 'Удалить',
-        Icon: BiTrash,
+        title: 'Создать папку',
+        Icon: MdOutlineCreateNewFolder,
+        handler: logout,
+        brBefore: true,
+      },
+      {
+        title: 'Создать альбом',
+        Icon: MdLibraryMusic,
+        handler: logout,
+      },
+      {
+        title: 'Создать трек',
+        Icon: MdAudiotrack,
+        handler: logout,
+      },
+      {
+        title: 'Загрузить фалы',
+        Icon: MdUploadFile,
         handler: logout,
         brAfter: true,
       },
     ],
-    default: [
+    []
+  );
+
+  const defaultCMI: IContextMenuItem[] = useMemo(
+    () => [
       {
         title: 'Открыть',
         Icon: MdOutlineOpenWith,
@@ -144,7 +105,11 @@ export const useContextMenu = (): IUseContextMenu => {
         handler: logout,
       },
     ],
-    trash: [
+    []
+  );
+
+  const trashCMI: IContextMenuItem[] = useMemo(
+    () => [
       {
         title: 'Востановить',
         Icon: MdRestore,
@@ -156,7 +121,35 @@ export const useContextMenu = (): IUseContextMenu => {
         handler: logout,
       },
     ],
-    workplace: {
+    []
+  );
+
+  const deleteCMI: IContextMenuItem[] = useMemo(
+    () => [
+      {
+        title: 'Удалить',
+        Icon: BiTrash,
+        handler: logout,
+        brAfter: true,
+      },
+    ],
+    []
+  );
+
+  const copyCMI: IContextMenuItem[] = useMemo(
+    () => [
+      {
+        title: 'Создать копию',
+        Icon: MdContentCopy,
+        handler: logout,
+        brAfter: true,
+      },
+    ],
+    []
+  );
+
+  const workplaceCMI: IWorkplaceCMI = useMemo(
+    () => ({
       [ItemTypes.FOLDER]: [
         {
           title: 'Изменить цвет',
@@ -213,8 +206,12 @@ export const useContextMenu = (): IUseContextMenu => {
           handler: logout,
         },
       ],
-    },
-    workplaceMore: {
+    }),
+    []
+  );
+
+  const workplaceMoreCMI: IWorkplaceCMI = useMemo(
+    () => ({
       [ItemTypes.FOLDER]: [
         {
           title: 'Изменить цвет',
@@ -255,8 +252,12 @@ export const useContextMenu = (): IUseContextMenu => {
           handler: logout,
         },
       ],
-    },
-    defaultMore: [
+    }),
+    []
+  );
+
+  const defaultMoreCMI: IContextMenuItem[] = useMemo(
+    () => [
       {
         title: 'Изменить доступ',
         Icon: HiOutlineUserAdd,
@@ -273,42 +274,17 @@ export const useContextMenu = (): IUseContextMenu => {
         handler: logout,
       },
     ],
-  };
-
-  const createContextMenuOne = (type: ItemTypes): IContextMenuItem[] => {
-    const { default: def, delete: del, workplace } = contextMenu;
-
-    return [...def, ...workplace[type], ...del];
-  };
-
-  const createContextMenuMore = (typeArr: ItemTypes[]): IContextMenuItem[] => {
-    const { defaultMore: def, delete: del, workplaceMore } = contextMenu;
-    const arr = Array.from(new Set(typeArr));
-
-    if (arr.length === 1) {
-      return [...def, ...workplaceMore[arr[0]], ...del];
-    }
-
-    const dd = types.includes(ItemTypes.FOLDER)
-      ? [
-          {
-            title: 'Создать копию',
-            Icon: MdContentCopy,
-            handler: logout,
-            brAfter: true,
-          },
-        ]
-      : workplaceMore[types[0]];
-
-    return [...def, ...dd, ...del];
-  };
-
-  const contextMenuItems =
-    types.length === 1 ? createContextMenuOne(types[0]) : createContextMenuMore(types);
+    []
+  );
 
   return {
-    contextMenuItems,
-    itemsCount: contextMenuItems.length,
-    brCount: contextMenuItems.filter(({ brAfter, brBefore }) => brAfter || brBefore).length,
+    createCMI,
+    defaultCMI,
+    trashCMI,
+    deleteCMI,
+    copyCMI,
+    workplaceCMI,
+    workplaceMoreCMI,
+    defaultMoreCMI,
   };
 };

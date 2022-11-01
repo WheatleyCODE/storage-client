@@ -1,8 +1,8 @@
 import React, { FC, memo, useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useContextMenu } from 'hooks';
+import { IContextMenuItem } from 'hooks/context-menu/useContextMenuItems';
 import { getContextMenuHeight } from 'utils';
-import { IContextMenuItem } from 'hooks/useContextMenu';
 import { ContextMenuItem } from './context-menu-item/ContextMenuItem';
 import './ContextMenu.scss';
 
