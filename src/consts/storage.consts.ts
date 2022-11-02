@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fc';
 import { AdditionTypes, HashModals, PathRoutes } from 'types';
 
-export const ITEM_WIDTH = 190;
+export const ITEM_WIDTH = 180;
 export const COLOR_BLUE = '#1573ff';
 export const COLOR_YELLOW = '#ffc934';
 export const COLOR_RED = '#f7192f';

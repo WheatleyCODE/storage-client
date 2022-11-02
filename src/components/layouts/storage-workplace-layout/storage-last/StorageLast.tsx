@@ -1,5 +1,5 @@
-import React, { FC, memo, useEffect, useCallback, useRef, useState } from 'react';
-import { useClickOutside, useTypedDispatch } from 'hooks';
+import React, { FC, useCallback, useRef, useState } from 'react';
+import { useClickOutside, useResizeObserver, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
 import { ITEM_WIDTH } from 'consts';
 import { WorkplaceItem } from 'types';
@@ -14,28 +14,12 @@ export const StorageLast: FC<IStorageLastProps> = ({ lastItems }) => {
   const [activeItems, setActiveItems] = useState<number[]>([]);
   const dispatch = useTypedDispatch();
   const ref = useRef<null | HTMLDivElement>(null);
+  const [itemsCount, setItemsCount] = useState<number>(0);
 
-  const [items, setItems] = useState<WorkplaceItem[]>([]);
-
-  useEffect(() => {
-    const resizeObserver = new ResizeObserver((e) => {
-      const width = e[0].target.clientWidth;
-      const els = Math.floor(width / ITEM_WIDTH);
-
-      if (items.length !== els) {
-        const copy = [...lastItems];
-        copy.splice(els, items.length - els);
-        setItems(copy);
-      }
-    });
-
-    const node = ref.current;
-    if (node) resizeObserver.observe(node);
-
-    return () => {
-      if (node) resizeObserver.unobserve(node);
-    };
-  }, [lastItems, items.length]);
+  useResizeObserver(ref, (e) => {
+    const els = Math.floor(e.width / ITEM_WIDTH);
+    setItemsCount(els);
+  });
 
   const changeActive = useCallback(
     (i: number) => {
@@ -57,18 +41,20 @@ export const StorageLast: FC<IStorageLastProps> = ({ lastItems }) => {
   useClickOutside(ref, resetActive, ['click', 'contextmenu']);
 
   return (
-    <div className="storage-last">
+    <div ref={ref} className="storage-last">
       <div className="storage-last__title">Последние открытые</div>
-      <div ref={ref} className="storage-last__items-desctop">
-        {items.map((item, i) => (
-          <StorageLastItem
-            isActive={activeItems.includes(i)}
-            changeActive={changeActive}
-            index={i}
-            item={item}
-            key={item.id}
-          />
-        ))}
+      <div className="storage-last__items-desctop">
+        {lastItems
+          .map((item, i) => (
+            <StorageLastItem
+              isActive={activeItems.includes(i)}
+              changeActive={changeActive}
+              index={i}
+              item={item}
+              key={item.id}
+            />
+          ))
+          .slice(0, itemsCount)}
       </div>
 
       <div className="storage-last__visual right" />
