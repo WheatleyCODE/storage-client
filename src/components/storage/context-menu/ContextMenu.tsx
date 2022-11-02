@@ -47,11 +47,11 @@ export const ContextMenu: FC<IContextMenuProps> = memo(({ coords, onClose }) => 
       className="context-menu"
     >
       <AnimatePresence>
-        {items.map(({ Icon, title, brAfter, brBefore }) => {
+        {items.map(({ Icon, title, brAfter, brBefore, handler }) => {
           return (
             <div key={title}>
               {brAfter && <div className="context-menu__br" />}
-              <ContextMenuItem onClose={onClose} title={title} Icon={Icon} />
+              <ContextMenuItem handler={handler} onClose={onClose} title={title} Icon={Icon} />
               {brBefore && <div className="context-menu__br" />}
             </div>
           );

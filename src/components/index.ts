@@ -30,6 +30,12 @@ export { Popup } from './modals/popup/Popup';
 export { Drawer } from './modals/drawer/Drawer';
 export { PopupMenu } from './modals/popup/popup-menu/PopupMenu';
 export { Modal } from './modals/modal/Modal';
+export { Confirm } from './modals/confirm/Confirm';
+export { ModalsController } from './modals/modals-controller/ModalsController';
+export { CreateAlbum } from './modals/storage/create-album/CreateAlbum';
+export { CreateFolder } from './modals/storage/create-folder/CreateFolder';
+export { CreateTrack } from './modals/storage/create-track/CreateTrack';
+export { UploadFiles } from './modals/storage/upload-files/UploadFiles';
 
 export { Search } from './storage/search/Search';
 export { StorageSize } from './storage/storage-size/StorageSize';

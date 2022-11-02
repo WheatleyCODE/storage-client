@@ -2,6 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useAnimation } from 'framer-motion';
 import { Outlet } from 'react-router';
 import { useActions, useTypedSelector } from 'hooks';
+import { ModalsController } from 'components';
 import { setAppLoader } from 'helpers';
 import { getContextMenuCoords, sleep } from 'utils';
 import { ICoords } from 'types';
@@ -108,6 +109,7 @@ export const StoragePageLayout: FC = () => {
         </div>
         <StorageAside controls={asideControls} isOpen={isOpenAside} toggleOpen={toggleAside} />
       </div>
+      <ModalsController />
     </div>
   );
 };

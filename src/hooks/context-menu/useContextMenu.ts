@@ -40,7 +40,7 @@ export const useContextMenu = (): IUseContextMenu => {
     }
 
     return [...createCMI];
-  }, [createCMI, defaultCMI, deleteCMI, workplaceCMI]);
+  }, [createCMI, defaultCMI, deleteCMI, currentItems, workplaceCMI]);
 
   const moreCMI = useMemo(() => {
     if (typesArr.length === 1) {
@@ -50,7 +50,7 @@ export const useContextMenu = (): IUseContextMenu => {
     const addCMI = types.includes(ItemTypes.FOLDER) ? copyCMI : workplaceMoreCMI.TRACK;
 
     return [...defaultMoreCMI, ...addCMI, ...deleteCMI];
-  }, [copyCMI, defaultMoreCMI, deleteCMI, workplaceMoreCMI]);
+  }, [copyCMI, defaultMoreCMI, deleteCMI, currentItems, workplaceMoreCMI]);
 
   if (pathname === PathRoutes.STORAGE_TRASH) {
     if (types.length === 0) {

@@ -3,12 +3,21 @@ import { AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router';
 import { FcSettings } from 'react-icons/fc';
 import { Popup, Button, PopupMenu } from 'components';
-import { POPUP_MENU_ITEM_HEIGHT, POPUP_MENU_PADDING, storageSettings } from 'consts';
+import {
+  hashToStateKeys,
+  POPUP_MENU_ITEM_HEIGHT,
+  POPUP_MENU_PADDING,
+  storageSettings,
+} from 'consts';
 import './Settings.scss';
+import { useTypedDispatch } from 'hooks';
+import { modalsActions } from 'store';
+import { ModalsStateKeys } from 'types';
 
 export const Settings: FC = memo(() => {
   const [showPopup, setShowPopup] = useState(false);
   const { pathname } = useLocation();
+  const dispatch = useTypedDispatch();
 
   const closePopup = useCallback(() => setShowPopup(false), []);
   const openPopup = useCallback(() => {
@@ -17,7 +26,19 @@ export const Settings: FC = memo(() => {
     }
   }, [showPopup]);
 
-  const items = storageSettings.map((item) => ({ ...item, path: `${pathname}${item.hash}` }));
+  const getOpen = (key: ModalsStateKeys) => {
+    return () => {
+      dispatch(modalsActions.changeIsModal({ key, boolean: true }));
+    };
+  };
+
+  const items = storageSettings.map((item) => {
+    return {
+      ...item,
+      path: `${pathname}${item.hash}`,
+      onClick: getOpen(hashToStateKeys[item.hash]),
+    };
+  });
 
   return (
     <div className="settings">

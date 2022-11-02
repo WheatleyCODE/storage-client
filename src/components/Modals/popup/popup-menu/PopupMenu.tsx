@@ -7,6 +7,7 @@ export interface PopupMenuProps {
     title: string;
     path: string;
     Icon?: IconType;
+    onClick?: () => void;
   }[];
   onClose: () => void;
 }
@@ -14,8 +15,15 @@ export interface PopupMenuProps {
 export const PopupMenu: FC<PopupMenuProps> = memo(({ items, onClose }) => {
   return (
     <div className="popup-menu">
-      {items.map(({ title, path, Icon }) => (
-        <PopupMenuItem Icon={Icon} onClose={onClose} key={title} title={title} path={path} />
+      {items.map(({ title, path, Icon, onClick }) => (
+        <PopupMenuItem
+          onClick={onClick}
+          Icon={Icon}
+          onClose={onClose}
+          key={title}
+          title={title}
+          path={path}
+        />
       ))}
     </div>
   );

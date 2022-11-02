@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser, IAuthState } from 'types';
 import {
   login,
@@ -23,7 +23,11 @@ const initialState: IAuthState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setLoadNoAuthChunk: (state, { payload }: PayloadAction<boolean>) => {
+      state.loadNoAuthChunk = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, (state) => {

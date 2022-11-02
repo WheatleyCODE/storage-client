@@ -10,3 +10,4 @@ export * from './album.interface';
 export * from './track.interface';
 export * from './file.interface';
 export * from './folder.interface';
+export * from './modals.interface';

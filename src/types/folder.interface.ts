@@ -24,3 +24,8 @@ export interface IFolder {
   comments: any[];
   color: FolderColors;
 }
+
+export interface ICreateFolderFilds {
+  readonly name: string;
+  readonly parent?: string;
+}

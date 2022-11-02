@@ -8,12 +8,25 @@ export interface PopupMenuItemProps {
   title: string;
   path: string;
   onClose: () => void;
+  onClick?: () => void;
 }
 
-export const PopupMenuItem: FC<PopupMenuItemProps> = memo(({ title, path, onClose, Icon }) => {
+export const PopupMenuItem: FC<PopupMenuItemProps> = memo((props) => {
+  const { title, path, onClose, Icon, onClick } = props;
   const MemoIcon = Icon && memo(Icon);
+
+  const onClickHandler = () => {
+    if (onClick) onClick();
+
+    onClose();
+  };
+
   return (
-    <Link onClick={onClose} to={path} className={`popup-menu-item ${MemoIcon ? 'icon' : ''}`}>
+    <Link
+      onClick={onClickHandler}
+      to={path}
+      className={`popup-menu-item ${MemoIcon ? 'icon' : ''}`}
+    >
       {MemoIcon && <MemoIcon className="popup-menu-item__icon" />}
       {title}
     </Link>

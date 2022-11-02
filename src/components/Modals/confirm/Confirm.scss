@@ -1,0 +1,13 @@
+@import 'styles/templates.scss';
+
+.confirm {
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .button {
+      width: 140px;
+    }
+  }
+}

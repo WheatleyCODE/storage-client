@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IStorageState, WorkplaceItem } from 'types';
-import { fetchStorage } from './storage.actions';
+import { createFolder, fetchStorage } from './storage.actions';
 
 const initialState: IStorageState = {
   id: '',
@@ -43,6 +43,16 @@ export const storageSlice = createSlice({
 
   extraReducers(builder) {
     builder
+      .addCase(createFolder.fulfilled, (state, { payload }) => {
+        state.folders = [payload, ...state.folders];
+
+        state.allItems = [...state.folders, ...state.tracks, ...state.files, ...state.albums];
+
+        state.lastItems = [...state.folders, ...state.tracks, ...state.files, ...state.albums]
+          .filter((item) => !item.isTrash)
+          .sort((a, b) => a.openDate - b.openDate)
+          .splice(0);
+      })
       .addCase(fetchStorage.pending, (state) => {
         state.loading = true;
         state.id = '';

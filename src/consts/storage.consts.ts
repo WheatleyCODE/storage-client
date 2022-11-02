@@ -11,7 +11,7 @@ import {
   FcBookmark,
   FcVideoCall,
 } from 'react-icons/fc';
-import { AdditionTypes, PathRoutes } from 'types';
+import { AdditionTypes, HashModals, PathRoutes } from 'types';
 
 export const ITEM_WIDTH = 190;
 export const COLOR_BLUE = '#1573ff';
@@ -51,20 +51,12 @@ export const allApps = [
 export const storageSettings = [
   {
     title: 'Настройки',
-    hash: PathRoutes.STORAGE_SETTINGS,
+    hash: HashModals.SETTINGS,
   },
   {
     title: 'Горячие клавиши',
-    hash: PathRoutes.STORAGE_HOTKEYS,
+    hash: HashModals.HOTKEYS,
   },
-];
-
-export const settingsAndHotkeysStoragePages: string[] = [
-  PathRoutes.STORAGE_MY_DRIVE,
-  PathRoutes.STORAGE_RECENT,
-  PathRoutes.STORAGE_SHARED,
-  PathRoutes.STORAGE_STARRED,
-  PathRoutes.STORAGE_TRASH,
 ];
 
 export const additionIcons = [

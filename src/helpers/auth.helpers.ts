@@ -113,7 +113,7 @@ export const passValidator = getValidator({
   },
 });
 
-export const folderNameValidator = getValidator({
+export const nameValidator = getValidator({
   minLength: {
     value: 3,
     textError: 'Имя должно быть больше 3 символов',
