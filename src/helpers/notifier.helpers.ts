@@ -1,4 +1,5 @@
-import { INotifierMessage, MessageColor } from 'types';
+import { notifierActions } from 'store';
+import { INotifierCreateMessage, INotifierMessage } from 'types';
 
 export enum EventNames {
   ADD_MESSAGE = 'ADD_MESSAGE',
@@ -25,10 +26,25 @@ class Emitter {
 
 export const emitter = new Emitter();
 
-export const emitMessage = ({ color, message }: { color: MessageColor; message: string }) => {
+export const emitMessage = ({ color, text }: INotifierCreateMessage) => {
   emitter.emit(EventNames.ADD_MESSAGE, {
     color,
     id: Date.now(),
-    message,
+    text,
+  });
+};
+
+export const getActionMessage = ({
+  color,
+  text,
+  restoreActionName,
+  restoreParams,
+}: INotifierCreateMessage) => {
+  return notifierActions.notifierAddMessage({
+    id: Date.now(),
+    color,
+    text,
+    restoreActionName,
+    restoreParams,
   });
 };

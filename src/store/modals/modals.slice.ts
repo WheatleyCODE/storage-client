@@ -8,6 +8,7 @@ const initialState: IModalsState = {
   isCreateAlbum: false,
   isCreateTrack: false,
   isUploadFiles: false,
+  isDelete: false,
 };
 
 export const modalsSlice = createSlice({

@@ -1,9 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { emitMessage } from 'helpers';
 import { StorageService } from 'services';
-import { ICreateFolderFilds, IFolder, IStorageState } from 'types';
+import { createChangeIsTrashMessage } from 'utils';
+import {
+  IChangeIsTrashFilds,
+  ICreateFolderFilds,
+  IFolder,
+  IStorageData,
+  RestoreActionNames,
+  WorkplaceItem,
+} from 'types';
+import { getActionMessage } from 'helpers';
 
-export const fetchStorage = createAsyncThunk<IStorageState>(
+export const fetchStorage = createAsyncThunk<IStorageData>(
   'storage/fetchStorage',
   async (_, thunkAPI) => {
     try {
@@ -22,10 +30,34 @@ export const createFolder = createAsyncThunk<IFolder, ICreateFolderFilds>(
     try {
       const { data } = await StorageService.createFolder(filds);
 
-      emitMessage({
-        color: 'default',
-        message: `Создана новая папка: ${data.name}`,
-      });
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: `Создана новая папка: ${data.name}`,
+        })
+      );
+
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const changeIsTrash = createAsyncThunk<WorkplaceItem[], IChangeIsTrashFilds>(
+  'storage/changeIsTrashServer',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await StorageService.changeIsTrash(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: createChangeIsTrashMessage(filds),
+          restoreActionName: RestoreActionNames.CHANGE_IS_THASH,
+          restoreParams: { ...filds, isTrash: !filds.isTrash },
+        })
+      );
 
       return data;
     } catch (e: any) {

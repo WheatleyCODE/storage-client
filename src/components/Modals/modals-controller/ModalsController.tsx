@@ -10,6 +10,7 @@ import {
   CreateAlbum,
   CreateTrack,
   UploadFiles,
+  DeleteItem,
 } from 'components';
 import { useLocation, useNavigate } from 'react-router';
 import { hashToStateKeys } from 'consts';
@@ -20,6 +21,7 @@ export const ModalsController: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const modals = useTypedSelector((state) => state.modals);
+  const { currentItems } = useTypedSelector((state) => state.storage);
 
   const getClose = (key: ModalsStateKeys) => {
     return () => {
@@ -75,6 +77,16 @@ export const ModalsController: FC = () => {
           <Backdrop onClose={getClose('isUploadFiles')}>
             <Modal onClose={getClose('isUploadFiles')}>
               <UploadFiles />
+            </Modal>
+          </Backdrop>
+        </Portal>
+      )}
+
+      {modals.isDelete && (
+        <Portal>
+          <Backdrop onClose={getClose('isDelete')}>
+            <Modal onClose={getClose('isDelete')}>
+              <DeleteItem currentItems={currentItems} />
             </Modal>
           </Backdrop>
         </Portal>

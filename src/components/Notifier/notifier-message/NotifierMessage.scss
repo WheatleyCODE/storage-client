@@ -17,6 +17,7 @@
 }
 
 .notifier-message {
+  display: flex;
   .notifier-message__icon {
     min-height: 30px;
     min-width: 35px;
@@ -26,6 +27,19 @@
     padding: 15px 20px;
     font-size: 1rem;
     padding-right: 5px
+  }
+
+  .notifier-message__restore {
+    cursor: pointer;
+    @include flex;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex: 1 1 auto;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

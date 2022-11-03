@@ -1,21 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IStorageState, WorkplaceItem } from 'types';
-import { createFolder, fetchStorage } from './storage.actions';
+import { changeIsTrash, createFolder, fetchStorage } from './storage.actions';
 
 const initialState: IStorageState = {
   id: '',
   currentItems: [],
   workplaceItems: [],
   allItems: [],
-  lastItems: [],
   name: '',
   user: '',
   diskSpace: 0,
   usedSpace: 0,
-  folders: [],
-  tracks: [],
-  files: [],
-  albums: [],
   loading: true,
 };
 
@@ -43,15 +38,20 @@ export const storageSlice = createSlice({
 
   extraReducers(builder) {
     builder
+      .addCase(changeIsTrash.fulfilled, (state, { payload }) => {
+        const types = payload.map((item) => item.type);
+
+        state.currentItems = [];
+        state.allItems = state.allItems.map((item) => {
+          if (types.includes(item.type)) {
+            return payload.find((itm) => itm.id === item.id) || item;
+          }
+
+          return item;
+        });
+      })
       .addCase(createFolder.fulfilled, (state, { payload }) => {
-        state.folders = [payload, ...state.folders];
-
-        state.allItems = [...state.folders, ...state.tracks, ...state.files, ...state.albums];
-
-        state.lastItems = [...state.folders, ...state.tracks, ...state.files, ...state.albums]
-          .filter((item) => !item.isTrash)
-          .sort((a, b) => a.openDate - b.openDate)
-          .splice(0);
+        state.allItems = [payload, ...state.allItems];
       })
       .addCase(fetchStorage.pending, (state) => {
         state.loading = true;
@@ -60,12 +60,8 @@ export const storageSlice = createSlice({
         state.user = '';
         state.diskSpace = 0;
         state.usedSpace = 0;
-        state.folders = [];
-        state.tracks = [];
-        state.files = [];
-        state.albums = [];
         state.allItems = [];
-        state.lastItems = [];
+        state.currentItems = [];
       })
       .addCase(fetchStorage.fulfilled, (state, { payload }) => {
         const { id, name, user, diskSpace, usedSpace, folders, tracks, files, albums } = payload;
@@ -76,16 +72,7 @@ export const storageSlice = createSlice({
         state.user = user;
         state.diskSpace = diskSpace;
         state.usedSpace = usedSpace;
-        state.folders = folders;
-        state.tracks = tracks;
-        state.files = files;
-        state.albums = albums;
         state.allItems = [...folders, ...tracks, ...files, ...albums];
-
-        state.lastItems = [...folders, ...tracks, ...files, ...albums]
-          .filter((item) => !item.isTrash)
-          .sort((a, b) => a.openDate - b.openDate)
-          .splice(0);
       })
       .addCase(fetchStorage.rejected, (state) => {
         state.loading = false;

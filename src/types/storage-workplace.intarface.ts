@@ -10,3 +10,13 @@ export enum ItemTypes {
   FILE = 'FILE',
   ALBUM = 'ALBUM',
 }
+
+export interface IItemFilds {
+  id: string;
+  type: ItemTypes;
+}
+
+export interface IChangeIsTrashFilds {
+  items: IItemFilds[];
+  isTrash: boolean;
+}

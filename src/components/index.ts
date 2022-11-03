@@ -36,6 +36,7 @@ export { CreateAlbum } from './modals/storage/create-album/CreateAlbum';
 export { CreateFolder } from './modals/storage/create-folder/CreateFolder';
 export { CreateTrack } from './modals/storage/create-track/CreateTrack';
 export { UploadFiles } from './modals/storage/upload-files/UploadFiles';
+export { DeleteItem } from './modals/storage/delete-item/DeleteItem';
 
 export { Search } from './storage/search/Search';
 export { StorageSize } from './storage/storage-size/StorageSize';

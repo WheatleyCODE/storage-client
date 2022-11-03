@@ -5,6 +5,7 @@ export interface IModalsState {
   isCreateAlbum: boolean;
   isCreateTrack: boolean;
   isUploadFiles: boolean;
+  isDelete: boolean;
 }
 
 export type ModalsStateKeys = keyof IModalsState;
@@ -21,6 +22,7 @@ export enum HashModals {
   UPLOAD_FILES = '#upload-files',
   SETTINGS = '#settings',
   HOTKEYS = '#hotkeys',
+  DELETE = '#delete',
 }
 
 export type HashModalsToStateKeys = {

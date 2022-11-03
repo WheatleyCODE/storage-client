@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { IAlbum } from './album.interface';
 import { IFile } from './file.interface';
 import { IFolder } from './folder.interface';
@@ -17,12 +16,8 @@ export interface ICoords {
   bottom?: string;
 }
 
-export interface IStorageState {
+export interface IStorageData {
   id: string;
-  currentItems: WorkplaceItem[];
-  workplaceItems: WorkplaceItem[];
-  allItems: WorkplaceItem[];
-  lastItems: WorkplaceItem[];
   name: string;
   user: string;
   diskSpace: number;
@@ -31,6 +26,17 @@ export interface IStorageState {
   files: IFile[];
   albums: IAlbum[];
   tracks: ITrack[];
+}
+
+export interface IStorageState {
+  id: string;
+  currentItems: WorkplaceItem[];
+  workplaceItems: WorkplaceItem[];
+  allItems: WorkplaceItem[];
+  name: string;
+  user: string;
+  diskSpace: number;
+  usedSpace: number;
   loading: boolean;
 }
 

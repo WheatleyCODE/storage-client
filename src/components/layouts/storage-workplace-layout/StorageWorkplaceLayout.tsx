@@ -15,8 +15,13 @@ export interface IStorageWorkplaceLayoutProps {
 
 export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = (props) => {
   const { children, isContextMenu, coords, openContextMenu, closeContextMenu } = props;
-  const { lastItems } = useTypedSelector((state) => state.storage);
+  const { allItems } = useTypedSelector((state) => state.storage);
   const ref = useRef<null | HTMLDivElement>(null);
+
+  const lastItems = allItems
+    .filter((item) => !item.isTrash)
+    .sort((a, b) => a.openDate - b.openDate)
+    .splice(0);
 
   return (
     <div aria-hidden onClick={closeContextMenu} className="storage-workplace-layout">

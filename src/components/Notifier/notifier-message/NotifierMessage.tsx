@@ -2,17 +2,16 @@ import React, { FC, useCallback, useEffect, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useTypedDispatch } from 'hooks';
 import { FaCheck, FaExclamationTriangle, FaInfoCircle, FaFireAlt, FaTimes } from 'react-icons/fa';
-import { notifierSlice } from 'store';
-import { MessageColor } from 'types';
+import { notifierSlice, restoreAsyncThunks } from 'store';
+import { INotifierMessage } from 'types';
 import './NotifierMessage.scss';
 
 export interface INotifierMessageProps {
-  color: MessageColor;
-  message: string;
-  id: number;
+  message: INotifierMessage;
 }
 
-export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id }) => {
+export const NotifierMessage: FC<INotifierMessageProps> = ({ message }) => {
+  const { id, text, color, restoreActionName, restoreParams } = message;
   const dispath = useTypedDispatch();
 
   const removeMessage = useCallback(() => {
@@ -24,6 +23,14 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id 
       removeMessage();
     }, 10000);
   }, [removeMessage]);
+
+  const restore = useCallback(() => {
+    if (restoreActionName && restoreParams) {
+      dispath(restoreAsyncThunks[restoreActionName](restoreParams));
+    }
+
+    removeMessage();
+  }, [removeMessage, restoreActionName, restoreParams]);
 
   const MemoFaCheck = memo(FaCheck);
   const MemoFaExclamation = memo(FaExclamationTriangle);
@@ -45,7 +52,12 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ color, message, id 
         {color === 'red' && <MemoFaFireAlt />}
         {color === 'default' && <MemoFaInfoCircle />}
       </div>
-      <div className="notifier-message__text">{message}</div>
+      <div className="notifier-message__text">{text}</div>
+      {restoreActionName && (
+        <div aria-hidden onClick={restore} className="notifier-message__restore">
+          ОТМЕНИТЬ
+        </div>
+      )}
       <div aria-hidden onClick={removeMessage} className="notifier-message__close">
         <MemoFaTimes />
       </div>

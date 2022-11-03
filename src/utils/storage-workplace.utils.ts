@@ -1,4 +1,4 @@
-import { AccessTypes, ItemTypes, WorkplaceItem } from 'types';
+import { AccessTypes, ItemTypes, WorkplaceItem, IChangeIsTrashFilds } from 'types';
 import { IFile } from 'types/file.interface';
 import { ITrack } from 'types/track.interface';
 import { formatSize } from './storage.utils';
@@ -25,4 +25,16 @@ export const calcAndFormatSize = (item: WorkplaceItem): string => {
   }
 
   return '—';
+};
+
+export const createChangeIsTrashMessage = (filds: IChangeIsTrashFilds): string => {
+  const { items, isTrash } = filds;
+
+  if (items.length === 1) {
+    return isTrash ? `${items[0].type} перемещена в корзину` : `${items[0].type} востановлена`;
+  }
+
+  return isTrash
+    ? `(${items.length}) объектов перемещено в корзину`
+    : `(${items.length}) объектов востановлено`;
 };

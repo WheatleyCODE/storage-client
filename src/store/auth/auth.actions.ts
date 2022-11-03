@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { emitMessage } from 'helpers';
+import { getActionMessage } from 'helpers';
 import { AuthService } from 'services';
 import {
   IAuthData,
@@ -17,10 +17,12 @@ export const register = createAsyncThunk<IAuthData, IRegisterFilds>(
     try {
       const { data } = await AuthService.registration(name, email, password);
 
-      emitMessage({
-        color: 'yellow',
-        message: `На вашу: ${email} почту было выслано письмо для активации аккаунта`,
-      });
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: `На вашу: ${email} почту было выслано письмо для активации аккаунта`,
+        })
+      );
 
       return data;
     } catch (e: any) {
@@ -37,10 +39,12 @@ export const login = createAsyncThunk<IAuthData, ILoginFilds>(
 
       setToken(data.accessToken);
 
-      emitMessage({
-        color: 'green',
-        message: 'Вы успешно вошли в систему',
-      });
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'green',
+          text: 'Вы успешно вошли в систему',
+        })
+      );
 
       return data;
     } catch (e: any) {
@@ -55,10 +59,12 @@ export const checkAuth = createAsyncThunk<IAuthData>('auth/checkAuth', async (_,
 
     setToken(data.accessToken);
 
-    emitMessage({
-      color: 'green',
-      message: 'Вы успешно вошли в систему',
-    });
+    thunkAPI.dispatch(
+      getActionMessage({
+        color: 'green',
+        text: 'Вы успешно вошли в систему',
+      })
+    );
 
     return data;
   } catch (e: any) {
@@ -70,12 +76,14 @@ export const logout = createAsyncThunk<void>('auth/logout', async (_, thunkAPI) 
   try {
     await AuthService.logout();
 
-    removeToken();
+    thunkAPI.dispatch(
+      getActionMessage({
+        color: 'default',
+        text: 'Вы вышли из системы',
+      })
+    );
 
-    return emitMessage({
-      color: 'default',
-      message: 'Вы вышли из системы',
-    });
+    return removeToken();
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
   }
@@ -89,10 +97,12 @@ export const activateAndLogin = createAsyncThunk<IAuthData, string>(
 
       setToken(data.accessToken);
 
-      emitMessage({
-        color: 'green',
-        message: 'Вы успешно активировали аккаунт',
-      });
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'green',
+          text: 'Вы успешно активировали аккаунт',
+        })
+      );
 
       return data;
     } catch (e: any) {
@@ -107,10 +117,12 @@ export const resetPassword = createAsyncThunk<IResetPasswordData, string>(
     try {
       const { data } = await AuthService.resetPassword(email);
 
-      emitMessage({
-        color: 'yellow',
-        message: `На вашу почту: ${email} было выслано письмо с ссылкой для сброса пароля`,
-      });
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: `На вашу почту: ${email} было выслано письмо с ссылкой для сброса пароля`,
+        })
+      );
 
       return data;
     } catch (e: any) {
@@ -125,10 +137,12 @@ export const changePassword = createAsyncThunk<IChangePasswordData, IChangePassw
     try {
       const { data } = await AuthService.changePassword(password, link);
 
-      emitMessage({
-        color: 'green',
-        message: 'Ваш пароль успешно изменён',
-      });
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'green',
+          text: 'Ваш пароль успешно изменён',
+        })
+      );
 
       return data;
     } catch (e: any) {

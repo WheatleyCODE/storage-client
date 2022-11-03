@@ -11,7 +11,6 @@ export const Notifier: FC = memo(() => {
   const dispatch = useTypedDispatch();
   const { currentMessages } = useTypedSelector((state) => state.notifier);
 
-  // todo check
   useEffect(() => {
     const unsub = emitter.subscribe(EventNames.ADD_MESSAGE, (message) => {
       dispatch(notifierActions.notifierAddMessage(message));
@@ -24,8 +23,8 @@ export const Notifier: FC = memo(() => {
     <Portal>
       <div className="notifier">
         <AnimatePresence>
-          {currentMessages.map(({ color, id, message }) => (
-            <NotifierMessage id={id} key={id} color={color} message={message} />
+          {currentMessages.map((message) => (
+            <NotifierMessage key={message.id} message={message} />
           ))}
         </AnimatePresence>
       </div>

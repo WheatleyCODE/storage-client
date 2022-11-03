@@ -11,7 +11,7 @@ export const errorLogger: Middleware = () => (next) => (action) => {
 
     emitMessage({
       color: 'red',
-      message: action.payload,
+      text: action.payload,
     });
   }
 

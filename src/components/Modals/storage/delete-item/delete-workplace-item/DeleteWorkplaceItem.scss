@@ -1,0 +1,24 @@
+@import 'styles/templates.scss';
+
+.delete-workplace-item {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  padding: $storagePadding;
+  border-bottom: $storageBorder;
+
+  &__icon {
+    @include flex;
+    font-size: 1.7rem;
+    color: $colorDarkGrey3;
+    margin-right: 15px;
+    margin-left: 5px;
+  }
+
+  &__size {
+    padding-right: 15px;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 1 auto;
+  }
+}

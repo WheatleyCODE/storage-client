@@ -7,6 +7,7 @@ export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.UPLOAD_FILES]: 'isUploadFiles',
   [HashModals.SETTINGS]: 'isSettings',
   [HashModals.HOTKEYS]: 'isHotkeys',
+  [HashModals.DELETE]: 'isDelete',
 };
 
 export const stateKeysToHashModals: StateKeysToHashModals = {
@@ -16,4 +17,5 @@ export const stateKeysToHashModals: StateKeysToHashModals = {
   isUploadFiles: HashModals.UPLOAD_FILES,
   isSettings: HashModals.SETTINGS,
   isHotkeys: HashModals.HOTKEYS,
+  isDelete: HashModals.DELETE,
 };

@@ -18,7 +18,7 @@ import {
 } from 'react-icons/md';
 import { BiDownload, BiInfoCircle, BiTrash } from 'react-icons/bi';
 import { IconType } from 'react-icons';
-import { useActions, useTypedDispatch } from 'hooks';
+import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
 import { modalsActions } from 'store';
 import { ItemTypes, ModalsStateKeys } from 'types';
 import { stateKeysToHashModals } from 'consts';
@@ -39,10 +39,11 @@ export interface IWorkplaceCMI {
 }
 
 export const useContextMenuItems = () => {
+  const { currentItems } = useTypedSelector((state) => state.storage);
   const { changeIsModal } = modalsActions;
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { logout } = useActions();
+  const { logout, changeIsTrash } = useActions();
   const dispatch = useTypedDispatch();
 
   const getOpen = (key: ModalsStateKeys) => {
@@ -52,6 +53,15 @@ export const useContextMenuItems = () => {
       navigate(pathname + hash);
       dispatch(changeIsModal({ key, boolean: true }));
     };
+  };
+
+  const changeIsTrashHandler = (isTrash: boolean) => {
+    dispatch(
+      changeIsTrash({
+        items: currentItems.map(({ id, type }) => ({ id, type })),
+        isTrash,
+      })
+    );
   };
 
   const createCMI: IContextMenuItem[] = useMemo(
@@ -129,12 +139,12 @@ export const useContextMenuItems = () => {
       {
         title: 'Востановить',
         Icon: MdRestore,
-        handler: logout,
+        handler: () => changeIsTrashHandler(false),
       },
       {
         title: 'Удалить навсегда',
         Icon: BiTrash,
-        handler: logout,
+        handler: getOpen('isDelete'),
       },
     ],
     []
@@ -145,7 +155,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Удалить',
         Icon: BiTrash,
-        handler: logout,
+        handler: () => changeIsTrashHandler(true),
         brAfter: true,
       },
     ],
