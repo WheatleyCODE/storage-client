@@ -56,12 +56,10 @@ export const useContextMenuItems = () => {
   };
 
   const changeIsTrashHandler = (isTrash: boolean) => {
-    dispatch(
-      changeIsTrash({
-        items: currentItems.map(({ id, type }) => ({ id, type })),
-        isTrash,
-      })
-    );
+    changeIsTrash({
+      items: currentItems.map(({ id, type }) => ({ id, type })),
+      isTrash,
+    });
   };
 
   const createCMI: IContextMenuItem[] = useMemo(

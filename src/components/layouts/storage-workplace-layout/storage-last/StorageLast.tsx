@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef, useState, useEffect } from 'react';
 import { useClickOutside, useResizeObserver, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
 import { ITEM_WIDTH } from 'consts';
@@ -30,6 +30,10 @@ export const StorageLast: FC<IStorageLastProps> = ({ lastItems }) => {
     },
     [lastItems]
   );
+
+  useEffect(() => {
+    setActiveItems([]);
+  }, [lastItems]);
 
   const resetActive = useCallback(() => {
     if (activeItems.length) {

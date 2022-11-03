@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useRef, useState, memo } from 'react';
+import React, { FC, useCallback, useRef, useState, memo, useEffect } from 'react';
 import { useClickOutside, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
 import { WorkplaceItem } from 'types';
@@ -23,6 +23,10 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
     },
     [workplaceItems]
   );
+
+  useEffect(() => {
+    setActiveItems([]);
+  }, [workplaceItems]);
 
   const resetActive = useCallback(() => {
     if (activeItems.length) {
