@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import {
   IChangeIsTrashFilds,
   ICreateFolderFilds,
+  IDeleteItemsFilds,
   IFolder,
   IStorageData,
   WorkplaceItem,
@@ -19,5 +20,9 @@ export class StorageService {
 
   static async changeIsTrash(filds: IChangeIsTrashFilds): Promise<AxiosResponse<WorkplaceItem[]>> {
     return $api.post<WorkplaceItem[]>('/api/storage/change/trash', filds);
+  }
+
+  static async deleteItems(filds: IDeleteItemsFilds): Promise<AxiosResponse<IStorageData>> {
+    return $api.post<IStorageData>('/api/storage/delete/items', filds);
   }
 }

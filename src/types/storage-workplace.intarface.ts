@@ -16,6 +16,10 @@ export interface IItemFilds {
   type: ItemTypes;
 }
 
+export interface IDeleteItemsFilds {
+  items: IItemFilds[];
+}
+
 export interface IChangeIsTrashFilds {
   items: IItemFilds[];
   isTrash: boolean;

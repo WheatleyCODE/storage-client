@@ -14,6 +14,8 @@ export const CreateFolder: FC<ICreateFolderProps> = ({ onClose }) => {
   const { createFolder } = useActions();
 
   const createFolderHandler = () => {
+    if (nameInput.isError || !nameInput.value) return;
+
     onClose();
     createFolder({ name: nameInput.value });
   };

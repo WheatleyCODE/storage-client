@@ -86,7 +86,7 @@ export const ModalsController: FC = () => {
         <Portal>
           <Backdrop onClose={getClose('isDelete')}>
             <Modal onClose={getClose('isDelete')}>
-              <DeleteItem currentItems={currentItems} />
+              <DeleteItem onClose={getClose('isDelete')} currentItems={currentItems} />
             </Modal>
           </Backdrop>
         </Portal>

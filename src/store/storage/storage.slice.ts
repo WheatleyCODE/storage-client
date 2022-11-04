@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IStorageState, WorkplaceItem } from 'types';
-import { changeIsTrash, createFolder, fetchStorage } from './storage.actions';
+import { changeIsTrash, createFolder, deleteItems, fetchStorage } from './storage.actions';
 
 const initialState: IStorageState = {
   id: '',
@@ -49,6 +49,13 @@ export const storageSlice = createSlice({
 
           return item;
         });
+      })
+      .addCase(deleteItems.fulfilled, (state, { payload }) => {
+        const { diskSpace, usedSpace, folders, tracks, files, albums } = payload;
+
+        state.diskSpace = diskSpace;
+        state.usedSpace = usedSpace;
+        state.allItems = [...folders, ...tracks, ...files, ...albums];
       })
       .addCase(createFolder.fulfilled, (state, { payload }) => {
         state.allItems = [payload, ...state.allItems];

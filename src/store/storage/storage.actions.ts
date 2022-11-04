@@ -4,6 +4,7 @@ import { createChangeIsTrashMessage } from 'utils';
 import {
   IChangeIsTrashFilds,
   ICreateFolderFilds,
+  IDeleteItemsFilds,
   IFolder,
   IStorageData,
   RestoreActionNames,
@@ -56,6 +57,26 @@ export const changeIsTrash = createAsyncThunk<WorkplaceItem[], IChangeIsTrashFil
           text: createChangeIsTrashMessage(filds),
           restoreActionName: RestoreActionNames.CHANGE_IS_THASH,
           restoreParams: { ...filds, isTrash: !filds.isTrash },
+        })
+      );
+
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
+  'storage/deleteItems',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await StorageService.deleteItems(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Успешно удалено',
         })
       );
 
