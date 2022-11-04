@@ -38,7 +38,7 @@ export const formatSize = (bytes: number, decimals = 2) => {
 
 export const getContextMenuCoords = (e: React.MouseEvent): ICoords => {
   const pageHeight = document.documentElement.scrollHeight;
-  const normWidth = window.innerWidth / 4;
+  const normWidth = window.innerWidth / 4.5;
   const normHeight = window.innerHeight / 12;
   const { platform } = window.navigator;
   const newCoords = {} as { top?: number; right?: number; left?: number; bottom?: number };

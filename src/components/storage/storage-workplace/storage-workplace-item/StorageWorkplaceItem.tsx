@@ -1,7 +1,7 @@
 import { storageWorkplaceIcons } from 'consts';
 import React, { FC, memo } from 'react';
 import { WorkplaceItem } from 'types';
-import { calcAndFormatSize, transformAccess, transformDate } from 'utils';
+import { calcAndFormatSize, getColorClassName, transformAccess, transformDate } from 'utils';
 import './StorageWorkplaceItem.scss';
 
 export interface IStorageWorkplaceItemProps {
@@ -45,7 +45,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       className={`storage-workplace-item ${isActive ? 'active' : ''}`}
     >
       <div className="storage-workplace-item__name">
-        <MemoIcon className="storage-workplace-item__icon" />
+        <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(item)}`} />
         {item.name}
       </div>
       <div className="storage-workplace-item__access">{transformAccess(item.accessType)}</div>

@@ -1,9 +1,10 @@
-import { ItemTypes, AccessTypes } from './storage-workplace.intarface';
+import { ItemTypes, AccessTypes, IItemFilds } from './storage-workplace.intarface';
 
 export enum FolderColors {
   GREY = 'GREY',
   RED = 'RED',
   BLUE = 'BLUE',
+  YELLOW = 'YELLOW',
 }
 
 export interface IFolder {
@@ -23,9 +24,15 @@ export interface IFolder {
   openDate: number;
   comments: any[];
   color: FolderColors;
+  folderSize: number;
 }
 
 export interface ICreateFolderFilds {
   readonly name: string;
   readonly parent?: string;
+}
+
+export interface IChangeColorFilds {
+  items: IItemFilds[];
+  color: FolderColors;
 }

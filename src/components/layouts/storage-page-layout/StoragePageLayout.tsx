@@ -47,7 +47,12 @@ export const StoragePageLayout: FC = () => {
   }, []);
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
     fetchStorage();
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, []);
 
   useEffect(() => {

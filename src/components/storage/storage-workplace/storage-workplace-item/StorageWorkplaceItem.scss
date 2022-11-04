@@ -24,6 +24,22 @@
     font-size: 1.7rem;
     color: $colorDarkGrey2;
     margin-right: 15px;
+
+    &.grey {
+      color: $colorDarkGrey2;
+    }
+
+    &.blue {
+      color: $colorBlue;
+    }
+
+    &.red {
+      color: $colorRed;
+    }
+
+    &.yellow {
+      color: $colorYellow;
+    }
   }
 
   &__no-size {

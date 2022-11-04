@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IStorageState, WorkplaceItem } from 'types';
-import { changeIsTrash, createFolder, deleteItems, fetchStorage } from './storage.actions';
+import {
+  changeColor,
+  changeIsTrash,
+  createFolder,
+  deleteItems,
+  fetchStorage,
+} from './storage.actions';
 
 const initialState: IStorageState = {
   id: '',
@@ -38,6 +44,18 @@ export const storageSlice = createSlice({
 
   extraReducers(builder) {
     builder
+      .addCase(changeColor.fulfilled, (state, { payload }) => {
+        const types = payload.map((item) => item.type);
+
+        state.currentItems = [];
+        state.allItems = state.allItems.map((item) => {
+          if (types.includes(item.type)) {
+            return payload.find((itm) => itm.id === item.id) || item;
+          }
+
+          return item;
+        });
+      })
       .addCase(changeIsTrash.fulfilled, (state, { payload }) => {
         const types = payload.map((item) => item.type);
 
@@ -53,12 +71,14 @@ export const storageSlice = createSlice({
       .addCase(deleteItems.fulfilled, (state, { payload }) => {
         const { diskSpace, usedSpace, folders, tracks, files, albums } = payload;
 
+        state.currentItems = [];
         state.diskSpace = diskSpace;
         state.usedSpace = usedSpace;
         state.allItems = [...folders, ...tracks, ...files, ...albums];
       })
       .addCase(createFolder.fulfilled, (state, { payload }) => {
-        state.allItems = [payload, ...state.allItems];
+        state.allItems = [...state.allItems, payload];
+        state.usedSpace += payload.folderSize;
       })
       .addCase(fetchStorage.pending, (state) => {
         state.loading = true;

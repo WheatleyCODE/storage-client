@@ -1,0 +1,29 @@
+@import 'styles/templates.scss';
+
+.context-menu-popup-option {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  transition: all $animationDuration;
+
+  &:hover {
+    transform: scale(0.93);
+  }
+
+  &.grey {
+    background-color: $colorDarkGrey2;
+  }
+
+  &.blue {
+    background-color: $colorBlue;
+  }
+
+  &.red {
+    background-color: $colorRed;
+  }
+
+  &.yellow {
+    background-color: $colorYellow;
+  }
+}

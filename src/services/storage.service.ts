@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import {
+  IChangeColorFilds,
   IChangeIsTrashFilds,
   ICreateFolderFilds,
   IDeleteItemsFilds,
@@ -24,5 +25,9 @@ export class StorageService {
 
   static async deleteItems(filds: IDeleteItemsFilds): Promise<AxiosResponse<IStorageData>> {
     return $api.post<IStorageData>('/api/storage/delete/items', filds);
+  }
+
+  static async changeColor(filds: IChangeColorFilds): Promise<AxiosResponse<IFolder[]>> {
+    return $api.post<IFolder[]>('/api/storage/change/color', filds);
   }
 }

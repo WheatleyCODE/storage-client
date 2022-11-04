@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { StorageService } from 'services';
 import { createChangeIsTrashMessage } from 'utils';
 import {
+  IChangeColorFilds,
   IChangeIsTrashFilds,
   ICreateFolderFilds,
   IDeleteItemsFilds,
@@ -82,6 +83,27 @@ export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
 
       return data;
     } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const changeColor = createAsyncThunk<IFolder[], IChangeColorFilds>(
+  'storage/changeColor',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await StorageService.changeColor(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Успешно изменент цвет',
+        })
+      );
+
+      return data;
+    } catch (e: any) {
+      console.log(e);
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
   }

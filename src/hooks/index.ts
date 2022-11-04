@@ -6,3 +6,5 @@ export { useClickOutside } from './useClickOutside';
 export { useContextMenu } from './context-menu/useContextMenu';
 export { useContextMenuItems } from './context-menu/useContextMenuItems';
 export { useResizeObserver } from './useResizeObserver';
+
+export type { IContextOptions } from './context-menu/useContextMenuItems';

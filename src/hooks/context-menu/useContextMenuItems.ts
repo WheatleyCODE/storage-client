@@ -18,17 +18,20 @@ import {
 } from 'react-icons/md';
 import { BiDownload, BiInfoCircle, BiTrash } from 'react-icons/bi';
 import { IconType } from 'react-icons';
-import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
-import { modalsActions } from 'store';
-import { ItemTypes, ModalsStateKeys } from 'types';
-import { stateKeysToHashModals } from 'consts';
+import { FolderColors, ItemTypes } from 'types';
+import { useContextMenuHandlers } from './useCoontextMenuHandlers';
 
+export interface IContextOptions {
+  color: FolderColors;
+  handler: () => void;
+}
 export interface IContextMenuItem {
   title: string;
   Icon: IconType;
   handler: () => void;
   brAfter?: boolean;
   brBefore?: boolean;
+  options?: IContextOptions[];
 }
 
 export interface IWorkplaceCMI {
@@ -39,51 +42,30 @@ export interface IWorkplaceCMI {
 }
 
 export const useContextMenuItems = () => {
-  const { currentItems } = useTypedSelector((state) => state.storage);
-  const { changeIsModal } = modalsActions;
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const { logout, changeIsTrash } = useActions();
-  const dispatch = useTypedDispatch();
-
-  const getOpen = (key: ModalsStateKeys) => {
-    const hash = stateKeysToHashModals[key];
-
-    return () => {
-      navigate(pathname + hash);
-      dispatch(changeIsModal({ key, boolean: true }));
-    };
-  };
-
-  const changeIsTrashHandler = (isTrash: boolean) => {
-    changeIsTrash({
-      items: currentItems.map(({ id, type }) => ({ id, type })),
-      isTrash,
-    });
-  };
+  const { getOpenModal, changeIsTrashHandler, changeColorHandler } = useContextMenuHandlers();
 
   const createCMI: IContextMenuItem[] = useMemo(
     () => [
       {
         title: 'Создать папку',
         Icon: MdOutlineCreateNewFolder,
-        handler: getOpen('isCreateFolder'),
+        handler: getOpenModal('isCreateFolder'),
         brBefore: true,
       },
       {
         title: 'Создать альбом',
         Icon: MdLibraryMusic,
-        handler: getOpen('isCreateAlbum'),
+        handler: getOpenModal('isCreateAlbum'),
       },
       {
         title: 'Создать трек',
         Icon: MdAudiotrack,
-        handler: getOpen('isCreateTrack'),
+        handler: getOpenModal('isCreateTrack'),
       },
       {
         title: 'Загрузить фалы',
         Icon: MdUploadFile,
-        handler: getOpen('isUploadFiles'),
+        handler: getOpenModal('isUploadFiles'),
         brAfter: true,
       },
     ],
@@ -95,38 +77,38 @@ export const useContextMenuItems = () => {
       {
         title: 'Открыть',
         Icon: MdOutlineOpenWith,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
         brBefore: true,
       },
       {
         title: 'Изменить доступ',
         Icon: HiOutlineUserAdd,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
       {
         title: 'Получить ссылку',
         Icon: MdOutlineLink,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
       {
         title: 'Переместить',
         Icon: MdOutlineDriveFileMove,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
       {
         title: 'Добавить в отмеченные',
         Icon: MdOutlineBookmarkAdd,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
       {
         title: 'Переименовать',
         Icon: MdDriveFileRenameOutline,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
       {
         title: 'Показать своства',
         Icon: BiInfoCircle,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
     ],
     []
@@ -142,7 +124,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Удалить навсегда',
         Icon: BiTrash,
-        handler: getOpen('isDelete'),
+        handler: getOpenModal('isDelete'),
       },
     ],
     []
@@ -165,7 +147,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Создать копию',
         Icon: MdContentCopy,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
         brAfter: true,
       },
     ],
@@ -178,56 +160,74 @@ export const useContextMenuItems = () => {
         {
           title: 'Изменить цвет',
           Icon: MdOutlinePalette,
-          handler: logout,
+          handler: () => {},
+          options: [
+            {
+              color: FolderColors.GREY,
+              handler: () => changeColorHandler(FolderColors.GREY),
+            },
+            {
+              color: FolderColors.BLUE,
+              handler: () => changeColorHandler(FolderColors.BLUE),
+            },
+            {
+              color: FolderColors.RED,
+              handler: () => changeColorHandler(FolderColors.RED),
+            },
+            {
+              color: FolderColors.YELLOW,
+              handler: () => changeColorHandler(FolderColors.YELLOW),
+            },
+          ],
         },
       ],
       [ItemTypes.FILE]: [
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
           brAfter: true,
         },
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
         },
       ],
       [ItemTypes.ALBUM]: [
         {
           title: 'Редактироввать',
           Icon: MdSettingsSuggest,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
         },
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
           brAfter: true,
         },
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
         },
       ],
       [ItemTypes.TRACK]: [
         {
           title: 'Редактироввать',
           Icon: MdSettingsSuggest,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
         },
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
           brAfter: true,
         },
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
         },
       ],
     }),
@@ -240,40 +240,58 @@ export const useContextMenuItems = () => {
         {
           title: 'Изменить цвет',
           Icon: MdOutlinePalette,
-          handler: logout,
+          handler: () => {},
+          options: [
+            {
+              color: FolderColors.GREY,
+              handler: () => changeColorHandler(FolderColors.GREY),
+            },
+            {
+              color: FolderColors.BLUE,
+              handler: () => changeColorHandler(FolderColors.BLUE),
+            },
+            {
+              color: FolderColors.RED,
+              handler: () => changeColorHandler(FolderColors.RED),
+            },
+            {
+              color: FolderColors.YELLOW,
+              handler: () => changeColorHandler(FolderColors.YELLOW),
+            },
+          ],
         },
       ],
       [ItemTypes.FILE]: [
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
         },
       ],
       [ItemTypes.ALBUM]: [
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
           brAfter: true,
         },
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
         },
       ],
       [ItemTypes.TRACK]: [
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
           brAfter: true,
         },
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: logout,
+          handler: getOpenModal('isSettings'),
         },
       ],
     }),
@@ -285,17 +303,17 @@ export const useContextMenuItems = () => {
       {
         title: 'Изменить доступ',
         Icon: HiOutlineUserAdd,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
       {
         title: 'Переместить',
         Icon: MdOutlineDriveFileMove,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
       {
         title: 'Добавить в отмеченные',
         Icon: MdOutlineBookmarkAdd,
-        handler: logout,
+        handler: getOpenModal('isSettings'),
       },
     ],
     []

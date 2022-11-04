@@ -1,4 +1,4 @@
-import { AccessTypes, ItemTypes, WorkplaceItem, IChangeIsTrashFilds } from 'types';
+import { AccessTypes, ItemTypes, WorkplaceItem, IChangeIsTrashFilds, IFolder } from 'types';
 import { IFile } from 'types/file.interface';
 import { ITrack } from 'types/track.interface';
 import { formatSize } from './storage.utils';
@@ -25,6 +25,16 @@ export const calcAndFormatSize = (item: WorkplaceItem): string => {
   }
 
   return '—';
+};
+
+export const getColorClassName = (item: WorkplaceItem): string => {
+  if (item.type === ItemTypes.FOLDER) {
+    const { color } = item as IFolder;
+
+    return color.toLocaleLowerCase();
+  }
+
+  return '';
 };
 
 export const createChangeIsTrashMessage = (filds: IChangeIsTrashFilds): string => {

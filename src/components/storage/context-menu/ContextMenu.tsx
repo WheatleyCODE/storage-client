@@ -25,7 +25,7 @@ export const ContextMenu: FC<IContextMenuProps> = memo(({ coords, onClose }) => 
   useEffect(() => {
     setTimeout(() => {
       setItems(contextMenuItems);
-    }, 50);
+    }, 100);
   }, [contextMenuItems]);
 
   return (
@@ -47,11 +47,18 @@ export const ContextMenu: FC<IContextMenuProps> = memo(({ coords, onClose }) => 
       className="context-menu"
     >
       <AnimatePresence>
-        {items.map(({ Icon, title, brAfter, brBefore, handler }) => {
+        {items.map(({ Icon, title, brAfter, brBefore, handler, options }) => {
           return (
             <div key={title}>
               {brAfter && <div className="context-menu__br" />}
-              <ContextMenuItem handler={handler} onClose={onClose} title={title} Icon={Icon} />
+              <ContextMenuItem
+                side={left ? 'left' : 'right'}
+                options={options}
+                handler={handler}
+                onClose={onClose}
+                title={title}
+                Icon={Icon}
+              />
               {brBefore && <div className="context-menu__br" />}
             </div>
           );

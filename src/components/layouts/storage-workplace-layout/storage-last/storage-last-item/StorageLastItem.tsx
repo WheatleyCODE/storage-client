@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react';
 import { storageWorkplaceIcons } from 'consts';
 import { WorkplaceItem } from 'types';
+import { getColorClassName } from 'utils';
 import './StorageLastItem.scss';
 
 export interface IStorageLastItemProps {
@@ -25,7 +26,7 @@ export const StorageLastItem: FC<IStorageLastItemProps> = memo((props) => {
       onContextMenu={onClick}
       className={`storage-last-item ${isActive ? 'active' : ''}`}
     >
-      <div className="storage-last-item__icon">
+      <div className={`storage-last-item__icon ${getColorClassName(item)}`}>
         <MemoIcon />
       </div>
       <div className="storage-last-item__name">{item.name}</div>
