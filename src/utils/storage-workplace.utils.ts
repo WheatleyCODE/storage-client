@@ -11,7 +11,7 @@ export const transformAccess = (type: AccessTypes): string => {
   return 'Публичный';
 };
 
-export const calcAndFormatSize = (item: WorkplaceItem): string => {
+export const calcAndFormatSize = (item: WorkplaceItem, isFolder = false): string => {
   if (item.type === ItemTypes.FILE) {
     const { fileSize } = item as IFile;
 
@@ -22,6 +22,12 @@ export const calcAndFormatSize = (item: WorkplaceItem): string => {
     const { audioSize, imageSize } = item as ITrack;
 
     return formatSize(audioSize + imageSize);
+  }
+
+  if (item.type === ItemTypes.FOLDER && isFolder) {
+    const { folderSize } = item as IFolder;
+
+    return formatSize(folderSize);
   }
 
   return '—';

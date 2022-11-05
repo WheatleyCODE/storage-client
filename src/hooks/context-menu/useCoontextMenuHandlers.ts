@@ -6,19 +6,34 @@ import { FolderColors, ModalsStateKeys } from 'types';
 
 export const useContextMenuHandlers = () => {
   const { currentItems } = useTypedSelector((state) => state.storage);
+  const { isAside } = useTypedSelector((state) => state.modals);
   const { changeIsModal } = modalsActions;
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { changeIsTrash, changeColor } = useActions();
   const dispatch = useTypedDispatch();
 
-  const getOpenModal = (key: ModalsStateKeys) => {
+  const getOpenModal = (key: ModalsStateKeys, isHash = true) => {
     const hash = stateKeysToHashModals[key];
 
+    if (isHash) {
+      return () => {
+        navigate(pathname + hash);
+        dispatch(changeIsModal({ key, boolean: true }));
+      };
+    }
+
     return () => {
-      navigate(pathname + hash);
       dispatch(changeIsModal({ key, boolean: true }));
     };
+  };
+
+  const openIsInfo = () => {
+    if (isAside) {
+      dispatch(changeIsModal({ key: 'isAside', boolean: false }));
+    }
+
+    dispatch(changeIsModal({ key: 'isInfo', boolean: true }));
   };
 
   const changeIsTrashHandler = (isTrash: boolean) => {
@@ -39,5 +54,6 @@ export const useContextMenuHandlers = () => {
     getOpenModal,
     changeIsTrashHandler,
     changeColorHandler,
+    openIsInfo,
   };
 };

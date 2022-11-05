@@ -1,23 +1,37 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { AnimatePresence, AnimationControls, motion } from 'framer-motion';
 import { Portal, Backdrop, Drawer } from 'components';
+import { useTypedDispatch, useTypedSelector } from 'hooks';
 import { AdditionTypes } from 'types';
+import { modalsActions } from 'store';
 import { StorageAdditions } from '../storage-additions/StorageAdditions';
 import './StorageAside.scss';
 
 export interface IStorageAsideProps {
   isOpen: boolean;
   controls: AnimationControls;
-  toggleOpen: () => void;
+  openAside: () => void;
+  closeAside: () => void;
 }
 
-export const StorageAside: FC<IStorageAsideProps> = memo(({ isOpen, toggleOpen, controls }) => {
+export const StorageAside: FC<IStorageAsideProps> = memo((props) => {
+  const { isOpen, openAside, closeAside, controls } = props;
+  const { isInfo } = useTypedSelector((state) => state.modals);
   const [active, setActive] = useState<AdditionTypes>(AdditionTypes.CALENDAR);
+  const dispatch = useTypedDispatch();
+
+  const { changeIsModal } = modalsActions;
+
+  const closeInfo = useCallback(() => {
+    dispatch(changeIsModal({ key: 'isInfo', boolean: false }));
+  }, []);
 
   const changeActive = useCallback(
     (type: AdditionTypes) => {
-      if (type === active) {
-        toggleOpen();
+      if (isInfo) closeInfo();
+
+      if (type === active && isOpen) {
+        closeAside();
         return;
       }
 
@@ -26,10 +40,10 @@ export const StorageAside: FC<IStorageAsideProps> = memo(({ isOpen, toggleOpen, 
         return;
       }
 
-      toggleOpen();
+      openAside();
       setActive(type);
     },
-    [isOpen, toggleOpen, active]
+    [isOpen, openAside, closeAside, active, isInfo, closeInfo]
   );
 
   return (
@@ -44,7 +58,7 @@ export const StorageAside: FC<IStorageAsideProps> = memo(({ isOpen, toggleOpen, 
         className="storage-aside__desctop"
       >
         <StorageAdditions
-          toggleOpen={toggleOpen}
+          toggleOpen={closeAside}
           active={active}
           isOpen={isOpen}
           changeActive={changeActive}
@@ -53,7 +67,7 @@ export const StorageAside: FC<IStorageAsideProps> = memo(({ isOpen, toggleOpen, 
 
       <div className="storage-aside__mobile">
         <StorageAdditions
-          toggleOpen={toggleOpen}
+          toggleOpen={closeAside}
           active={active}
           isOpen={false}
           changeActive={changeActive}
@@ -63,11 +77,11 @@ export const StorageAside: FC<IStorageAsideProps> = memo(({ isOpen, toggleOpen, 
       <AnimatePresence>
         {isOpen && (
           <Portal>
-            <Backdrop className="storage-aside" onClose={toggleOpen}>
+            <Backdrop className="storage-aside" onClose={closeAside}>
               <Drawer open="right">
                 <div className="storage-aside-modal">
                   <StorageAdditions
-                    toggleOpen={toggleOpen}
+                    toggleOpen={closeAside}
                     active={active}
                     isOpen={isOpen}
                     changeActive={changeActive}

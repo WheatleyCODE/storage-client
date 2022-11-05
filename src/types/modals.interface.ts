@@ -1,6 +1,8 @@
 export interface IModalsState {
   isSettings: boolean;
   isHotkeys: boolean;
+  isInfo: boolean;
+  isAside: boolean;
   isCreateFolder: boolean;
   isCreateAlbum: boolean;
   isCreateTrack: boolean;
@@ -22,6 +24,8 @@ export enum HashModals {
   UPLOAD_FILES = '#upload-files',
   SETTINGS = '#settings',
   HOTKEYS = '#hotkeys',
+  INFO = '#info',
+  ASIDE = '#aside',
   DELETE = '#delete',
 }
 

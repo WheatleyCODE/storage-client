@@ -9,13 +9,15 @@ export interface IStorageMenuItemProps {
   path: PathRoutes;
   Icon: IconType;
   isOpen: boolean;
+  onClick: () => void;
 }
 
-export const StorageMenuItem: FC<IStorageMenuItemProps> = memo(({ title, path, Icon, isOpen }) => {
+export const StorageMenuItem: FC<IStorageMenuItemProps> = memo((props) => {
+  const { title, path, Icon, isOpen, onClick } = props;
   const MemoIcon = memo(Icon);
 
   return (
-    <NavLink to={path} className={`storage-menu-item ${!isOpen ? 'close' : ''}`}>
+    <NavLink onClick={onClick} to={path} className={`storage-menu-item ${!isOpen ? 'close' : ''}`}>
       <div className="storage-menu-item__icon">
         <MemoIcon />
       </div>

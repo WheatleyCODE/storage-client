@@ -4,6 +4,8 @@ import { IModalsPayload, IModalsState } from 'types';
 const initialState: IModalsState = {
   isSettings: false,
   isHotkeys: false,
+  isInfo: false,
+  isAside: false,
   isCreateFolder: false,
   isCreateAlbum: false,
   isCreateTrack: false,

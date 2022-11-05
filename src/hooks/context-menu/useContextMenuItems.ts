@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router';
 import { HiOutlineUserAdd } from 'react-icons/hi';
 import {
   MdAudiotrack,
@@ -42,7 +41,8 @@ export interface IWorkplaceCMI {
 }
 
 export const useContextMenuItems = () => {
-  const { getOpenModal, changeIsTrashHandler, changeColorHandler } = useContextMenuHandlers();
+  const { getOpenModal, changeIsTrashHandler, changeColorHandler, openIsInfo } =
+    useContextMenuHandlers();
 
   const createCMI: IContextMenuItem[] = useMemo(
     () => [
@@ -108,7 +108,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Показать своства',
         Icon: BiInfoCircle,
-        handler: getOpenModal('isSettings'),
+        handler: openIsInfo,
       },
     ],
     []
@@ -124,7 +124,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Удалить навсегда',
         Icon: BiTrash,
-        handler: getOpenModal('isDelete'),
+        handler: getOpenModal('isDelete', false),
       },
     ],
     []

@@ -1,8 +1,9 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { useAnimation } from 'framer-motion';
+import { AnimatePresence, useAnimation } from 'framer-motion';
 import { Outlet } from 'react-router';
-import { useActions, useTypedSelector } from 'hooks';
+import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
 import { ModalsController } from 'components';
+import { modalsActions } from 'store';
 import { setAppLoader } from 'helpers';
 import { getContextMenuCoords, sleep } from 'utils';
 import { ICoords } from 'types';
@@ -12,15 +13,19 @@ import { StorageLogo } from './storage-logo/StorageLogo';
 import { StorageMenu } from './storage-menu/StorageMenu';
 import { StorageSearch } from './storage-search/StorageSearch';
 import { StorageUser } from './storage-user/StorageUser';
+import { StorageInfo } from './storage-info/StorageInfo';
 import './StoragePageLayout.scss';
 
 export const StoragePageLayout: FC = () => {
   const { loading } = useTypedSelector((state) => state.storage);
-  const [isOpenAside, setIsOpenAside] = useState(false);
+  const { isInfo, isAside } = useTypedSelector((state) => state.modals);
   const [isOpenMenu, setIsOpenMenu] = useState(true);
   const [isContextMenu, setIsContextMenu] = useState(false);
   const [coords, setCoords] = useState<ICoords>({});
   const { fetchStorage } = useActions();
+  const dispatch = useTypedDispatch();
+
+  const { changeIsModal } = modalsActions;
 
   const asideControls = useAnimation();
   const menuControls = useAnimation();
@@ -56,13 +61,13 @@ export const StoragePageLayout: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isOpenAside) {
+    if (isAside) {
       asideControls.start('open');
       return;
     }
 
     asideControls.start('close');
-  }, [isOpenAside, asideControls]);
+  }, [isAside, asideControls]);
 
   useEffect(() => {
     if (isOpenMenu) {
@@ -73,8 +78,19 @@ export const StoragePageLayout: FC = () => {
     menuControls.start('close');
   }, [isOpenMenu, menuControls]);
 
-  const toggleAside = useCallback(() => setIsOpenAside((p) => !p), []);
+  const openAside = useCallback(() => {
+    dispatch(changeIsModal({ key: 'isAside', boolean: true }));
+  }, []);
+
+  const closeAside = useCallback(() => {
+    dispatch(changeIsModal({ key: 'isAside', boolean: false }));
+  }, []);
+
   const toggleMenu = useCallback(() => setIsOpenMenu((p) => !p), []);
+
+  const closeInfo = useCallback(() => {
+    dispatch(changeIsModal({ key: 'isInfo', boolean: false }));
+  }, []);
 
   const lockContextMenu = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -97,7 +113,7 @@ export const StoragePageLayout: FC = () => {
           <StorageLogo controls={menuControls} isOpen={isOpenMenu} />
           <StorageSearch />
         </div>
-        <StorageUser controls={asideControls} isOpen={isOpenAside} />
+        <StorageUser controls={asideControls} isOpen={isAside} />
       </div>
 
       <div className="storage-page-layout__main">
@@ -112,7 +128,17 @@ export const StoragePageLayout: FC = () => {
             <Outlet />
           </StorageWorkplaceLayout>
         </div>
-        <StorageAside controls={asideControls} isOpen={isOpenAside} toggleOpen={toggleAside} />
+
+        <AnimatePresence>
+          {isInfo && <StorageInfo onClose={closeInfo} isOpen={isInfo} />}
+        </AnimatePresence>
+
+        <StorageAside
+          controls={asideControls}
+          isOpen={isAside}
+          openAside={openAside}
+          closeAside={closeAside}
+        />
       </div>
       <ModalsController />
     </div>

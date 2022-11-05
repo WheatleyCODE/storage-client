@@ -1,9 +1,10 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useCallback } from 'react';
 import { AnimationControls, motion } from 'framer-motion';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdHorizontalRule } from 'react-icons/md';
 import { Button, StorageSize } from 'components';
-import { useTypedSelector } from 'hooks';
+import { storageActions } from 'store';
+import { useTypedDispatch, useTypedSelector } from 'hooks';
 import { storageMenu } from 'consts';
 import { StorageMenuItem } from './storage-menu-item/StorageMenuItem';
 import './StorageMenu.scss';
@@ -16,7 +17,12 @@ export interface IStorageMenuProps {
 
 export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, toggleOpen }) => {
   const { diskSpace, usedSpace } = useTypedSelector((state) => state.storage);
+  const dispatch = useTypedDispatch();
   const openClassName = isOpen ? 'open' : '';
+
+  const clearCurrentItems = useCallback(() => {
+    dispatch(storageActions.setCurrent([]));
+  }, []);
 
   return (
     <motion.div
@@ -37,7 +43,14 @@ export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, togg
       />
 
       {storageMenu.map(({ title, path, Icon }) => (
-        <StorageMenuItem key={path} isOpen={isOpen} title={title} path={path} Icon={Icon} />
+        <StorageMenuItem
+          onClick={clearCurrentItems}
+          key={path}
+          isOpen={isOpen}
+          title={title}
+          path={path}
+          Icon={Icon}
+        />
       ))}
 
       <div className="storage-menu__toggle-button">

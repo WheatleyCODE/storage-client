@@ -8,6 +8,8 @@ export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.SETTINGS]: 'isSettings',
   [HashModals.HOTKEYS]: 'isHotkeys',
   [HashModals.DELETE]: 'isDelete',
+  [HashModals.INFO]: 'isInfo',
+  [HashModals.ASIDE]: 'isAside',
 };
 
 export const stateKeysToHashModals: StateKeysToHashModals = {
@@ -18,4 +20,6 @@ export const stateKeysToHashModals: StateKeysToHashModals = {
   isSettings: HashModals.SETTINGS,
   isHotkeys: HashModals.HOTKEYS,
   isDelete: HashModals.DELETE,
+  isInfo: HashModals.INFO,
+  isAside: HashModals.ASIDE,
 };

@@ -1,0 +1,89 @@
+@import 'styles/templates.scss';
+
+.item-info {
+  &__img {
+    @include flex;
+    padding: 20px;
+    padding-bottom: 0;
+    font-size: 8rem;
+    border-top: $storageBorder;
+    color: $colorDarkGrey2;
+    height: 170px;
+
+    &.grey {
+      color: $colorDarkGrey2;
+    }
+
+    &.blue {
+      color: $colorBlue;
+    }
+
+    &.red {
+      color: $colorRed;
+    }
+
+    &.yellow {
+      color: $colorYellow;
+    }
+  }
+
+  &__properties, &__access {
+    padding: 25px 0 0 20px;
+  }
+
+  &__access-block {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+  }
+
+  &__properties-row {
+    display: flex;
+    padding: 3px 0;
+  }
+
+  &__properties-title {
+    width: 80px;
+  }
+
+  &__properties-text {
+    color: $colorDarkGrey3;
+    margin-left: 10px;
+  }
+
+  &__link {
+    transition: all $animationDuration;
+    display: inline-block;
+    cursor: pointer;
+    color: $colorBlue;
+    padding-top: 3px;
+    margin-top: 12px;
+    border-bottom: 1px solid $colorWhite;
+
+    &:hover {
+      border-bottom: 1px solid $colorBlue;
+    }
+  }
+
+  &__access-icon {
+    @include flex;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    color: $colorDarkGrey1;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid $colorLightGrey3;
+  }
+  
+  &__access-text {
+    color: $colorDarkGrey3;
+  }
+
+  &__title {
+    font-size: 1.15rem;
+    height: 32px;
+    color: $colorBlack;
+  }
+
+}

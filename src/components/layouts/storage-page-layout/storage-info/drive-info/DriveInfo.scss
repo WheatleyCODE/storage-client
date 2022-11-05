@@ -1,0 +1,19 @@
+@import 'styles/templates.scss';
+
+.drive-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: $storageBorder;
+  padding-top: 60px;
+
+  &__img {
+    width: 260px;
+  }
+
+  &__text {
+    text-align: center;
+    margin-top: 50px;
+    color: $colorDarkGrey2;
+  }
+}
