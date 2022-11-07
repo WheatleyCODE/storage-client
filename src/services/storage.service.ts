@@ -1,10 +1,14 @@
 import { AxiosResponse } from 'axios';
 import {
+  IChangeAccessTypeFilds,
   IChangeColorFilds,
   IChangeIsTrashFilds,
+  IChangeNameFilds,
+  IChangeParentFilds,
   ICreateFolderFilds,
   IDeleteItemsFilds,
   IFolder,
+  IItemFilds,
   IStorageData,
   WorkplaceItem,
 } from 'types';
@@ -29,5 +33,23 @@ export class StorageService {
 
   static async changeColor(filds: IChangeColorFilds): Promise<AxiosResponse<IFolder[]>> {
     return $api.post<IFolder[]>('/api/storage/change/color', filds);
+  }
+
+  static async changeName(filds: IChangeNameFilds): Promise<AxiosResponse<WorkplaceItem>> {
+    return $api.post<WorkplaceItem>('/api/storage/change/name', filds);
+  }
+
+  static async changeParent(filds: IChangeParentFilds): Promise<AxiosResponse<WorkplaceItem[]>> {
+    return $api.post<WorkplaceItem[]>('/api/storage/change/parent', filds);
+  }
+
+  static async createAccessLink(filds: IItemFilds): Promise<AxiosResponse<WorkplaceItem>> {
+    return $api.post<WorkplaceItem>('/api/storage/create/access-link', filds);
+  }
+
+  static async changeAccessType(
+    filds: IChangeAccessTypeFilds
+  ): Promise<AxiosResponse<WorkplaceItem>> {
+    return $api.post<WorkplaceItem>('/api/storage/change/access', filds);
   }
 }

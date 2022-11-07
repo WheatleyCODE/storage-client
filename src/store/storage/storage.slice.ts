@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IStorageState, WorkplaceItem } from 'types';
 import {
+  changeAccessType,
   changeColor,
   changeIsTrash,
+  changeName,
+  changeParent,
+  createAccessLink,
   createFolder,
   deleteItems,
   fetchStorage,
@@ -44,6 +48,54 @@ export const storageSlice = createSlice({
 
   extraReducers(builder) {
     builder
+      .addCase(changeAccessType.fulfilled, (state, { payload }) => {
+        const { id } = payload;
+
+        state.currentItems = [];
+        state.allItems = state.allItems.map((item) => {
+          if (item.id === id) {
+            return payload;
+          }
+
+          return item;
+        });
+      })
+      .addCase(createAccessLink.fulfilled, (state, { payload }) => {
+        const { id } = payload;
+
+        state.currentItems = [payload];
+        state.allItems = state.allItems.map((item) => {
+          if (item.id === id) {
+            return payload;
+          }
+
+          return item;
+        });
+      })
+      .addCase(changeParent.fulfilled, (state, { payload }) => {
+        const types = payload.map((item) => item.type);
+
+        state.currentItems = [];
+        state.allItems = state.allItems.map((item) => {
+          if (types.includes(item.type)) {
+            return payload.find((itm) => itm.id === item.id) || item;
+          }
+
+          return item;
+        });
+      })
+      .addCase(changeName.fulfilled, (state, { payload }) => {
+        const { id } = payload;
+
+        state.currentItems = [];
+        state.allItems = state.allItems.map((item) => {
+          if (item.id === id) {
+            return payload;
+          }
+
+          return item;
+        });
+      })
       .addCase(changeColor.fulfilled, (state, { payload }) => {
         const types = payload.map((item) => item.type);
 

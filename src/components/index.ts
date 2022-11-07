@@ -10,6 +10,7 @@ export { Button } from './ui/button/Button';
 export { Input } from './ui/input/Input';
 export { Link } from './ui/link/Link';
 export { Checkbox } from './ui/checkbox/Checkbox';
+export { Select } from './ui/select/Select';
 
 export { Hills } from './design/hills/Hills';
 export { Mountains } from './design/mountains/Mountains';

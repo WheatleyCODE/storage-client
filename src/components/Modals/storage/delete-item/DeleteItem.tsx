@@ -21,7 +21,7 @@ export const DeleteItem: FC<IDeleteItem> = ({ currentItems, onClose }) => {
   };
 
   return (
-    <Confirm upproveText="Удалить навсегда" onClose={() => {}} onUpprove={deleteHandler}>
+    <Confirm upproveText="Удалить навсегда" onClose={onClose} onUpprove={deleteHandler}>
       <div className="delete-item">
         <h1 className="delete-item__title">Удалить</h1>
 

@@ -1,0 +1,22 @@
+@import 'styles/templates.scss';
+
+.change-parent-item {
+  &__title {
+    font-size: 1.5rem;
+    margin: 0;
+    margin-bottom: 30px;
+  }
+
+  &__folders {
+    border-top: $storageBorder;
+    max-height: 300px;
+    overflow: auto;
+  }
+
+  &__folders-title {
+    font-size: 1rem;
+    color: $colorDarkGrey3;
+    font-weight: normal;
+    margin-bottom: 15px;
+  }
+}

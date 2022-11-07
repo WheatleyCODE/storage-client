@@ -46,11 +46,17 @@ export const getColorClassName = (item: WorkplaceItem): string => {
 export const createChangeIsTrashMessage = (filds: IChangeIsTrashFilds): string => {
   const { items, isTrash } = filds;
 
-  if (items.length === 1) {
-    return isTrash ? `${items[0].type} перемещена в корзину` : `${items[0].type} востановлена`;
+  if (items.length === 1 && isTrash) {
+    return `${items[0].type} в корзину`;
   }
 
-  return isTrash
-    ? `(${items.length}) объектов перемещено в корзину`
-    : `(${items.length}) объектов востановлено`;
+  if (items.length === 1 && !isTrash) {
+    return `${items[0].type} из корзины`;
+  }
+
+  if (isTrash) {
+    return `(${items.length}) объектов перемещено в корзину`;
+  }
+
+  return `(${items.length}) объектов востановлено`;
 };

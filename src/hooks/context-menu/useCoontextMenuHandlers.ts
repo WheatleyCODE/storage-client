@@ -40,6 +40,8 @@ export const useContextMenuHandlers = () => {
     changeIsTrash({
       items: currentItems.map(({ id, type }) => ({ id, type })),
       isTrash,
+      prevIsTrash: !isTrash,
+      isCanRestore: true,
     });
   };
 

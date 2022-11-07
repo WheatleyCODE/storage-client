@@ -21,7 +21,7 @@ export const CreateFolder: FC<ICreateFolderProps> = ({ onClose }) => {
   };
 
   return (
-    <Confirm onClose={() => {}} onUpprove={createFolderHandler}>
+    <Confirm onClose={onClose} onUpprove={createFolderHandler}>
       <div className="create-folder">
         <h1 className="create-folder__title">Новая папка</h1>
 

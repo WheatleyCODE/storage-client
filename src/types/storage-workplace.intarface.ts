@@ -20,7 +20,18 @@ export interface IDeleteItemsFilds {
   items: IItemFilds[];
 }
 
-export interface IChangeIsTrashFilds {
-  items: IItemFilds[];
+export interface IChangeIsTrashFilds extends IDeleteItemsFilds {
   isTrash: boolean;
+}
+
+export interface IChangeNameFilds extends IItemFilds {
+  name: string;
+}
+
+export interface IChangeAccessTypeFilds extends IItemFilds {
+  accessType: AccessTypes;
+}
+
+export interface IChangeParentFilds extends IDeleteItemsFilds {
+  parent: string;
 }

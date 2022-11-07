@@ -5,11 +5,15 @@ import { useValidInput } from 'hooks';
 import { nameValidator } from 'helpers';
 import './CreateAlbum.scss';
 
-export const CreateAlbum: FC = () => {
+export interface ICreateAlbumProps {
+  onClose: () => void;
+}
+
+export const CreateAlbum: FC<ICreateAlbumProps> = ({ onClose }) => {
   const nameInput = useValidInput([nameValidator]);
 
   return (
-    <Confirm onClose={() => {}} onUpprove={() => {}}>
+    <Confirm onClose={onClose} onUpprove={() => {}}>
       <div className="create-album">
         <h1 className="create-album__title">Создать альбом</h1>
 

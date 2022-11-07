@@ -5,11 +5,15 @@ import { useValidInput } from 'hooks';
 import { nameValidator } from 'helpers';
 import './CreateTrack.scss';
 
-export const CreateTrack: FC = () => {
+export interface ICreateTrackProps {
+  onClose: () => void;
+}
+
+export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
   const nameInput = useValidInput([nameValidator]);
 
   return (
-    <Confirm onClose={() => {}} onUpprove={() => {}}>
+    <Confirm onClose={onClose} onUpprove={() => {}}>
       <div className="create-track">
         <h1 className="create-track__title">Создание трека</h1>
 

@@ -8,6 +8,10 @@ export interface IModalsState {
   isCreateTrack: boolean;
   isUploadFiles: boolean;
   isDelete: boolean;
+  isChangeAccess: boolean;
+  isChangeParent: boolean;
+  isGetLink: boolean;
+  isRename: boolean;
 }
 
 export type ModalsStateKeys = keyof IModalsState;
@@ -27,6 +31,10 @@ export enum HashModals {
   INFO = '#info',
   ASIDE = '#aside',
   DELETE = '#delete',
+  CHANGE_ACCESS = '#change-access',
+  CHANGE_PARENT = '#change-parent',
+  GET_LINK = '#get-link',
+  RENAME = '#rename',
 }
 
 export type HashModalsToStateKeys = {

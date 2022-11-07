@@ -10,6 +10,10 @@ export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.DELETE]: 'isDelete',
   [HashModals.INFO]: 'isInfo',
   [HashModals.ASIDE]: 'isAside',
+  [HashModals.CHANGE_ACCESS]: 'isChangeAccess',
+  [HashModals.CHANGE_PARENT]: 'isChangeParent',
+  [HashModals.GET_LINK]: 'isGetLink',
+  [HashModals.RENAME]: 'isRename',
 };
 
 export const stateKeysToHashModals: StateKeysToHashModals = {
@@ -22,4 +26,8 @@ export const stateKeysToHashModals: StateKeysToHashModals = {
   isDelete: HashModals.DELETE,
   isInfo: HashModals.INFO,
   isAside: HashModals.ASIDE,
+  isChangeAccess: HashModals.CHANGE_ACCESS,
+  isChangeParent: HashModals.CHANGE_PARENT,
+  isGetLink: HashModals.GET_LINK,
+  isRename: HashModals.RENAME,
 };

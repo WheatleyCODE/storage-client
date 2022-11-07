@@ -83,17 +83,17 @@ export const useContextMenuItems = () => {
       {
         title: 'Изменить доступ',
         Icon: HiOutlineUserAdd,
-        handler: getOpenModal('isSettings'),
+        handler: getOpenModal('isChangeAccess', false),
       },
       {
         title: 'Получить ссылку',
         Icon: MdOutlineLink,
-        handler: getOpenModal('isSettings'),
+        handler: getOpenModal('isGetLink', false),
       },
       {
         title: 'Переместить',
         Icon: MdOutlineDriveFileMove,
-        handler: getOpenModal('isSettings'),
+        handler: getOpenModal('isChangeParent', false),
       },
       {
         title: 'Добавить в отмеченные',
@@ -103,7 +103,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Переименовать',
         Icon: MdDriveFileRenameOutline,
-        handler: getOpenModal('isSettings'),
+        handler: getOpenModal('isRename', false),
       },
       {
         title: 'Показать своства',
@@ -308,7 +308,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Переместить',
         Icon: MdOutlineDriveFileMove,
-        handler: getOpenModal('isSettings'),
+        handler: getOpenModal('isChangeParent', false),
       },
       {
         title: 'Добавить в отмеченные',
