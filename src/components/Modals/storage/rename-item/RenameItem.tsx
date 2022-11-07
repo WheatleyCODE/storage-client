@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Confirm, Input } from 'components';
 import { useActions, useValidInput } from 'hooks';
 import { nameValidator } from 'helpers';
-import { storageWorkplaceIcons } from 'consts';
+import { getWorkplaceIcon } from 'utils';
 import { WorkplaceItem } from 'types';
 import './RenameItem.scss';
 
@@ -30,7 +30,7 @@ export const RenameItem: FC<IRenameItemProps> = ({ currentItems, onClose }) => {
         <h1 className="rename-item__title">Переименовать</h1>
 
         <Input
-          Icon={storageWorkplaceIcons[item.type]}
+          Icon={getWorkplaceIcon(item)}
           value={nameInput.value}
           type="text"
           placeholder="Новое имя"

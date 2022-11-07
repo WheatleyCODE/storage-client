@@ -1,17 +1,24 @@
 import React, { FC, memo } from 'react';
-import { calcAndFormatSize, getColorClassName, transformAccess, transformDate } from 'utils';
-import { storageWorkplaceAccessIcons, storageWorkplaceIcons } from 'consts';
+import {
+  calcAndFormatSize,
+  getColorClassName,
+  getWorkplaceIcon,
+  transformAccess,
+  transformDate,
+} from 'utils';
+import { storageWorkplaceAccessIcons } from 'consts';
 import { WorkplaceItem } from 'types';
 import './ItemInfo.scss';
 
 export interface IItemInfoProps {
   item: WorkplaceItem;
   userId: string;
+  openChangeAccessModal: () => void;
 }
 
-export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId }) => {
+export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId, openChangeAccessModal }) => {
   const MemoAccessIcon = memo(storageWorkplaceAccessIcons[item?.accessType]);
-  const MemoIcon = memo(storageWorkplaceIcons[item.type]);
+  const MemoIcon = memo(getWorkplaceIcon(item));
 
   return (
     <div className="item-info">
@@ -27,7 +34,9 @@ export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId }) => {
           </div>
           <div className="item-info__access-text">{transformAccess(item.accessType)}</div>
         </div>
-        <div className="item-info__link">Настроить доступ</div>
+        <div aria-hidden onClick={openChangeAccessModal} className="item-info__link">
+          Настроить доступ
+        </div>
       </div>
 
       <div className="item-info__properties">

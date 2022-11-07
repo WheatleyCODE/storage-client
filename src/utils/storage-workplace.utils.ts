@@ -1,3 +1,5 @@
+import { storageWorkplaceIcons } from 'consts';
+import { IconType } from 'react-icons';
 import { AccessTypes, ItemTypes, WorkplaceItem, IChangeIsTrashFilds, IFolder } from 'types';
 import { IFile } from 'types/file.interface';
 import { ITrack } from 'types/track.interface';
@@ -59,4 +61,16 @@ export const createChangeIsTrashMessage = (filds: IChangeIsTrashFilds): string =
   }
 
   return `(${items.length}) объектов востановлено`;
+};
+
+export const getWorkplaceIcon = (item: WorkplaceItem): IconType => {
+  const { accessType, type } = item;
+
+  const isAccess = accessType === AccessTypes.LINK || accessType === AccessTypes.PUBLIC;
+
+  if (isAccess && type === ItemTypes.FOLDER) {
+    return storageWorkplaceIcons.FOLDER_SHARED;
+  }
+
+  return storageWorkplaceIcons[type];
 };

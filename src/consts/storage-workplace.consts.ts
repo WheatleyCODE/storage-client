@@ -6,6 +6,7 @@ import {
   MdOutlineLink,
   MdPublic,
   MdLockOutline,
+  MdFolderShared,
 } from 'react-icons/md';
 import { AccessTypes, ItemTypes } from 'types';
 
@@ -14,6 +15,7 @@ export const storageWorkplaceIcons = {
   [ItemTypes.FILE]: MdInsertDriveFile,
   [ItemTypes.ALBUM]: MdLibraryMusic,
   [ItemTypes.TRACK]: MdAudiotrack,
+  FOLDER_SHARED: MdFolderShared,
 };
 
 export const storageWorkplaceAccessIcons = {

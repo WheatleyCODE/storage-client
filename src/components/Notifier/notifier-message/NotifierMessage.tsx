@@ -45,6 +45,7 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ message }) => {
       exit={{ opacity: 0, translateX: -300 }}
       transition={{ duration: 0.3 }}
       className={`notifier-message ${color}`}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="notifier-message__icon">
         {color === 'green' && <MemoFaCheck />}

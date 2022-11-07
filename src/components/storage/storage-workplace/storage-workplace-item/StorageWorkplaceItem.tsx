@@ -1,7 +1,12 @@
-import { storageWorkplaceIcons } from 'consts';
 import React, { FC, memo } from 'react';
+import {
+  calcAndFormatSize,
+  getColorClassName,
+  getWorkplaceIcon,
+  transformAccess,
+  transformDate,
+} from 'utils';
 import { WorkplaceItem } from 'types';
-import { calcAndFormatSize, getColorClassName, transformAccess, transformDate } from 'utils';
 import './StorageWorkplaceItem.scss';
 
 export interface IStorageWorkplaceItemProps {
@@ -15,7 +20,7 @@ export interface IStorageWorkplaceItemProps {
 export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const { item, isActive, changeActive, addActive, addActiveShift, index } = props;
 
-  const MemoIcon = memo(storageWorkplaceIcons[item.type]);
+  const MemoIcon = memo(getWorkplaceIcon(item));
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.ctrlKey) {

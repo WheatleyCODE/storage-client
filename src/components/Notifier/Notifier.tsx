@@ -21,7 +21,7 @@ export const Notifier: FC = memo(() => {
 
   return (
     <Portal>
-      <div className="notifier">
+      <div aria-hidden onClick={(e) => e.stopPropagation()} className="notifier">
         <AnimatePresence>
           {currentMessages.map((message) => (
             <NotifierMessage key={message.id} message={message} />

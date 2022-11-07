@@ -1,7 +1,6 @@
 import React, { FC, memo } from 'react';
-import { storageWorkplaceIcons } from 'consts';
 import { WorkplaceItem } from 'types';
-import { getColorClassName } from 'utils';
+import { getColorClassName, getWorkplaceIcon } from 'utils';
 import './StorageLastItem.scss';
 
 export interface IStorageLastItemProps {
@@ -13,7 +12,7 @@ export interface IStorageLastItemProps {
 
 export const StorageLastItem: FC<IStorageLastItemProps> = memo((props) => {
   const { item, changeActive, index, isActive } = props;
-  const MemoIcon = memo(storageWorkplaceIcons[item.type]);
+  const MemoIcon = memo(getWorkplaceIcon(item));
 
   const onClick = () => {
     changeActive(index);

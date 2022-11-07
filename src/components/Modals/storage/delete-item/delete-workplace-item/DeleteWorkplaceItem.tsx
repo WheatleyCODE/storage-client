@@ -1,6 +1,5 @@
 import React, { FC, memo } from 'react';
-import { storageWorkplaceIcons } from 'consts';
-import { calcAndFormatSize } from 'utils';
+import { calcAndFormatSize, getWorkplaceIcon } from 'utils';
 import { WorkplaceItem } from 'types';
 import './DeleteWorkplaceItem.scss';
 
@@ -9,7 +8,7 @@ export interface IDeleteWorkplaceItem {
 }
 
 export const DeleteWorkplaceItem: FC<IDeleteWorkplaceItem> = ({ item }) => {
-  const MemoIcon = memo(storageWorkplaceIcons[item.type]);
+  const MemoIcon = memo(getWorkplaceIcon(item));
 
   return (
     <div className="delete-workplace-item">
