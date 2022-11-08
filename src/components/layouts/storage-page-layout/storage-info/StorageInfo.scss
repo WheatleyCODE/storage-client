@@ -62,3 +62,22 @@
     }
   }
 }
+
+.backdrop.is-info-modal {
+  display: none;
+}
+
+@media screen and (max-width: 1260px) {
+  .backdrop.is-info-modal {
+    z-index: 40px;
+    display: block;
+
+    .drawer.right {
+      width: 320px;
+    }
+  }
+
+  .storage-info {
+    display: none;
+  }
+}

@@ -129,9 +129,7 @@ export const StoragePageLayout: FC = () => {
           </StorageWorkplaceLayout>
         </div>
 
-        <AnimatePresence>
-          {isInfo && <StorageInfo onClose={closeInfo} isOpen={isInfo} />}
-        </AnimatePresence>
+        <AnimatePresence>{isInfo && <StorageInfo onClose={closeInfo} />}</AnimatePresence>
 
         <StorageAside
           controls={asideControls}

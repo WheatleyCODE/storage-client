@@ -5,13 +5,14 @@ import './ContextMenuPopup.scss';
 
 export interface IContextMenuPopupProps {
   options: IContextOptions[];
+  onClose: () => void;
 }
 
-export const ContextMenuPopup: FC<IContextMenuPopupProps> = ({ options }) => {
+export const ContextMenuPopup: FC<IContextMenuPopupProps> = ({ options, onClose }) => {
   return (
     <div className="context-menu-popup">
       {options.map((option) => (
-        <ContextMenuPopupOption key={option.color} option={option} />
+        <ContextMenuPopupOption onClose={onClose} key={option.color} option={option} />
       ))}
     </div>
   );

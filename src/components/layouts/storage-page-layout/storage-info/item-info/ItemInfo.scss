@@ -43,7 +43,10 @@
   }
 
   &__properties-title {
+    display: flex;
+    align-items: center;
     width: 80px;
+    font-size: 0.9rem;
   }
 
   &__properties-text {

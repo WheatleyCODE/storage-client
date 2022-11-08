@@ -4,15 +4,21 @@ import './ContextMenuPopupOption.scss';
 
 export interface IContextMenuPopupOptionProps {
   option: IContextOptions;
+  onClose: () => void;
 }
 
-export const ContextMenuPopupOption: FC<IContextMenuPopupOptionProps> = ({ option }) => {
+export const ContextMenuPopupOption: FC<IContextMenuPopupOptionProps> = ({ option, onClose }) => {
   const { color, handler } = option;
+
+  const onClick = () => {
+    onClose();
+    handler();
+  };
 
   return (
     <div
       aria-hidden
-      onClick={handler}
+      onClick={onClick}
       className={`context-menu-popup-option ${color.toLocaleLowerCase()}`}
     />
   );

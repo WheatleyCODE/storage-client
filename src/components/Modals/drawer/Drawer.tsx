@@ -1,20 +1,21 @@
 import React, { FC, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { drawerConfig } from './drawer.config';
+import { getDrawerConfig } from './drawer.config';
 import './Drawer.scss';
 
 export interface IDrawerProps {
   children: React.ReactNode;
   open: 'right' | 'left' | 'top' | 'bottom';
+  width?: number;
   isFull?: boolean;
 }
 
-export const Drawer: FC<IDrawerProps> = ({ children, open, isFull = true }) => {
+export const Drawer: FC<IDrawerProps> = ({ children, open, isFull = true, width = 400 }) => {
   const stopPropagation = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
   }, []);
 
-  const { initial, exit, animate } = drawerConfig[open];
+  const { initial, exit, animate } = getDrawerConfig(open, width);
 
   return (
     <motion.div

@@ -12,7 +12,7 @@ export interface IContextMenuItemProps {
   Icon: IconType;
   title: string;
   onClose: () => void;
-  handler: () => void;
+  handler?: () => void;
   options?: IContextOptions[];
   side: 'left' | 'right';
 }
@@ -24,8 +24,10 @@ export const ContextMenuItem: FC<IContextMenuItemProps> = (props) => {
   const MemoChevron = memo(HiChevronRight);
 
   const onClick = () => {
-    onClose();
-    handler();
+    if (handler) {
+      onClose();
+      handler();
+    }
   };
 
   return (
@@ -47,8 +49,8 @@ export const ContextMenuItem: FC<IContextMenuItemProps> = (props) => {
 
       <AnimatePresence>
         {options && show && (
-          <Popup onClose={() => {}} height={POPUP_MENU_ITEM_HEIGHT + POPUP_MENU_PADDING}>
-            <ContextMenuPopup options={options} />
+          <Popup onClose={onClose} height={POPUP_MENU_ITEM_HEIGHT + POPUP_MENU_PADDING}>
+            <ContextMenuPopup onClose={onClose} options={options} />
           </Popup>
         )}
       </AnimatePresence>

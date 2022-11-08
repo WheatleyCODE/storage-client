@@ -27,7 +27,7 @@ export interface IContextOptions {
 export interface IContextMenuItem {
   title: string;
   Icon: IconType;
-  handler: () => void;
+  handler?: () => void;
   brAfter?: boolean;
   brBefore?: boolean;
   options?: IContextOptions[];
@@ -160,7 +160,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Изменить цвет',
           Icon: MdOutlinePalette,
-          handler: () => {},
+          // handler: () => {},
           options: [
             {
               color: FolderColors.GREY,
