@@ -8,59 +8,6 @@
     height: $storagePathHeight;
     border-bottom: $storageBorder;
   }
-
-  &__main {
-    width: 320px;
-    position: relative;
-    height: 100%;
-    border-left: $storageBorder;
-  }
-
-  &__close-button {
-    @include button-el;
-    @include flex;
-    position: absolute;
-    top: 17.5px;
-    right: 10px;
-    width: 45px;
-    height: 45px;
-    font-size: 1.6rem;
-    border-radius: 50%;
-  }
-
-  &__head {
-    display: flex;
-    align-items: center;
-    height: 80px;
-    padding-left: 30px;
-  }
-
-  &__name {
-    font-size: 1.2rem;
-  }
-
-  &__icon {
-    @include flex;
-    color: $colorDarkGrey2;
-    font-size: 1.8rem;
-    margin-right: 15px;
-
-    &.grey {
-      color: $colorDarkGrey2;
-    }
-
-    &.blue {
-      color: $colorBlue;
-    }
-
-    &.red {
-      color: $colorRed;
-    }
-
-    &.yellow {
-      color: $colorYellow;
-    }
-  }
 }
 
 .backdrop.is-info-modal {
