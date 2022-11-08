@@ -11,6 +11,7 @@ export const StorageTrashPage: FC = () => {
   useEffect(() => {
     const newItems = allItems.filter((item) => item.isTrash);
     dispatch(storageActions.setWorkplace(newItems));
+    dispatch(storageActions.setParents([]));
   }, [allItems]);
 
   return (

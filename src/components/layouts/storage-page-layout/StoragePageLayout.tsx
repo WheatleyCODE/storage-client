@@ -17,7 +17,7 @@ import { StorageInfo } from './storage-info/StorageInfo';
 import './StoragePageLayout.scss';
 
 export const StoragePageLayout: FC = () => {
-  const { loading } = useTypedSelector((state) => state.storage);
+  const { isLoading } = useTypedSelector((state) => state.storage);
   const { isInfo, isAside } = useTypedSelector((state) => state.modals);
   const [isOpenMenu, setIsOpenMenu] = useState(true);
   const [isContextMenu, setIsContextMenu] = useState(false);
@@ -98,8 +98,8 @@ export const StoragePageLayout: FC = () => {
   }, []);
 
   useEffect(() => {
-    setAppLoader(loading);
-  }, [loading]);
+    setAppLoader(isLoading);
+  }, [isLoading]);
 
   return (
     <div

@@ -11,6 +11,7 @@ export const StorageMyDrivePage: FC = () => {
   useEffect(() => {
     const newItems = allItems.filter((item) => !item.isTrash).filter((item) => !item.parent);
     dispatch(storageActions.setWorkplace(newItems));
+    dispatch(storageActions.setParents([]));
   }, [allItems]);
 
   return (

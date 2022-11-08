@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IStorageState, WorkplaceItem } from 'types';
+import { IFolder, IStorageState, WorkplaceItem } from 'types';
 import {
   changeAccessType,
   changeColor,
@@ -23,7 +23,7 @@ const initialState: IStorageState = {
   user: '',
   diskSpace: 0,
   usedSpace: 0,
-  loading: true,
+  isLoading: true,
 };
 
 export const storageSlice = createSlice({
@@ -45,6 +45,10 @@ export const storageSlice = createSlice({
 
     setWorkplace: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
       state.workplaceItems = payload;
+    },
+
+    setParents: (state, { payload }: PayloadAction<IFolder[]>) => {
+      state.parents = payload;
     },
   },
 
@@ -140,7 +144,7 @@ export const storageSlice = createSlice({
         state.usedSpace += payload.folderSize;
       })
       .addCase(fetchStorage.pending, (state) => {
-        state.loading = true;
+        state.isLoading = true;
         state.id = '';
         state.name = '';
         state.user = '';
@@ -153,7 +157,7 @@ export const storageSlice = createSlice({
       .addCase(fetchStorage.fulfilled, (state, { payload }) => {
         const { id, name, user, diskSpace, usedSpace, folders, tracks, files, albums } = payload;
 
-        state.loading = false;
+        state.isLoading = false;
         state.id = id;
         state.name = name;
         state.user = user;
@@ -162,7 +166,7 @@ export const storageSlice = createSlice({
         state.allItems = [...folders, ...tracks, ...files, ...albums];
       })
       .addCase(fetchStorage.rejected, (state) => {
-        state.loading = false;
+        state.isLoading = false;
       });
   },
 });

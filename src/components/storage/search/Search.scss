@@ -6,4 +6,28 @@
   .input__textfild {
     border-radius: 50px;
   }
+
+  .popup-menu {
+    max-height: 400px;
+    overflow: auto;
+  }
+
+  &.show {
+    .input__textfild {
+      outline: 1px solid $colorBlue;
+    }
+  }
+
+  &__not-found {
+    display: flex;
+    align-items: center;
+    height: 40px;
+
+    .icon {
+      font-size: 1.5rem;
+      margin-left: 25px;
+      margin-right: 10px;
+      color: $colorDarkGrey3;
+    }
+  }
 }

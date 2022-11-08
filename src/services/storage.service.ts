@@ -57,4 +57,8 @@ export class StorageService {
   static async getChildrens(id: string): Promise<AxiosResponse<IChildrensData>> {
     return $api.get<IChildrensData>(`/api/storage/childrens/${id}`);
   }
+
+  static async searchItems(text: string): Promise<AxiosResponse<WorkplaceItem[]>> {
+    return $api.post<WorkplaceItem[]>('/api/storage/search/items', { text });
+  }
 }

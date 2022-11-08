@@ -16,5 +16,22 @@
   &__icon {
     font-size: 1.6rem;
     margin-right: 10px;
+    color: $colorDarkGrey3;
+
+    &.grey {
+      color: $colorDarkGrey3;
+    }
+
+    &.blue {
+      color: $colorBlue;
+    }
+
+    &.red {
+      color: $colorRed;
+    }
+
+    &.yellow {
+      color: $colorYellow;
+    }
   }
 }

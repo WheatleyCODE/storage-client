@@ -5,6 +5,7 @@ import './PopupMenuItem.scss';
 
 export interface PopupMenuItemProps {
   Icon?: IconType;
+  iconColor: string;
   title: string;
   path: string;
   onClose: () => void;
@@ -12,7 +13,7 @@ export interface PopupMenuItemProps {
 }
 
 export const PopupMenuItem: FC<PopupMenuItemProps> = memo((props) => {
-  const { title, path, onClose, Icon, onClick } = props;
+  const { title, path, onClose, Icon, onClick, iconColor } = props;
   const MemoIcon = Icon && memo(Icon);
 
   const onClickHandler = () => {
@@ -27,7 +28,7 @@ export const PopupMenuItem: FC<PopupMenuItemProps> = memo((props) => {
       to={path}
       className={`popup-menu-item ${MemoIcon ? 'icon' : ''}`}
     >
-      {MemoIcon && <MemoIcon className="popup-menu-item__icon" />}
+      {MemoIcon && <MemoIcon className={`popup-menu-item__icon ${iconColor}`} />}
       {title}
     </Link>
   );

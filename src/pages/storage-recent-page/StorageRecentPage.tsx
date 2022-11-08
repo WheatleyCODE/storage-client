@@ -11,6 +11,7 @@ export const StorageRecentPage: FC = () => {
   useEffect(() => {
     const newItems = [...allItems].sort((a, b) => b.openDate - a.openDate);
     dispatch(storageActions.setWorkplace(newItems));
+    dispatch(storageActions.setParents([]));
   }, [allItems]);
 
   return (

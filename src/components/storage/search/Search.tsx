@@ -1,21 +1,73 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useState, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useValidInput } from 'hooks';
-import { Input, Popup } from 'components';
+import { MdErrorOutline } from 'react-icons/md';
+import { StorageService } from 'services';
+import { useDebounce, useValidInput } from 'hooks';
+import { Input, Popup, PopupMenu } from 'components';
+import { getColorClassName, getWorkplaceIcon, getWorkplaceUrl } from 'utils';
+import {
+  POPUP_MENU_ITEM_HEIGHT,
+  POPUP_MENU_MAX_HEIGHT,
+  POPUP_MENU_PADDING,
+  POPUP_MENU_PADDING_SCROLL,
+} from 'consts';
+import { WorkplaceItem } from 'types';
 import './Search.scss';
 
 export const Search: FC = memo(() => {
+  const [show, setShow] = useState(false);
+  const [items, setItems] = useState<WorkplaceItem[]>([]);
   const search = useValidInput();
 
+  const searchReuest = async (text: string) => {
+    if (text) {
+      const { data } = await StorageService.searchItems(text);
+      setItems(data);
+    }
+  };
+
+  const openPopup = useCallback(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 0);
+  }, []);
+
+  const closePopup = useCallback(() => {
+    setShow(false);
+  }, []);
+
+  const debouncedRequest = useDebounce(searchReuest, 300);
+
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      search.onChange(e);
+      debouncedRequest(e.target.value);
+    },
+    [debouncedRequest, search]
+  );
+
+  const MemoIcon = memo(MdErrorOutline);
+
+  const menuItems = items.map((item) => ({
+    title: item.name,
+    Icon: getWorkplaceIcon(item),
+    path: getWorkplaceUrl(item),
+    iconColor: getColorClassName(item),
+  }));
+
+  const popupHeight = menuItems.length
+    ? menuItems.length * POPUP_MENU_ITEM_HEIGHT + POPUP_MENU_PADDING
+    : 70;
+
   return (
-    <div className="search">
+    <div className={`search ${show ? 'show' : ''}`}>
       <Input
         Icon={AiOutlineSearch}
         value={search.value}
         type="text"
         placeholder="Поиск..."
-        onChange={search.onChange}
+        onChange={onChange}
         onBlur={search.onBlur}
         onFocus={search.onFocus}
         isError={search.isError}
@@ -23,12 +75,26 @@ export const Search: FC = memo(() => {
         isActive={search.isActive}
         changeFocus={search.changeFocus}
         changeActive={search.changeActive}
+        onClick={openPopup}
       />
 
       <AnimatePresence>
-        {search.value && search.isFocus && (
-          <Popup onClose={() => {}} height={200}>
-            <h2>Hello!</h2>
+        {show && (
+          <Popup
+            onClose={closePopup}
+            height={
+              popupHeight > POPUP_MENU_MAX_HEIGHT
+                ? POPUP_MENU_MAX_HEIGHT + POPUP_MENU_PADDING_SCROLL
+                : popupHeight
+            }
+          >
+            <PopupMenu onClose={closePopup} items={menuItems} />
+            {!items.length && (
+              <div className="search__not-found">
+                <MemoIcon className="icon" />
+                Ничего не найдено
+              </div>
+            )}
           </Popup>
         )}
       </AnimatePresence>

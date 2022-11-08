@@ -7,6 +7,7 @@ export interface PopupMenuProps {
     title: string;
     path: string;
     Icon?: IconType;
+    iconColor?: string;
     onClick?: () => void;
   }[];
   onClose: () => void;
@@ -15,8 +16,9 @@ export interface PopupMenuProps {
 export const PopupMenu: FC<PopupMenuProps> = memo(({ items, onClose }) => {
   return (
     <div className="popup-menu">
-      {items.map(({ title, path, Icon, onClick }) => (
+      {items.map(({ title, path, Icon, onClick, iconColor = 'grey' }) => (
         <PopupMenuItem
+          iconColor={iconColor}
           onClick={onClick}
           Icon={Icon}
           onClose={onClose}

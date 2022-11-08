@@ -1,7 +1,8 @@
-import React, { FC, memo, useCallback, useMemo } from 'react';
+import React, { FC, memo, useCallback } from 'react';
 import { FcFolder } from 'react-icons/fc';
 import { HiChevronRight } from 'react-icons/hi';
-import { IFolder } from 'types';
+import { useNavigate } from 'react-router';
+import { IFolder, PathRoutes } from 'types';
 import { PathItem } from './path-item/PathItem';
 import { PathMore } from './path-more/PathMore';
 import './StoragePath.scss';
@@ -11,9 +12,12 @@ export interface StoragePathProps {
 }
 
 export const StoragePath: FC<StoragePathProps> = memo(({ parents }) => {
+  const navigate = useNavigate();
   const folders = parents.map((parent) => ({ title: parent.name, Icon: FcFolder }));
 
   const MemoIcon = memo(HiChevronRight);
+
+  const navigateToMyDrive = useCallback(() => navigate(PathRoutes.STORAGE_MY_DRIVE), []);
 
   const getDefaultPath = useCallback(() => {
     return folders.map(({ title }, i) => (
@@ -50,7 +54,9 @@ export const StoragePath: FC<StoragePathProps> = memo(({ parents }) => {
 
   return (
     <div className="storage-path">
-      <div className="storage-path__my-drive">Хранилище</div>
+      <div aria-hidden onClick={navigateToMyDrive} className="storage-path__my-drive">
+        Хранилище
+      </div>
       {pathItems}
     </div>
   );

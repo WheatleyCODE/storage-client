@@ -16,6 +16,7 @@ export const StorageSharedPage: FC = () => {
         !item.isTrash
     );
     dispatch(storageActions.setWorkplace(newItems));
+    dispatch(storageActions.setParents([]));
   }, [allItems]);
 
   return (
