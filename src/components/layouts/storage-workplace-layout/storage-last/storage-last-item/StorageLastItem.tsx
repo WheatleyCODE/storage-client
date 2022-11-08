@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react';
+import { useNavigate } from 'react-router';
 import { WorkplaceItem } from 'types';
-import { getColorClassName, getWorkplaceIcon } from 'utils';
+import { getColorClassName, getWorkplaceIcon, getWorkplaceUrl } from 'utils';
 import './StorageLastItem.scss';
 
 export interface IStorageLastItemProps {
@@ -12,10 +13,15 @@ export interface IStorageLastItemProps {
 
 export const StorageLastItem: FC<IStorageLastItemProps> = memo((props) => {
   const { item, changeActive, index, isActive } = props;
+  const navigate = useNavigate();
   const MemoIcon = memo(getWorkplaceIcon(item));
 
   const onClick = () => {
     changeActive(index);
+  };
+
+  const openWorkplaceItem = () => {
+    navigate(getWorkplaceUrl(item));
   };
 
   return (
@@ -23,6 +29,7 @@ export const StorageLastItem: FC<IStorageLastItemProps> = memo((props) => {
       aria-hidden
       onClick={onClick}
       onContextMenu={onClick}
+      onDoubleClick={openWorkplaceItem}
       className={`storage-last-item ${isActive ? 'active' : ''}`}
     >
       <div className={`storage-last-item__icon ${getColorClassName(item)}`}>

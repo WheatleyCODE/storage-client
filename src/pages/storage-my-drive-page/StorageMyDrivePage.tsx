@@ -9,7 +9,7 @@ export const StorageMyDrivePage: FC = () => {
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
-    const newItems = allItems.filter((item) => !item.isTrash);
+    const newItems = allItems.filter((item) => !item.isTrash).filter((item) => !item.parent);
     dispatch(storageActions.setWorkplace(newItems));
   }, [allItems]);
 

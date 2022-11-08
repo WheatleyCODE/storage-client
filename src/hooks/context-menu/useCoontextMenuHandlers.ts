@@ -3,6 +3,7 @@ import { useTypedSelector, useActions, useTypedDispatch } from 'hooks';
 import { useLocation, useNavigate } from 'react-router';
 import { modalsActions } from 'store';
 import { FolderColors, ModalsStateKeys } from 'types';
+import { getWorkplaceUrl } from 'utils';
 
 export const useContextMenuHandlers = () => {
   const { currentItems } = useTypedSelector((state) => state.storage);
@@ -26,6 +27,13 @@ export const useContextMenuHandlers = () => {
     return () => {
       dispatch(changeIsModal({ key, boolean: true }));
     };
+  };
+
+  const openWorkpaceItem = () => {
+    const item = currentItems[0];
+    if (!item) return;
+
+    navigate(getWorkplaceUrl(item));
   };
 
   const openIsInfo = () => {
@@ -57,5 +65,6 @@ export const useContextMenuHandlers = () => {
     changeIsTrashHandler,
     changeColorHandler,
     openIsInfo,
+    openWorkpaceItem,
   };
 };

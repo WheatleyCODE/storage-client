@@ -10,12 +10,14 @@ import {
   createFolder,
   deleteItems,
   fetchStorage,
+  getChildrens,
 } from './storage.actions';
 
 const initialState: IStorageState = {
   id: '',
   currentItems: [],
   workplaceItems: [],
+  parents: [],
   allItems: [],
   name: '',
   user: '',
@@ -48,6 +50,11 @@ export const storageSlice = createSlice({
 
   extraReducers(builder) {
     builder
+      .addCase(getChildrens.fulfilled, (state, { payload }) => {
+        state.currentItems = [];
+        state.parents = payload.parents;
+        state.workplaceItems = payload.childrens;
+      })
       .addCase(changeAccessType.fulfilled, (state, { payload }) => {
         const { id } = payload;
 
@@ -141,6 +148,7 @@ export const storageSlice = createSlice({
         state.usedSpace = 0;
         state.allItems = [];
         state.currentItems = [];
+        state.parents = [];
       })
       .addCase(fetchStorage.fulfilled, (state, { payload }) => {
         const { id, name, user, diskSpace, usedSpace, folders, tracks, files, albums } = payload;

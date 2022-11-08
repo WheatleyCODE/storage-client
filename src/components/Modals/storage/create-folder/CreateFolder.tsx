@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { MdFolder } from 'react-icons/md';
+import { useParams } from 'react-router';
 import { Confirm, Input } from 'components';
 import { useActions, useValidInput } from 'hooks';
 import { nameValidator } from 'helpers';
@@ -11,13 +12,16 @@ export interface ICreateFolderProps {
 
 export const CreateFolder: FC<ICreateFolderProps> = ({ onClose }) => {
   const nameInput = useValidInput([nameValidator]);
+  const params = useParams();
   const { createFolder } = useActions();
 
   const createFolderHandler = () => {
     if (nameInput.isError || !nameInput.value) return;
 
+    const { id } = params;
+
     onClose();
-    createFolder({ name: nameInput.value });
+    createFolder({ name: nameInput.value, parent: id });
   };
 
   return (

@@ -6,7 +6,7 @@ import {
   POPUP_MENU_ITEM_HEIGHT,
   POPUP_MENU_PADDING,
 } from 'consts';
-import { ICoords } from 'types';
+import { ICoords, WorkplaceItem } from 'types';
 
 export function getPercent(a: number, b: number): number {
   return Math.round(100 / (a / b));
@@ -83,4 +83,8 @@ export const getContextMenuHeight = (numbers: PopupNumbers): number => {
     brCount * POPUP_MENU_BR_HEIGHT +
     POPUP_MENU_PADDING
   );
+};
+
+export const getWorkplaceUrl = (item: WorkplaceItem): string => {
+  return `/storage/${item.type.toLocaleLowerCase()}s/${item.id}`;
 };

@@ -1,8 +1,10 @@
 import React, { FC, memo } from 'react';
+import { useNavigate } from 'react-router';
 import {
   calcAndFormatSize,
   getColorClassName,
   getWorkplaceIcon,
+  getWorkplaceUrl,
   transformAccess,
   transformDate,
 } from 'utils';
@@ -19,6 +21,7 @@ export interface IStorageWorkplaceItemProps {
 }
 export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const { item, isActive, changeActive, addActive, addActiveShift, index } = props;
+  const navigate = useNavigate();
 
   const MemoIcon = memo(getWorkplaceIcon(item));
 
@@ -42,10 +45,15 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     }
   };
 
+  const openWorkplaceItem = () => {
+    navigate(getWorkplaceUrl(item));
+  };
+
   return (
     <div
       aria-hidden
       onClick={onClick}
+      onDoubleClick={openWorkplaceItem}
       onContextMenu={onContextMenu}
       className={`storage-workplace-item ${isActive ? 'active' : ''}`}
     >

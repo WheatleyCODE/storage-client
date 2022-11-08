@@ -17,6 +17,7 @@ import {
   IStorageData,
   RestoreActionNames,
   WorkplaceItem,
+  IChildrensData,
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { IChangeAccessTypeRestore } from '../../types/notifier.interfaces';
@@ -249,3 +250,16 @@ export const changeAccessType = createAsyncThunk<
     return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
   }
 });
+
+export const getChildrens = createAsyncThunk<IChildrensData, string>(
+  'storage/getChildrens',
+  async (string, thunkAPI) => {
+    try {
+      const { data } = await StorageService.getChildrens(string);
+
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);

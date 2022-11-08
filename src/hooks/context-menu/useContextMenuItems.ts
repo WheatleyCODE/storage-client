@@ -41,7 +41,7 @@ export interface IWorkplaceCMI {
 }
 
 export const useContextMenuItems = () => {
-  const { getOpenModal, changeIsTrashHandler, changeColorHandler, openIsInfo } =
+  const { getOpenModal, changeIsTrashHandler, changeColorHandler, openIsInfo, openWorkpaceItem } =
     useContextMenuHandlers();
 
   const createCMI: IContextMenuItem[] = useMemo(
@@ -77,7 +77,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Открыть',
         Icon: MdOutlineOpenWith,
-        handler: getOpenModal('isSettings'),
+        handler: openWorkpaceItem,
         brBefore: true,
       },
       {

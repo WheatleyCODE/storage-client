@@ -1,28 +1,17 @@
 import React, { FC, memo, useCallback, useMemo } from 'react';
 import { FcFolder } from 'react-icons/fc';
 import { HiChevronRight } from 'react-icons/hi';
+import { IFolder } from 'types';
 import { PathItem } from './path-item/PathItem';
 import { PathMore } from './path-more/PathMore';
 import './StoragePath.scss';
 
-export const StoragePath: FC = memo(() => {
-  const folders = useMemo(
-    () => [
-      {
-        title: 'Новая папка',
-        Icon: FcFolder,
-      },
-      {
-        title: 'Лучшая папка',
-        Icon: FcFolder,
-      },
-      {
-        title: 'Старая папка',
-        Icon: FcFolder,
-      },
-    ],
-    []
-  );
+export interface StoragePathProps {
+  parents: IFolder[];
+}
+
+export const StoragePath: FC<StoragePathProps> = memo(({ parents }) => {
+  const folders = parents.map((parent) => ({ title: parent.name, Icon: FcFolder }));
 
   const MemoIcon = memo(HiChevronRight);
 

@@ -1,4 +1,5 @@
 import {
+  StorageFoldersPage,
   StorageMyDrivePage,
   StorageRecentPage,
   StorageSharedPage,
@@ -11,26 +12,25 @@ export const authRoutes = [
   {
     path: PathRoutes.STORAGE_MY_DRIVE,
     Page: StorageMyDrivePage,
-    childs: [],
   },
   {
     path: PathRoutes.STORAGE_SHARED,
     Page: StorageSharedPage,
-    childs: [],
   },
   {
     path: PathRoutes.STORAGE_RECENT,
     Page: StorageRecentPage,
-    childs: [],
   },
   {
     path: PathRoutes.STORAGE_STARRED,
     Page: StorageStarredPage,
-    childs: [],
   },
   {
     path: PathRoutes.STORAGE_TRASH,
     Page: StorageTrashPage,
-    childs: [],
+  },
+  {
+    path: PathRoutes.STORAGE_FOLDERS,
+    Page: StorageFoldersPage,
   },
 ];

@@ -32,12 +32,18 @@ export interface IStorageState {
   id: string;
   currentItems: WorkplaceItem[];
   workplaceItems: WorkplaceItem[];
+  parents: IFolder[];
   allItems: WorkplaceItem[];
   name: string;
   user: string;
   diskSpace: number;
   usedSpace: number;
   loading: boolean;
+}
+
+export interface IChildrensData {
+  childrens: WorkplaceItem[];
+  parents: IFolder[];
 }
 
 export type WorkplaceItem = IFolder | IFile | IAlbum | ITrack;

@@ -7,3 +7,4 @@ export { StorageSharedPage } from './storage-shared-page/StorageSharedPage';
 export { StorageRecentPage } from './storage-recent-page/StorageRecentPage';
 export { StorageStarredPage } from './storage-starred-page/StorageStarredPage';
 export { StorageTrashPage } from './storage-trash-page/StorageTrashPage';
+export { StorageFoldersPage } from './storage-folders-page/StorageFoldersPage';

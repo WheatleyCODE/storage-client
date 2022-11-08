@@ -5,6 +5,7 @@ import {
   IChangeIsTrashFilds,
   IChangeNameFilds,
   IChangeParentFilds,
+  IChildrensData,
   ICreateFolderFilds,
   IDeleteItemsFilds,
   IFolder,
@@ -51,5 +52,9 @@ export class StorageService {
     filds: IChangeAccessTypeFilds
   ): Promise<AxiosResponse<WorkplaceItem>> {
     return $api.post<WorkplaceItem>('/api/storage/change/access', filds);
+  }
+
+  static async getChildrens(id: string): Promise<AxiosResponse<IChildrensData>> {
+    return $api.get<IChildrensData>(`/api/storage/childrens/${id}`);
   }
 }
