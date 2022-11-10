@@ -24,10 +24,6 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
     [workplaceItems]
   );
 
-  useEffect(() => {
-    setActiveItems([]);
-  }, [workplaceItems]);
-
   const resetActive = useCallback(() => {
     setTimeout(() => {
       dispatch(storageActions.setCurrent([]));
@@ -35,7 +31,6 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
 
     if (activeItems.length) {
       setActiveItems([]);
-      dispatch(storageActions.setCurrent([]));
     }
   }, [activeItems.length]);
 

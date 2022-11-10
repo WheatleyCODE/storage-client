@@ -1,32 +1,34 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { StorageWorkplace } from 'components';
 import { useActions, useTypedSelector } from 'hooks';
+import { StorageWorkplace } from 'components';
 import { PathRoutes } from 'types';
 import { checkRequestStatus } from 'utils';
 import './StorageFoldersPage.scss';
 
 export const StorageFoldersPage: FC = () => {
   const { getChildrens } = useActions();
-  const { workplaceItems } = useTypedSelector((state) => state.storage);
-  const params = useParams();
+  const { workplaceItems, allItems } = useTypedSelector((state) => state.storage);
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const fetchChildrens = async () => {
-    const { id } = params;
+  const fetchChildrens = useCallback(async (folderId?: string) => {
+    if (!folderId) return;
 
-    if (!id) return;
-
-    const data = await getChildrens(id);
+    const data = await getChildrens(folderId);
 
     if (!checkRequestStatus(data)) {
       navigate(PathRoutes.STORAGE_MY_DRIVE);
     }
-  };
+  }, []);
+
+  const items = useMemo(() => allItems, [allItems]);
 
   useEffect(() => {
-    fetchChildrens();
-  }, [params]);
+    if (items.length) {
+      fetchChildrens(id);
+    }
+  }, [fetchChildrens, id, items]);
 
   return (
     <div className="storage-folders-page">

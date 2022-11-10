@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Confirm, Input } from 'components';
 import { useActions, useValidInput } from 'hooks';
 import { nameValidator } from 'helpers';
-import { getWorkplaceIcon } from 'utils';
+import { getColorClassName, getWorkplaceIcon } from 'utils';
 import { WorkplaceItem } from 'types';
 import './RenameItem.scss';
 
@@ -26,7 +26,7 @@ export const RenameItem: FC<IRenameItemProps> = ({ currentItems, onClose }) => {
 
   return (
     <Confirm upproveText="Переименовать" onClose={onClose} onUpprove={renameHandler}>
-      <div className="rename-item">
+      <div className={`rename-item ${getColorClassName(item)}`}>
         <h1 className="rename-item__title">Переименовать</h1>
 
         <Input

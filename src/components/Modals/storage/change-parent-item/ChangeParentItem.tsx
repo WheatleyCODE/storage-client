@@ -34,6 +34,8 @@ export const ChangeParentItem: FC<IChangeParentItem> = ({ currentItems, onClose,
       prevParent: parent,
       isCanRestore: true,
     });
+
+    onClose();
   }, [activeIndex, currentItems, folders]);
 
   return (

@@ -24,22 +24,15 @@ export const StorageLast: FC<IStorageLastProps> = ({ lastItems }) => {
   const changeActive = useCallback(
     (i: number) => {
       setTimeout(() => {
-        dispatch(storageActions.setCurrent([lastItems[i]]));
         setActiveItems([i]);
+        dispatch(storageActions.setCurrent([lastItems[i]]));
       }, 1);
     },
     [lastItems]
   );
 
-  useEffect(() => {
-    setActiveItems([]);
-  }, [lastItems]);
-
   const resetActive = useCallback(() => {
-    if (activeItems.length) {
-      setActiveItems([]);
-      dispatch(storageActions.setCurrent([]));
-    }
+    setActiveItems([]);
   }, [activeItems.length]);
 
   useClickOutside(ref, resetActive, ['click', 'contextmenu']);

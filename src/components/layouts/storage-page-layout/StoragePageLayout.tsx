@@ -34,10 +34,9 @@ export const StoragePageLayout: FC = () => {
     async (e: React.MouseEvent<HTMLDivElement>) => {
       e.preventDefault();
 
-      if (isContextMenu) {
-        setIsContextMenu(false);
-        await sleep(150);
-      }
+      if (isContextMenu) setIsContextMenu(false);
+
+      await sleep(120);
 
       setTimeout(() => {
         setCoords(getContextMenuCoords(e));

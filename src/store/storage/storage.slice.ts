@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IFolder, IStorageState, WorkplaceItem } from 'types';
 import {
-  changeAccessType,
-  changeColor,
-  changeIsTrash,
-  changeName,
-  changeParent,
   createAccessLink,
   createFolder,
   deleteItems,
@@ -50,82 +45,94 @@ export const storageSlice = createSlice({
     setParents: (state, { payload }: PayloadAction<IFolder[]>) => {
       state.parents = payload;
     },
+
+    setItem: (state, { payload }: PayloadAction<WorkplaceItem>) => {
+      const { id } = payload;
+
+      state.parents = state.parents.map((item) => {
+        if (item.id === id) {
+          return payload as IFolder;
+        }
+
+        return item;
+      });
+
+      state.workplaceItems = state.workplaceItems.map((item) => {
+        if (item.id === id) {
+          return payload;
+        }
+
+        return item;
+      });
+
+      state.allItems = state.allItems.map((item) => {
+        if (item.id === id) {
+          return payload;
+        }
+
+        return item;
+      });
+    },
+
+    setItems: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
+      const types = payload.map((item) => item.type);
+
+      state.parents = state.parents.map((item) => {
+        if (types.includes(item.type)) {
+          return (payload.find((itm) => itm.id === item.id) as IFolder) || item;
+        }
+
+        return item;
+      });
+
+      state.workplaceItems = state.workplaceItems.map((item) => {
+        if (types.includes(item.type)) {
+          return payload.find((itm) => itm.id === item.id) || item;
+        }
+
+        return item;
+      });
+
+      state.allItems = state.allItems.map((item) => {
+        if (types.includes(item.type)) {
+          return payload.find((itm) => itm.id === item.id) || item;
+        }
+
+        return item;
+      });
+    },
   },
 
   extraReducers(builder) {
     builder
       .addCase(getChildrens.fulfilled, (state, { payload }) => {
-        state.currentItems = [];
         state.parents = payload.parents;
-        state.workplaceItems = payload.childrens;
-      })
-      .addCase(changeAccessType.fulfilled, (state, { payload }) => {
-        const { id } = payload;
-
-        state.currentItems = [];
-        state.allItems = state.allItems.map((item) => {
-          if (item.id === id) {
-            return payload;
-          }
-
-          return item;
-        });
+        state.workplaceItems = payload.childrens.filter((item) => !item.isTrash);
       })
       .addCase(createAccessLink.fulfilled, (state, { payload }) => {
         const { id } = payload;
 
         state.currentItems = [payload];
-        state.allItems = state.allItems.map((item) => {
+
+        state.parents = state.parents.map((item) => {
+          if (item.id === id) {
+            return payload as IFolder;
+          }
+
+          return item;
+        });
+
+        state.workplaceItems = state.workplaceItems.map((item) => {
           if (item.id === id) {
             return payload;
           }
 
           return item;
         });
-      })
-      .addCase(changeParent.fulfilled, (state, { payload }) => {
-        const types = payload.map((item) => item.type);
 
-        state.currentItems = [];
-        state.allItems = state.allItems.map((item) => {
-          if (types.includes(item.type)) {
-            return payload.find((itm) => itm.id === item.id) || item;
-          }
-
-          return item;
-        });
-      })
-      .addCase(changeName.fulfilled, (state, { payload }) => {
-        const { id } = payload;
-
-        state.currentItems = [];
         state.allItems = state.allItems.map((item) => {
           if (item.id === id) {
             return payload;
-          }
-
-          return item;
-        });
-      })
-      .addCase(changeColor.fulfilled, (state, { payload }) => {
-        const types = payload.map((item) => item.type);
-
-        state.currentItems = [];
-        state.allItems = state.allItems.map((item) => {
-          if (types.includes(item.type)) {
-            return payload.find((itm) => itm.id === item.id) || item;
-          }
-
-          return item;
-        });
-      })
-      .addCase(changeIsTrash.fulfilled, (state, { payload }) => {
-        const types = payload.map((item) => item.type);
-
-        state.currentItems = [];
-        state.allItems = state.allItems.map((item) => {
-          if (types.includes(item.type)) {
-            return payload.find((itm) => itm.id === item.id) || item;
           }
 
           return item;

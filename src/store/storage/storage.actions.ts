@@ -20,6 +20,7 @@ import {
   IChildrensData,
 } from 'types';
 import { getActionMessage } from 'helpers';
+import { storageActions as SA } from 'store';
 import { IChangeAccessTypeRestore } from '../../types/notifier.interfaces';
 
 export const fetchStorage = createAsyncThunk<IStorageData>(
@@ -70,19 +71,20 @@ export const changeIsTrash = createAsyncThunk<
           text: 'Действие отменено',
         })
       );
-
-      return data;
     }
 
-    thunkAPI.dispatch(
-      getActionMessage({
-        color: 'default',
-        text: createChangeIsTrashMessage(filds),
-        restoreActionName: RestoreActionNames.CHANGE_IS_THASH,
-        restoreParams: { ...filds, isTrash: prevIsTrash, isCanRestore: false },
-      })
-    );
+    if (isCanRestore) {
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: createChangeIsTrashMessage(filds),
+          restoreActionName: RestoreActionNames.CHANGE_IS_THASH,
+          restoreParams: { ...filds, isTrash: prevIsTrash, isCanRestore: false },
+        })
+      );
+    }
 
+    thunkAPI.dispatch(SA.setItems(data));
     return data;
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -122,6 +124,7 @@ export const changeColor = createAsyncThunk<IFolder[], IChangeColorFilds>(
         })
       );
 
+      thunkAPI.dispatch(SA.setItems(data));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -143,19 +146,20 @@ export const changeName = createAsyncThunk<WorkplaceItem, IChangeNameFilds & ICh
             text: 'Переименование отменено',
           })
         );
-
-        return data;
       }
 
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Имя изменено',
-          restoreActionName: RestoreActionNames.CHANGE_NAME,
-          restoreParams: { ...filds, name: prevName, isCanRestore: false },
-        })
-      );
+      if (isCanRestore) {
+        thunkAPI.dispatch(
+          getActionMessage({
+            color: 'default',
+            text: 'Имя изменено',
+            restoreActionName: RestoreActionNames.CHANGE_NAME,
+            restoreParams: { ...filds, name: prevName, isCanRestore: false },
+          })
+        );
+      }
 
+      thunkAPI.dispatch(SA.setItem(data));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -178,19 +182,20 @@ export const changeParent = createAsyncThunk<
           text: 'Перемещение отменено',
         })
       );
-
-      return data;
     }
 
-    thunkAPI.dispatch(
-      getActionMessage({
-        color: 'default',
-        text: 'Перемещение',
-        restoreActionName: RestoreActionNames.CHANGE_PARENT,
-        restoreParams: { ...filds, parent: prevParent, isCanRestore: false },
-      })
-    );
+    if (isCanRestore) {
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Перемещение',
+          restoreActionName: RestoreActionNames.CHANGE_PARENT,
+          restoreParams: { ...filds, parent: prevParent, isCanRestore: false },
+        })
+      );
+    }
 
+    thunkAPI.dispatch(SA.setItems(data));
     return data;
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -232,19 +237,20 @@ export const changeAccessType = createAsyncThunk<
           text: 'Изменение типа доступа отменено',
         })
       );
-
-      return data;
     }
 
-    thunkAPI.dispatch(
-      getActionMessage({
-        color: 'default',
-        text: 'Тип доступа изменен',
-        restoreActionName: RestoreActionNames.CHANGE_ACCESS_TYPE,
-        restoreParams: { ...filds, accessType: prevAccessType, isCanRestore: false },
-      })
-    );
+    if (isCanRestore) {
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Тип доступа изменен',
+          restoreActionName: RestoreActionNames.CHANGE_ACCESS_TYPE,
+          restoreParams: { ...filds, accessType: prevAccessType, isCanRestore: false },
+        })
+      );
+    }
 
+    thunkAPI.dispatch(SA.setItem(data));
     return data;
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');

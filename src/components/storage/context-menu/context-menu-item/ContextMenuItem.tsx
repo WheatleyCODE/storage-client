@@ -1,8 +1,8 @@
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { IconType } from 'react-icons';
 import { HiChevronRight } from 'react-icons/hi';
-import { IContextOptions } from 'hooks';
+import { IContextOptions, useDelayHover } from 'hooks';
 import { Popup } from 'components';
 import { POPUP_MENU_ITEM_HEIGHT, POPUP_MENU_PADDING } from 'consts';
 import { ContextMenuPopup } from './context-menu-popup/ContextMenuPopup';
@@ -19,7 +19,7 @@ export interface IContextMenuItemProps {
 
 export const ContextMenuItem: FC<IContextMenuItemProps> = (props) => {
   const { Icon, title, onClose, handler, options, side } = props;
-  const [show, setShow] = useState(false);
+  const { onMouseEnter, onMouseLeave, onMouseMove, isShow } = useDelayHover();
   const MemoIcon = memo(Icon);
   const MemoChevron = memo(HiChevronRight);
 
@@ -32,8 +32,9 @@ export const ContextMenuItem: FC<IContextMenuItemProps> = (props) => {
 
   return (
     <div
-      onMouseEnter={options && (() => setShow(true))}
-      onMouseLeave={options && (() => setShow(false))}
+      onMouseEnter={options && onMouseEnter}
+      onMouseLeave={options && onMouseLeave}
+      onMouseMove={options && onMouseMove}
       aria-hidden
       onClick={onClick}
       className={`context-menu-item ${side}`}
@@ -48,7 +49,7 @@ export const ContextMenuItem: FC<IContextMenuItemProps> = (props) => {
       )}
 
       <AnimatePresence>
-        {options && show && (
+        {options && isShow && (
           <Popup onClose={onClose} height={POPUP_MENU_ITEM_HEIGHT + POPUP_MENU_PADDING}>
             <ContextMenuPopup onClose={onClose} options={options} />
           </Popup>
