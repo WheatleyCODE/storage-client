@@ -26,7 +26,7 @@ export const StorageLast: FC<IStorageLastProps> = ({ lastItems }) => {
       setTimeout(() => {
         dispatch(storageActions.setCurrent([lastItems[i]]));
         setActiveItems([i]);
-      }, 0);
+      }, 1);
     },
     [lastItems]
   );

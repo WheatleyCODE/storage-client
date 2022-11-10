@@ -61,18 +61,18 @@ export const useContextMenuItems = () => {
         title: 'Создать трек',
         Icon: MdAudiotrack,
         handler: getOpenModal('isCreateTrack'),
+        brBefore: true,
       },
       {
         title: 'Загрузить фалы',
         Icon: MdUploadFile,
         handler: getOpenModal('isUploadFiles'),
-        brAfter: true,
       },
     ],
     []
   );
 
-  const defaultCMI: IContextMenuItem[] = useMemo(
+  const openCMI: IContextMenuItem[] = useMemo(
     () => [
       {
         title: 'Открыть',
@@ -80,6 +80,18 @@ export const useContextMenuItems = () => {
         handler: openWorkpaceItem,
         brBefore: true,
       },
+    ],
+    []
+  );
+
+  const defaultCMI: IContextMenuItem[] = useMemo(
+    () => [
+      // {
+      //   title: 'Открыть',
+      //   Icon: MdOutlineOpenWith,
+      //   handler: openWorkpaceItem,
+      //   brBefore: true,
+      // },
       {
         title: 'Изменить доступ',
         Icon: HiOutlineUserAdd,
@@ -160,7 +172,6 @@ export const useContextMenuItems = () => {
         {
           title: 'Изменить цвет',
           Icon: MdOutlinePalette,
-          // handler: () => {},
           options: [
             {
               color: FolderColors.GREY,
@@ -231,7 +242,7 @@ export const useContextMenuItems = () => {
         },
       ],
     }),
-    []
+    [changeColorHandler]
   );
 
   const workplaceMoreCMI: IWorkplaceCMI = useMemo(
@@ -295,7 +306,7 @@ export const useContextMenuItems = () => {
         },
       ],
     }),
-    []
+    [changeColorHandler]
   );
 
   const defaultMoreCMI: IContextMenuItem[] = useMemo(
@@ -324,6 +335,7 @@ export const useContextMenuItems = () => {
     defaultCMI,
     trashCMI,
     deleteCMI,
+    openCMI,
     copyCMI,
     workplaceCMI,
     workplaceMoreCMI,

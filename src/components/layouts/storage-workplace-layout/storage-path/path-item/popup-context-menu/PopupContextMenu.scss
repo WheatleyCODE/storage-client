@@ -1,0 +1,17 @@
+@import 'styles/templates.scss';
+
+.popup-context-menu {
+  color: $colorBlack;
+  font-size: 1rem;
+
+  &__br {
+    border-bottom: $storageBorder;
+    margin: 5px 0;
+  }
+
+  .context-menu-item.right {
+    .popup {
+      left: inherit;
+    }
+  }
+}

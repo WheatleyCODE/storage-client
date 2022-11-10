@@ -18,7 +18,7 @@ export interface IUseContextMenu {
 // Todo одновременно с фиксом методов сервера пофиксить и генерацию с запросами
 // * (-_-)... ♪
 
-export const useContextMenu = (): IUseContextMenu => {
+export const useContextMenu = (isPopup = false): IUseContextMenu => {
   const { pathname } = useLocation();
   const { currentItems } = useTypedSelector((state) => state.storage);
   const types = currentItems.map((item) => item.type);
@@ -28,6 +28,7 @@ export const useContextMenu = (): IUseContextMenu => {
     defaultCMI,
     trashCMI,
     deleteCMI,
+    openCMI,
     copyCMI,
     workplaceCMI,
     workplaceMoreCMI,
@@ -36,11 +37,24 @@ export const useContextMenu = (): IUseContextMenu => {
 
   const CMI = useMemo(() => {
     if (types.length === 1) {
-      return [...defaultCMI, ...workplaceCMI[types[0]], ...deleteCMI];
+      let create: IContextMenuItem[] = [];
+
+      if (isPopup) {
+        createCMI[createCMI.length - 1].brBefore = true;
+        create = createCMI;
+      }
+
+      return [
+        ...create,
+        ...(isPopup ? [] : openCMI),
+        ...defaultCMI,
+        ...workplaceCMI[types[0]],
+        ...deleteCMI,
+      ];
     }
 
     return [...createCMI];
-  }, [createCMI, defaultCMI, deleteCMI, currentItems, workplaceCMI]);
+  }, [createCMI, defaultCMI, deleteCMI, currentItems, workplaceCMI, isPopup]);
 
   const moreCMI = useMemo(() => {
     if (typesArr.length === 1) {

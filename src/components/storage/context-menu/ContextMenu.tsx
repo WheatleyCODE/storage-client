@@ -52,7 +52,7 @@ export const ContextMenu: FC<IContextMenuProps> = memo(({ coords, onClose }) => 
             <div key={title}>
               {brAfter && <div className="context-menu__br" />}
               <ContextMenuItem
-                side={left ? 'left' : 'right'}
+                side={!left ? 'left' : 'right'}
                 options={options}
                 handler={handler}
                 onClose={onClose}

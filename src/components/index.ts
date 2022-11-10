@@ -51,6 +51,7 @@ export { Calendar } from './storage/calendar/Calendar';
 export { Keep } from './storage/keep/Keep';
 export { Todo } from './storage/todo/Todo';
 export { ContextMenu } from './storage/context-menu/ContextMenu';
+export { ContextMenuItem } from './storage/context-menu/context-menu-item/ContextMenuItem';
 export { StorageWorkplace } from './storage/storage-workplace/StorageWorkplace';
 
 export { Notifier } from './notifier/Notifier';

@@ -1,6 +1,7 @@
 @import 'styles/templates.scss';
 
 .path-item {
+  position: relative;
   @include button-el-active;
   display: flex;
   align-items: center;
@@ -20,11 +21,19 @@
     margin-left: 5px;
     color: $colorDarkGrey1;
   }
+
+  .popup {
+    top: 38px;
+    left: 0;
+    right: auto;
+    width: 320px;
+    overflow: inherit;
+  }
 }
 
 .path-item.last {
-   .path-item__icon {
-      display: flex;
+  .path-item__icon {
+    display: flex;
   }
 }
 

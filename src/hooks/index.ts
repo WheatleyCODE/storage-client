@@ -8,4 +8,4 @@ export { useContextMenuItems } from './context-menu/useContextMenuItems';
 export { useResizeObserver } from './useResizeObserver';
 export { useDebounce } from './useDebounce';
 
-export type { IContextOptions } from './context-menu/useContextMenuItems';
+export type { IContextOptions, IContextMenuItem } from './context-menu/useContextMenuItems';

@@ -4,14 +4,19 @@ import { IconType } from 'react-icons';
 import { BsThreeDots } from 'react-icons/bs';
 import { Popup, PopupMenu } from 'components';
 import { POPUP_MENU_ITEM_HEIGHT, POPUP_MENU_PADDING } from 'consts';
-import { PathRoutes } from 'types';
 import './PathMore.scss';
 
 export interface PathMoreProps {
-  folders: { title: string; Icon: IconType }[];
+  items: {
+    title: string;
+    path: string;
+    Icon?: IconType;
+    iconColor?: string;
+    onClick?: () => void;
+  }[];
 }
 
-export const PathMore: FC<PathMoreProps> = memo(({ folders }) => {
+export const PathMore: FC<PathMoreProps> = memo(({ items }) => {
   const [show, setShow] = useState(false);
 
   const openPopup = useCallback(() => {
@@ -24,7 +29,6 @@ export const PathMore: FC<PathMoreProps> = memo(({ folders }) => {
   const closePopup = useCallback(() => setShow(false), []);
 
   const MemoIcon = memo(BsThreeDots);
-  const items = folders.map((folder) => ({ ...folder, path: `${PathRoutes.STORAGE_MY_DRIVE}` }));
 
   return (
     <div aria-hidden onClick={openPopup} className={`path-more ${show ? 'active' : ''}`}>
@@ -33,7 +37,7 @@ export const PathMore: FC<PathMoreProps> = memo(({ folders }) => {
         {show && (
           <Popup
             onClose={closePopup}
-            height={folders.length * POPUP_MENU_ITEM_HEIGHT + POPUP_MENU_PADDING}
+            height={items.length * POPUP_MENU_ITEM_HEIGHT + POPUP_MENU_PADDING}
           >
             <PopupMenu items={items} onClose={closePopup} />
           </Popup>
