@@ -18,6 +18,8 @@ import {
   RestoreActionNames,
   WorkplaceItem,
   IChildrensData,
+  ITrack,
+  ICreateTrackFilds,
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { storageActions as SA } from 'store';
@@ -46,6 +48,26 @@ export const createFolder = createAsyncThunk<IFolder, ICreateFolderFilds>(
         getActionMessage({
           color: 'default',
           text: `Создана новая папка: ${data.name}`,
+        })
+      );
+
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const createTrack = createAsyncThunk<ITrack, ICreateTrackFilds>(
+  'storage/createTrack',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await StorageService.createTrack(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: `Создан новый трек: ${data.name}`,
         })
       );
 

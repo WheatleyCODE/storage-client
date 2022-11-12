@@ -1,9 +1,12 @@
 /* eslint-disable no-return-assign */
 import React, { FC, useCallback, useState } from 'react';
+import { useLocation, useParams } from 'react-router';
 import { MdAudiotrack, MdPerson, MdShortText } from 'react-icons/md';
+import { useActions, useValidInput } from 'hooks';
 import { Input, Stepper, Step, Button, Textarea, FileUploader } from 'components';
-import { useValidInput } from 'hooks';
 import { nameValidator, nickValidator, textAreaValidator } from 'helpers';
+import { checkPathnameOnPathRoute } from 'utils';
+import { PathRoutes } from 'types';
 import './CreateTrack.scss';
 
 export interface ICreateTrackProps {
@@ -23,13 +26,59 @@ export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
   const authorInput = useValidInput([nickValidator]);
   const textInput = useValidInput([textAreaValidator]);
   const [activeStep, setActiveStep] = useState(0);
+  const { createTrack } = useActions();
+  const { id } = useParams();
+  const { pathname } = useLocation();
 
   const setImageHandler = useCallback((file: File) => setImage(file), []);
   const setAudioHandler = useCallback((file: File) => setAudio(file), []);
   const addStep = useCallback(() => setActiveStep((p) => (p += 1)), []);
   const subStep = useCallback(() => setActiveStep((p) => (p -= 1)), []);
 
-  const createTrack = useCallback(() => console.log('Создать трек'), []);
+  const createTrackHandler = () => {
+    if (!nameInput.value || nameInput.isError) return;
+    if (!authorInput.value || authorInput.isError) return;
+    if (!textInput.value || textInput.isError) return;
+    if (!audio || !image) return;
+
+    if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
+      createTrack({
+        name: nameInput.value,
+        author: authorInput.value,
+        text: textInput.value,
+        parent: id,
+        audio,
+        image,
+      });
+
+      onClose();
+      return;
+    }
+
+    if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_ALBUMS)) {
+      createTrack({
+        name: nameInput.value,
+        author: authorInput.value,
+        text: textInput.value,
+        album: id,
+        audio,
+        image,
+      });
+
+      onClose();
+      return;
+    }
+
+    createTrack({
+      name: nameInput.value,
+      author: authorInput.value,
+      text: textInput.value,
+      audio,
+      image,
+    });
+
+    onClose();
+  };
 
   return (
     <div className="create-track">
@@ -102,7 +151,7 @@ export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
         <Button disable={activeStep === 0} onClick={subStep} text="Назад" />
 
         {activeStep === stepTiles.length - 1 ? (
-          <Button color="blue" outline="fill" onClick={createTrack} text="Создать трек" />
+          <Button color="blue" outline="fill" onClick={createTrackHandler} text="Создать трек" />
         ) : (
           <Button color="blue" outline="fill" onClick={addStep} text="Вперёд" />
         )}

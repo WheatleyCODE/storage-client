@@ -7,10 +7,12 @@ import {
   IChangeParentFilds,
   IChildrensData,
   ICreateFolderFilds,
+  ICreateTrackFilds,
   IDeleteItemsFilds,
   IFolder,
   IItemFilds,
   IStorageData,
+  ITrack,
   WorkplaceItem,
 } from 'types';
 import { $api } from '../api';
@@ -22,6 +24,12 @@ export class StorageService {
 
   static async createFolder(filds: ICreateFolderFilds): Promise<AxiosResponse<IFolder>> {
     return $api.post<IFolder>('/api/storage/create/folder', filds);
+  }
+
+  static async createTrack(filds: ICreateTrackFilds): Promise<AxiosResponse<ITrack>> {
+    const formData = new FormData();
+    Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
+    return $api.post<ITrack>('/api/storage/create/track', formData);
   }
 
   static async changeIsTrash(filds: IChangeIsTrashFilds): Promise<AxiosResponse<WorkplaceItem[]>> {

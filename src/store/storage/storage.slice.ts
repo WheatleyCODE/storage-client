@@ -3,6 +3,7 @@ import { IFolder, IStorageState, WorkplaceItem } from 'types';
 import {
   createAccessLink,
   createFolder,
+  createTrack,
   deleteItems,
   fetchStorage,
   getChildrens,
@@ -149,6 +150,11 @@ export const storageSlice = createSlice({
       .addCase(createFolder.fulfilled, (state, { payload }) => {
         state.allItems = [...state.allItems, payload];
         state.usedSpace += payload.folderSize;
+      })
+      .addCase(createTrack.fulfilled, (state, { payload }) => {
+        const { imageSize, audioSize } = payload;
+        state.allItems = [...state.allItems, payload];
+        state.usedSpace += (imageSize || 0) + audioSize;
       })
       .addCase(fetchStorage.pending, (state) => {
         state.isLoading = true;
