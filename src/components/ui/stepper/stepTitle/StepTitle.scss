@@ -1,0 +1,48 @@
+@import 'styles/templates.scss';
+
+.step-title {
+  @include flex;
+  position: relative;
+  z-index: 15;
+  flex-direction: column;
+  flex: 0 0 auto;
+
+  &__icon {
+    @include flex;
+    transition: all 0.2s;
+    background-color: $colorLightGrey4;
+    border: 1px solid $colorLightGrey3;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 0.95rem;
+    color: $colorDarkGrey3;
+
+    .icon {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__title {
+    margin-top: 13px;
+    font-size: 0.95rem;
+    color: $colorDarkGrey3;
+  }
+
+  &.active {
+    .step-title__icon {
+      background-color: $colorLightBlue2;
+      border: 1px solid $colorBlue;
+      color: $colorDarkBlue;
+      box-shadow: 0 0 0px 3px $colorWhite;
+    }
+  }
+
+  &.complete {
+    .step-title__icon {
+      background-color: $colorLightBlue2;
+      border: 1px solid $colorLightBlue1;
+      color: $colorDarkBlue;
+    }
+  }
+}

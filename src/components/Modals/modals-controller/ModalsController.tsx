@@ -74,7 +74,7 @@ export const ModalsController: FC = () => {
       {modals.isCreateTrack && (
         <Portal>
           <Backdrop onClose={getClose('isCreateTrack')}>
-            <Modal onClose={getClose('isCreateTrack')}>
+            <Modal className="create-track__modal" onClose={getClose('isCreateTrack')}>
               <CreateTrack onClose={getClose('isCreateTrack')} />
             </Modal>
           </Backdrop>

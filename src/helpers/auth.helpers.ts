@@ -130,6 +130,18 @@ export const nameValidator = getValidator({
   },
 });
 
+export const textAreaValidator = getValidator({
+  noEmpty: {
+    value: true,
+    textError: 'Поле не может быть пустым',
+  },
+
+  maxLength: {
+    value: 50,
+    textError: 'Текс должнен быть меньше 50 символов',
+  },
+});
+
 export const nickValidator = getValidator({
   minLength: {
     value: 6,

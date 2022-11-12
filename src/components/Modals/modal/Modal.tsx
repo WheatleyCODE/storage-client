@@ -6,9 +6,10 @@ import './Modal.scss';
 export interface IModalProps {
   children: React.ReactNode;
   onClose: () => void;
+  className?: string;
 }
 
-export const Modal: FC<IModalProps> = ({ children, onClose }) => {
+export const Modal: FC<IModalProps> = ({ children, onClose, className }) => {
   useEffect(() => {
     const { platform } = window.navigator;
 
@@ -34,7 +35,7 @@ export const Modal: FC<IModalProps> = ({ children, onClose }) => {
       transition={{ duration: 0.3 }}
       exit={{ translateY: -30, opacity: 0 }}
       onClick={stopPropagation}
-      className="modal"
+      className={`modal ${className}`}
     >
       <div aria-hidden onClick={onClose} className="modal__close-button">
         <MemoIcon />

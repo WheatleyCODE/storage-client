@@ -12,6 +12,10 @@ export { Input } from './ui/input/Input';
 export { Link } from './ui/link/Link';
 export { Checkbox } from './ui/checkbox/Checkbox';
 export { Select } from './ui/select/Select';
+export { Stepper } from './ui/stepper/Stepper';
+export { Step } from './ui/stepper/step/Step';
+export { Textarea } from './ui/textarea/Textarea';
+export { FileUploader } from './ui/file-uploader/FileUploader';
 
 export { Hills } from './design/hills/Hills';
 export { Mountains } from './design/mountains/Mountains';

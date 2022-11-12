@@ -1,0 +1,51 @@
+@import 'styles/templates.scss';
+
+.file-uploader {
+  display: flex;
+  align-items: center;
+  height: 40px;
+
+  &__textfild {
+    display: none;
+  }
+
+  &__icon {
+    @include flex;
+    position: absolute;
+    right: 15px;
+    font-size: 1.3rem;
+    color: $colorDarkBlue;
+  }
+
+  &__label {
+    @include flex;
+    @include button-el;
+    position: relative;
+    padding: 5px 10px;
+    height: 100%;
+    border-radius: 3px;
+    border: 1px dashed $colorLightGrey;
+
+    &.icon {
+      padding-right: 40px;
+      border: 1px dashed $colorBlue;
+      background-color: $colorLightBlue2;
+    }
+  }
+
+  &__file-info {
+    flex: 1 1 auto;
+    justify-content: space-between;
+    display: flex;
+    padding-right: 30px;
+  }
+
+  &__name, &__size {
+    font-size: 1rem;
+    color: $colorDarkGrey3;
+  }
+
+  &__name {
+    margin-left: 40px;
+  }
+}

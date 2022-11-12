@@ -1,11 +1,66 @@
 @import 'styles/templates.scss';
 
 .create-track {
-  height: 130px;
-
   &__title {
     font-size: 1.5rem;
     margin: 0;
     margin-bottom: 30px;
+  }
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__step {
+    padding-top: 25px;
+    height: 150px;
+
+    .input, .file-uploader {
+      margin-bottom: 25px;
+    }
+
+    .file-uploader__label {
+      width: 230px;
+    }
+    
+  }
+
+  &__buttons {
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .button {
+      height: 43px;
+      width: 150px;
+    }
+  }
+
+  &__modal {
+    width: 600px;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .create-track {
+    &__modal {
+      height: 100%;
+      border-radius: 0px;
+
+      .modal__close-button {
+        @include button-el;
+        border-radius: 50%;
+        top: 15px;
+        right: 15px;
+        color: $colorBlack;
+        font-size: 1.6rem;
+      }
+  
+      .modal__close-button:hover {
+        transform: none;
+      }
+    }
   }
 }
