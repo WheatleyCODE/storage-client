@@ -1,8 +1,10 @@
 @import 'styles/templates.scss';
 
 .rename-item {
+  width: 380px;
+
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin: 0;
     margin-bottom: 30px;
   }
@@ -35,5 +37,11 @@
     .input__icon {
       color: $colorYellow;
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .rename-item {
+    width: 100%;
   }
 }

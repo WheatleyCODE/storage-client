@@ -25,9 +25,11 @@ export const DeleteItem: FC<IDeleteItem> = ({ currentItems, onClose }) => {
       <div className="delete-item">
         <h1 className="delete-item__title">Удалить</h1>
 
-        {currentItems.map((item) => (
-          <DeleteWorkplaceItem key={item.id} item={item} />
-        ))}
+        <div className="delete-item__items">
+          {currentItems.map((item) => (
+            <DeleteWorkplaceItem key={item.id} item={item} />
+          ))}
+        </div>
       </div>
     </Confirm>
   );

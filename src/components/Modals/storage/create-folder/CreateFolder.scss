@@ -1,9 +1,17 @@
 @import 'styles/templates.scss';
 
 .create-folder {
+  width: 380px;
+
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin: 0;
     margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .create-folder {
+    width: 100%;
   }
 }

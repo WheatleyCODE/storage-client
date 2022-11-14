@@ -5,6 +5,7 @@ import { MdAudiotrack, MdPerson, MdShortText } from 'react-icons/md';
 import { useActions, useValidInput } from 'hooks';
 import { Input, Stepper, Step, Button, Textarea, FileUploader } from 'components';
 import { nameValidator, nickValidator, textAreaValidator } from 'helpers';
+import { createTrackStepTitles } from 'consts';
 import { checkPathnameOnPathRoute } from 'utils';
 import { PathRoutes } from 'types';
 import './CreateTrack.scss';
@@ -12,12 +13,6 @@ import './CreateTrack.scss';
 export interface ICreateTrackProps {
   onClose: () => void;
 }
-
-const stepTiles = [
-  { title: 'Название и автор' },
-  { title: 'Текст трека' },
-  { title: 'Загрузка файлов' },
-];
 
 export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
   const [image, setImage] = useState<File | null>(null);
@@ -32,7 +27,23 @@ export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
 
   const setImageHandler = useCallback((file: File) => setImage(file), []);
   const setAudioHandler = useCallback((file: File) => setAudio(file), []);
-  const addStep = useCallback(() => setActiveStep((p) => (p += 1)), []);
+
+  const addStep = () => {
+    if (activeStep === 0) {
+      if (!nameInput.value || nameInput.isError) return;
+      if (!authorInput.value || authorInput.isError) return;
+      setActiveStep((p) => (p += 1));
+      return;
+    }
+
+    if (activeStep === 1) {
+      if (!textInput.value || textInput.isError) return;
+      setActiveStep((p) => (p += 1));
+      return;
+    }
+
+    setActiveStep((p) => (p += 1));
+  };
   const subStep = useCallback(() => setActiveStep((p) => (p -= 1)), []);
 
   const createTrackHandler = () => {
@@ -84,7 +95,7 @@ export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
     <div className="create-track">
       <h1 className="create-track__title">Создание трека</h1>
 
-      <Stepper activeStep={activeStep} stepTitles={stepTiles}>
+      <Stepper activeStep={activeStep} stepTitles={createTrackStepTitles}>
         <Step className="create-track__step">
           <Input
             Icon={MdAudiotrack}
@@ -150,7 +161,7 @@ export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
       <div className="create-track__buttons">
         <Button disable={activeStep === 0} onClick={subStep} text="Назад" />
 
-        {activeStep === stepTiles.length - 1 ? (
+        {activeStep === createTrackStepTitles.length - 1 ? (
           <Button color="blue" outline="fill" onClick={createTrackHandler} text="Создать трек" />
         ) : (
           <Button color="blue" outline="fill" onClick={addStep} text="Вперёд" />

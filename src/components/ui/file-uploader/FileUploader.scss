@@ -49,3 +49,37 @@
     margin-left: 40px;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .file-uploader {
+    display: flex;
+
+    &__size {
+      display: none;
+    }
+
+    &__file-info {
+      padding-right: 0;
+    }
+
+    &__name {
+      margin-left: 0px;
+      width: 100%;
+      text-align: center;
+    }
+
+    &__label {
+      font-size: 0.9rem;
+
+      &.icon {
+        padding-right: 10px;
+        border: 1px dashed $colorBlue;
+        background-color: $colorLightBlue2;
+      }
+    }
+
+    &__icon {
+      display: none;
+    }
+  }
+}

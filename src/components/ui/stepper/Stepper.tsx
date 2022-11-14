@@ -25,7 +25,7 @@ export const Stepper: FC<IStepperProps> = memo((props) => {
 
       const widthArr = arrNodes.map((node) => node.offsetWidth);
       const widthItems = arrNodes.reduce((acc, node) => (acc += node.offsetWidth), 0);
-      const padding = (containerWidth - widthItems) / arrNodes.length;
+      const padding = (containerWidth - widthItems) / (arrNodes.length - 1);
 
       if (activeStep === 0) {
         setProgressWidth(widthArr[activeStep] / 2);
@@ -41,8 +41,10 @@ export const Stepper: FC<IStepperProps> = memo((props) => {
 
       for (let i = 0; i < activeStep; i += 1) {
         width += widthArr[i];
-        width += padding * 2.1;
+        width += padding;
       }
+
+      width += widthArr[activeStep] / 2;
 
       setProgressWidth(width);
     }

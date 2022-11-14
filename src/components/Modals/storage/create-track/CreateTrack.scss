@@ -2,7 +2,7 @@
 
 .create-track {
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin: 0;
     margin-bottom: 30px;
   }
@@ -43,24 +43,24 @@
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   .create-track {
-    &__modal {
-      height: 100%;
-      border-radius: 0px;
+    &__buttons {
+      .button {
+        width: auto;
+      }
+    }
 
-      .modal__close-button {
-        @include button-el;
-        border-radius: 50%;
-        top: 15px;
-        right: 15px;
-        color: $colorBlack;
-        font-size: 1.6rem;
+    .step-title__title {
+      width: 70px;
+      text-align: center;
+    }
+
+    &__step {
+      .file-uploader__label {
+        width: 164px;
       }
-  
-      .modal__close-button:hover {
-        transform: none;
-      }
+      
     }
   }
 }

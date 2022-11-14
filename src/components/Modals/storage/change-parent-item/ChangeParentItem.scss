@@ -1,8 +1,10 @@
 @import 'styles/templates.scss';
 
 .change-parent-item {
+  width: 440px;
+
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin: 0;
     margin-bottom: 30px;
   }
@@ -18,5 +20,11 @@
     color: $colorDarkGrey3;
     font-weight: normal;
     margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .change-parent-item {
+    width: 100%;
   }
 }

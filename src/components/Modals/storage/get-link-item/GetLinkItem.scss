@@ -1,8 +1,10 @@
 @import 'styles/templates.scss';
 
 .get-link-item {
+  width: 380px;
+
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin: 0;
     margin-bottom: 30px;
   }
@@ -14,5 +16,11 @@
     &.grey {
       color: $colorDarkGrey2;
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .get-link-item {
+    width: 100%;
   }
 }
