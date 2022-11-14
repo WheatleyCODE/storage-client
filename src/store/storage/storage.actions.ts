@@ -20,6 +20,8 @@ import {
   IChildrensData,
   ITrack,
   ICreateTrackFilds,
+  IAlbum,
+  ICreateAlbumFilds,
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { storageActions as SA } from 'store';
@@ -68,6 +70,26 @@ export const createTrack = createAsyncThunk<ITrack, ICreateTrackFilds>(
         getActionMessage({
           color: 'default',
           text: `Создан новый трек: ${data.name}`,
+        })
+      );
+
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const createAlbum = createAsyncThunk<IAlbum, ICreateAlbumFilds>(
+  'storage/createAlbum',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await StorageService.createAlbum(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: `Создан новый альбом: ${data.name}`,
         })
       );
 

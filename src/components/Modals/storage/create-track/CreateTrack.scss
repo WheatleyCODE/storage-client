@@ -33,7 +33,7 @@
 
     .button {
       height: 43px;
-      width: 150px;
+      min-width: 110px;
     }
   }
 
@@ -60,7 +60,6 @@
       .file-uploader__label {
         width: 164px;
       }
-      
     }
   }
 }

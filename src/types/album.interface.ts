@@ -20,3 +20,10 @@ export interface IAlbum {
   imageSize: number;
   tracks: any[];
 }
+
+export interface ICreateAlbumFilds {
+  readonly name: string;
+  readonly author: string;
+  readonly parent?: string;
+  readonly image: File;
+}

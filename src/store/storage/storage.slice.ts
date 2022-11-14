@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IFolder, IStorageState, WorkplaceItem } from 'types';
 import {
   createAccessLink,
+  createAlbum,
   createFolder,
   createTrack,
   deleteItems,
@@ -155,6 +156,11 @@ export const storageSlice = createSlice({
         const { imageSize, audioSize } = payload;
         state.allItems = [...state.allItems, payload];
         state.usedSpace += (imageSize || 0) + audioSize;
+      })
+      .addCase(createAlbum.fulfilled, (state, { payload }) => {
+        const { imageSize } = payload;
+        state.allItems = [...state.allItems, payload];
+        state.usedSpace += imageSize;
       })
       .addCase(fetchStorage.pending, (state) => {
         state.isLoading = true;

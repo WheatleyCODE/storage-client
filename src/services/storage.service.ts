@@ -1,11 +1,13 @@
 import { AxiosResponse } from 'axios';
 import {
+  IAlbum,
   IChangeAccessTypeFilds,
   IChangeColorFilds,
   IChangeIsTrashFilds,
   IChangeNameFilds,
   IChangeParentFilds,
   IChildrensData,
+  ICreateAlbumFilds,
   ICreateFolderFilds,
   ICreateTrackFilds,
   IDeleteItemsFilds,
@@ -30,6 +32,12 @@ export class StorageService {
     const formData = new FormData();
     Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
     return $api.post<ITrack>('/api/storage/create/track', formData);
+  }
+
+  static async createAlbum(filds: ICreateAlbumFilds): Promise<AxiosResponse<IAlbum>> {
+    const formData = new FormData();
+    Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
+    return $api.post<IAlbum>('/api/storage/create/album', formData);
   }
 
   static async changeIsTrash(filds: IChangeIsTrashFilds): Promise<AxiosResponse<WorkplaceItem[]>> {

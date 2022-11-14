@@ -1,9 +1,59 @@
 @import 'styles/templates.scss';
 
 .create-album {
+  width: 440px;
+
   &__title {
     font-size: 1.4rem;
     margin: 0;
     margin-bottom: 30px;
+  }
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__step {
+    padding-top: 25px;
+    height: 150px;
+
+    .input, .file-uploader {
+      margin-bottom: 25px;
+    }
+
+    .file-uploader__label {
+      width: 230px;
+    }
+  }
+
+  .step-title {
+    width: 40%;
+  }
+
+  &__buttons {
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .button {
+      height: 43px;
+      min-width: 110px;
+    }
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .create-album {
+    width: 100%;
+
+    .step-title {
+      width: inherit;
+    }
+
+    .step-title__title {
+      text-align: center;
+    }
   }
 }
