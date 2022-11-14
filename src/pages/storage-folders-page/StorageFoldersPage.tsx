@@ -8,7 +8,9 @@ import './StorageFoldersPage.scss';
 
 export const StorageFoldersPage: FC = () => {
   const { getChildrens } = useActions();
-  const { workplaceItems, allItems } = useTypedSelector((state) => state.storage);
+  const { workplaceItems, allItems, isWorkplaceLoading } = useTypedSelector(
+    (state) => state.storage
+  );
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -32,7 +34,7 @@ export const StorageFoldersPage: FC = () => {
 
   return (
     <div className="storage-folders-page">
-      <StorageWorkplace workplaceItems={workplaceItems} />
+      {!isWorkplaceLoading && <StorageWorkplace workplaceItems={workplaceItems} />}
     </div>
   );
 };

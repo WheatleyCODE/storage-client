@@ -1,4 +1,5 @@
 @import 'styles/templates.scss';
+@import 'styles/animations.scss';
 
 .storage-workplace-item {
   @include button-el;
@@ -9,6 +10,7 @@
   padding-left: 20px;
   padding-right: 10px;
   border-bottom: $storageBorder;
+  animation: defaultShow $animationDuration forwards;
 
   &__name, &__access, &__open-date, &__size {
     display: flex;

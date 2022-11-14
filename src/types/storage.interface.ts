@@ -39,6 +39,7 @@ export interface IStorageState {
   diskSpace: number;
   usedSpace: number;
   isLoading: boolean;
+  isWorkplaceLoading: boolean;
 }
 
 export interface IChildrensData {

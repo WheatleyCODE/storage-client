@@ -4,7 +4,7 @@
   &__img {
     @include flex;
     padding: 20px;
-    padding-bottom: 0;
+    padding-bottom: 10px;
     font-size: 8rem;
     border-top: $storageBorder;
     color: $colorDarkGrey2;
@@ -24,6 +24,22 @@
 
     &.yellow {
       color: $colorYellow;
+    }
+  }
+
+  &__image {
+    @include flex;
+    height: 100%;
+
+    img {
+      transition: all $animationDuration;
+      height: 100%;
+      cursor: pointer;
+      outline: 2px solid $colorWhite;
+
+      &:hover {
+        outline: 2px solid $colorBlue;
+      }
     }
   }
 

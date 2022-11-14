@@ -1,4 +1,5 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState, memo } from 'react';
+import { FcSafe } from 'react-icons/fc';
 import { Confirm } from 'components';
 import { useActions } from 'hooks';
 import { IFolder, WorkplaceItem } from 'types';
@@ -16,6 +17,7 @@ export const ChangeParentItem: FC<IChangeParentItem> = ({ currentItems, onClose,
   const { changeParent } = useActions();
 
   const setActiveHandler = useCallback((i: number) => setActiveIndex(i), []);
+  const clearActiveHandler = useCallback(() => setActiveIndex(null), []);
 
   const changeParentHandler = useCallback(() => {
     if (activeIndex === null) return;
@@ -38,6 +40,8 @@ export const ChangeParentItem: FC<IChangeParentItem> = ({ currentItems, onClose,
     onClose();
   }, [activeIndex, currentItems, folders]);
 
+  const MemoIcon = memo(FcSafe);
+
   return (
     <Confirm upproveText="Переместить" onClose={onClose} onUpprove={changeParentHandler}>
       <div className="change-parent-item">
@@ -45,6 +49,15 @@ export const ChangeParentItem: FC<IChangeParentItem> = ({ currentItems, onClose,
 
         <h2 className="change-parent-item__folders-title">Выберите куда переместить:</h2>
         <div className="change-parent-item__folders">
+          <div
+            aria-hidden
+            onClick={clearActiveHandler}
+            className={`change-parent-item__drive ${activeIndex === null ? 'active' : ''}`}
+          >
+            <MemoIcon className="change-parent-item__icon" />
+            Мой диск
+          </div>
+
           {folders.map((folder, i) => (
             <ChangeParentFolder
               setActiveHandler={setActiveHandler}

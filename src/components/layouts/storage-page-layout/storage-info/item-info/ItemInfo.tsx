@@ -2,6 +2,7 @@ import React, { FC, memo } from 'react';
 import {
   calcAndFormatSize,
   getColorClassName,
+  getImageLink,
   getWorkplaceIcon,
   transformAccess,
   transformDate,
@@ -19,11 +20,18 @@ export interface IItemInfoProps {
 export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId, openChangeAccessModal }) => {
   const MemoAccessIcon = memo(storageWorkplaceAccessIcons[item?.accessType]);
   const MemoIcon = memo(getWorkplaceIcon(item));
+  const imageLink = getImageLink(item);
 
   return (
     <div className="item-info">
       <div className={`item-info__img ${getColorClassName(item)}`}>
-        <MemoIcon />
+        {imageLink ? (
+          <div className="item-info__image">
+            <img src={imageLink} alt="Картика" />
+          </div>
+        ) : (
+          <MemoIcon />
+        )}
       </div>
 
       <div className="item-info__access">

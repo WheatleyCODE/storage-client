@@ -1,9 +1,9 @@
-import { storageWorkplaceIcons } from 'consts';
 import { IconType } from 'react-icons';
-import { AccessTypes, ItemTypes, WorkplaceItem, IChangeIsTrashFilds, IFolder } from 'types';
 import { IFile } from 'types/file.interface';
 import { ITrack } from 'types/track.interface';
-import { formatSize } from './storage.utils';
+import { BASE_URL, storageWorkplaceIcons } from 'consts';
+import { formatSize } from 'utils';
+import { AccessTypes, ItemTypes, WorkplaceItem, IChangeIsTrashFilds, IFolder, IAlbum } from 'types';
 
 export const transformDate = (date: number): string => new Date(date).toLocaleDateString();
 
@@ -43,6 +43,22 @@ export const getColorClassName = (item: WorkplaceItem): string => {
   }
 
   return '';
+};
+
+export const getImageLink = (item: WorkplaceItem): string | false => {
+  if (item.type === ItemTypes.TRACK) {
+    const { image } = item as ITrack;
+
+    return `${BASE_URL}/${image}`;
+  }
+
+  if (item.type === ItemTypes.ALBUM) {
+    const { image } = item as IAlbum;
+
+    return `${BASE_URL}/${image}`;
+  }
+
+  return false;
 };
 
 export const createChangeIsTrashMessage = (filds: IChangeIsTrashFilds): string => {

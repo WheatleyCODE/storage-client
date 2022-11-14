@@ -42,22 +42,17 @@ export const CreateAlbum: FC<ICreateAlbumProps> = ({ onClose }) => {
     if (!authorInput.value || authorInput.isError) return;
     if (!image) return;
 
-    if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
-      createAlbum({
-        name: nameInput.value,
-        author: authorInput.value,
-        parent: id,
-        image,
-      });
+    const filds: { parent?: string } = {};
 
-      onClose();
-      return;
+    if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
+      filds.parent = id;
     }
 
     createAlbum({
       name: nameInput.value,
       author: authorInput.value,
       image,
+      ...filds,
     });
 
     onClose();

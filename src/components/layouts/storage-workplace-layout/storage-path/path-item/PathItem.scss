@@ -1,8 +1,9 @@
 @import 'styles/templates.scss';
 
 .path-item {
-  position: relative;
   @include button-el-active;
+  position: relative;
+  z-index: 31;
   display: flex;
   align-items: center;
   font-size: 1.1rem;
@@ -11,6 +12,7 @@
   border-radius: 5px;
   color: $colorDarkGrey3;
   border: 1px solid $colorWhite;
+  animation: defaultShow $animationDuration forwards;
   
   &__icon {
     @include flex;

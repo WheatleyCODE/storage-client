@@ -52,32 +52,14 @@ export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
     if (!textInput.value || textInput.isError) return;
     if (!audio || !image) return;
 
-    if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
-      createTrack({
-        name: nameInput.value,
-        author: authorInput.value,
-        text: textInput.value,
-        parent: id,
-        audio,
-        image,
-      });
+    const filds: { parent?: string; album?: string } = {};
 
-      onClose();
-      return;
+    if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
+      filds.parent = id;
     }
 
     if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_ALBUMS)) {
-      createTrack({
-        name: nameInput.value,
-        author: authorInput.value,
-        text: textInput.value,
-        album: id,
-        audio,
-        image,
-      });
-
-      onClose();
-      return;
+      filds.album = id;
     }
 
     createTrack({
@@ -86,6 +68,7 @@ export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
       text: textInput.value,
       audio,
       image,
+      ...filds,
     });
 
     onClose();

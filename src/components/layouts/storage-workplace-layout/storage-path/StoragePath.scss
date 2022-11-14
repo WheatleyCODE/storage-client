@@ -30,6 +30,7 @@
     color: $colorDarkGrey;
     font-size: 1.3rem;
     width: 20px;
+    animation: defaultShow $animationDuration forwards;
   }
 
   &__more {

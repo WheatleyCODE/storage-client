@@ -21,6 +21,7 @@ const initialState: IStorageState = {
   diskSpace: 0,
   usedSpace: 0,
   isLoading: true,
+  isWorkplaceLoading: false,
 };
 
 export const storageSlice = createSlice({
@@ -107,9 +108,16 @@ export const storageSlice = createSlice({
 
   extraReducers(builder) {
     builder
+      .addCase(getChildrens.pending, (state) => {
+        state.isWorkplaceLoading = true;
+      })
       .addCase(getChildrens.fulfilled, (state, { payload }) => {
         state.parents = payload.parents;
         state.workplaceItems = payload.childrens.filter((item) => !item.isTrash);
+        state.isWorkplaceLoading = false;
+      })
+      .addCase(getChildrens.rejected, (state) => {
+        state.isWorkplaceLoading = false;
       })
       .addCase(createAccessLink.fulfilled, (state, { payload }) => {
         const { id } = payload;
