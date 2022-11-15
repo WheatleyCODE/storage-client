@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import { StepTitle } from './stepTitle/StepTitle';
 import './Stepper.scss';

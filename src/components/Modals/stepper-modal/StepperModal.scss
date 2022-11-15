@@ -1,0 +1,21 @@
+@import 'styles/templates.scss';
+
+.stepper-modal {
+  &__title {
+    font-size: 1.4rem;
+    margin: 0;
+    margin-bottom: 30px;
+  }
+
+  &__buttons {
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .button {
+      height: 43px;
+      min-width: 90px;
+    }
+  }
+}

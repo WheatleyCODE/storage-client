@@ -1,9 +1,8 @@
-/* eslint-disable no-return-assign */
 import React, { FC, useCallback, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { MdAudiotrack, MdPerson, MdShortText } from 'react-icons/md';
 import { useActions, useValidInput } from 'hooks';
-import { Input, Stepper, Step, Button, Textarea, FileUploader } from 'components';
+import { Input, Stepper, Step, StepperModal, Textarea, FileUploader } from 'components';
 import { nameValidator, nickValidator, textAreaValidator } from 'helpers';
 import { createTrackStepTitles } from 'consts';
 import { checkPathnameOnPathRoute } from 'utils';
@@ -75,81 +74,84 @@ export const CreateTrack: FC<ICreateTrackProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="create-track">
-      <h1 className="create-track__title">Создание трека</h1>
+    <StepperModal
+      title="Создать трек"
+      activeStep={activeStep}
+      stepTitlesLength={createTrackStepTitles.length}
+      subStep={subStep}
+      addStep={addStep}
+      lastButtonHandler={createTrackHandler}
+      lastButtonText="Создать трек"
+    >
+      <div className="create-track">
+        <Stepper
+          className="create-track__stepper"
+          activeStep={activeStep}
+          stepTitles={createTrackStepTitles}
+        >
+          <Step className="create-track__step">
+            <Input
+              Icon={MdAudiotrack}
+              value={nameInput.value}
+              type="text"
+              placeholder="Название"
+              onChange={nameInput.onChange}
+              onBlur={nameInput.onBlur}
+              onFocus={nameInput.onFocus}
+              isError={nameInput.isError}
+              validError={nameInput.validError}
+              isActive={nameInput.isActive}
+              changeFocus={nameInput.changeFocus}
+              changeActive={nameInput.changeActive}
+            />
+            <Input
+              Icon={MdPerson}
+              value={authorInput.value}
+              type="text"
+              placeholder="Автор"
+              onChange={authorInput.onChange}
+              onBlur={authorInput.onBlur}
+              onFocus={authorInput.onFocus}
+              isError={authorInput.isError}
+              validError={authorInput.validError}
+              isActive={authorInput.isActive}
+              changeFocus={authorInput.changeFocus}
+              changeActive={authorInput.changeActive}
+            />
+          </Step>
 
-      <Stepper activeStep={activeStep} stepTitles={createTrackStepTitles}>
-        <Step className="create-track__step">
-          <Input
-            Icon={MdAudiotrack}
-            value={nameInput.value}
-            type="text"
-            placeholder="Название"
-            onChange={nameInput.onChange}
-            onBlur={nameInput.onBlur}
-            onFocus={nameInput.onFocus}
-            isError={nameInput.isError}
-            validError={nameInput.validError}
-            isActive={nameInput.isActive}
-            changeFocus={nameInput.changeFocus}
-            changeActive={nameInput.changeActive}
-          />
+          <Step className="create-track__step">
+            <Textarea
+              Icon={MdShortText}
+              value={textInput.value}
+              placeholder="Текст трека"
+              onChange={textInput.onChange}
+              onBlur={textInput.onBlur}
+              onFocus={textInput.onFocus}
+              isError={textInput.isError}
+              validError={textInput.validError}
+              isActive={textInput.isActive}
+              changeFocus={textInput.changeFocus}
+              changeActive={textInput.changeActive}
+            />
+          </Step>
 
-          <Input
-            Icon={MdPerson}
-            value={authorInput.value}
-            type="text"
-            placeholder="Автор"
-            onChange={authorInput.onChange}
-            onBlur={authorInput.onBlur}
-            onFocus={authorInput.onFocus}
-            isError={authorInput.isError}
-            validError={authorInput.validError}
-            isActive={authorInput.isActive}
-            changeFocus={authorInput.changeFocus}
-            changeActive={authorInput.changeActive}
-          />
-        </Step>
-        <Step className="create-track__step">
-          <Textarea
-            Icon={MdShortText}
-            value={textInput.value}
-            placeholder="Текст трека"
-            onChange={textInput.onChange}
-            onBlur={textInput.onBlur}
-            onFocus={textInput.onFocus}
-            isError={textInput.isError}
-            validError={textInput.validError}
-            isActive={textInput.isActive}
-            changeFocus={textInput.changeFocus}
-            changeActive={textInput.changeActive}
-          />
-        </Step>
-        <Step className="create-track__step">
-          <FileUploader
-            initFile={image}
-            setFile={setImageHandler}
-            accept="image/*"
-            label="Выберите картинку"
-          />
-          <FileUploader
-            initFile={audio}
-            setFile={setAudioHandler}
-            accept="audio/*"
-            label="Выберите аудиофайл"
-          />
-        </Step>
-      </Stepper>
-
-      <div className="create-track__buttons">
-        <Button disable={activeStep === 0} onClick={subStep} text="Назад" />
-
-        {activeStep === createTrackStepTitles.length - 1 ? (
-          <Button color="blue" outline="fill" onClick={createTrackHandler} text="Создать трек" />
-        ) : (
-          <Button color="blue" outline="fill" onClick={addStep} text="Вперёд" />
-        )}
+          <Step className="create-track__step files">
+            <FileUploader
+              initFile={image}
+              setFile={setImageHandler}
+              accept="image/*"
+              label="Выберите картинку"
+            />
+            <FileUploader
+              initFile={audio}
+              setFile={setAudioHandler}
+              accept="audio/*"
+              label="Выберите аудиофайл"
+            />
+          </Step>
+        </Stepper>
       </div>
-    </div>
+    </StepperModal>
   );
 };

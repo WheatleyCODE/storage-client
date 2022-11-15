@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/return-await */
 import axios from 'axios';
 import { BASE_URL } from 'consts';
 import { IAuthData, LocalStorageKeys } from 'types';

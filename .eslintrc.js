@@ -45,8 +45,8 @@ module.exports = {
     '@typescript-eslint/default-param-last': 'off',
     'no-underscore-dangle': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'no-return-assign': 'off',
     quotes: [2, 'single'],
-
     'prettier/prettier': [
       'error',
       {

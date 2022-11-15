@@ -16,7 +16,6 @@ export const MobileMenuItem: FC<IMobileMenuItem> = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // todo check
   const isHash = (str: string) => str.split('').includes('#');
   const isHome = () => location.pathname === PathRoutes.HOME;
 

@@ -37,6 +37,7 @@ export { Drawer } from './modals/drawer/Drawer';
 export { PopupMenu } from './modals/popup/popup-menu/PopupMenu';
 export { Modal } from './modals/modal/Modal';
 export { Confirm } from './modals/confirm/Confirm';
+export { StepperModal } from './modals/stepper-modal/StepperModal';
 export { ModalsController } from './modals/modals-controller/ModalsController';
 export { CreateAlbum } from './modals/storage/create-album/CreateAlbum';
 export { CreateFolder } from './modals/storage/create-folder/CreateFolder';

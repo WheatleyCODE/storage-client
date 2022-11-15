@@ -1,9 +1,8 @@
 import React, { FC, useCallback, useState } from 'react';
 import { Confirm, Select } from 'components';
 import { useActions } from 'hooks';
-import { storageWorkplaceAccessIcons } from 'consts';
-import { transformAccess } from 'utils';
-import { AccessTypes, WorkplaceItem } from 'types';
+import { changeAccessItems } from 'consts';
+import { WorkplaceItem } from 'types';
 import './ChangeAccessItem.scss';
 
 export interface IChangeAccessItem {
@@ -11,34 +10,16 @@ export interface IChangeAccessItem {
   onClose: () => void;
 }
 
-const items = [
-  {
-    text: transformAccess(AccessTypes.PRIVATE),
-    Icon: storageWorkplaceAccessIcons[AccessTypes.PRIVATE],
-    value: AccessTypes.PRIVATE,
-  },
-  {
-    text: transformAccess(AccessTypes.LINK),
-    Icon: storageWorkplaceAccessIcons[AccessTypes.LINK],
-    value: AccessTypes.LINK,
-  },
-  {
-    text: transformAccess(AccessTypes.PUBLIC),
-    Icon: storageWorkplaceAccessIcons[AccessTypes.PUBLIC],
-    value: AccessTypes.PUBLIC,
-  },
-];
-
 export const ChangeAccessItem: FC<IChangeAccessItem> = ({ currentItems, onClose }) => {
   const item = currentItems[0];
   const [activeIndex, setActiveIndex] = useState<number | null>(
-    items.findIndex((itm) => itm.value === item.accessType)
+    changeAccessItems.findIndex((itm) => itm.value === item.accessType)
   );
   const { changeAccessType } = useActions();
 
   const changeAccessTypeHandler = useCallback(() => {
     if (activeIndex === null || !item) return;
-    const { value } = items[activeIndex];
+    const { value } = changeAccessItems[activeIndex];
 
     const { id, type } = item;
 
@@ -50,7 +31,7 @@ export const ChangeAccessItem: FC<IChangeAccessItem> = ({ currentItems, onClose 
       isCanRestore: true,
     });
     onClose();
-  }, [activeIndex, item, items]);
+  }, [activeIndex, item, changeAccessType, onClose]);
 
   return (
     <Confirm upproveText="Изменить доступ" onClose={onClose} onUpprove={changeAccessTypeHandler}>
@@ -60,7 +41,7 @@ export const ChangeAccessItem: FC<IChangeAccessItem> = ({ currentItems, onClose 
         <Select
           activeIndex={activeIndex}
           setActiveIndex={setActiveIndex}
-          items={items}
+          items={changeAccessItems}
           placeholder="Тип доступа"
         />
       </div>

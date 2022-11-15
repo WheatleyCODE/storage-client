@@ -1,9 +1,8 @@
-/* eslint-disable no-return-assign */
 import React, { FC, useState, useCallback } from 'react';
 import { MdLibraryMusic, MdPerson } from 'react-icons/md';
 import { useLocation, useParams } from 'react-router';
 import { useActions, useValidInput } from 'hooks';
-import { Input, Button, Stepper, Step, FileUploader } from 'components';
+import { Input, StepperModal, Stepper, Step, FileUploader } from 'components';
 import { nameValidator, nickValidator } from 'helpers';
 import { createAlbumStepTitles } from 'consts';
 import { checkPathnameOnPathRoute } from 'utils';
@@ -59,60 +58,62 @@ export const CreateAlbum: FC<ICreateAlbumProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="create-album">
-      <h1 className="create-album__title">Создать альбом</h1>
+    <StepperModal
+      title="Создать альбом"
+      activeStep={activeStep}
+      stepTitlesLength={createAlbumStepTitles.length}
+      subStep={subStep}
+      addStep={addStep}
+      lastButtonHandler={createAlbumHandler}
+      lastButtonText="Создать альбом"
+    >
+      <div className="create-album">
+        <Stepper
+          className="create-album__stepper"
+          activeStep={activeStep}
+          stepTitles={createAlbumStepTitles}
+        >
+          <Step className="create-album__step">
+            <Input
+              Icon={MdLibraryMusic}
+              value={nameInput.value}
+              type="text"
+              placeholder="Название"
+              onChange={nameInput.onChange}
+              onBlur={nameInput.onBlur}
+              onFocus={nameInput.onFocus}
+              isError={nameInput.isError}
+              validError={nameInput.validError}
+              isActive={nameInput.isActive}
+              changeFocus={nameInput.changeFocus}
+              changeActive={nameInput.changeActive}
+            />
+            <Input
+              Icon={MdPerson}
+              value={authorInput.value}
+              type="text"
+              placeholder="Автор"
+              onChange={authorInput.onChange}
+              onBlur={authorInput.onBlur}
+              onFocus={authorInput.onFocus}
+              isError={authorInput.isError}
+              validError={authorInput.validError}
+              isActive={authorInput.isActive}
+              changeFocus={authorInput.changeFocus}
+              changeActive={authorInput.changeActive}
+            />
+          </Step>
 
-      <Stepper activeStep={activeStep} stepTitles={createAlbumStepTitles}>
-        <Step className="create-track__step">
-          <Input
-            Icon={MdLibraryMusic}
-            value={nameInput.value}
-            type="text"
-            placeholder="Название"
-            onChange={nameInput.onChange}
-            onBlur={nameInput.onBlur}
-            onFocus={nameInput.onFocus}
-            isError={nameInput.isError}
-            validError={nameInput.validError}
-            isActive={nameInput.isActive}
-            changeFocus={nameInput.changeFocus}
-            changeActive={nameInput.changeActive}
-          />
-
-          <Input
-            Icon={MdPerson}
-            value={authorInput.value}
-            type="text"
-            placeholder="Автор"
-            onChange={authorInput.onChange}
-            onBlur={authorInput.onBlur}
-            onFocus={authorInput.onFocus}
-            isError={authorInput.isError}
-            validError={authorInput.validError}
-            isActive={authorInput.isActive}
-            changeFocus={authorInput.changeFocus}
-            changeActive={authorInput.changeActive}
-          />
-        </Step>
-        <Step className="create-track__step">
-          <FileUploader
-            initFile={image}
-            setFile={setImageHandler}
-            accept="image/*"
-            label="Выберите картинку"
-          />
-        </Step>
-      </Stepper>
-
-      <div className="create-album__buttons">
-        <Button disable={activeStep === 0} onClick={subStep} text="Назад" />
-
-        {activeStep === createAlbumStepTitles.length - 1 ? (
-          <Button color="blue" outline="fill" onClick={createAlbumHandler} text="Создать Альбом" />
-        ) : (
-          <Button color="blue" outline="fill" onClick={addStep} text="Вперёд" />
-        )}
+          <Step className="create-album__step">
+            <FileUploader
+              initFile={image}
+              setFile={setImageHandler}
+              accept="image/*"
+              label="Выберите картинку"
+            />
+          </Step>
+        </Stepper>
       </div>
-    </div>
+    </StepperModal>
   );
 };

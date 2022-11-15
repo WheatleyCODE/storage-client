@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef } from 'react';
 import { Confirm } from 'components';
-import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
+import { useActions, useTypedDispatch } from 'hooks';
 import { getActionMessage } from 'helpers';
 import { WorkplaceItem } from 'types';
 import './GetLinkItem.scss';

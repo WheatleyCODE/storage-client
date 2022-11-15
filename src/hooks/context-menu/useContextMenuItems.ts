@@ -86,12 +86,6 @@ export const useContextMenuItems = () => {
 
   const defaultCMI: IContextMenuItem[] = useMemo(
     () => [
-      // {
-      //   title: 'Открыть',
-      //   Icon: MdOutlineOpenWith,
-      //   handler: openWorkpaceItem,
-      //   brBefore: true,
-      // },
       {
         title: 'Изменить доступ',
         Icon: HiOutlineUserAdd,

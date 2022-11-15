@@ -3,43 +3,30 @@
 .create-album {
   width: 440px;
 
-  &__title {
-    font-size: 1.4rem;
-    margin: 0;
-    margin-bottom: 30px;
-  }
-
-  &__buttons {
-    display: flex;
-  }
-
   &__step {
-    padding-top: 25px;
-    height: 150px;
+    padding-top: 15px;
+    height: 140px;
 
     .input, .file-uploader {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+    }
+
+    .input:last-child, .file-uploader:last-child {
+      margin-bottom: 0;
     }
 
     .file-uploader__label {
-      width: 230px;
+      width: 210px;
+      margin-right: 30px;
+    }
+
+    .textarea__textfild {
+      height: 110px;
     }
   }
 
   .step-title {
     width: 40%;
-  }
-
-  &__buttons {
-    padding-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .button {
-      height: 43px;
-      min-width: 110px;
-    }
   }
 }
 
