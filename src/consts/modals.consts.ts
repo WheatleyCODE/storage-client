@@ -14,6 +14,7 @@ export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.CHANGE_PARENT]: 'isChangeParent',
   [HashModals.GET_LINK]: 'isGetLink',
   [HashModals.RENAME]: 'isRename',
+  [HashModals.IMAGE]: 'isImage',
 };
 
 export const stateKeysToHashModals: StateKeysToHashModals = {
@@ -30,4 +31,5 @@ export const stateKeysToHashModals: StateKeysToHashModals = {
   isChangeParent: HashModals.CHANGE_PARENT,
   isGetLink: HashModals.GET_LINK,
   isRename: HashModals.RENAME,
+  isImage: HashModals.IMAGE,
 };

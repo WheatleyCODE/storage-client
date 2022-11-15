@@ -15,6 +15,7 @@ const initialState: IModalsState = {
   isChangeParent: false,
   isGetLink: false,
   isRename: false,
+  isImage: false,
 };
 
 export const modalsSlice = createSlice({
@@ -41,6 +42,7 @@ export const modalsSlice = createSlice({
       state.isChangeParent = false;
       state.isGetLink = false;
       state.isRename = false;
+      state.isImage = false;
     },
   },
 });

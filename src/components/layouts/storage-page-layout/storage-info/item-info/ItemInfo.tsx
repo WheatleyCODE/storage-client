@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useCallback } from 'react';
 import {
   calcAndFormatSize,
   getColorClassName,
@@ -10,6 +10,8 @@ import {
 import { storageWorkplaceAccessIcons } from 'consts';
 import { WorkplaceItem } from 'types';
 import './ItemInfo.scss';
+import { useTypedDispatch } from 'hooks';
+import { modalsActions } from 'store';
 
 export interface IItemInfoProps {
   item: WorkplaceItem;
@@ -18,15 +20,20 @@ export interface IItemInfoProps {
 }
 
 export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId, openChangeAccessModal }) => {
+  const dispatch = useTypedDispatch();
   const MemoAccessIcon = memo(storageWorkplaceAccessIcons[item?.accessType]);
   const MemoIcon = memo(getWorkplaceIcon(item));
   const imageLink = getImageLink(item);
+
+  const openImage = useCallback(() => {
+    dispatch(modalsActions.changeIsModal({ key: 'isImage', boolean: true }));
+  }, []);
 
   return (
     <div className="item-info">
       <div className={`item-info__img ${getColorClassName(item)}`}>
         {imageLink ? (
-          <div className="item-info__image">
+          <div aria-hidden onClick={openImage} className="item-info__image">
             <img src={imageLink} alt="Картика" />
           </div>
         ) : (

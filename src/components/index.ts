@@ -44,6 +44,7 @@ export { CreateFolder } from './modals/storage/create-folder/CreateFolder';
 export { CreateTrack } from './modals/storage/create-track/CreateTrack';
 export { UploadFiles } from './modals/storage/upload-files/UploadFiles';
 export { DeleteItem } from './modals/storage/delete-item/DeleteItem';
+export { ImageModal } from './modals/storage/image-modal/ImageModal';
 
 export { Search } from './storage/search/Search';
 export { StorageSize } from './storage/storage-size/StorageSize';

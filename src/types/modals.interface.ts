@@ -12,6 +12,7 @@ export interface IModalsState {
   isChangeParent: boolean;
   isGetLink: boolean;
   isRename: boolean;
+  isImage: boolean;
 }
 
 export type ModalsStateKeys = keyof IModalsState;
@@ -35,6 +36,7 @@ export enum HashModals {
   CHANGE_PARENT = '#change-parent',
   GET_LINK = '#get-link',
   RENAME = '#rename',
+  IMAGE = '#image',
 }
 
 export type HashModalsToStateKeys = {

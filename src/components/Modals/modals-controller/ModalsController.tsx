@@ -11,6 +11,7 @@ import {
   CreateTrack,
   UploadFiles,
   DeleteItem,
+  ImageModal,
 } from 'components';
 import { useLocation, useNavigate } from 'react-router';
 import { hashToStateKeys } from 'consts';
@@ -161,6 +162,14 @@ export const ModalsController: FC = () => {
             <Modal onClose={getClose('isChangeAccess')}>
               <ChangeAccessItem currentItems={currentItems} onClose={getClose('isChangeAccess')} />
             </Modal>
+          </Backdrop>
+        </Portal>
+      )}
+
+      {modals.isImage && (
+        <Portal>
+          <Backdrop className="dark" onClose={getClose('isImage')}>
+            <ImageModal currentItems={currentItems} onClose={getClose('isImage')} />
           </Backdrop>
         </Portal>
       )}

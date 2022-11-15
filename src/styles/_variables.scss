@@ -45,8 +45,11 @@ $colorDarkGrey3:#434343;
 
 $colorShadow: #1c314133;
 $colorBackdrop: rgba(0, 0, 0, 0.6);
+$colorBackdropDark: rgba(0, 0, 0, 0.85);
+$colorTransparentWhite: rgba(255, 255, 255, 0.3);
 
 $homePageGradient: linear-gradient(0deg, $colorViolet 0%, $colorViolet 20%, $colorWhite 100%);
+$darkGradient: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
 
 $headerHeight: 80px;
 $footerHeight: 420px;
