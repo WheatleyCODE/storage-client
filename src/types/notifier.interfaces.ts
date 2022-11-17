@@ -40,7 +40,7 @@ export interface IChangeIsTrashRestore extends ICanRestore {
 }
 
 export interface IChangeParentRestore extends ICanRestore {
-  prevParent: string;
+  prevParent: string | null;
 }
 
 export interface IChangeAccessTypeRestore extends ICanRestore {

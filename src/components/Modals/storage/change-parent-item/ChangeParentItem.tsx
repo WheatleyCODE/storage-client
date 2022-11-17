@@ -1,8 +1,10 @@
 import React, { FC, useCallback, useState, memo } from 'react';
+import { useLocation, useParams } from 'react-router';
 import { FcSafe } from 'react-icons/fc';
 import { Confirm } from 'components';
 import { useActions } from 'hooks';
-import { IFolder, WorkplaceItem } from 'types';
+import { checkPathnameOnPathRoute } from 'utils';
+import { IFolder, PathRoutes, WorkplaceItem } from 'types';
 import { ChangeParentFolder } from './change-parent-folder/ChangeParentFolder';
 import './ChangeParentItem.scss';
 
@@ -15,25 +17,39 @@ export interface IChangeParentItem {
 export const ChangeParentItem: FC<IChangeParentItem> = ({ currentItems, onClose, folders }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const { changeParent } = useActions();
+  const params = useParams();
+  const { pathname } = useLocation();
 
   const setActiveHandler = useCallback((i: number) => setActiveIndex(i), []);
   const clearActiveHandler = useCallback(() => setActiveIndex(null), []);
 
   const changeParentHandler = useCallback(() => {
-    if (activeIndex === null) return;
+    const filds: { parent: string | null } = { parent: null };
+
+    if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
+      filds.parent = params.id || null;
+    }
+
+    if (activeIndex === null) {
+      changeParent({
+        items: currentItems.map(({ id, type }) => ({ id, type })),
+        parent: null,
+        prevParent: filds.parent,
+        isCanRestore: true,
+      });
+
+      onClose();
+      return;
+    }
 
     const folder = folders[activeIndex];
-
     if (!folder) return;
-
     const { id: parent } = folder;
 
     changeParent({
       items: currentItems.map(({ id, type }) => ({ id, type })),
       parent,
-
-      // ! fix
-      prevParent: parent,
+      prevParent: filds.parent,
       isCanRestore: true,
     });
 

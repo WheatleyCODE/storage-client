@@ -33,5 +33,5 @@ export interface IChangeAccessTypeFilds extends IItemFilds {
 }
 
 export interface IChangeParentFilds extends IDeleteItemsFilds {
-  parent: string;
+  parent: string | null;
 }
