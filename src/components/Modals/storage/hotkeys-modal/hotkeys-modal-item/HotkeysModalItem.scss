@@ -1,0 +1,20 @@
+@import 'styles/templates.scss';
+
+.hotkeys-modal-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid $colorLightGrey3;
+
+  &__title {
+    width: 73%;
+    font-size: 0.9rem;
+    padding-right: 40px;
+  }
+
+  &__key {
+    width: 27%;
+    font-size: 0.9rem;
+  }
+}

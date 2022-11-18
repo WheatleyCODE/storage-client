@@ -12,6 +12,8 @@ import {
   UploadFiles,
   DeleteItem,
   ImageModal,
+  SettingsModal,
+  HotkeysModal,
 } from 'components';
 import { useLocation, useNavigate } from 'react-router';
 import { hashToStateKeys } from 'consts';
@@ -106,7 +108,7 @@ export const ModalsController: FC = () => {
         <Portal>
           <Backdrop onClose={getClose('isSettings')}>
             <Modal onClose={getClose('isSettings')}>
-              <h1>Настройки будут позже</h1>
+              <SettingsModal onClose={getClose('isSettings')} />
             </Modal>
           </Backdrop>
         </Portal>
@@ -116,7 +118,7 @@ export const ModalsController: FC = () => {
         <Portal>
           <Backdrop onClose={getClose('isHotkeys')}>
             <Modal onClose={getClose('isHotkeys')}>
-              <h1>Хоткеи будут позже</h1>
+              <HotkeysModal onClose={getClose('isSettings')} />
             </Modal>
           </Backdrop>
         </Portal>

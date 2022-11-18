@@ -1,0 +1,28 @@
+@import 'styles/templates.scss';
+
+.hotkeys-modal {
+  width: 440px;
+
+  &__title {
+    font-size: 1.4rem;
+    margin: 0;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $colorLightGrey3;
+  }
+
+  &__sub-title {
+    font-size: 0.95rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__hotkeys {
+    width: 100%;
+    max-height: 380px;
+    overflow: auto;
+  }
+
+  &__margin {
+    margin-bottom: 15px;
+  }
+}

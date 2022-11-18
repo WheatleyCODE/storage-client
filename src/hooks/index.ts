@@ -8,5 +8,6 @@ export { useContextMenuItems } from './context-menu/useContextMenuItems';
 export { useResizeObserver } from './useResizeObserver';
 export { useDebounce } from './useDebounce';
 export { useDelayHover } from './useDelayHover';
+export { useFirstRender } from './useFirstRender';
 
 export type { IContextOptions, IContextMenuItem } from './context-menu/useContextMenuItems';

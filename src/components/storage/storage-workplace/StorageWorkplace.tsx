@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useRef, useState, memo, useEffect } from 'react';
+import React, { FC, useCallback, useRef, useState, memo } from 'react';
 import { useClickOutside, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
 import { WorkplaceItem } from 'types';

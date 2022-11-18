@@ -19,6 +19,7 @@ export interface IStorageWorkplaceItemProps {
   addActive: (i: number) => void;
   addActiveShift: (i: number) => void;
 }
+
 export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const { item, isActive, changeActive, addActive, addActiveShift, index } = props;
   const navigate = useNavigate();
