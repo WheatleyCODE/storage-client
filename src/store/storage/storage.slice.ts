@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StorageSorter } from 'helpers';
 import { IFolder, IStorageState, SortTypes, WorkplaceItem } from 'types';
 import {
+  changeSettings,
   createAccessLink,
   createAlbum,
   createFolder,
@@ -24,6 +25,10 @@ const initialState: IStorageState = {
   isLoading: true,
   isWorkplaceLoading: false,
   sortType: SortTypes.NAME,
+  settings: {
+    isRecommend: true,
+    isTools: true,
+  },
 };
 
 export const storageSlice = createSlice({
@@ -118,9 +123,11 @@ export const storageSlice = createSlice({
       });
     },
   },
-
   extraReducers(builder) {
     builder
+      .addCase(changeSettings.fulfilled, (state, { payload }) => {
+        state.settings = payload;
+      })
       .addCase(getChildrens.pending, (state) => {
         state.isWorkplaceLoading = true;
       })

@@ -1,4 +1,5 @@
 import React, { FC, memo, useEffect } from 'react';
+import * as uuid from 'uuid';
 import { motion, useAnimation } from 'framer-motion';
 import { FiCheck } from 'react-icons/fi';
 import './Checkbox.scss';
@@ -21,9 +22,11 @@ export const Checkbox: FC<ICheckboxProps> = memo(({ label, value, onClick }) => 
     checkControls.start('hidden');
   }, [value, checkControls]);
 
+  const randomString = uuid.v4();
+
   return (
     <div className="checkbox">
-      <label className="checkbox__label" htmlFor="checkbox">
+      <label className="checkbox__label" htmlFor={`checkbox ${randomString}`}>
         <div className={`checkbox__square ${value && 'active'}`}>
           <motion.div
             animate={checkControls}
@@ -38,7 +41,12 @@ export const Checkbox: FC<ICheckboxProps> = memo(({ label, value, onClick }) => 
             <FiCheck />
           </motion.div>
         </div>
-        <input className="checkbox__textfild" onClick={onClick} id="checkbox" type="checkbox" />
+        <input
+          className="checkbox__textfild"
+          onClick={onClick}
+          id={`checkbox ${randomString}`}
+          type="checkbox"
+        />
         <div className="checkbox__text">{label}</div>
       </label>
     </div>

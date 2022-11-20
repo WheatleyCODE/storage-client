@@ -17,7 +17,7 @@ import { StorageInfo } from './storage-info/StorageInfo';
 import './StoragePageLayout.scss';
 
 export const StoragePageLayout: FC = () => {
-  const { isLoading } = useTypedSelector((state) => state.storage);
+  const { isLoading, settings } = useTypedSelector((state) => state.storage);
   const { isInfo, isAside } = useTypedSelector((state) => state.modals);
   const [isOpenMenu, setIsOpenMenu] = useState(true);
   const [isContextMenu, setIsContextMenu] = useState(false);
@@ -60,13 +60,18 @@ export const StoragePageLayout: FC = () => {
   }, []);
 
   useEffect(() => {
+    if (!settings.isTools) {
+      asideControls.start('close');
+      return;
+    }
+
     if (isAside) {
       asideControls.start('open');
       return;
     }
 
     asideControls.start('close');
-  }, [isAside, asideControls]);
+  }, [isAside, asideControls, settings.isTools]);
 
   useEffect(() => {
     if (isOpenMenu) {
@@ -130,12 +135,14 @@ export const StoragePageLayout: FC = () => {
 
         <AnimatePresence>{isInfo && <StorageInfo onClose={closeInfo} />}</AnimatePresence>
 
-        <StorageAside
-          controls={asideControls}
-          isOpen={isAside}
-          openAside={openAside}
-          closeAside={closeAside}
-        />
+        {settings.isTools && (
+          <StorageAside
+            controls={asideControls}
+            isOpen={isAside}
+            openAside={openAside}
+            closeAside={closeAside}
+          />
+        )}
       </div>
       <ModalsController />
     </div>

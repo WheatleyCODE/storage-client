@@ -39,6 +39,11 @@ export interface IStorageData {
   tracks: ITrack[];
 }
 
+export interface IStorageSettings {
+  isTools: boolean;
+  isRecommend: boolean;
+}
+
 export interface IStorageState {
   id: string;
   currentItems: WorkplaceItem[];
@@ -52,11 +57,14 @@ export interface IStorageState {
   isLoading: boolean;
   isWorkplaceLoading: boolean;
   sortType: SortTypes;
+  settings: IStorageSettings;
 }
 
 export interface IChildrensData {
   childrens: WorkplaceItem[];
   parents: IFolder[];
 }
+
+export type ISettingsData = IStorageSettings;
 
 export type WorkplaceItem = IFolder | IFile | IAlbum | ITrack;

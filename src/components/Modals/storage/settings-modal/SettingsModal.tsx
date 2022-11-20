@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 import { StorageSize, Checkbox, Confirm } from 'components';
-import { useTypedSelector } from 'hooks';
+import { useActions, useTypedSelector } from 'hooks';
 import './SettingsModal.scss';
 
 export interface ISettingsModalProps {
@@ -8,13 +8,21 @@ export interface ISettingsModalProps {
 }
 
 export const SettingsModal: FC<ISettingsModalProps> = ({ onClose }) => {
-  const [isTools, setIsTools] = useState(true);
-  const { diskSpace, usedSpace } = useTypedSelector((state) => state.storage);
+  const { diskSpace, usedSpace, settings } = useTypedSelector((state) => state.storage);
+  const [isTools, setIsTools] = useState(settings.isTools);
+  const [isRecommend, setIsRecommend] = useState(settings.isRecommend);
+  const { changeSettings } = useActions();
 
   const toggleIsTools = useCallback(() => setIsTools((p) => !p), []);
+  const toggleIsRecommend = useCallback(() => setIsRecommend((p) => !p), []);
+
+  const changeSettingsHandler = useCallback(() => {
+    changeSettings({ isRecommend, isTools });
+    onClose();
+  }, [isRecommend, isTools, onClose]);
 
   return (
-    <Confirm upproveText="Сохранить" onClose={onClose} onUpprove={() => {}}>
+    <Confirm upproveText="Сохранить" onClose={onClose} onUpprove={changeSettingsHandler}>
       <div className="settings-modal">
         <h1 className="settings-modal__title">Настройки</h1>
         <StorageSize diskSpace={diskSpace} usedSpace={usedSpace} />
@@ -28,9 +36,9 @@ export const SettingsModal: FC<ISettingsModalProps> = ({ onClose }) => {
           </div>
           <div className="settings-modal__checkbox">
             <Checkbox
-              value={isTools}
+              value={isRecommend}
               label="Показывать рекомендуемые файлы"
-              onClick={toggleIsTools}
+              onClick={toggleIsRecommend}
             />
           </div>
         </div>

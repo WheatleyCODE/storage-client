@@ -22,6 +22,8 @@ import {
   ICreateTrackFilds,
   IAlbum,
   ICreateAlbumFilds,
+  ISettingsData,
+  IStorageSettings,
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { storageActions as SA } from 'store';
@@ -317,6 +319,26 @@ export const getChildrens = createAsyncThunk<IChildrensData, string>(
       hashData.set(string, data, 5000);
 
       return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const changeSettings = createAsyncThunk<ISettingsData, IStorageSettings>(
+  'storage/changeSettings',
+  async (settings, thunkAPI) => {
+    try {
+      // Todo сделать настройки на сервере и сделать запрос
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Настроки сохранены',
+        })
+      );
+
+      return settings;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }

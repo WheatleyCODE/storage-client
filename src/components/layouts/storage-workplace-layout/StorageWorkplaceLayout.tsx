@@ -17,7 +17,7 @@ export interface IStorageWorkplaceLayoutProps {
 export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = (props) => {
   const { children, isContextMenu, coords, openContextMenu, closeContextMenu } = props;
   const { pathname } = useLocation();
-  const { allItems, parents } = useTypedSelector((state) => state.storage);
+  const { allItems, parents, settings } = useTypedSelector((state) => state.storage);
   const ref = useRef<null | HTMLDivElement>(null);
 
   const lastItems = useMemo(
@@ -29,6 +29,8 @@ export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = (props) 
     [allItems]
   );
 
+  const isLast = PathRoutes.STORAGE_MY_DRIVE === pathname && settings.isRecommend;
+
   return (
     <div aria-hidden onClick={closeContextMenu} className="storage-workplace-layout">
       <div className="storage-workplace-layout__storage-path-visual right" />
@@ -36,7 +38,7 @@ export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = (props) 
       <StoragePath parents={parents} />
 
       <div onContextMenu={openContextMenu} className="storage-workplace-layout__content">
-        {PathRoutes.STORAGE_MY_DRIVE === pathname && <StorageLast lastItems={lastItems} />}
+        {isLast && <StorageLast lastItems={lastItems} />}
         <StorageSorter />
         {children}
       </div>
