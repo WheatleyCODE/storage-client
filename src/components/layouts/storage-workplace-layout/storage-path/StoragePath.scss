@@ -1,12 +1,14 @@
 @import 'styles/templates.scss';
 
 .storage-path {
+  position: relative;
   display: flex;
   align-items: center;
   padding: $storagePadding;
   padding-left: 5px;
   height: $storagePathHeight;
   border-bottom: $storageBorder;
+  z-index: 32;
   // overflow-y: hidden;
   // overflow-x: auto;
 

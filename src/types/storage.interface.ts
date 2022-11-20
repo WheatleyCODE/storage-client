@@ -9,6 +9,17 @@ export enum AdditionTypes {
   TODO = 'TODO',
 }
 
+export enum SortTypes {
+  NAME = 'NAME',
+  NAME_REVERCE = 'NAME_REVERCE',
+  ACCESS = 'ACCESS',
+  ACCESS_REVERCE = 'ACCESS_REVERCE',
+  DATE = 'DATE',
+  DATE_REVERCE = 'DATE_REVERCE',
+  SIZE = 'SIZE',
+  SIZE_REVERCE = 'SIZE_REVERCE',
+}
+
 export interface ICoords {
   top?: string;
   left?: string;
@@ -40,6 +51,7 @@ export interface IStorageState {
   usedSpace: number;
   isLoading: boolean;
   isWorkplaceLoading: boolean;
+  sortType: SortTypes;
 }
 
 export interface IChildrensData {

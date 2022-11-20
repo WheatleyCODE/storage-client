@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useCallback, useMemo } from 'react';
+import React, { FC, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useActions, useTypedSelector } from 'hooks';
 import { StorageWorkplace } from 'components';
@@ -8,9 +8,7 @@ import './StorageFoldersPage.scss';
 
 export const StorageFoldersPage: FC = () => {
   const { getChildrens } = useActions();
-  const { workplaceItems, allItems, isWorkplaceLoading } = useTypedSelector(
-    (state) => state.storage
-  );
+  const { workplaceItems, isWorkplaceLoading } = useTypedSelector((state) => state.storage);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -24,13 +22,9 @@ export const StorageFoldersPage: FC = () => {
     }
   }, []);
 
-  const items = useMemo(() => allItems, [allItems]);
-
   useEffect(() => {
-    if (items.length) {
-      fetchChildrens(id);
-    }
-  }, [fetchChildrens, id, items]);
+    fetchChildrens(id);
+  }, [id]);
 
   return (
     <div className="storage-folders-page">

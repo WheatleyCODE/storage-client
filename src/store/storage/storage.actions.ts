@@ -25,6 +25,7 @@ import {
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { storageActions as SA } from 'store';
+import { hashData } from 'helpers/hash.helpers';
 import { IChangeAccessTypeRestore } from '../../types/notifier.interfaces';
 
 export const fetchStorage = createAsyncThunk<IStorageData>(
@@ -305,7 +306,15 @@ export const getChildrens = createAsyncThunk<IChildrensData, string>(
   'storage/getChildrens',
   async (string, thunkAPI) => {
     try {
+      const dataHash = hashData.get<IChildrensData>(string);
+
+      if (dataHash) {
+        hashData.set(string, dataHash, 5000);
+        return dataHash;
+      }
+
       const { data } = await StorageService.getChildrens(string);
+      hashData.set(string, data, 5000);
 
       return data;
     } catch (e: any) {

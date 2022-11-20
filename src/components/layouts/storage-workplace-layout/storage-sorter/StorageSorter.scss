@@ -9,6 +9,7 @@
   padding: $storagePadding;
   padding-left: 20px;
   border-bottom: $storageBorder;
+  z-index: 31;
 }
 
 @media screen and (max-width: 750px) {

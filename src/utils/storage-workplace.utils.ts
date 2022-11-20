@@ -35,6 +35,28 @@ export const calcAndFormatSize = (item: WorkplaceItem, isFolder = false): string
   return '—';
 };
 
+export const getSize = (item: WorkplaceItem, isFolder = false): number => {
+  if (item.type === ItemTypes.FILE) {
+    const { fileSize } = item as IFile;
+
+    return fileSize;
+  }
+
+  if (item.type === ItemTypes.TRACK) {
+    const { audioSize, imageSize } = item as ITrack;
+
+    return audioSize + imageSize;
+  }
+
+  if (item.type === ItemTypes.FOLDER && isFolder) {
+    const { folderSize } = item as IFolder;
+
+    return folderSize;
+  }
+
+  return 0;
+};
+
 export const getColorClassName = (item: WorkplaceItem): string => {
   if (item.type === ItemTypes.FOLDER) {
     const { color } = item as IFolder;

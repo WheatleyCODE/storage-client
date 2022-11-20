@@ -1,6 +1,7 @@
 @import 'styles/templates.scss';
 
 .sort-item {
+  @include no-select;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -8,10 +9,36 @@
   
   &__icon {
     @include flex;
-    font-size: 1.4rem;
+    transition: all $animationDuration;
+    font-size: 1.3rem;
     width: 25px;
     height: 25px;
     margin-left: 5px;
     color: $colorDarkGrey1;
+    border-radius: 50%;
+    border: 1px solid $colorWhite;
+
+    .svg {
+      @include flex;
+      transition: all $animationDuration;
+    }
+  }
+
+  &.active {
+    .sort-item__icon {
+      color: $colorDarkBlue;
+      background-color: $colorLightBlue2;
+      border: 1px solid $colorLightBlue1;
+      
+      .svg {
+        transform: rotate(0deg);
+      }
+    }
+
+    .sort-item__icon.reverce {
+      .svg {
+        transform: rotate(180deg);
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IFolder, IStorageState, WorkplaceItem } from 'types';
+import { StorageSorter } from 'helpers';
+import { IFolder, IStorageState, SortTypes, WorkplaceItem } from 'types';
 import {
   createAccessLink,
   createAlbum,
@@ -22,6 +23,7 @@ const initialState: IStorageState = {
   usedSpace: 0,
   isLoading: true,
   isWorkplaceLoading: false,
+  sortType: SortTypes.NAME,
 };
 
 export const storageSlice = createSlice({
@@ -47,6 +49,17 @@ export const storageSlice = createSlice({
 
     setParents: (state, { payload }: PayloadAction<IFolder[]>) => {
       state.parents = payload;
+    },
+
+    setSortType: (state, { payload }: PayloadAction<SortTypes>) => {
+      const sorter = new StorageSorter();
+      state.sortType = payload;
+
+      const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
+      const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
+
+      state.allItems = sorter.sort(allItemsArr, payload);
+      state.workplaceItems = sorter.sort(workplaceItemsArr, payload);
     },
 
     setItem: (state, { payload }: PayloadAction<WorkplaceItem>) => {
@@ -112,8 +125,14 @@ export const storageSlice = createSlice({
         state.isWorkplaceLoading = true;
       })
       .addCase(getChildrens.fulfilled, (state, { payload }) => {
+        const sorter = new StorageSorter();
         state.parents = payload.parents;
-        state.workplaceItems = payload.childrens.filter((item) => !item.isTrash);
+
+        state.workplaceItems = sorter.sort(
+          payload.childrens.filter((item) => !item.isTrash),
+          state.sortType
+        );
+
         state.isWorkplaceLoading = false;
       })
       .addCase(getChildrens.rejected, (state) => {
@@ -182,6 +201,7 @@ export const storageSlice = createSlice({
         state.parents = [];
       })
       .addCase(fetchStorage.fulfilled, (state, { payload }) => {
+        const sorter = new StorageSorter();
         const { id, name, user, diskSpace, usedSpace, folders, tracks, files, albums } = payload;
 
         state.isLoading = false;
@@ -190,7 +210,7 @@ export const storageSlice = createSlice({
         state.user = user;
         state.diskSpace = diskSpace;
         state.usedSpace = usedSpace;
-        state.allItems = [...folders, ...tracks, ...files, ...albums];
+        state.allItems = sorter.sort([...folders, ...tracks, ...files, ...albums], state.sortType);
       })
       .addCase(fetchStorage.rejected, (state) => {
         state.isLoading = false;
