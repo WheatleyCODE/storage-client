@@ -58,6 +58,31 @@
       color: $colorDarkBlue;
     }
   }
+
+  &.drag {
+    position: relative;
+    z-index: 10;
+    transition: none;
+    outline: 1px solid $colorLightBlue;
+    background-color: $colorLightBlue2;
+  }
+
+  &.grey {
+    position: relative;
+    z-index: 10;
+    transition: none;
+    color: $colorLightGrey;
+    outline: 1px solid $colorLightGrey2;
+    background-color: 1px solid $colorLightGrey3;
+
+    .storage-workplace-item__icon {
+      color: $colorLightGrey1;
+    }
+
+    .storage-workplace-item__name {
+      color: $colorLightGrey1;
+    }
+  }
 }
 
 @media screen and (max-width: 750px) {

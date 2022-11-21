@@ -9,11 +9,11 @@ import {
   CreateFolder,
   CreateAlbum,
   CreateTrack,
-  UploadFiles,
   DeleteItem,
   ImageModal,
   SettingsModal,
   HotkeysModal,
+  BuyMoreSpace,
 } from 'components';
 import { useLocation, useNavigate } from 'react-router';
 import { hashToStateKeys } from 'consts';
@@ -84,7 +84,7 @@ export const ModalsController: FC = () => {
         </Portal>
       )}
 
-      {modals.isUploadFiles && (
+      {/* {modals.isUploadFiles && (
         <Portal>
           <Backdrop onClose={getClose('isUploadFiles')}>
             <Modal onClose={getClose('isUploadFiles')}>
@@ -92,7 +92,7 @@ export const ModalsController: FC = () => {
             </Modal>
           </Backdrop>
         </Portal>
-      )}
+      )} */}
 
       {modals.isDelete && (
         <Portal>
@@ -172,6 +172,16 @@ export const ModalsController: FC = () => {
         <Portal>
           <Backdrop className="dark" onClose={getClose('isImage')}>
             <ImageModal currentItems={currentItems} onClose={getClose('isImage')} />
+          </Backdrop>
+        </Portal>
+      )}
+
+      {modals.isBuySpace && (
+        <Portal>
+          <Backdrop onClose={getClose('isBuySpace')}>
+            <Modal onClose={getClose('isBuySpace')}>
+              <BuyMoreSpace onClose={getClose('isBuySpace')} />
+            </Modal>
           </Backdrop>
         </Portal>
       )}

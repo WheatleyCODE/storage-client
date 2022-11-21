@@ -3,6 +3,8 @@ import { AiOutlineCloud } from 'react-icons/ai';
 import { Button } from 'components';
 import { getPercent, getProgressColor, formatSize } from 'utils';
 import './StorageSize.scss';
+import { useTypedDispatch } from 'hooks';
+import { modalsActions } from 'store';
 
 export interface IStorageSizeProps {
   diskSpace: number;
@@ -10,9 +12,14 @@ export interface IStorageSizeProps {
 }
 
 export const StorageSize: FC<IStorageSizeProps> = memo(({ diskSpace, usedSpace }) => {
+  const dispatch = useTypedDispatch();
   const percent = getPercent(diskSpace, usedSpace);
   const color = getProgressColor(percent);
   const MemoIcon = memo(AiOutlineCloud);
+
+  const openModal = () => {
+    dispatch(modalsActions.changeIsModal({ key: 'isBuySpace', boolean: true }));
+  };
 
   return (
     <div className="storage-size">
@@ -29,7 +36,7 @@ export const StorageSize: FC<IStorageSizeProps> = memo(({ diskSpace, usedSpace }
       <div className="storage-size__size-info">
         {formatSize(usedSpace)} из {formatSize(diskSpace)}
       </div>
-      <Button outline="outline" color="orange" text="Купить больше места" />
+      <Button onClick={openModal} outline="outline" color="orange" text="Купить больше места" />
     </div>
   );
 });

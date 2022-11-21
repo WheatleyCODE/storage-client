@@ -17,6 +17,7 @@ import {
 } from 'react-icons/md';
 import { BiDownload, BiInfoCircle, BiTrash } from 'react-icons/bi';
 import { IconType } from 'react-icons';
+import { emitOpenFiles } from 'helpers';
 import { FolderColors, ItemTypes } from 'types';
 import { useContextMenuHandlers } from './useCoontextMenuHandlers';
 
@@ -64,9 +65,9 @@ export const useContextMenuItems = () => {
         brBefore: true,
       },
       {
-        title: 'Загрузить фалы',
+        title: 'Загрузить файлы',
         Icon: MdUploadFile,
-        handler: getOpenModal('isUploadFiles'),
+        handler: emitOpenFiles,
       },
     ],
     []

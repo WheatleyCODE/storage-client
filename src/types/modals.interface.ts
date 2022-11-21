@@ -6,13 +6,13 @@ export interface IModalsState {
   isCreateFolder: boolean;
   isCreateAlbum: boolean;
   isCreateTrack: boolean;
-  isUploadFiles: boolean;
   isDelete: boolean;
   isChangeAccess: boolean;
   isChangeParent: boolean;
   isGetLink: boolean;
   isRename: boolean;
   isImage: boolean;
+  isBuySpace: boolean;
 }
 
 export type ModalsStateKeys = keyof IModalsState;
@@ -37,6 +37,7 @@ export enum HashModals {
   GET_LINK = '#get-link',
   RENAME = '#rename',
   IMAGE = '#image',
+  BUY_SPACE = '#buy-space',
 }
 
 export type HashModalsToStateKeys = {

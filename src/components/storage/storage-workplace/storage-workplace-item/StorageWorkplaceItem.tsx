@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
   calcAndFormatSize,
@@ -8,7 +8,7 @@ import {
   transformAccess,
   transformDate,
 } from 'utils';
-import { WorkplaceItem } from 'types';
+import { ItemTypes, WorkplaceItem } from 'types';
 import './StorageWorkplaceItem.scss';
 
 export interface IStorageWorkplaceItemProps {
@@ -21,6 +21,7 @@ export interface IStorageWorkplaceItemProps {
 }
 
 export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
+  const [isDragEnter, setIsDragEnter] = useState(false);
   const { item, isActive, changeActive, addActive, addActiveShift, index } = props;
   const navigate = useNavigate();
 
@@ -50,13 +51,42 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     navigate(getWorkplaceUrl(item));
   };
 
+  const onDragEnterHandler = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragEnter(true);
+  }, []);
+
+  const onDragLeaveHandler = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragEnter(false);
+  }, []);
+
+  const onDropHandler = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const { files } = e.dataTransfer;
+    setIsDragEnter(false);
+
+    console.log(files);
+  }, []);
+
+  const isFolder = item.type === ItemTypes.FOLDER;
+
   return (
     <div
       aria-hidden
       onClick={onClick}
       onDoubleClick={openWorkplaceItem}
       onContextMenu={onContextMenu}
-      className={`storage-workplace-item ${isActive ? 'active' : ''}`}
+      onDragEnter={onDragEnterHandler}
+      onDragLeave={onDragLeaveHandler}
+      onDragOver={onDragEnterHandler}
+      onDrop={onDropHandler}
+      className={`storage-workplace-item ${isActive ? 'active' : ''} ${
+        isDragEnter && isFolder ? 'drag' : ''
+      } ${isDragEnter && !isFolder ? 'grey' : ''}`}
     >
       <div className="storage-workplace-item__name">
         <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(item)}`} />

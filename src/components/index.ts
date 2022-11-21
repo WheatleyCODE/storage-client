@@ -42,9 +42,9 @@ export { ModalsController } from './modals/modals-controller/ModalsController';
 export { CreateAlbum } from './modals/storage/create-album/CreateAlbum';
 export { CreateFolder } from './modals/storage/create-folder/CreateFolder';
 export { CreateTrack } from './modals/storage/create-track/CreateTrack';
-export { UploadFiles } from './modals/storage/upload-files/UploadFiles';
 export { DeleteItem } from './modals/storage/delete-item/DeleteItem';
 export { ImageModal } from './modals/storage/image-modal/ImageModal';
+export { BuyMoreSpace } from './modals/storage/buy-more-space/BuyMoreSpace';
 export { SettingsModal } from './modals/storage/settings-modal/SettingsModal';
 export { HotkeysModal } from './modals/storage/hotkeys-modal/HotkeysModal';
 

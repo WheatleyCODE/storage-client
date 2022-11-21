@@ -1,7 +1,8 @@
-import React, { FC, useCallback, useRef, useState, memo } from 'react';
+import React, { FC, useCallback, useRef, useState, memo, useEffect } from 'react';
 import { useClickOutside, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
 import { WorkplaceItem } from 'types';
+import { emitter, EventNames } from 'helpers';
 import { StorageWorkplaceItem } from './storage-workplace-item/StorageWorkplaceItem';
 import './StorageWorkplace.scss';
 
@@ -11,8 +12,24 @@ export interface IStorageWorkplace {
 
 export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems }) => {
   const [activeItems, setActiveItems] = useState<number[]>([]);
+  const [isDragEnter, setIsDragEnter] = useState(false);
   const ref = useRef<null | HTMLDivElement>(null);
+  const refInput = useRef<null | HTMLInputElement>(null);
   const dispatch = useTypedDispatch();
+
+  const openFiles = useCallback(() => {
+    if (refInput.current) {
+      refInput.current.click();
+    }
+  }, [refInput]);
+
+  useEffect(() => {
+    const unsub = emitter.subscribe(EventNames.OPEN_FILES, () => {
+      openFiles();
+    });
+
+    return unsub;
+  }, []);
 
   const changeActive = useCallback(
     (i: number) => {
@@ -66,19 +83,56 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
 
   useClickOutside(ref, resetActive, ['click', 'contextmenu']);
 
+  const onDragEnterHandler = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragEnter(true);
+  }, []);
+
+  const onDragLeaveHandler = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragEnter(false);
+  }, []);
+
+  const onDropHandler = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragEnter(false);
+    const { files } = e.dataTransfer;
+
+    console.log(files);
+  }, []);
+
   return (
-    <div ref={ref} className="storage-workplace">
-      {workplaceItems.map((item, i) => (
-        <StorageWorkplaceItem
-          changeActive={changeActive}
-          addActive={addActive}
-          addActiveShift={addActiveShift}
-          key={item.id}
-          isActive={activeItems.includes(i)}
-          item={item}
-          index={i}
-        />
-      ))}
+    <div
+      onDragEnter={onDragEnterHandler}
+      onDragLeave={onDragLeaveHandler}
+      onDragOver={onDragEnterHandler}
+      onDrop={onDropHandler}
+      className={`storage-workplace ${isDragEnter ? 'drag' : ''}`}
+    >
+      <div ref={ref}>
+        {workplaceItems.map((item, i) => (
+          <StorageWorkplaceItem
+            changeActive={changeActive}
+            addActive={addActive}
+            addActiveShift={addActiveShift}
+            key={item.id}
+            isActive={activeItems.includes(i)}
+            item={item}
+            index={i}
+          />
+        ))}
+      </div>
+
+      <input
+        ref={refInput}
+        multiple
+        onChange={() => {}}
+        type="file"
+        className="storage-workplace__file-upload"
+      />
     </div>
   );
 });

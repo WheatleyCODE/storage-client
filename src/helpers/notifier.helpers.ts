@@ -3,6 +3,7 @@ import { INotifierCreateMessage, INotifierMessage } from 'types';
 
 export enum EventNames {
   ADD_MESSAGE = 'ADD_MESSAGE',
+  OPEN_FILES = 'OPEN_FILES',
 }
 
 class Emitter {
@@ -25,6 +26,10 @@ class Emitter {
 }
 
 export const emitter = new Emitter();
+
+export const emitOpenFiles = () => {
+  emitter.emit(EventNames.OPEN_FILES, {} as INotifierMessage);
+};
 
 export const emitMessage = ({ color, text }: INotifierCreateMessage) => {
   emitter.emit(EventNames.ADD_MESSAGE, {

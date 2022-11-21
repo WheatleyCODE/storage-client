@@ -1,3 +1,15 @@
 @import 'styles/templates.scss';
 
-.storage-workplace {}
+.storage-workplace {
+  height: 100%;
+  border: 1px solid $colorWhite;
+
+  &__file-upload {
+    display: none;
+  }
+
+  &.drag {
+    background-color: $colorLightBlue2;
+    border: 1px solid $colorBlue;
+  }
+}
