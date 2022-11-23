@@ -1,5 +1,6 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useActions } from 'hooks';
 import {
   calcAndFormatSize,
   getColorClassName,
@@ -21,9 +22,10 @@ export interface IStorageWorkplaceItemProps {
 }
 
 export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
-  const [isDragEnter, setIsDragEnter] = useState(false);
   const { item, isActive, changeActive, addActive, addActiveShift, index } = props;
+  const [isDragEnter, setIsDragEnter] = useState(false);
   const navigate = useNavigate();
+  const { uploadFiles } = useActions();
 
   const MemoIcon = memo(getWorkplaceIcon(item));
 
@@ -66,10 +68,9 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const onDropHandler = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const { files } = e.dataTransfer;
+    const files = [...(e.dataTransfer.files as any)];
     setIsDragEnter(false);
-
-    console.log(files);
+    uploadFiles({ files, parent: item.id });
   }, []);
 
   const isFolder = item.type === ItemTypes.FOLDER;
@@ -83,7 +84,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       onDragEnter={onDragEnterHandler}
       onDragLeave={onDragLeaveHandler}
       onDragOver={onDragEnterHandler}
-      onDrop={onDropHandler}
+      onDrop={isFolder ? onDropHandler : undefined}
       className={`storage-workplace-item ${isActive ? 'active' : ''} ${
         isDragEnter && isFolder ? 'drag' : ''
       } ${isDragEnter && !isFolder ? 'grey' : ''}`}

@@ -1,7 +1,9 @@
 import { IAlbum } from './album.interface';
 import { IFile } from './file.interface';
 import { IFolder } from './folder.interface';
+import { IImage } from './image.interface';
 import { ITrack } from './track.interface';
+import { IVideo } from './video';
 
 export enum AdditionTypes {
   CALENDAR = 'CALENDAR',
@@ -37,6 +39,8 @@ export interface IStorageData {
   files: IFile[];
   albums: IAlbum[];
   tracks: ITrack[];
+  images: IImage[];
+  videos: IVideo[];
 }
 
 export interface IStorageSettings {
@@ -67,4 +71,4 @@ export interface IChildrensData {
 
 export type ISettingsData = IStorageSettings;
 
-export type WorkplaceItem = IFolder | IFile | IAlbum | ITrack;
+export type WorkplaceItem = IFolder | IFile | IAlbum | ITrack | IImage | IVideo;

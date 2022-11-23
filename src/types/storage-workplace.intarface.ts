@@ -9,6 +9,8 @@ export enum ItemTypes {
   TRACK = 'TRACK',
   FILE = 'FILE',
   ALBUM = 'ALBUM',
+  IMAGE = 'IMAGE',
+  VIDEO = 'VIDEO',
 }
 
 export interface IItemFilds {

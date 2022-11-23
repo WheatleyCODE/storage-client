@@ -1,6 +1,6 @@
 import { AccessTypes, ItemTypes } from './storage-workplace.intarface';
 
-export interface IFile {
+export interface IVideo {
   id: string;
   user: string;
   type: ItemTypes;
@@ -16,11 +16,17 @@ export interface IFile {
   creationDate: number;
   openDate: number;
   comments: any[];
-  file: string;
-  fileSize: number;
+  description: string;
+  image: string;
+  imageSize: number;
+  video: string;
+  videoSize: number;
 }
 
-export interface IUploadFilesFilds {
-  readonly files: File[];
-  parent?: string;
+export interface ICreateTrackFilds {
+  readonly name: string;
+  readonly description: string;
+  readonly parent?: string;
+  readonly video: File;
+  readonly image?: File;
 }

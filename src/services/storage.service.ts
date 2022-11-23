@@ -15,6 +15,7 @@ import {
   IItemFilds,
   IStorageData,
   ITrack,
+  IUploadFilesFilds,
   WorkplaceItem,
 } from 'types';
 import { $api } from '../api';
@@ -76,5 +77,16 @@ export class StorageService {
 
   static async searchItems(text: string): Promise<AxiosResponse<WorkplaceItem[]>> {
     return $api.post<WorkplaceItem[]>('/api/storage/search/items', { text });
+  }
+
+  static async uploadFiles(filds: IUploadFilesFilds): Promise<AxiosResponse<WorkplaceItem[]>> {
+    const formData: any = new FormData();
+    filds.files.forEach((file) => formData.append('files', file));
+
+    if (filds.parent) {
+      formData.append('parent', filds.parent);
+    }
+
+    return $api.post<WorkplaceItem[]>('/api/storage/upload/files', formData);
   }
 }

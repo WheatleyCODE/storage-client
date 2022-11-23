@@ -1,6 +1,6 @@
 import { AccessTypes, ItemTypes } from './storage-workplace.intarface';
 
-export interface IFile {
+export interface IImage {
   id: string;
   user: string;
   type: ItemTypes;
@@ -16,11 +16,6 @@ export interface IFile {
   creationDate: number;
   openDate: number;
   comments: any[];
-  file: string;
-  fileSize: number;
-}
-
-export interface IUploadFilesFilds {
-  readonly files: File[];
-  parent?: string;
+  image: string;
+  imageSize: number;
 }

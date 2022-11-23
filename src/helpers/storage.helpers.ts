@@ -46,6 +46,10 @@ export class StorageSorter {
 
   private [ItemTypes.ALBUM]: WorkplaceItem[] = [];
 
+  private [ItemTypes.IMAGE]: WorkplaceItem[] = [];
+
+  private [ItemTypes.VIDEO]: WorkplaceItem[] = [];
+
   sort(items: WorkplaceItem[], sortType: SortTypes): WorkplaceItem[] {
     const sortMethod = SortMethods[sortType];
 
@@ -53,6 +57,13 @@ export class StorageSorter {
       this[type] = items.filter((item) => item.type === type).sort(sortMethod);
     }, []);
 
-    return [...this.FOLDER, ...this.TRACK, ...this.FILE, ...this.ALBUM];
+    return [
+      ...this.FOLDER,
+      ...this.TRACK,
+      ...this.FILE,
+      ...this.ALBUM,
+      ...this.IMAGE,
+      ...this.VIDEO,
+    ];
   }
 }

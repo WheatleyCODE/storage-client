@@ -24,6 +24,7 @@ import {
   ICreateAlbumFilds,
   ISettingsData,
   IStorageSettings,
+  IUploadFilesFilds,
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { storageActions as SA } from 'store';
@@ -339,6 +340,26 @@ export const changeSettings = createAsyncThunk<ISettingsData, IStorageSettings>(
       );
 
       return settings;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const uploadFiles = createAsyncThunk<WorkplaceItem[], IUploadFilesFilds>(
+  'storage/uploadFiles',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await StorageService.uploadFiles(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Что-то фак мэн случилось',
+        })
+      );
+
+      return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }

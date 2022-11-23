@@ -10,6 +10,7 @@ import {
   deleteItems,
   fetchStorage,
   getChildrens,
+  uploadFiles,
 } from './storage.actions';
 
 const initialState: IStorageState = {
@@ -125,6 +126,15 @@ export const storageSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(uploadFiles.fulfilled, (state, { payload }) => {
+        const sorter = new StorageSorter();
+
+        const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
+        const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
+
+        state.allItems = sorter.sort([...allItemsArr, ...payload], state.sortType);
+        state.workplaceItems = sorter.sort([...workplaceItemsArr, ...payload], state.sortType);
+      })
       .addCase(changeSettings.fulfilled, (state, { payload }) => {
         state.settings = payload;
       })
@@ -175,12 +185,12 @@ export const storageSlice = createSlice({
         });
       })
       .addCase(deleteItems.fulfilled, (state, { payload }) => {
-        const { diskSpace, usedSpace, folders, tracks, files, albums } = payload;
+        const { diskSpace, usedSpace, folders, tracks, files, albums, images, videos } = payload;
 
         state.currentItems = [];
         state.diskSpace = diskSpace;
         state.usedSpace = usedSpace;
-        state.allItems = [...folders, ...tracks, ...files, ...albums];
+        state.allItems = [...folders, ...tracks, ...files, ...albums, ...images, ...videos];
       })
       .addCase(createFolder.fulfilled, (state, { payload }) => {
         state.allItems = [...state.allItems, payload];
@@ -209,7 +219,19 @@ export const storageSlice = createSlice({
       })
       .addCase(fetchStorage.fulfilled, (state, { payload }) => {
         const sorter = new StorageSorter();
-        const { id, name, user, diskSpace, usedSpace, folders, tracks, files, albums } = payload;
+        const {
+          id,
+          name,
+          user,
+          diskSpace,
+          usedSpace,
+          folders,
+          tracks,
+          files,
+          albums,
+          images,
+          videos,
+        } = payload;
 
         state.isLoading = false;
         state.id = id;
@@ -217,7 +239,10 @@ export const storageSlice = createSlice({
         state.user = user;
         state.diskSpace = diskSpace;
         state.usedSpace = usedSpace;
-        state.allItems = sorter.sort([...folders, ...tracks, ...files, ...albums], state.sortType);
+        state.allItems = sorter.sort(
+          [...folders, ...tracks, ...files, ...albums, ...images, ...videos],
+          state.sortType
+        );
       })
       .addCase(fetchStorage.rejected, (state) => {
         state.isLoading = false;

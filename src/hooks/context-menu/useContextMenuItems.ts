@@ -39,6 +39,8 @@ export interface IWorkplaceCMI {
   [ItemTypes.FILE]: IContextMenuItem[];
   [ItemTypes.ALBUM]: IContextMenuItem[];
   [ItemTypes.TRACK]: IContextMenuItem[];
+  [ItemTypes.IMAGE]: IContextMenuItem[];
+  [ItemTypes.VIDEO]: IContextMenuItem[];
 }
 
 export const useContextMenuItems = () => {
@@ -236,6 +238,32 @@ export const useContextMenuItems = () => {
           handler: getOpenModal('isSettings'),
         },
       ],
+      [ItemTypes.IMAGE]: [
+        {
+          title: 'Создать копию',
+          Icon: MdContentCopy,
+          handler: getOpenModal('isSettings'),
+          brAfter: true,
+        },
+        {
+          title: 'Скачать',
+          Icon: BiDownload,
+          handler: getOpenModal('isSettings'),
+        },
+      ],
+      [ItemTypes.VIDEO]: [
+        {
+          title: 'Создать копию',
+          Icon: MdContentCopy,
+          handler: getOpenModal('isSettings'),
+          brAfter: true,
+        },
+        {
+          title: 'Скачать',
+          Icon: BiDownload,
+          handler: getOpenModal('isSettings'),
+        },
+      ],
     }),
     [changeColorHandler]
   );
@@ -288,6 +316,32 @@ export const useContextMenuItems = () => {
         },
       ],
       [ItemTypes.TRACK]: [
+        {
+          title: 'Создать копию',
+          Icon: MdContentCopy,
+          handler: getOpenModal('isSettings'),
+          brAfter: true,
+        },
+        {
+          title: 'Скачать',
+          Icon: BiDownload,
+          handler: getOpenModal('isSettings'),
+        },
+      ],
+      [ItemTypes.IMAGE]: [
+        {
+          title: 'Создать копию',
+          Icon: MdContentCopy,
+          handler: getOpenModal('isSettings'),
+          brAfter: true,
+        },
+        {
+          title: 'Скачать',
+          Icon: BiDownload,
+          handler: getOpenModal('isSettings'),
+        },
+      ],
+      [ItemTypes.VIDEO]: [
         {
           title: 'Создать копию',
           Icon: MdContentCopy,

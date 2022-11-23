@@ -7,6 +7,8 @@ import {
   MdPublic,
   MdLockOutline,
   MdFolderShared,
+  MdImage,
+  MdVideocam,
 } from 'react-icons/md';
 import { AccessTypes, ItemTypes, SortTypes } from 'types';
 
@@ -15,6 +17,8 @@ export const storageWorkplaceIcons = {
   [ItemTypes.FILE]: MdInsertDriveFile,
   [ItemTypes.ALBUM]: MdLibraryMusic,
   [ItemTypes.TRACK]: MdAudiotrack,
+  [ItemTypes.IMAGE]: MdImage,
+  [ItemTypes.VIDEO]: MdVideocam,
   FOLDER_SHARED: MdFolderShared,
 };
 
@@ -47,4 +51,11 @@ export const sortItems = [
   },
 ];
 
-export const ItemTypesArr = [ItemTypes.FOLDER, ItemTypes.TRACK, ItemTypes.FILE, ItemTypes.ALBUM];
+export const ItemTypesArr = [
+  ItemTypes.FOLDER,
+  ItemTypes.TRACK,
+  ItemTypes.FILE,
+  ItemTypes.ALBUM,
+  ItemTypes.IMAGE,
+  ItemTypes.VIDEO,
+];

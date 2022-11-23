@@ -1,8 +1,10 @@
 import React, { FC, useCallback, useRef, useState, memo, useEffect } from 'react';
-import { useClickOutside, useTypedDispatch } from 'hooks';
+import { useLocation, useParams } from 'react-router';
+import { useActions, useClickOutside, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
-import { WorkplaceItem } from 'types';
+import { PathRoutes, WorkplaceItem } from 'types';
 import { emitter, EventNames } from 'helpers';
+import { checkPathnameOnPathRoute } from 'utils';
 import { StorageWorkplaceItem } from './storage-workplace-item/StorageWorkplaceItem';
 import './StorageWorkplace.scss';
 
@@ -16,6 +18,9 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
   const ref = useRef<null | HTMLDivElement>(null);
   const refInput = useRef<null | HTMLInputElement>(null);
   const dispatch = useTypedDispatch();
+  const { uploadFiles } = useActions();
+  const params = useParams();
+  const { pathname } = useLocation();
 
   const openFiles = useCallback(() => {
     if (refInput.current) {
@@ -95,14 +100,35 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
     setIsDragEnter(false);
   }, []);
 
-  const onDropHandler = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragEnter(false);
-    const { files } = e.dataTransfer;
+  const uploadFilesHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const filds: { parent?: string } = {};
 
-    console.log(files);
-  }, []);
+      if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
+        filds.parent = params.id;
+      }
+      const files = [...(e.target.files as any)];
+      uploadFiles({ files, ...filds });
+    },
+    [params.id, pathname]
+  );
+
+  const onDropHandler = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragEnter(false);
+
+      const filds: { parent?: string } = {};
+
+      if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
+        filds.parent = params.id;
+      }
+      const files = [...(e.dataTransfer.files as any)];
+      uploadFiles({ files, ...filds });
+    },
+    [params.id, pathname]
+  );
 
   return (
     <div
@@ -129,7 +155,7 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
       <input
         ref={refInput}
         multiple
-        onChange={() => {}}
+        onChange={uploadFilesHandler}
         type="file"
         className="storage-workplace__file-upload"
       />
