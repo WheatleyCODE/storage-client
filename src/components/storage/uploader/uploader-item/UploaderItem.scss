@@ -1,0 +1,17 @@
+@import 'styles/templates.scss';
+
+.uploader-item {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 30px;
+
+  &__icon {
+    font-size: 1.6rem;
+    margin-right: 15px;
+    color: $colorGreen;
+    padding: 3px;
+    border: 1px solid $colorGreen;
+    border-radius: 50%;
+  }
+}

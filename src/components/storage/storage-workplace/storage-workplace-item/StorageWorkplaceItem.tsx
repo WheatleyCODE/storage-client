@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useActions } from 'hooks';
+import { useNavigate, useParams } from 'react-router';
+import { useActions, useTypedDispatch } from 'hooks';
 import {
   calcAndFormatSize,
   getColorClassName,
@@ -9,7 +9,9 @@ import {
   transformAccess,
   transformDate,
 } from 'utils';
-import { ItemTypes, WorkplaceItem } from 'types';
+import { ItemTypes, ModalsStateKeys, WorkplaceItem } from 'types';
+import { stateKeysToHashModals } from 'consts';
+import { modalsActions } from 'store';
 import './StorageWorkplaceItem.scss';
 
 export interface IStorageWorkplaceItemProps {
@@ -26,6 +28,8 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const navigate = useNavigate();
   const { uploadFiles } = useActions();
+  const dispatch = useTypedDispatch();
+  const { pathname } = useParams();
 
   const MemoIcon = memo(getWorkplaceIcon(item));
 
@@ -49,7 +53,38 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     }
   };
 
+  const getOpenModal = (key: ModalsStateKeys, isHash = true) => {
+    const hash = stateKeysToHashModals[key];
+
+    if (isHash) {
+      return () => {
+        navigate(pathname + hash);
+        dispatch(modalsActions.changeIsModal({ key, boolean: true }));
+      };
+    }
+
+    return () => {
+      dispatch(modalsActions.changeIsModal({ key, boolean: true }));
+    };
+  };
+
+  // ! Fix
   const openWorkplaceItem = () => {
+    if (item.type === ItemTypes.IMAGE) {
+      getOpenModal('isImage', false)();
+      return;
+    }
+
+    if (item.type === ItemTypes.VIDEO) {
+      getOpenModal('isVideo', false)();
+      return;
+    }
+
+    if (item.type === ItemTypes.TRACK) {
+      getOpenModal('isTrack', false)();
+      return;
+    }
+
     navigate(getWorkplaceUrl(item));
   };
 

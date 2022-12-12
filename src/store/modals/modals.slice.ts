@@ -9,6 +9,7 @@ const initialState: IModalsState = {
   isCreateFolder: false,
   isCreateAlbum: false,
   isCreateTrack: false,
+  isCreateVideo: false,
   isDelete: false,
   isChangeAccess: false,
   isChangeParent: false,
@@ -16,6 +17,8 @@ const initialState: IModalsState = {
   isRename: false,
   isImage: false,
   isBuySpace: false,
+  isVideo: false,
+  isTrack: false,
 };
 
 export const modalsSlice = createSlice({
@@ -43,6 +46,9 @@ export const modalsSlice = createSlice({
       state.isRename = false;
       state.isImage = false;
       state.isBuySpace = false;
+      state.isVideo = false;
+      state.isTrack = false;
+      state.isVideo = false;
     },
   },
 });

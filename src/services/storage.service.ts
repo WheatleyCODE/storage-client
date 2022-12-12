@@ -1,4 +1,6 @@
+import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
+import { uploaderActions } from 'store';
 import {
   IAlbum,
   IChangeAccessTypeFilds,
@@ -7,6 +9,7 @@ import {
   IChangeNameFilds,
   IChangeParentFilds,
   IChildrensData,
+  ICopyFilesFilds,
   ICreateAlbumFilds,
   ICreateFolderFilds,
   ICreateTrackFilds,
@@ -79,7 +82,10 @@ export class StorageService {
     return $api.post<WorkplaceItem[]>('/api/storage/search/items', { text });
   }
 
-  static async uploadFiles(filds: IUploadFilesFilds): Promise<AxiosResponse<WorkplaceItem[]>> {
+  static async uploadFiles(
+    filds: IUploadFilesFilds,
+    dispatch: ThunkDispatch<any, any, any>
+  ): Promise<AxiosResponse<WorkplaceItem[]>> {
     const formData: any = new FormData();
     filds.files.forEach((file) => formData.append('files', file));
 
@@ -87,6 +93,15 @@ export class StorageService {
       formData.append('parent', filds.parent);
     }
 
-    return $api.post<WorkplaceItem[]>('/api/storage/upload/files', formData);
+    return $api.post<WorkplaceItem[]>('/api/storage/upload/files', formData, {
+      onUploadProgress: (progressEvent) => {
+        const progress = progressEvent?.progress?.toFixed(2) || 0;
+        dispatch(uploaderActions.setProgress(Math.floor(+progress * 100)));
+      },
+    });
+  }
+
+  static async copyFiles(filds: ICopyFilesFilds): Promise<AxiosResponse<WorkplaceItem[]>> {
+    return $api.post<WorkplaceItem[]>('/api/storage/copy/files', filds);
   }
 }

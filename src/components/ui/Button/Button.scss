@@ -11,8 +11,14 @@
 }
 
 .button.rounded {
-  border-radius: 50px;
+  border-radius: 50px !important;
 }
+
+.button.icon.outline.black {
+  @include button-icon($colorWhite, $colorBlack, $colorBlack, $colorLightGrey4);
+  border: none;
+}
+
 
 .button.icon {
   .button__icon {

@@ -1,0 +1,48 @@
+@import 'styles/templates.scss';
+
+.uploader {
+  width: 350px;
+  background-color: $colorWhite;
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  box-shadow: 0 0 6px 3px $colorShadow;
+
+  &__header {
+    padding: 7px 12px;
+    display: flex;
+    justify-content: space-between;
+    background-color: $colorBlack;
+  }
+
+  &__title {
+    margin-left: 10px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    color: $colorWhite;
+  }
+
+  &__buttons {
+    display: flex;
+
+    .button:first-child {
+      margin-right: 5px;
+    }
+  }
+  
+  .rotate {
+    transform: rotate(180deg);
+  }
+
+  .icon {
+    transition: $animationDuration;
+  }
+
+  &__items {
+    .uploader-item:first-child {
+      padding-top: 15px;
+      height: 55px;
+    }
+  }
+}

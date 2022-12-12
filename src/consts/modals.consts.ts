@@ -4,6 +4,7 @@ export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.CREATE_FOLDER]: 'isCreateFolder',
   [HashModals.CREATE_ALBUM]: 'isCreateAlbum',
   [HashModals.CREATE_TRACK]: 'isCreateTrack',
+  [HashModals.CREATE_VIDEO]: 'isCreateVideo',
   [HashModals.SETTINGS]: 'isSettings',
   [HashModals.HOTKEYS]: 'isHotkeys',
   [HashModals.DELETE]: 'isDelete',
@@ -15,12 +16,15 @@ export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.RENAME]: 'isRename',
   [HashModals.IMAGE]: 'isImage',
   [HashModals.BUY_SPACE]: 'isBuySpace',
+  [HashModals.VIDEO]: 'isVideo',
+  [HashModals.TRACK]: 'isTrack',
 };
 
 export const stateKeysToHashModals: StateKeysToHashModals = {
   isCreateFolder: HashModals.CREATE_FOLDER,
   isCreateAlbum: HashModals.CREATE_ALBUM,
   isCreateTrack: HashModals.CREATE_TRACK,
+  isCreateVideo: HashModals.CREATE_VIDEO,
   isSettings: HashModals.SETTINGS,
   isHotkeys: HashModals.HOTKEYS,
   isDelete: HashModals.DELETE,
@@ -32,4 +36,6 @@ export const stateKeysToHashModals: StateKeysToHashModals = {
   isRename: HashModals.RENAME,
   isImage: HashModals.IMAGE,
   isBuySpace: HashModals.BUY_SPACE,
+  isVideo: HashModals.VIDEO,
+  isTrack: HashModals.TRACK,
 };

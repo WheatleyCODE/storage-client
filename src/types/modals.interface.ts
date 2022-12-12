@@ -6,6 +6,7 @@ export interface IModalsState {
   isCreateFolder: boolean;
   isCreateAlbum: boolean;
   isCreateTrack: boolean;
+  isCreateVideo: boolean;
   isDelete: boolean;
   isChangeAccess: boolean;
   isChangeParent: boolean;
@@ -13,6 +14,8 @@ export interface IModalsState {
   isRename: boolean;
   isImage: boolean;
   isBuySpace: boolean;
+  isVideo: boolean;
+  isTrack: boolean;
 }
 
 export type ModalsStateKeys = keyof IModalsState;
@@ -26,6 +29,7 @@ export enum HashModals {
   CREATE_FOLDER = '#create-folder',
   CREATE_ALBUM = '#create-album',
   CREATE_TRACK = '#create-track',
+  CREATE_VIDEO = '#create-video',
   UPLOAD_FILES = '#upload-files',
   SETTINGS = '#settings',
   HOTKEYS = '#hotkeys',
@@ -38,6 +42,8 @@ export enum HashModals {
   RENAME = '#rename',
   IMAGE = '#image',
   BUY_SPACE = '#buy-space',
+  VIDEO = '#video',
+  TRACK = '#track',
 }
 
 export type HashModalsToStateKeys = {

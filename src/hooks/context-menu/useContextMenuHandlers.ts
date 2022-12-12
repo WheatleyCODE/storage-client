@@ -2,7 +2,7 @@ import { stateKeysToHashModals } from 'consts';
 import { useTypedSelector, useActions, useTypedDispatch } from 'hooks';
 import { useLocation, useNavigate } from 'react-router';
 import { modalsActions } from 'store';
-import { FolderColors, ModalsStateKeys } from 'types';
+import { FolderColors, ItemTypes, ModalsStateKeys } from 'types';
 import { getWorkplaceUrl } from 'utils';
 
 export const useContextMenuHandlers = () => {
@@ -11,7 +11,7 @@ export const useContextMenuHandlers = () => {
   const { changeIsModal } = modalsActions;
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { changeIsTrash, changeColor } = useActions();
+  const { changeIsTrash, changeColor, copyFiles } = useActions();
   const dispatch = useTypedDispatch();
 
   const getOpenModal = (key: ModalsStateKeys, isHash = true) => {
@@ -32,6 +32,22 @@ export const useContextMenuHandlers = () => {
   const openWorkpaceItem = () => {
     const item = currentItems[0];
     if (!item) return;
+
+    // ! Fix
+    if (item.type === ItemTypes.IMAGE) {
+      getOpenModal('isImage')();
+      return;
+    }
+
+    if (item.type === ItemTypes.VIDEO) {
+      getOpenModal('isVideo')();
+      return;
+    }
+
+    if (item.type === ItemTypes.TRACK) {
+      getOpenModal('isTrack')();
+      return;
+    }
 
     navigate(getWorkplaceUrl(item));
   };
@@ -60,10 +76,17 @@ export const useContextMenuHandlers = () => {
     });
   };
 
+  const copyFilesHandler = () => {
+    copyFiles({
+      items: currentItems.map(({ id, type }) => ({ id, type })),
+    });
+  };
+
   return {
     getOpenModal,
     changeIsTrashHandler,
     changeColorHandler,
+    copyFilesHandler,
     openIsInfo,
     openWorkpaceItem,
   };

@@ -25,11 +25,13 @@ import {
   ISettingsData,
   IStorageSettings,
   IUploadFilesFilds,
+  ICopyFilesFilds,
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { storageActions as SA } from 'store';
 import { hashData } from 'helpers/hash.helpers';
-import { IChangeAccessTypeRestore } from '../../types/notifier.interfaces';
+import { uploaderActions } from 'store/uploader/uploader.slice';
+import { IChangeAccessTypeRestore } from 'types/notifier.interfaces';
 
 export const fetchStorage = createAsyncThunk<IStorageData>(
   'storage/fetchStorage',
@@ -350,12 +352,38 @@ export const uploadFiles = createAsyncThunk<WorkplaceItem[], IUploadFilesFilds>(
   'storage/uploadFiles',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.uploadFiles(filds);
+      thunkAPI.dispatch(uploaderActions.setIsOpen(true));
+      thunkAPI.dispatch(uploaderActions.setIsUpload(false));
+      thunkAPI.dispatch(uploaderActions.setFileNames(filds.files.map((file) => file.name)));
+
+      const { data } = await StorageService.uploadFiles(filds, thunkAPI.dispatch);
 
       thunkAPI.dispatch(
         getActionMessage({
           color: 'default',
-          text: 'Что-то фак мэн случилось',
+          text: 'Загрузка завершена',
+        })
+      );
+
+      thunkAPI.dispatch(uploaderActions.setIsUpload(true));
+
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const copyFiles = createAsyncThunk<WorkplaceItem[], ICopyFilesFilds>(
+  'storage/copyFiles',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await StorageService.copyFiles(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Копирование файлов',
         })
       );
 

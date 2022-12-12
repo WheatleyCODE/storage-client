@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { HiOutlineUserAdd } from 'react-icons/hi';
 import {
   MdAudiotrack,
+  MdVideocam,
   MdContentCopy,
   MdDriveFileRenameOutline,
   MdLibraryMusic,
@@ -19,7 +20,7 @@ import { BiDownload, BiInfoCircle, BiTrash } from 'react-icons/bi';
 import { IconType } from 'react-icons';
 import { emitOpenFiles } from 'helpers';
 import { FolderColors, ItemTypes } from 'types';
-import { useContextMenuHandlers } from './useCoontextMenuHandlers';
+import { useContextMenuHandlers } from './useContextMenuHandlers';
 
 export interface IContextOptions {
   color: FolderColors;
@@ -44,8 +45,14 @@ export interface IWorkplaceCMI {
 }
 
 export const useContextMenuItems = () => {
-  const { getOpenModal, changeIsTrashHandler, changeColorHandler, openIsInfo, openWorkpaceItem } =
-    useContextMenuHandlers();
+  const {
+    getOpenModal,
+    changeIsTrashHandler,
+    changeColorHandler,
+    openIsInfo,
+    openWorkpaceItem,
+    copyFilesHandler,
+  } = useContextMenuHandlers();
 
   const createCMI: IContextMenuItem[] = useMemo(
     () => [
@@ -64,6 +71,11 @@ export const useContextMenuItems = () => {
         title: 'Создать трек',
         Icon: MdAudiotrack,
         handler: getOpenModal('isCreateTrack'),
+      },
+      {
+        title: 'Создать видео',
+        Icon: MdVideocam,
+        handler: getOpenModal('isCreateVideo'),
         brBefore: true,
       },
       {
@@ -156,7 +168,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Создать копию',
         Icon: MdContentCopy,
-        handler: getOpenModal('isSettings'),
+        handler: copyFilesHandler,
         brAfter: true,
       },
     ],
@@ -193,7 +205,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {
@@ -211,7 +223,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {
@@ -229,7 +241,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {
@@ -242,7 +254,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {
@@ -255,7 +267,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {
@@ -306,7 +318,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {
@@ -319,7 +331,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {
@@ -332,7 +344,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {
@@ -345,7 +357,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
-          handler: getOpenModal('isSettings'),
+          handler: copyFilesHandler,
           brAfter: true,
         },
         {

@@ -37,3 +37,5 @@ export interface IChangeAccessTypeFilds extends IItemFilds {
 export interface IChangeParentFilds extends IDeleteItemsFilds {
   parent: string | null;
 }
+
+export type ICopyFilesFilds = IDeleteItemsFilds;

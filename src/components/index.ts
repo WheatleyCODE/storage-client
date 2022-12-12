@@ -47,6 +47,9 @@ export { ImageModal } from './modals/storage/image-modal/ImageModal';
 export { BuyMoreSpace } from './modals/storage/buy-more-space/BuyMoreSpace';
 export { SettingsModal } from './modals/storage/settings-modal/SettingsModal';
 export { HotkeysModal } from './modals/storage/hotkeys-modal/HotkeysModal';
+export { VideoModal } from './modals/storage/video-modal/VideoModal';
+export { TrackModal } from './modals/storage/track-modal/TrackModal';
+export { CreateVideo } from './modals/storage/create-video/CreateVideo';
 
 export { Search } from './storage/search/Search';
 export { StorageSize } from './storage/storage-size/StorageSize';
@@ -61,6 +64,7 @@ export { Todo } from './storage/todo/Todo';
 export { ContextMenu } from './storage/context-menu/ContextMenu';
 export { ContextMenuItem } from './storage/context-menu/context-menu-item/ContextMenuItem';
 export { StorageWorkplace } from './storage/storage-workplace/StorageWorkplace';
+export { Uploader } from './storage/uploader/Uploader';
 
 export { Notifier } from './notifier/Notifier';
 

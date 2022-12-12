@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, useAnimation } from 'framer-motion';
 import { Outlet } from 'react-router';
 import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
-import { ModalsController } from 'components';
+import { ModalsController, Uploader } from 'components';
 import { modalsActions } from 'store';
 import { setAppLoader } from 'helpers';
 import { getContextMenuCoords, sleep } from 'utils';
@@ -19,6 +19,7 @@ import './StoragePageLayout.scss';
 export const StoragePageLayout: FC = () => {
   const { isLoading, settings } = useTypedSelector((state) => state.storage);
   const { isInfo, isAside } = useTypedSelector((state) => state.modals);
+  const { isOpen } = useTypedSelector((state) => state.uploader);
   const [isOpenMenu, setIsOpenMenu] = useState(true);
   const [isContextMenu, setIsContextMenu] = useState(false);
   const [coords, setCoords] = useState<ICoords>({});
@@ -145,6 +146,7 @@ export const StoragePageLayout: FC = () => {
         )}
       </div>
       <ModalsController />
+      <AnimatePresence>{isOpen && <Uploader />}</AnimatePresence>
     </div>
   );
 };

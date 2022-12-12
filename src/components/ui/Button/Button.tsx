@@ -6,7 +6,7 @@ interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   text?: string;
   type?: 'icon' | 'default';
   outline?: 'fill' | 'outline';
-  color?: 'blue' | 'orange';
+  color?: 'blue' | 'orange' | 'black';
   radius?: 'rounded' | 'none';
   className?: string;
   Icon?: IconType;

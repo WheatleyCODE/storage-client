@@ -3,6 +3,7 @@ import { StorageSorter } from 'helpers';
 import { IFolder, IStorageState, SortTypes, WorkplaceItem } from 'types';
 import {
   changeSettings,
+  copyFiles,
   createAccessLink,
   createAlbum,
   createFolder,
@@ -126,6 +127,15 @@ export const storageSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(copyFiles.fulfilled, (state, { payload }) => {
+        const sorter = new StorageSorter();
+
+        const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
+        const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
+
+        state.allItems = sorter.sort([...allItemsArr, ...payload], state.sortType);
+        state.workplaceItems = sorter.sort([...workplaceItemsArr, ...payload], state.sortType);
+      })
       .addCase(uploadFiles.fulfilled, (state, { payload }) => {
         const sorter = new StorageSorter();
 

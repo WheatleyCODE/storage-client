@@ -14,6 +14,9 @@ import {
   SettingsModal,
   HotkeysModal,
   BuyMoreSpace,
+  VideoModal,
+  TrackModal,
+  CreateVideo,
 } from 'components';
 import { useLocation, useNavigate } from 'react-router';
 import { hashToStateKeys } from 'consts';
@@ -83,16 +86,6 @@ export const ModalsController: FC = () => {
           </Backdrop>
         </Portal>
       )}
-
-      {/* {modals.isUploadFiles && (
-        <Portal>
-          <Backdrop onClose={getClose('isUploadFiles')}>
-            <Modal onClose={getClose('isUploadFiles')}>
-              <UploadFiles onClose={getClose('isUploadFiles')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )} */}
 
       {modals.isDelete && (
         <Portal>
@@ -181,6 +174,36 @@ export const ModalsController: FC = () => {
           <Backdrop onClose={getClose('isBuySpace')}>
             <Modal onClose={getClose('isBuySpace')}>
               <BuyMoreSpace onClose={getClose('isBuySpace')} />
+            </Modal>
+          </Backdrop>
+        </Portal>
+      )}
+
+      {modals.isVideo && (
+        <Portal>
+          <Backdrop className="dark" onClose={getClose('isVideo')}>
+            <Modal onClose={getClose('isVideo')}>
+              <VideoModal onClose={getClose('isVideo')} />
+            </Modal>
+          </Backdrop>
+        </Portal>
+      )}
+
+      {modals.isTrack && (
+        <Portal>
+          <Backdrop className="dark" onClose={getClose('isTrack')}>
+            <Modal onClose={getClose('isTrack')}>
+              <TrackModal onClose={getClose('isTrack')} />
+            </Modal>
+          </Backdrop>
+        </Portal>
+      )}
+
+      {modals.isCreateVideo && (
+        <Portal>
+          <Backdrop onClose={getClose('isCreateVideo')}>
+            <Modal onClose={getClose('isCreateVideo')}>
+              <CreateVideo onClose={getClose('isCreateVideo')} />
             </Modal>
           </Backdrop>
         </Portal>
