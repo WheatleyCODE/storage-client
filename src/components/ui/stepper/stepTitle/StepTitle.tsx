@@ -15,7 +15,13 @@ export const StepTitle: FC<IStepTitleProps> = memo((props) => {
 
   return (
     <div className={`step-title ${isActive ? 'active' : ''} ${isComplete ? 'complete' : ''}`}>
-      <div className="step-title__icon">{isComplete ? <MemoIcon className="icon" /> : number}</div>
+      <div className="step-title__icon">
+        {isComplete ? (
+          <MemoIcon className="icon" />
+        ) : (
+          <div className="step-title__number">{number}</div>
+        )}
+      </div>
       <div className="step-title__title">{title}</div>
     </div>
   );

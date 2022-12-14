@@ -11,7 +11,7 @@ export const useContextMenuHandlers = () => {
   const { changeIsModal } = modalsActions;
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { changeIsTrash, changeColor, copyFiles } = useActions();
+  const { changeIsTrash, changeColor, copyFiles, downloadFile, downloadAcrhive } = useActions();
   const dispatch = useTypedDispatch();
 
   const getOpenModal = (key: ModalsStateKeys, isHash = true) => {
@@ -82,6 +82,22 @@ export const useContextMenuHandlers = () => {
     });
   };
 
+  const downloadFileHandler = () => {
+    const arr = currentItems.map(({ id, type }) => ({ id, type }));
+    const { id, type } = arr[0];
+
+    downloadFile({
+      id,
+      type,
+    });
+  };
+
+  const downloadArchiveHandler = () => {
+    downloadAcrhive({
+      items: currentItems.map(({ id, type }) => ({ id, type })),
+    });
+  };
+
   return {
     getOpenModal,
     changeIsTrashHandler,
@@ -89,5 +105,7 @@ export const useContextMenuHandlers = () => {
     copyFilesHandler,
     openIsInfo,
     openWorkpaceItem,
+    downloadFileHandler,
+    downloadArchiveHandler,
   };
 };

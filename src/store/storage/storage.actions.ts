@@ -26,10 +26,12 @@ import {
   IStorageSettings,
   IUploadFilesFilds,
   ICopyFilesFilds,
+  IDownloadFileFilds,
+  IDownloadArchiveFilds,
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { storageActions as SA } from 'store';
-import { hashData } from 'helpers/hash.helpers';
+import { CacheData } from 'helpers/cache.helpers';
 import { uploaderActions } from 'store/uploader/uploader.slice';
 import { IChangeAccessTypeRestore } from 'types/notifier.interfaces';
 
@@ -311,15 +313,16 @@ export const getChildrens = createAsyncThunk<IChildrensData, string>(
   'storage/getChildrens',
   async (string, thunkAPI) => {
     try {
-      const dataHash = hashData.get<IChildrensData>(string);
+      const cacheData = CacheData.getInstance();
+      const dataCache = cacheData.get<IChildrensData>(string);
 
-      if (dataHash) {
-        hashData.set(string, dataHash, 5000);
-        return dataHash;
+      if (dataCache) {
+        cacheData.set(string, dataCache, 5000);
+        return dataCache;
       }
 
       const { data } = await StorageService.getChildrens(string);
-      hashData.set(string, data, 5000);
+      cacheData.set(string, data, 5000);
 
       return data;
     } catch (e: any) {
@@ -388,6 +391,46 @@ export const copyFiles = createAsyncThunk<WorkplaceItem[], ICopyFilesFilds>(
       );
 
       return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const downloadFile = createAsyncThunk<any, IDownloadFileFilds>(
+  'storage/downloadFiles',
+  async (filds, thunkAPI) => {
+    try {
+      await StorageService.downloadFile(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Загрузка файла',
+        })
+      );
+
+      return {};
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const downloadAcrhive = createAsyncThunk<any, IDownloadArchiveFilds>(
+  'storage/downloadArhive',
+  async (filds, thunkAPI) => {
+    try {
+      await StorageService.downloadArchive(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Загрузка архива',
+        })
+      );
+
+      return {};
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }

@@ -88,3 +88,13 @@ export const getContextMenuHeight = (numbers: PopupNumbers): number => {
 export const getWorkplaceUrl = (item: WorkplaceItem): string => {
   return `/storage/${item.type.toLocaleLowerCase()}s/${item.id}`;
 };
+
+export const downloadTrigger = (file: Blob, filename: string) => {
+  const url = window.URL.createObjectURL(file);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+};

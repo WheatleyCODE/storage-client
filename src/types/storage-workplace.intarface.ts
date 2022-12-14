@@ -39,3 +39,5 @@ export interface IChangeParentFilds extends IDeleteItemsFilds {
 }
 
 export type ICopyFilesFilds = IDeleteItemsFilds;
+export type IDownloadArchiveFilds = IDeleteItemsFilds;
+export type IDownloadFileFilds = IItemFilds;

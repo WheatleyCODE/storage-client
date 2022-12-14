@@ -183,7 +183,7 @@ export const ModalsController: FC = () => {
         <Portal>
           <Backdrop className="dark" onClose={getClose('isVideo')}>
             <Modal onClose={getClose('isVideo')}>
-              <VideoModal onClose={getClose('isVideo')} />
+              <VideoModal currentItems={currentItems} onClose={getClose('isVideo')} />
             </Modal>
           </Backdrop>
         </Portal>
@@ -193,7 +193,7 @@ export const ModalsController: FC = () => {
         <Portal>
           <Backdrop className="dark" onClose={getClose('isTrack')}>
             <Modal onClose={getClose('isTrack')}>
-              <TrackModal onClose={getClose('isTrack')} />
+              <TrackModal currentItems={currentItems} onClose={getClose('isTrack')} />
             </Modal>
           </Backdrop>
         </Portal>
@@ -202,7 +202,7 @@ export const ModalsController: FC = () => {
       {modals.isCreateVideo && (
         <Portal>
           <Backdrop onClose={getClose('isCreateVideo')}>
-            <Modal onClose={getClose('isCreateVideo')}>
+            <Modal className="create-video__modal" onClose={getClose('isCreateVideo')}>
               <CreateVideo onClose={getClose('isCreateVideo')} />
             </Modal>
           </Backdrop>

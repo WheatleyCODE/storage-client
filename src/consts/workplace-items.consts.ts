@@ -13,6 +13,12 @@ export const createAlbumStepTitles = [
   { title: 'Загрузка картинки' },
 ];
 
+export const createVideoStepTitles = [
+  { title: 'Название видео' },
+  { title: 'Описание' },
+  { title: 'Загрузка файлов' },
+];
+
 export const changeAccessItems = [
   {
     text: transformAccess(AccessTypes.PRIVATE),

@@ -108,13 +108,15 @@ export const storageSlice = createSlice({
         return item;
       });
 
-      state.workplaceItems = state.workplaceItems.map((item) => {
-        if (types.includes(item.type)) {
-          return payload.find((itm) => itm.id === item.id) || item;
-        }
+      state.workplaceItems = state.workplaceItems
+        .map((item) => {
+          if (types.includes(item.type)) {
+            return payload.find((itm) => itm.id === item.id) || item;
+          }
 
-        return item;
-      });
+          return item;
+        })
+        .filter((item) => !item.isTrash);
 
       state.allItems = state.allItems.map((item) => {
         if (types.includes(item.type)) {
@@ -201,10 +203,21 @@ export const storageSlice = createSlice({
         state.diskSpace = diskSpace;
         state.usedSpace = usedSpace;
         state.allItems = [...folders, ...tracks, ...files, ...albums, ...images, ...videos];
+        state.workplaceItems = state.workplaceItems.filter((item) => item.isTrash);
       })
       .addCase(createFolder.fulfilled, (state, { payload }) => {
+        const sorter = new StorageSorter();
         state.allItems = [...state.allItems, payload];
         state.usedSpace += payload.folderSize;
+
+        const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
+
+        if (payload.parent) {
+          const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
+          state.workplaceItems = sorter.sort([...workplaceItemsArr, payload], state.sortType);
+        }
+
+        state.allItems = sorter.sort([...allItemsArr, payload], state.sortType);
       })
       .addCase(createTrack.fulfilled, (state, { payload }) => {
         const { imageSize, audioSize } = payload;

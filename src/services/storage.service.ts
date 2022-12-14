@@ -1,6 +1,8 @@
 import { ThunkDispatch } from '@reduxjs/toolkit';
+import * as uuid from 'uuid';
 import { AxiosResponse } from 'axios';
 import { uploaderActions } from 'store';
+import { downloadTrigger } from 'utils';
 import {
   IAlbum,
   IChangeAccessTypeFilds,
@@ -14,6 +16,8 @@ import {
   ICreateFolderFilds,
   ICreateTrackFilds,
   IDeleteItemsFilds,
+  IDownloadArchiveFilds,
+  IDownloadFileFilds,
   IFolder,
   IItemFilds,
   IStorageData,
@@ -103,5 +107,27 @@ export class StorageService {
 
   static async copyFiles(filds: ICopyFilesFilds): Promise<AxiosResponse<WorkplaceItem[]>> {
     return $api.post<WorkplaceItem[]>('/api/storage/copy/files', filds);
+  }
+
+  static async downloadArchive(filds: IDownloadArchiveFilds): Promise<void> {
+    const res = await $api.post<Blob>('/api/storage/download/archive', filds, {
+      responseType: 'blob',
+    });
+
+    const { filename } = res.headers;
+    const { data } = res;
+
+    downloadTrigger(data, filename || uuid.v4());
+  }
+
+  static async downloadFile(filds: IDownloadFileFilds): Promise<void> {
+    const res = await $api.post<Blob>('/api/storage/download/file', filds, {
+      responseType: 'blob',
+    });
+
+    const { filename } = res.headers;
+    const { data } = res;
+
+    downloadTrigger(data, filename || uuid.v4());
   }
 }

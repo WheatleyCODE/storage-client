@@ -52,6 +52,8 @@ export const useContextMenuItems = () => {
     openIsInfo,
     openWorkpaceItem,
     copyFilesHandler,
+    downloadFileHandler,
+    downloadArchiveHandler,
   } = useContextMenuHandlers();
 
   const createCMI: IContextMenuItem[] = useMemo(
@@ -209,9 +211,9 @@ export const useContextMenuItems = () => {
           brAfter: true,
         },
         {
-          title: 'Скачать',
+          title: 'Скачать СИНГ',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadFileHandler,
         },
       ],
       [ItemTypes.ALBUM]: [
@@ -245,9 +247,9 @@ export const useContextMenuItems = () => {
           brAfter: true,
         },
         {
-          title: 'Скачать',
+          title: 'Скачать СИНГ',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadFileHandler,
         },
       ],
       [ItemTypes.IMAGE]: [
@@ -258,9 +260,9 @@ export const useContextMenuItems = () => {
           brAfter: true,
         },
         {
-          title: 'Скачать',
+          title: 'Скачать СИНГЛ',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadFileHandler,
         },
       ],
       [ItemTypes.VIDEO]: [
@@ -271,9 +273,9 @@ export const useContextMenuItems = () => {
           brAfter: true,
         },
         {
-          title: 'Скачать',
+          title: 'Скачать СИНГ',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadFileHandler,
         },
       ],
     }),
@@ -309,9 +311,9 @@ export const useContextMenuItems = () => {
       ],
       [ItemTypes.FILE]: [
         {
-          title: 'Скачать',
+          title: 'Скачать МОРЕ',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadArchiveHandler,
         },
       ],
       [ItemTypes.ALBUM]: [
@@ -324,7 +326,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadArchiveHandler,
         },
       ],
       [ItemTypes.TRACK]: [
@@ -337,7 +339,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadArchiveHandler,
         },
       ],
       [ItemTypes.IMAGE]: [
@@ -350,7 +352,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadArchiveHandler,
         },
       ],
       [ItemTypes.VIDEO]: [
@@ -363,7 +365,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: downloadArchiveHandler,
         },
       ],
     }),

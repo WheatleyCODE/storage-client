@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router';
 import { useActions, useClickOutside, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
 import { PathRoutes, WorkplaceItem } from 'types';
-import { emitter, EventNames } from 'helpers';
+import { Emitter, EventNames } from 'helpers';
 import { checkPathnameOnPathRoute } from 'utils';
 import { StorageWorkplaceItem } from './storage-workplace-item/StorageWorkplaceItem';
 import './StorageWorkplace.scss';
@@ -29,6 +29,8 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
   }, [refInput]);
 
   useEffect(() => {
+    const emitter = Emitter.getInstance();
+
     const unsub = emitter.subscribe(EventNames.OPEN_FILES, () => {
       openFiles();
     });

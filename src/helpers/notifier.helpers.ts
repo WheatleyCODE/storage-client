@@ -1,31 +1,8 @@
 import { notifierActions } from 'store';
 import { INotifierCreateMessage, INotifierMessage } from 'types';
+import { Emitter, EventNames } from './emitter.helpers';
 
-export enum EventNames {
-  ADD_MESSAGE = 'ADD_MESSAGE',
-  OPEN_FILES = 'OPEN_FILES',
-}
-
-class Emitter {
-  private subscribers: { [propName: string]: Array<(a: INotifierMessage) => void> } = {};
-
-  emit(eventName: EventNames, arg: INotifierMessage): void {
-    if (Array.isArray(this.subscribers[eventName])) {
-      this.subscribers[eventName].forEach((callback) => callback(arg));
-    }
-  }
-
-  subscribe(eventName: EventNames, callback: (a: INotifierMessage) => void): () => void {
-    this.subscribers[eventName] = this.subscribers[eventName] || [];
-    this.subscribers[eventName].push(callback);
-
-    return () => {
-      this.subscribers[eventName] = this.subscribers[eventName].filter((fn) => fn !== callback);
-    };
-  }
-}
-
-export const emitter = new Emitter();
+const emitter = Emitter.getInstance();
 
 export const emitOpenFiles = () => {
   emitter.emit(EventNames.OPEN_FILES, {} as INotifierMessage);

@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { Portal } from 'components';
 import { useTypedDispatch, useTypedSelector } from 'hooks';
 import { notifierActions } from 'store';
-import { emitter, EventNames } from 'helpers';
+import { Emitter, EventNames } from 'helpers';
 import { NotifierMessage } from './notifier-message/NotifierMessage';
 import './Notifier.scss';
 
@@ -12,6 +12,8 @@ export const Notifier: FC = memo(() => {
   const { currentMessages } = useTypedSelector((state) => state.notifier);
 
   useEffect(() => {
+    const emitter = Emitter.getInstance();
+
     const unsub = emitter.subscribe(EventNames.ADD_MESSAGE, (message) => {
       dispatch(notifierActions.notifierAddMessage(message));
     });

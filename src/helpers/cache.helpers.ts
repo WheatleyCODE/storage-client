@@ -1,7 +1,28 @@
-class HashData {
+/* eslint-disable no-constructor-return */
+export class CacheData {
   private data: { [key: string]: any } = {};
 
   private timers: { [key: string]: NodeJS.Timeout | null } = {};
+
+  private static instance: CacheData;
+
+  private static exists: boolean;
+
+  constructor() {
+    if (CacheData.exists) return CacheData.instance;
+
+    CacheData.instance = this;
+    CacheData.exists = true;
+  }
+
+  public static getInstance(): CacheData {
+    if (!CacheData.exists) {
+      CacheData.instance = new CacheData();
+      CacheData.exists = true;
+    }
+
+    return CacheData.instance;
+  }
 
   set(key: string, data: any, time?: number): boolean {
     this.data[key] = data;
@@ -28,5 +49,3 @@ class HashData {
     return this.data[key];
   }
 }
-
-export const hashData = new HashData();
