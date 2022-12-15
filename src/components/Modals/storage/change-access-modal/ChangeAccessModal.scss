@@ -1,0 +1,17 @@
+@import 'styles/templates.scss';
+
+.change-access-modal {
+  width: 380px;
+
+  &__title {
+    font-size: 1.4rem;
+    margin: 0;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .change-access-modal {
+    width: 100%;
+  }
+}

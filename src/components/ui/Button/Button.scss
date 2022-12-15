@@ -10,16 +10,6 @@
   }
 }
 
-.button.rounded {
-  border-radius: 50px !important;
-}
-
-.button.icon.outline.black {
-  @include button-icon($colorWhite, $colorBlack, $colorBlack, $colorLightGrey4);
-  border: none;
-}
-
-
 .button.icon {
   .button__icon {
     font-size: 2rem;
@@ -27,26 +17,9 @@
   }
 }
 
-.button.default.outline.blue {
-  @include button($colorBlue, $colorWhite, $colorBlue, $colorWhite, $colorBlue, $colorDarkBlue);
-}
 
-.button.default.outline.orange {
-  @include button($colorOrange, $colorWhite, $colorOrange, $colorWhite, $colorOrange, $colorDarkOrange);
-}
-
-.button.icon.outline {
-  @include button-icon($colorBlack, $colorWhite, $colorBlack, $colorLightGrey4);
-}
-
-.button.default.fill.blue {
-  @include button($colorWhite, $colorBlue, $colorWhite, $colorWhite, $colorLightBlue, $colorDarkBlue);
-  font-size: 1.1rem;
-}
-
-.button.default.fill.orange {
-  @include button($colorWhite, $colorOrange, $colorWhite, $colorWhite, $colorLightOrange, $colorDarkOrange);
-  font-size: 1.1rem;
+.button.rounded {
+  border-radius: 50px;
 }
 
 .button.disable {
@@ -57,4 +30,116 @@
   background-color: $colorWhite !important;
   border: 1px solid $colorGrey !important;
   color: $colorGrey !important;
+}
+
+.button.icon.outline.black {
+  @include button-icon($colorWhite, $colorBlack, $colorWhite, $colorWhite, $colorDarkGrey2, $colorDarkGrey2, $colorWhite, $colorDarkGrey1, $colorDarkGrey1);
+}
+
+.button.icon.fill.black {
+  @include button-icon($colorWhite, $colorBlack, $colorBlack, $colorWhite, $colorDarkGrey2, $colorDarkGrey2, $colorWhite, $colorDarkGrey1, $colorDarkGrey1);
+}
+
+.button.icon.outline.none-light {
+  @include button-icon($colorWhite, $colorNone, $colorLight, $colorWhite, $colorLight, $colorNone, $colorWhite, $colorLight2, $colorNone);
+}
+
+.button.icon.fill.none-light {
+  @include button-icon($colorWhite, $colorNone, $colorNone, $colorWhite, $colorLight, $colorNone, $colorWhite, $colorLight2, $colorNone);
+}
+
+.button.icon.outline.none-dark {
+  @include button-icon($colorBlack, $colorNone, $colorDark, $colorBlack, $colorDark, $colorNone, $colorBlack, $colorDark2, $colorNone);
+}
+
+.button.icon.fill.none-dark {
+  @include button-icon($colorBlack, $colorNone, $colorNone, $colorBlack, $colorDark, $colorNone, $colorBlack, $colorDark2, $colorNone);
+}
+
+.button.icon.outline.blue {
+  @include button-icon($colorBlue, $colorWhite, $colorBlue, $colorWhite, $colorBlue, $colorBlue, $colorWhite, $colorDarkBlue, $colorDarkBlue);
+}
+
+.button.icon.fill.blue {
+  @include button-icon($colorWhite, $colorBlue, $colorBlue, $colorWhite, $colorLightBlue, $colorLightBlue, $colorWhite, $colorDarkBlue, $colorDarkBlue);
+}
+
+.button.icon.outline.orange {
+  @include button-icon($colorOrange, $colorWhite, $colorOrange, $colorWhite, $colorOrange, $colorOrange, $colorWhite, $colorDarkOrange, $colorDarkOrange);
+}
+
+.button.icon.fill.orange {
+  @include button-icon($colorWhite, $colorOrange, $colorOrange, $colorWhite, $colorLightOrange, $colorLightOrange, $colorWhite, $colorDarkOrange, $colorDarkOrange);
+}
+
+.button.icon.outline.red {
+  @include button-icon($colorRed, $colorWhite, $colorRed, $colorWhite, $colorRed, $colorRed, $colorWhite, $colorDarkRed, $colorDarkRed);
+}
+
+.button.icon.fill.red {
+  @include button-icon($colorWhite, $colorRed, $colorRed, $colorWhite, $colorLightRed, $colorLightRed, $colorWhite, $colorDarkRed, $colorDarkRed);
+}
+
+.button.icon.outline.green {
+  @include button-icon($colorGreen, $colorWhite, $colorGreen, $colorWhite, $colorGreen, $colorGreen, $colorWhite, $colorDarkGreen, $colorDarkGreen);
+}
+
+.button.icon.fill.green {
+  @include button-icon($colorWhite, $colorGreen, $colorGreen, $colorWhite, $colorLightGreen, $colorLightGreen, $colorWhite, $colorDarkGreen, $colorDarkGreen);
+}
+
+.button.default.outline.black {
+  @include button($colorWhite, $colorBlack, $colorWhite, $colorWhite, $colorDarkGrey2, $colorDarkGrey2, $colorWhite, $colorDarkGrey1, $colorDarkGrey1);
+}
+
+.button.default.fill.black {
+  @include button($colorWhite, $colorBlack, $colorBlack, $colorWhite, $colorDarkGrey2, $colorDarkGrey2, $colorWhite, $colorDarkGrey1, $colorDarkGrey1);
+}
+
+.button.default.outline.none-light {
+  @include button($colorWhite, $colorNone, $colorLight, $colorWhite, $colorLight, $colorNone, $colorWhite, $colorLight2, $colorNone);
+}
+
+.button.default.fill.none-light {
+  @include button($colorWhite, $colorNone, $colorNone, $colorWhite, $colorLight, $colorNone, $colorWhite, $colorLight2, $colorNone);
+}
+
+.button.default.outline.none-dark {
+  @include button($colorBlack, $colorNone, $colorDark, $colorBlack, $colorDark, $colorNone, $colorBlack, $colorDark2, $colorNone);
+}
+
+.button.default.fill.none-dark {
+  @include button($colorBlack, $colorNone, $colorNone, $colorBlack, $colorDark, $colorNone, $colorBlack, $colorDark2, $colorNone);
+}
+
+.button.default.outline.blue {
+  @include button($colorBlue, $colorWhite, $colorBlue, $colorWhite, $colorBlue, $colorBlue, $colorWhite, $colorDarkBlue, $colorDarkBlue);
+}
+
+.button.default.fill.blue {
+  @include button($colorWhite, $colorBlue, $colorBlue, $colorWhite, $colorLightBlue, $colorLightBlue, $colorWhite, $colorDarkBlue, $colorDarkBlue);
+}
+
+.button.default.outline.orange {
+  @include button($colorOrange, $colorWhite, $colorOrange, $colorWhite, $colorOrange, $colorOrange, $colorWhite, $colorDarkOrange, $colorDarkOrange);
+}
+
+.button.default.fill.orange {
+  @include button($colorWhite, $colorOrange, $colorOrange, $colorWhite, $colorLightOrange, $colorLightOrange, $colorWhite, $colorDarkOrange, $colorDarkOrange);
+}
+
+.button.default.outline.red {
+  @include button($colorRed, $colorWhite, $colorRed, $colorWhite, $colorRed, $colorRed, $colorWhite, $colorDarkRed, $colorDarkRed);
+}
+
+.button.default.fill.red {
+  @include button($colorWhite, $colorRed, $colorRed, $colorWhite, $colorLightRed, $colorLightRed, $colorWhite, $colorDarkRed, $colorDarkRed);
+}
+
+.button.default.outline.green {
+  @include button($colorGreen, $colorWhite, $colorGreen, $colorWhite, $colorGreen, $colorGreen, $colorWhite, $colorDarkGreen, $colorDarkGreen);
+}
+
+.button.default.fill.green {
+  @include button($colorWhite, $colorGreen, $colorGreen, $colorWhite, $colorLightGreen, $colorLightGreen, $colorWhite, $colorDarkGreen, $colorDarkGreen);
 }

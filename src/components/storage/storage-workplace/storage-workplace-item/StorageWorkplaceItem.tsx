@@ -85,6 +85,11 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       return;
     }
 
+    if (item.type === ItemTypes.ALBUM) {
+      getOpenModal('isAlbum', false)();
+      return;
+    }
+
     navigate(getWorkplaceUrl(item));
   };
 

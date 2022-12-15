@@ -6,62 +6,71 @@
   align-items: $b;
 }
 
-@mixin border($color: $colorGrey) {
-  border: 1px solid $color;
-}
-
 @mixin button-icon(
   $color: $colorBlack,
-  $colorBg: $colorWhite,
-  $hoverColor: $colorWhite,
-  $hoverColorBg: $colorLightGrey4,
-  $borderRadius: $buttonBorderRadius
+  $colorBackground: $colorWhite,
+  $colorBorder: $colorWhite,
+  $hoverColor: $colorBlack,
+  $hoverColorBackground: $colorLightGrey4,
+  $hoverColorBorder: $colorWhite,
+  $activeColor: $colorBlack,
+  $activeColorBackground: $colorLightGrey3,
+  $activeColorBorder: $colorWhite,
 ) {
   @include flex;
-  @include border($colorWhite);
   width: 45px;
   color: $color;
-  background-color: $colorBg;
+  background-color: $colorBackground;
   height: 45px;
-  border-radius: $borderRadius;
+  border: 1px solid $colorBorder;
+
   transition: all $animationDuration;
   cursor: pointer;
 
   &:hover {
-    background-color: $hoverColorBg;
+    border: 1px solid $hoverColorBorder;
+    background-color: $hoverColorBackground;
     color: $hoverColor;
   }
 
   &:active {
-    background-color: $colorLightGrey3;
+    border: 1px solid $activeColorBorder;
+    background-color: $activeColorBackground;
+    color: $activeColor;
   }
 }
 
 @mixin button(
   $color: $colorBlack,
-  $colorBg: $colorWhite,
-  $borderColor: $colorGrey,
-  $hoverColor: $colorWhite,
-  $hoverColorBg: $colorGrey,
-  $hoverColorAc: $colorDarkGrey,
+  $colorBackground: $colorWhite,
+  $colorBorder: $colorWhite,
+  $hoverColor: $colorBlack,
+  $hoverColorBackground: $colorLightGrey4,
+  $hoverColorBorder: $colorWhite,
+  $activeColor: $colorBlack,
+  $activeColorBackground: $colorLightGrey3,
+  $activeColorBorder: $colorWhite,
   $p1: 10px,
-  $p2: 14px,
+  $p2: 15px,
 ) {
-  @include border($borderColor);
   @include flex;
   padding: $p1 $p2;
   color: $color;
-  background-color: $colorBg;
+  border: 1px solid $colorBorder;
+  background-color: $colorBackground;
   transition: all $animationDuration;
   cursor: pointer;
 
   &:hover {
-    background-color: $hoverColorBg;
+    border: 1px solid $hoverColorBorder;
+    background-color: $hoverColorBackground;
     color: $hoverColor;
   }
 
   &:active {
-    background-color: $hoverColorAc;
+    border: 1px solid $activeColorBorder;
+    background-color: $activeColorBackground;
+    color: $activeColor;
   }
 }
 

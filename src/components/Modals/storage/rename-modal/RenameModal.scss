@@ -1,0 +1,47 @@
+@import 'styles/templates.scss';
+
+.rename-modal {
+  width: 380px;
+
+  &__title {
+    font-size: 1.4rem;
+    margin: 0;
+    margin-bottom: 30px;
+  }
+
+  &.yellow {
+    .input__icon {
+      color: red;
+    }
+  }
+
+  &.grey {
+    .input__icon {
+      color: $colorDarkGrey2;
+    }
+  }
+
+  &.blue {
+    .input__icon {
+      color: $colorBlue;
+    }
+  }
+
+  &.red {
+    .input__icon {
+      color: $colorRed;
+    }
+  }
+
+  &.yellow {
+    .input__icon {
+      color: $colorYellow;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .rename-modal {
+    width: 100%;
+  }
+}

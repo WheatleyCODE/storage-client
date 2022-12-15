@@ -1,6 +1,7 @@
 import React, { FC, memo, useCallback, useEffect, useRef, useState } from 'react';
-import { MdArrowBack, MdOutlineRemoveRedEye } from 'react-icons/md';
+import { MdArrowBack } from 'react-icons/md';
 import { useResizeObserver } from 'hooks';
+import { WorkplaceModal } from 'components';
 import { getImageLink, getWorkplaceIcon } from 'utils';
 import { WorkplaceItem } from 'types';
 import './ImageModal.scss';
@@ -94,36 +95,16 @@ export const ImageModal: FC<IImageModalProps> = ({ currentItems, onClose }) => {
   }, [aspectRatio, containerSize, initialSize.height, initialSize.width, size]);
 
   return (
-    <div aria-hidden onClick={stopPropagation} className="image-modal">
-      <div className="image-modal__header">
-        <div className="image-modal__title">
-          <div aria-hidden onClick={onClose} className="image-modal__arrow">
-            <MemoArrow />
-          </div>
-          <div className="image-modal__name">
-            <MemoIcon className="image-modal__icon" />
-            {item.name}
-          </div>
-        </div>
-        <div className="image-modal__action">
-          <MdOutlineRemoveRedEye className="image-modal__icon" />
-          Только просмотр
-        </div>
-        {/* <div className="image-modal__menu">
-          <h1>name</h1>
-        </div> */}
+    <WorkplaceModal onClose={onClose}>
+      <div aria-hidden onClick={stopPropagation} className="image-modal">
+        <img
+          height={size.height || undefined}
+          width={size.width || undefined}
+          ref={refImage}
+          src={imageLink || ''}
+          alt="Картика"
+        />
       </div>
-      {imageLink && (
-        <div ref={refDiv} className="image-modal__image">
-          <img
-            height={size.height || undefined}
-            width={size.width || undefined}
-            ref={refImage}
-            src={imageLink}
-            alt="Картика"
-          />
-        </div>
-      )}
-    </div>
+    </WorkplaceModal>
   );
 };

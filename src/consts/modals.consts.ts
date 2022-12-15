@@ -18,6 +18,7 @@ export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.BUY_SPACE]: 'isBuySpace',
   [HashModals.VIDEO]: 'isVideo',
   [HashModals.TRACK]: 'isTrack',
+  [HashModals.ALBUM]: 'isAlbum',
 };
 
 export const stateKeysToHashModals: StateKeysToHashModals = {
@@ -38,4 +39,5 @@ export const stateKeysToHashModals: StateKeysToHashModals = {
   isBuySpace: HashModals.BUY_SPACE,
   isVideo: HashModals.VIDEO,
   isTrack: HashModals.TRACK,
+  isAlbum: HashModals.ALBUM,
 };

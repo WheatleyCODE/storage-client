@@ -1,0 +1,44 @@
+@import 'styles/templates.scss';
+
+.create-track-modal {
+  &__step {
+    padding-top: 15px;
+    height: 140px;
+
+    .input, .file-uploader {
+      margin-bottom: 20px;
+    }
+
+    .input:last-child, .file-uploader:last-child {
+      margin-bottom: 0;
+    }
+
+    .file-uploader__label {
+      width: 210px;
+      margin-right: 30px;
+    }
+
+    .textarea__textfild {
+      height: 110px;
+    }
+  }
+}
+
+.create-track-modal-modal-width {
+  width: 600px;
+}
+
+
+@media screen and (max-width: 500px) {
+  .create-track-modal {
+    .step-title__title {
+      width: 70px;
+      text-align: center;
+    }
+
+    &__step.files {
+      height: auto;
+      min-height: 140px;
+    }
+  }
+}

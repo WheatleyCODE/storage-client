@@ -1,30 +1,28 @@
 import React, { FC, useEffect, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { useLocation, useNavigate } from 'react-router';
 import { modalsActions } from 'store';
 import { useTypedDispatch, useTypedSelector } from 'hooks';
 import {
-  Portal,
-  Backdrop,
-  Modal,
-  CreateFolder,
-  CreateAlbum,
-  CreateTrack,
-  DeleteItem,
+  CreateFolderModal,
+  CreateAlbumModal,
+  CreateTrackModal,
+  DeleteModal,
   ImageModal,
   SettingsModal,
   HotkeysModal,
-  BuyMoreSpace,
+  BuyMoreSpaceModal,
   VideoModal,
   TrackModal,
-  CreateVideo,
+  CreateVideoModal,
+  AlbumModal,
+  RenameModal,
+  ChangeParentModal,
+  GetLinkModal,
+  ChangeAccessModal,
 } from 'components';
-import { useLocation, useNavigate } from 'react-router';
 import { hashToStateKeys } from 'consts';
 import { IFolder, ItemTypes, ModalsStateKeys } from 'types';
-import { RenameItem } from '../storage/rename-item/RenameItem';
-import { ChangeParentItem } from '../storage/change-parent-item/ChangeParentItem';
-import { GetLinkItem } from '../storage/get-link-item/GetLinkItem';
-import { ChangeAccessItem } from '../storage/change-access-item/ChangeAccessItem';
 
 export const ModalsController: FC = () => {
   const dispatch = useTypedDispatch();
@@ -57,157 +55,36 @@ export const ModalsController: FC = () => {
 
   return (
     <AnimatePresence>
-      {modals.isCreateFolder && (
-        <Portal>
-          <Backdrop onClose={getClose('isCreateFolder')}>
-            <Modal onClose={getClose('isCreateFolder')}>
-              <CreateFolder onClose={getClose('isCreateFolder')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
-
-      {modals.isCreateAlbum && (
-        <Portal>
-          <Backdrop onClose={getClose('isCreateAlbum')}>
-            <Modal onClose={getClose('isCreateAlbum')}>
-              <CreateAlbum onClose={getClose('isCreateAlbum')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
-
-      {modals.isCreateTrack && (
-        <Portal>
-          <Backdrop onClose={getClose('isCreateTrack')}>
-            <Modal className="create-track__modal" onClose={getClose('isCreateTrack')}>
-              <CreateTrack onClose={getClose('isCreateTrack')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
-
+      {modals.isCreateFolder && <CreateFolderModal onClose={getClose('isCreateFolder')} />}
+      {modals.isCreateAlbum && <CreateAlbumModal onClose={getClose('isCreateAlbum')} />}
+      {modals.isCreateTrack && <CreateTrackModal onClose={getClose('isCreateTrack')} />}
       {modals.isDelete && (
-        <Portal>
-          <Backdrop onClose={getClose('isDelete')}>
-            <Modal onClose={getClose('isDelete')}>
-              <DeleteItem onClose={getClose('isDelete')} currentItems={currentItems} />
-            </Modal>
-          </Backdrop>
-        </Portal>
+        <DeleteModal onClose={getClose('isDelete')} currentItems={currentItems} />
       )}
-
-      {modals.isSettings && (
-        <Portal>
-          <Backdrop onClose={getClose('isSettings')}>
-            <Modal onClose={getClose('isSettings')}>
-              <SettingsModal onClose={getClose('isSettings')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
-
-      {modals.isHotkeys && (
-        <Portal>
-          <Backdrop onClose={getClose('isHotkeys')}>
-            <Modal onClose={getClose('isHotkeys')}>
-              <HotkeysModal onClose={getClose('isSettings')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
-
+      {modals.isSettings && <SettingsModal onClose={getClose('isSettings')} />}
+      {modals.isHotkeys && <HotkeysModal onClose={getClose('isHotkeys')} />}
       {modals.isRename && (
-        <Portal>
-          <Backdrop onClose={getClose('isRename')}>
-            <Modal onClose={getClose('isRename')}>
-              <RenameItem currentItems={currentItems} onClose={getClose('isRename')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
+        <RenameModal currentItems={currentItems} onClose={getClose('isRename')} />
       )}
-
       {modals.isChangeParent && (
-        <Portal>
-          <Backdrop onClose={getClose('isChangeParent')}>
-            <Modal onClose={getClose('isChangeParent')}>
-              <ChangeParentItem
-                folders={folders}
-                currentItems={currentItems}
-                onClose={getClose('isChangeParent')}
-              />
-            </Modal>
-          </Backdrop>
-        </Portal>
+        <ChangeParentModal
+          folders={folders}
+          currentItems={currentItems}
+          onClose={getClose('isChangeParent')}
+        />
       )}
-
       {modals.isGetLink && (
-        <Portal>
-          <Backdrop onClose={getClose('isGetLink')}>
-            <Modal onClose={getClose('isGetLink')}>
-              <GetLinkItem currentItems={currentItems} onClose={getClose('isGetLink')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
+        <GetLinkModal currentItems={currentItems} onClose={getClose('isGetLink')} />
       )}
-
+      {modals.isBuySpace && <BuyMoreSpaceModal onClose={getClose('isBuySpace')} />}
       {modals.isChangeAccess && (
-        <Portal>
-          <Backdrop onClose={getClose('isChangeAccess')}>
-            <Modal onClose={getClose('isChangeAccess')}>
-              <ChangeAccessItem currentItems={currentItems} onClose={getClose('isChangeAccess')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
+        <ChangeAccessModal currentItems={currentItems} onClose={getClose('isChangeAccess')} />
       )}
-
-      {modals.isImage && (
-        <Portal>
-          <Backdrop className="dark" onClose={getClose('isImage')}>
-            <ImageModal currentItems={currentItems} onClose={getClose('isImage')} />
-          </Backdrop>
-        </Portal>
-      )}
-
-      {modals.isBuySpace && (
-        <Portal>
-          <Backdrop onClose={getClose('isBuySpace')}>
-            <Modal onClose={getClose('isBuySpace')}>
-              <BuyMoreSpace onClose={getClose('isBuySpace')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
-
-      {modals.isVideo && (
-        <Portal>
-          <Backdrop className="dark" onClose={getClose('isVideo')}>
-            <Modal onClose={getClose('isVideo')}>
-              <VideoModal currentItems={currentItems} onClose={getClose('isVideo')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
-
-      {modals.isTrack && (
-        <Portal>
-          <Backdrop className="dark" onClose={getClose('isTrack')}>
-            <Modal onClose={getClose('isTrack')}>
-              <TrackModal currentItems={currentItems} onClose={getClose('isTrack')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
-
-      {modals.isCreateVideo && (
-        <Portal>
-          <Backdrop onClose={getClose('isCreateVideo')}>
-            <Modal className="create-video__modal" onClose={getClose('isCreateVideo')}>
-              <CreateVideo onClose={getClose('isCreateVideo')} />
-            </Modal>
-          </Backdrop>
-        </Portal>
-      )}
+      {modals.isImage && <ImageModal currentItems={currentItems} onClose={getClose('isImage')} />}
+      {modals.isVideo && <VideoModal currentItems={currentItems} onClose={getClose('isVideo')} />}
+      {modals.isTrack && <TrackModal currentItems={currentItems} onClose={getClose('isTrack')} />}
+      {modals.isAlbum && <AlbumModal currentItems={currentItems} onClose={getClose('isAlbum')} />}
+      {modals.isCreateVideo && <CreateVideoModal onClose={getClose('isCreateVideo')} />}
     </AnimatePresence>
   );
 };

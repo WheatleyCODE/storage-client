@@ -16,6 +16,7 @@ export interface IModalsState {
   isBuySpace: boolean;
   isVideo: boolean;
   isTrack: boolean;
+  isAlbum: boolean;
 }
 
 export type ModalsStateKeys = keyof IModalsState;
@@ -44,6 +45,7 @@ export enum HashModals {
   BUY_SPACE = '#buy-space',
   VIDEO = '#video',
   TRACK = '#track',
+  ALBUM = '#album',
 }
 
 export type HashModalsToStateKeys = {

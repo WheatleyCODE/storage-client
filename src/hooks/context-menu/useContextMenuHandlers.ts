@@ -49,6 +49,11 @@ export const useContextMenuHandlers = () => {
       return;
     }
 
+    if (item.type === ItemTypes.ALBUM) {
+      getOpenModal('isAlbum')();
+      return;
+    }
+
     navigate(getWorkplaceUrl(item));
   };
 

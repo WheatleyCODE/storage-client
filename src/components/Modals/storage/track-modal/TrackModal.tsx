@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
-import { WorkplaceItem } from 'types';
+import { WorkplaceModal, Button } from 'components';
+import { MdPlayArrow } from 'react-icons/md';
+import { ITrack, WorkplaceItem } from 'types';
+import { getImageLink } from 'utils';
 import './TrackModal.scss';
 
 export interface ITrackModalProps {
@@ -8,12 +11,31 @@ export interface ITrackModalProps {
 }
 
 export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItems }) => {
-  const item = currentItems[0];
+  const item = currentItems[0] as ITrack;
+
+  const imageLink = getImageLink(item);
 
   return (
-    <div className="track-modal">
-      <h1>Track!!</h1>
-      {item.name}
-    </div>
+    <WorkplaceModal onClose={onClose}>
+      <div className="track-modal">
+        <div className="track-modal__header">
+          <div className="track-modal__image">
+            {imageLink && <img src={imageLink} alt="Картинка трека" />}
+          </div>
+          <div className="track-modal__titles">
+            <div className="track-modal__track__info">
+              <div className="track-modal__name">{item.name}</div>
+              <div className="track-modal__author">{item.author}</div>
+            </div>
+            <div className="track-modal__play">
+              <div className="player">
+                <Button Icon={MdPlayArrow} text="Слушать" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="track-modal__words">{item.text}</div>
+      </div>
+    </WorkplaceModal>
   );
 };

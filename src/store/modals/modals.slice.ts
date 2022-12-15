@@ -19,6 +19,7 @@ const initialState: IModalsState = {
   isBuySpace: false,
   isVideo: false,
   isTrack: false,
+  isAlbum: false,
 };
 
 export const modalsSlice = createSlice({
@@ -49,6 +50,7 @@ export const modalsSlice = createSlice({
       state.isVideo = false;
       state.isTrack = false;
       state.isVideo = false;
+      state.isAlbum = false;
     },
   },
 });

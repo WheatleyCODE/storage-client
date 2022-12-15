@@ -6,9 +6,10 @@ export interface IBackdropProps {
   onClose: () => void;
   children?: React.ReactNode;
   className?: string;
+  isDark?: boolean;
 }
 
-export const Backdrop: FC<IBackdropProps> = ({ onClose, children, className }) => {
+export const Backdrop: FC<IBackdropProps> = ({ onClose, children, className, isDark }) => {
   const onClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     onClose();
@@ -22,7 +23,7 @@ export const Backdrop: FC<IBackdropProps> = ({ onClose, children, className }) =
       transition={{ duration: 0.3 }}
       aria-hidden
       onClick={onClick}
-      className={`backdrop ${className || ''}`}
+      className={`backdrop ${isDark ? 'dark' : ''} ${className || ''}`}
     >
       {children}
     </motion.div>
