@@ -15,6 +15,7 @@ import {
   ICreateAlbumFilds,
   ICreateFolderFilds,
   ICreateTrackFilds,
+  ICreateVideoFilds,
   IDeleteItemsFilds,
   IDownloadArchiveFilds,
   IDownloadFileFilds,
@@ -23,6 +24,7 @@ import {
   IStorageData,
   ITrack,
   IUploadFilesFilds,
+  IVideo,
   WorkplaceItem,
 } from 'types';
 import { $api } from '../api';
@@ -46,6 +48,12 @@ export class StorageService {
     const formData = new FormData();
     Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
     return $api.post<IAlbum>('/api/storage/create/album', formData);
+  }
+
+  static async createVideo(filds: ICreateVideoFilds): Promise<AxiosResponse<IVideo>> {
+    const formData = new FormData();
+    Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
+    return $api.post<IVideo>('/api/storage/create/video', formData);
   }
 
   static async changeIsTrash(filds: IChangeIsTrashFilds): Promise<AxiosResponse<WorkplaceItem[]>> {

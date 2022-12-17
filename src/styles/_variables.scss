@@ -23,8 +23,8 @@ $colorLightBlue2: #e8f0fe;
 $colorNone: rgba(0, 0, 0, 0);
 $colorLight: rgba(255, 255, 255, 0.18);
 $colorLight2: rgba(255, 255, 255, 0.28);
-$colorDark: rgba(8, 8, 8, 0.18);
-$colorDark2: rgba(8, 8, 8, 0.28);
+$colorDark: rgba(8, 8, 8, 0.08);
+$colorDark2: rgba(8, 8, 8, 0.11);
 
 
 
@@ -56,7 +56,7 @@ $colorBackdropDark: rgba(0, 0, 0, 0.85);
 $colorTransparentWhite: rgba(255, 255, 255, 0.3);
 
 $homePageGradient: linear-gradient(0deg, $colorViolet 0%, $colorViolet 20%, $colorWhite 100%);
-$darkGradient: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+$darkGradient: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 70%, rgba(0, 0, 0, 0.6) 100%);
 
 $headerHeight: 80px;
 $footerHeight: 420px;

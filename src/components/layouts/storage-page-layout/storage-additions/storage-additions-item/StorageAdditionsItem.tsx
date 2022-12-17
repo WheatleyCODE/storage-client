@@ -1,5 +1,6 @@
 import React, { FC, memo, useCallback } from 'react';
 import { IconType } from 'react-icons';
+import { Button } from 'components';
 import { AdditionTypes } from 'types';
 import './StorageAdditionsItem.scss';
 
@@ -17,15 +18,16 @@ export const StorageAdditionsItem: FC<IStorageAdditionsItemProps> = memo((props)
     changeActive(type);
   }, [type, changeActive]);
 
-  const MemoIcon = memo(Icon);
-
   return (
-    <div
-      aria-hidden
-      onClick={onClick}
-      className={`storage-additions-item ${active ? 'active' : ''}`}
-    >
-      <MemoIcon />
+    <div className="storage-additions-item">
+      <Button
+        className={`${active ? 'active' : ''}`}
+        color="none-dark"
+        outline="fill"
+        onClick={onClick}
+        type="icon"
+        Icon={Icon}
+      />
     </div>
   );
 });

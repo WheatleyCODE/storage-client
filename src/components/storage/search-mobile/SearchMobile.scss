@@ -1,5 +1,7 @@
 @import 'styles/templates.scss';
 
 .search-mobile {
-
+  .button.icon.active {
+    @include button-select;
+  }
 }

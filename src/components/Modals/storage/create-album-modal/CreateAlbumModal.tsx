@@ -37,8 +37,6 @@ export const CreateAlbumModal: FC<ICreateAlbumModalProps> = ({ onClose }) => {
     if (activeStep === 0) {
       if (!nameInput.value || nameInput.isError) return;
       if (!authorInput.value || authorInput.isError) return;
-      setActiveStep((p) => (p += 1));
-      return;
     }
 
     setActiveStep((p) => (p += 1));
@@ -118,6 +116,7 @@ export const CreateAlbumModal: FC<ICreateAlbumModalProps> = ({ onClose }) => {
 
                 <Step className="create-album-modal__step">
                   <FileUploader
+                    acceptExt={['jpg', 'png', 'jpeg']}
                     initFile={image}
                     setFile={setImageHandler}
                     accept="image/*"

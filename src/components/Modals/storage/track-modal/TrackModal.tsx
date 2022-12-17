@@ -16,7 +16,7 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItems }) => {
   const imageLink = getImageLink(item);
 
   return (
-    <WorkplaceModal onClose={onClose}>
+    <WorkplaceModal currentItems={currentItems} onClose={onClose}>
       <div className="track-modal">
         <div className="track-modal__header">
           <div className="track-modal__image">

@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StorageSorter } from 'helpers';
 import { IFolder, IStorageState, SortTypes, WorkplaceItem } from 'types';
+import { getSize } from 'utils';
 import {
   changeSettings,
   copyFiles,
-  createAccessLink,
   createAlbum,
   createFolder,
   createTrack,
+  createVideo,
   deleteItems,
   fetchStorage,
   getChildrens,
@@ -69,83 +70,65 @@ export const storageSlice = createSlice({
       state.workplaceItems = sorter.sort(workplaceItemsArr, payload);
     },
 
-    setItem: (state, { payload }: PayloadAction<WorkplaceItem>) => {
-      const { id } = payload;
-
-      state.parents = state.parents.map((item) => {
-        if (item.id === id) {
-          return payload as IFolder;
-        }
-
-        return item;
-      });
-
-      state.workplaceItems = state.workplaceItems.map((item) => {
-        if (item.id === id) {
-          return payload;
-        }
-
-        return item;
-      });
-
-      state.allItems = state.allItems.map((item) => {
-        if (item.id === id) {
-          return payload;
-        }
-
-        return item;
-      });
-    },
-
     setItems: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
       const types = payload.map((item) => item.type);
+      const sorter = new StorageSorter();
 
-      state.parents = state.parents.map((item) => {
+      const newParents = state.parents.map((item) => {
         if (types.includes(item.type)) {
           return (payload.find((itm) => itm.id === item.id) as IFolder) || item;
         }
-
         return item;
       });
 
-      state.workplaceItems = state.workplaceItems
+      let newWorkplaceItems = state.workplaceItems
         .map((item) => {
           if (types.includes(item.type)) {
             return payload.find((itm) => itm.id === item.id) || item;
           }
-
           return item;
         })
         .filter((item) => !item.isTrash);
 
-      state.allItems = state.allItems.map((item) => {
+      if (newParents.length) {
+        const parent = newParents[newParents.length - 1];
+        newWorkplaceItems = newWorkplaceItems.filter((item) => item.parent === parent.id);
+      }
+
+      const newAllItems = state.allItems.map((item) => {
         if (types.includes(item.type)) {
           return payload.find((itm) => itm.id === item.id) || item;
         }
-
         return item;
       });
+
+      const allItemsArr = JSON.parse(JSON.stringify(newAllItems));
+      const workplaceItemsArr = JSON.parse(JSON.stringify(newWorkplaceItems));
+
+      state.allItems = sorter.sort(allItemsArr, state.sortType);
+      state.workplaceItems = sorter.sort(workplaceItemsArr, state.sortType);
+      state.parents = newParents;
+    },
+
+    addItems: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
+      const sorter = new StorageSorter();
+
+      const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
+      const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
+
+      state.allItems = sorter.sort([...allItemsArr, ...payload], state.sortType);
+      state.workplaceItems = sorter.sort([...workplaceItemsArr, ...payload], state.sortType);
     },
   },
   extraReducers(builder) {
     builder
       .addCase(copyFiles.fulfilled, (state, { payload }) => {
-        const sorter = new StorageSorter();
-
-        const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
-        const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
-
-        state.allItems = sorter.sort([...allItemsArr, ...payload], state.sortType);
-        state.workplaceItems = sorter.sort([...workplaceItemsArr, ...payload], state.sortType);
+        const size = payload.reduce((total, item) => (total += getSize(item)), 0);
+        state.usedSpace += size;
       })
       .addCase(uploadFiles.fulfilled, (state, { payload }) => {
-        const sorter = new StorageSorter();
-
-        const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
-        const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
-
-        state.allItems = sorter.sort([...allItemsArr, ...payload], state.sortType);
-        state.workplaceItems = sorter.sort([...workplaceItemsArr, ...payload], state.sortType);
+        const size = payload.reduce((total, item) => (total += getSize(item)), 0);
+        state.usedSpace += size;
       })
       .addCase(changeSettings.fulfilled, (state, { payload }) => {
         state.settings = payload;
@@ -167,35 +150,6 @@ export const storageSlice = createSlice({
       .addCase(getChildrens.rejected, (state) => {
         state.isWorkplaceLoading = false;
       })
-      .addCase(createAccessLink.fulfilled, (state, { payload }) => {
-        const { id } = payload;
-
-        state.currentItems = [payload];
-
-        state.parents = state.parents.map((item) => {
-          if (item.id === id) {
-            return payload as IFolder;
-          }
-
-          return item;
-        });
-
-        state.workplaceItems = state.workplaceItems.map((item) => {
-          if (item.id === id) {
-            return payload;
-          }
-
-          return item;
-        });
-
-        state.allItems = state.allItems.map((item) => {
-          if (item.id === id) {
-            return payload;
-          }
-
-          return item;
-        });
-      })
       .addCase(deleteItems.fulfilled, (state, { payload }) => {
         const { diskSpace, usedSpace, folders, tracks, files, albums, images, videos } = payload;
 
@@ -206,27 +160,18 @@ export const storageSlice = createSlice({
         state.workplaceItems = state.workplaceItems.filter((item) => item.isTrash);
       })
       .addCase(createFolder.fulfilled, (state, { payload }) => {
-        const sorter = new StorageSorter();
-        state.allItems = [...state.allItems, payload];
         state.usedSpace += payload.folderSize;
-
-        const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
-
-        if (payload.parent) {
-          const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
-          state.workplaceItems = sorter.sort([...workplaceItemsArr, payload], state.sortType);
-        }
-
-        state.allItems = sorter.sort([...allItemsArr, payload], state.sortType);
       })
       .addCase(createTrack.fulfilled, (state, { payload }) => {
         const { imageSize, audioSize } = payload;
-        state.allItems = [...state.allItems, payload];
         state.usedSpace += (imageSize || 0) + audioSize;
+      })
+      .addCase(createVideo.fulfilled, (state, { payload }) => {
+        const { imageSize, videoSize } = payload;
+        state.usedSpace += (imageSize || 0) + videoSize;
       })
       .addCase(createAlbum.fulfilled, (state, { payload }) => {
         const { imageSize } = payload;
-        state.allItems = [...state.allItems, payload];
         state.usedSpace += imageSize;
       })
       .addCase(fetchStorage.pending, (state) => {

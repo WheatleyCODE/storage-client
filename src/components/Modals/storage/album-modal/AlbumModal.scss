@@ -1,3 +1,39 @@
 @import 'styles/templates.scss';
 
-.album-modal {}
+.album-modal {
+  width: 440px;
+
+  &__header {
+    display: flex;
+  }
+
+  &__titles {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__image {
+    height: 150px;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  &__name {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  &__author {
+    font-size: 1.5rem;
+  }
+
+  &__words {
+    margin-top: 40px;
+    max-height: 200px;
+    overflow: auto;
+  }
+}

@@ -41,14 +41,10 @@ export const CreateTrackModal: FC<ICreateTrackModalProps> = ({ onClose }) => {
     if (activeStep === 0) {
       if (!nameInput.value || nameInput.isError) return;
       if (!authorInput.value || authorInput.isError) return;
-      setActiveStep((p) => (p += 1));
-      return;
     }
 
     if (activeStep === 1) {
       if (!textInput.value || textInput.isError) return;
-      setActiveStep((p) => (p += 1));
-      return;
     }
 
     setActiveStep((p) => (p += 1));
@@ -152,11 +148,13 @@ export const CreateTrackModal: FC<ICreateTrackModalProps> = ({ onClose }) => {
                 <Step className="create-track-modal__step files">
                   <FileUploader
                     initFile={image}
+                    acceptExt={['jpg', 'png', 'jpeg']}
                     setFile={setImageHandler}
                     accept="image/*"
                     label="Выберите картинку"
                   />
                   <FileUploader
+                    acceptExt={['mp3']}
                     initFile={audio}
                     setFile={setAudioHandler}
                     accept="audio/*"

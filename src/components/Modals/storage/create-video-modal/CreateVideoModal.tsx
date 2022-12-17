@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
-import { MdAudiotrack, MdPerson, MdShortText } from 'react-icons/md';
+import { useLocation, useParams } from 'react-router';
+import { MdAudiotrack, MdShortText } from 'react-icons/md';
 import {
   StepperModal,
   Stepper,
@@ -11,9 +12,11 @@ import {
   Backdrop,
   Modal,
 } from 'components';
-import { useValidInput } from 'hooks';
-import { nameValidator, nickValidator, textAreaValidator } from 'helpers';
+import { useActions, useValidInput } from 'hooks';
+import { nameValidator, textAreaValidator } from 'helpers';
 import { createVideoStepTitles } from 'consts';
+import { checkPathnameOnPathRoute } from 'utils';
+import { PathRoutes } from 'types';
 import './CreateVideoModal.scss';
 
 export interface ICreateVideoModalProps {
@@ -24,21 +27,19 @@ export const CreateVideoModal: FC<ICreateVideoModalProps> = ({ onClose }) => {
   const [image, setImage] = useState<File | null>(null);
   const [video, setVideo] = useState<File | null>(null);
   const nameInput = useValidInput([nameValidator]);
-  const authorInput = useValidInput([nickValidator]);
-  const textInput = useValidInput([textAreaValidator]);
+  const descriptionInput = useValidInput([textAreaValidator]);
   const [activeStep, setActiveStep] = useState(0);
+  const { createVideo } = useActions();
+  const { id } = useParams();
+  const { pathname } = useLocation();
 
   const addStep = () => {
     if (activeStep === 0) {
       if (!nameInput.value || nameInput.isError) return;
-      setActiveStep((p) => (p += 1));
-      return;
     }
 
     if (activeStep === 1) {
-      if (!textInput.value || textInput.isError) return;
-      setActiveStep((p) => (p += 1));
-      return;
+      if (!descriptionInput.value || descriptionInput.isError) return;
     }
 
     setActiveStep((p) => (p += 1));
@@ -47,6 +48,28 @@ export const CreateVideoModal: FC<ICreateVideoModalProps> = ({ onClose }) => {
 
   const setImageHandler = useCallback((file: File) => setImage(file), []);
   const setVideoHandler = useCallback((file: File) => setVideo(file), []);
+
+  const createVideoHandler = () => {
+    if (!nameInput.value || nameInput.isError) return;
+    if (!descriptionInput.value || descriptionInput.isError) return;
+    if (!video || !image) return;
+
+    const filds: { parent?: string } = {};
+
+    if (checkPathnameOnPathRoute(pathname, PathRoutes.STORAGE_FOLDERS)) {
+      filds.parent = id;
+    }
+
+    createVideo({
+      name: nameInput.value,
+      description: descriptionInput.value,
+      video,
+      image,
+      ...filds,
+    });
+
+    onClose();
+  };
 
   return (
     <Portal>
@@ -58,7 +81,7 @@ export const CreateVideoModal: FC<ICreateVideoModalProps> = ({ onClose }) => {
             stepTitlesLength={createVideoStepTitles.length}
             subStep={subStep}
             addStep={addStep}
-            lastButtonHandler={() => {}}
+            lastButtonHandler={createVideoHandler}
             lastButtonText="Создать видео"
           >
             <div className="create-video">
@@ -82,47 +105,35 @@ export const CreateVideoModal: FC<ICreateVideoModalProps> = ({ onClose }) => {
                     changeFocus={nameInput.changeFocus}
                     changeActive={nameInput.changeActive}
                   />
-                  <Input
-                    Icon={MdPerson}
-                    value={authorInput.value}
-                    type="text"
-                    placeholder="Автор"
-                    onChange={authorInput.onChange}
-                    onBlur={authorInput.onBlur}
-                    onFocus={authorInput.onFocus}
-                    isError={authorInput.isError}
-                    validError={authorInput.validError}
-                    isActive={authorInput.isActive}
-                    changeFocus={authorInput.changeFocus}
-                    changeActive={authorInput.changeActive}
-                  />
                 </Step>
 
                 <Step className="create-video__step">
                   <Textarea
                     Icon={MdShortText}
-                    value={textInput.value}
+                    value={descriptionInput.value}
                     placeholder="Описание"
-                    onChange={textInput.onChange}
-                    onBlur={textInput.onBlur}
-                    onFocus={textInput.onFocus}
-                    isError={textInput.isError}
-                    validError={textInput.validError}
-                    isActive={textInput.isActive}
-                    changeFocus={textInput.changeFocus}
-                    changeActive={textInput.changeActive}
+                    onChange={descriptionInput.onChange}
+                    onBlur={descriptionInput.onBlur}
+                    onFocus={descriptionInput.onFocus}
+                    isError={descriptionInput.isError}
+                    validError={descriptionInput.validError}
+                    isActive={descriptionInput.isActive}
+                    changeFocus={descriptionInput.changeFocus}
+                    changeActive={descriptionInput.changeActive}
                   />
                 </Step>
 
                 <Step className="create-video__step files">
                   <FileUploader
                     initFile={image}
+                    acceptExt={['jpg', 'png', 'jpeg']}
                     setFile={setImageHandler}
                     accept="image/*"
                     label="Выберите картинку"
                   />
                   <FileUploader
                     initFile={video}
+                    acceptExt={['mp4']}
                     setFile={setVideoHandler}
                     accept="video/*"
                     label="Выберите видео"

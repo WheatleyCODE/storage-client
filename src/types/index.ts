@@ -12,3 +12,4 @@ export * from './file.interface';
 export * from './folder.interface';
 export * from './modals.interface';
 export * from './uploader.interface';
+export * from './video.interface';

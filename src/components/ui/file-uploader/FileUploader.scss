@@ -39,11 +39,31 @@
     justify-content: space-between;
     display: flex;
     align-items: center;
+    padding-right: 10px;
   }
 
   &__name, &__size {
     font-size: 1rem;
     color: $colorDarkGrey3;
+  }
+
+  &__name {
+    max-width: 180px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $colorWhite;
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $colorLightGrey2;
+      border: 1px solid $colorWhite;
+    }
   }
 }
 

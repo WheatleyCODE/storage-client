@@ -5,7 +5,7 @@ import { BASE_URL, storageWorkplaceIcons } from 'consts';
 import { formatSize } from 'utils';
 import { AccessTypes, ItemTypes, WorkplaceItem, IChangeIsTrashFilds, IFolder, IAlbum } from 'types';
 import { IImage } from 'types/image.interface';
-import { IVideo } from 'types/video';
+import { IVideo } from 'types/video.interface';
 
 export const transformDate = (date: number): string => new Date(date).toLocaleDateString();
 

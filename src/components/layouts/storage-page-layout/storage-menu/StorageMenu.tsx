@@ -55,6 +55,8 @@ export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, togg
 
       <div className="storage-menu__toggle-button">
         <Button
+          color="none-dark"
+          outline="fill"
           className={`storage-menu__toggle ${openClassName}`}
           onClick={toggleOpen}
           Icon={MdHorizontalRule}

@@ -95,7 +95,7 @@ export const ImageModal: FC<IImageModalProps> = ({ currentItems, onClose }) => {
   }, [aspectRatio, containerSize, initialSize.height, initialSize.width, size]);
 
   return (
-    <WorkplaceModal onClose={onClose}>
+    <WorkplaceModal currentItems={currentItems} onClose={onClose}>
       <div aria-hidden onClick={stopPropagation} className="image-modal">
         <img
           height={size.height || undefined}

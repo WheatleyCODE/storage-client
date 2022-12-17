@@ -132,6 +132,18 @@
   grid-template-columns: 1fr 100px 130px 110px;
 }
 
+@mixin button-select {
+  background-color: $colorLightBlue2;
+  border: 1px solid $colorLightBlue1;
+  color: $colorDarkBlue;
+
+  &:hover {
+    background-color: $colorLightBlue2;
+    border: 1px solid $colorLightBlue1;
+    color: $colorDarkBlue;
+  }
+}
+
 @mixin button-el {
   @include no-select;
   cursor: pointer;

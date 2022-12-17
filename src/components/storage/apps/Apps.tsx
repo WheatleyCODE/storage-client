@@ -18,7 +18,9 @@ export const Apps: FC = memo(() => {
   return (
     <div className="apps">
       <Button
-        className={showPopup ? 'open' : ''}
+        color="none-dark"
+        outline="fill"
+        className={showPopup ? 'active' : ''}
         onClick={openPopup}
         type="icon"
         Icon={FcOrgUnit}

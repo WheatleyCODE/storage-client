@@ -2,7 +2,7 @@
 
 .select {
   position: relative;
-  height: 45px;
+  height: 48px;
 
   &__items {
     overflow: hidden;
@@ -20,7 +20,7 @@
   &__icon {
     @include flex;
     position: absolute;
-    height: 45px;
+    height: 48px;
     padding-left: 15px;
     font-size: 1.4rem;
     color: $colorDarkGrey2;
@@ -30,7 +30,7 @@
   &__chevron {
     @include flex;
     position: absolute;
-    height: 45px;
+    height: 48px;
     right: 0;
     font-size: 1.4rem;
     width: 45px;
@@ -51,7 +51,7 @@
     border-radius: 10px;
     top: 13px;
     left: 20px;
-    color: $colorDarkGrey3;
+    color: $colorDarkGrey2;
     padding: 0 5px;
     position: absolute;
     background-color: $colorWhite;

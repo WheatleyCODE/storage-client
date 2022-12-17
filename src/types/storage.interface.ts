@@ -3,7 +3,7 @@ import { IFile } from './file.interface';
 import { IFolder } from './folder.interface';
 import { IImage } from './image.interface';
 import { ITrack } from './track.interface';
-import { IVideo } from './video';
+import { IVideo } from './video.interface';
 
 export enum AdditionTypes {
   CALENDAR = 'CALENDAR',

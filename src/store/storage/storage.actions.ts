@@ -28,6 +28,8 @@ import {
   ICopyFilesFilds,
   IDownloadFileFilds,
   IDownloadArchiveFilds,
+  IVideo,
+  ICreateVideoFilds,
 } from 'types';
 import { getActionMessage } from 'helpers';
 import { storageActions as SA } from 'store';
@@ -61,6 +63,7 @@ export const createFolder = createAsyncThunk<IFolder, ICreateFolderFilds>(
         })
       );
 
+      thunkAPI.dispatch(SA.addItems([data]));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -81,6 +84,7 @@ export const createTrack = createAsyncThunk<ITrack, ICreateTrackFilds>(
         })
       );
 
+      thunkAPI.dispatch(SA.addItems([data]));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -101,6 +105,28 @@ export const createAlbum = createAsyncThunk<IAlbum, ICreateAlbumFilds>(
         })
       );
 
+      thunkAPI.dispatch(SA.addItems([data]));
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const createVideo = createAsyncThunk<IVideo, ICreateVideoFilds>(
+  'storage/createVideo',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await StorageService.createVideo(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: `Создано новое видео: ${data.name}`,
+        })
+      );
+
+      thunkAPI.dispatch(SA.addItems([data]));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -211,7 +237,7 @@ export const changeName = createAsyncThunk<WorkplaceItem, IChangeNameFilds & ICh
         );
       }
 
-      thunkAPI.dispatch(SA.setItem(data));
+      thunkAPI.dispatch(SA.setItems([data]));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -267,6 +293,8 @@ export const createAccessLink = createAsyncThunk<WorkplaceItem, IItemFilds>(
         })
       );
 
+      thunkAPI.dispatch(SA.setItems([data]));
+      thunkAPI.dispatch(SA.setCurrent([data]));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -302,7 +330,7 @@ export const changeAccessType = createAsyncThunk<
       );
     }
 
-    thunkAPI.dispatch(SA.setItem(data));
+    thunkAPI.dispatch(SA.setItems([data]));
     return data;
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -369,6 +397,7 @@ export const uploadFiles = createAsyncThunk<WorkplaceItem[], IUploadFilesFilds>(
       );
 
       thunkAPI.dispatch(uploaderActions.setIsUpload(true));
+      thunkAPI.dispatch(SA.addItems(data));
 
       return data;
     } catch (e: any) {
@@ -390,6 +419,7 @@ export const copyFiles = createAsyncThunk<WorkplaceItem[], ICopyFilesFilds>(
         })
       );
 
+      thunkAPI.dispatch(SA.addItems(data));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');

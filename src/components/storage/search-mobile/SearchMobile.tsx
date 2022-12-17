@@ -12,7 +12,14 @@ export const SearchMobile: FC = memo(() => {
 
   return (
     <div className="search-mobile">
-      <Button onClick={openModal} type="icon" Icon={FcSearch} />
+      <Button
+        className={showModal ? 'active' : ''}
+        color="none-dark"
+        outline="fill"
+        onClick={openModal}
+        type="icon"
+        Icon={FcSearch}
+      />
 
       <AnimatePresence>
         {showModal && (

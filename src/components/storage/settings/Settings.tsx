@@ -43,7 +43,9 @@ export const Settings: FC = memo(() => {
   return (
     <div className="settings">
       <Button
-        className={showPopup ? 'open' : ''}
+        color="none-dark"
+        outline="fill"
+        className={showPopup ? 'active' : ''}
         onClick={openPopup}
         type="icon"
         Icon={FcSettings}

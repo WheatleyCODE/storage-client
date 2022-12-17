@@ -64,7 +64,7 @@ export const Select: FC<ISelectProps> = memo((props) => {
   const MemoIcon = Icon && memo(Icon);
 
   return (
-    <div aria-hidden onClick={openSelect} className={`select ${isIcon ? 'icon' : ''}`}>
+    <div ref={ref} aria-hidden onClick={openSelect} className={`select ${isIcon ? 'icon' : ''}`}>
       {isIcon && MemoIcon && (
         <div className="select__icon">
           <MemoIcon />
@@ -79,7 +79,6 @@ export const Select: FC<ISelectProps> = memo((props) => {
         value={activeIndex !== null ? items[activeIndex].text : ''}
         readOnly
         className="select__textfild"
-        ref={ref}
         {...anotherProps}
       />
 

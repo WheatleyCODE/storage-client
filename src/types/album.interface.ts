@@ -16,6 +16,7 @@ export interface IAlbum {
   creationDate: number;
   openDate: number;
   comments: any[];
+  author: string;
   image: string;
   imageSize: number;
   tracks: any[];

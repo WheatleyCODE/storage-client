@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
-import { CgClose } from 'react-icons/cg';
+import { Button } from 'components';
+import { MdClose } from 'react-icons/md';
 import { FcSafe } from 'react-icons/fc';
 import { WorkplaceItem } from 'types';
 import { getColorClassName, getWorkplaceIcon } from 'utils';
@@ -16,14 +17,20 @@ export interface IStorageInfoMainProps {
 
 export const StorageInfoMain: FC<IStorageInfoMainProps> = memo((props) => {
   const { item, onClose, openChangeAccessModal, userId } = props;
-  const MemoClose = memo(CgClose);
 
   const MemoWPIcon = item ? memo(getWorkplaceIcon(item)) : memo(FcSafe);
 
   return (
     <div className="storage-info-main">
       <div aria-hidden onClick={onClose} className="storage-info-main__close-button">
-        <MemoClose />
+        <Button
+          color="none-dark"
+          radius="rounded"
+          outline="fill"
+          onClick={onClose}
+          type="icon"
+          Icon={MdClose}
+        />
       </div>
 
       <div className="storage-info-main__head">

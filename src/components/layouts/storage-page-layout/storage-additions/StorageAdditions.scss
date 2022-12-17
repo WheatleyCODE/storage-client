@@ -17,14 +17,8 @@
   }
 
   &__close {
-    @include button-el;
-    @include flex;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
     position: absolute;
     right: 0;
     top: 0px;
-    font-size: 1.6rem;
   }
 }

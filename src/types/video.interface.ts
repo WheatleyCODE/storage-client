@@ -23,7 +23,7 @@ export interface IVideo {
   videoSize: number;
 }
 
-export interface ICreateTrackFilds {
+export interface ICreateVideoFilds {
   readonly name: string;
   readonly description: string;
   readonly parent?: string;

@@ -27,7 +27,7 @@ export const StorageLogo: FC<IStorageLogoProps> = memo(({ isOpen, controls }) =>
       className="storage-logo"
     >
       <div className="storage-logo__menu">
-        <Button onClick={openMenu} type="icon" color="blue" Icon={MdMenu} />
+        <Button color="none-dark" outline="fill" onClick={openMenu} type="icon" Icon={MdMenu} />
       </div>
       <div className="storage-logo__mobile-logo">
         <Logo />

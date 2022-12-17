@@ -16,7 +16,7 @@ export const Header: FC = () => {
     <header className="header">
       <div className="header__menu">
         <div className="header__burger">
-          <Button onClick={openMenu} type="icon" color="blue" Icon={MdMenu} />
+          <Button color="none-dark" outline="fill" onClick={openMenu} type="icon" Icon={MdMenu} />
         </div>
         <Logo />
         <Menu />

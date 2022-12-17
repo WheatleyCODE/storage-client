@@ -1,6 +1,6 @@
 import React, { FC, memo, useMemo } from 'react';
-import { CgClose } from 'react-icons/cg';
-import { Calendar, Keep, Todo } from 'components';
+import { MdClose } from 'react-icons/md';
+import { Calendar, Keep, Todo, Button } from 'components';
 import { additionIcons } from 'consts';
 import { AdditionTypes } from 'types';
 import { StorageAdditionsItem } from './storage-additions-item/StorageAdditionsItem';
@@ -27,8 +27,6 @@ export const StorageAdditions: FC<IStorageAdditionsProps> = memo((props) => {
 
   const ActiveContent = additionContent[active];
 
-  const MemoIcon = memo(CgClose);
-
   return (
     <div className="storage-additions">
       <div className="storage-additions__icons">
@@ -45,8 +43,15 @@ export const StorageAdditions: FC<IStorageAdditionsProps> = memo((props) => {
 
       {isOpen && (
         <div className="storage-additions__content">
-          <div aria-hidden onClick={toggleOpen} className="storage-additions__close">
-            <MemoIcon />
+          <div className="storage-additions__close">
+            <Button
+              color="none-dark"
+              radius="rounded"
+              outline="fill"
+              onClick={toggleOpen}
+              type="icon"
+              Icon={MdClose}
+            />
           </div>
 
           <ActiveContent />

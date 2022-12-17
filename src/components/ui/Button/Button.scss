@@ -22,14 +22,14 @@
   border-radius: 50px;
 }
 
-.button.disable {
-  background-color: $colorLightGrey !important;
+.button.fill.disable {
+  background-color: $colorGrey !important;
+  border: 1px solid $colorGrey !important;
 }
 
 .button.outline.disable {
   background-color: $colorWhite !important;
   border: 1px solid $colorGrey !important;
-  color: $colorGrey !important;
 }
 
 .button.icon.outline.black {

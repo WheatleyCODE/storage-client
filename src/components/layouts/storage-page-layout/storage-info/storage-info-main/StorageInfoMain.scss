@@ -7,15 +7,9 @@
   border-left: $storageBorder;
 
   &__close-button {
-    @include button-el;
-    @include flex;
     position: absolute;
     top: 17.5px;
     right: 10px;
-    width: 45px;
-    height: 45px;
-    font-size: 1.6rem;
-    border-radius: 50%;
   }
 
   &__head {
