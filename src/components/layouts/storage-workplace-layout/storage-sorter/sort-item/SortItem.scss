@@ -24,6 +24,12 @@
     }
   }
 
+  &:hover {
+    .sort-item__icon {
+      border: 1px solid $colorLightBlue1;
+    }
+  }
+
   &.active {
     .sort-item__icon {
       color: $colorDarkBlue;

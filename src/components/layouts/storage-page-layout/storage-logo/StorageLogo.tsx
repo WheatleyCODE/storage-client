@@ -1,8 +1,7 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { AnimatePresence, AnimationControls, motion } from 'framer-motion';
 import { MdMenu } from 'react-icons/md';
-import { Portal, Backdrop, Button, Logo, Drawer, MobileMenuLayout } from 'components';
-import { StorageMobileMenu } from '../storage-mobile-menu/StorageMobileMenu';
+import { Button, Logo, StorageMobileMenuModal } from 'components';
 import './StorageLogo.scss';
 
 export interface IStorageLogoProps {
@@ -37,17 +36,7 @@ export const StorageLogo: FC<IStorageLogoProps> = memo(({ isOpen, controls }) =>
       </div>
 
       <AnimatePresence>
-        {showMenu && (
-          <Portal>
-            <Backdrop onClose={closeMenu}>
-              <Drawer open="left">
-                <MobileMenuLayout onClose={closeMenu}>
-                  <StorageMobileMenu onClose={closeMenu} />
-                </MobileMenuLayout>
-              </Drawer>
-            </Backdrop>
-          </Portal>
-        )}
+        {showMenu && <StorageMobileMenuModal onClose={closeMenu} />}
       </AnimatePresence>
     </motion.div>
   );

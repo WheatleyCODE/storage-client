@@ -1,9 +1,8 @@
 import React, { FC, useCallback, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { MdMenu } from 'react-icons/md';
-import { Button, Portal, Backdrop, Logo, User, Drawer, MobileMenuLayout } from 'components';
+import { Button, Logo, User, MainMobileMenuModal } from 'components';
 import { Menu } from '../menu/Menu';
-import { MobileMenu } from '../mobile-menu/MobileMenu';
 import './Header.scss';
 
 export const Header: FC = () => {
@@ -25,19 +24,7 @@ export const Header: FC = () => {
         <User />
       </div>
 
-      <AnimatePresence>
-        {showMenu && (
-          <Portal>
-            <Backdrop onClose={closeMenu}>
-              <Drawer open="left">
-                <MobileMenuLayout onClose={closeMenu}>
-                  <MobileMenu onClose={closeMenu} />
-                </MobileMenuLayout>
-              </Drawer>
-            </Backdrop>
-          </Portal>
-        )}
-      </AnimatePresence>
+      <AnimatePresence>{showMenu && <MainMobileMenuModal onClose={closeMenu} />}</AnimatePresence>
     </header>
   );
 };

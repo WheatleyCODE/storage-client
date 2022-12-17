@@ -1,7 +1,6 @@
 export { MainLayout } from './layouts/main-layout/MainLayout';
 export { AuthPageLayout } from './layouts/auth-page-layout/AuthPageLayout';
 export { StoragePageLayout } from './layouts/storage-page-layout/StoragePageLayout';
-export { MobileMenuLayout } from './layouts/mobile-menu-layout/MobileMenuLayout';
 export { StoragePath } from './layouts/storage-workplace-layout/storage-path/StoragePath';
 export { StorageSorter } from './layouts/storage-workplace-layout/storage-sorter/StorageSorter';
 export { StorageLast } from './layouts/storage-workplace-layout/storage-last/StorageLast';
@@ -56,6 +55,9 @@ export { RenameModal } from './modals/storage/rename-modal/RenameModal';
 export { ChangeParentModal } from './modals/storage/change-parent-modal/ChangeParentModal';
 export { GetLinkModal } from './modals/storage/get-link-modal/GetLinkModal';
 export { ChangeAccessModal } from './modals/storage/change-access-modal/ChangeAccessModal';
+export { MobileMenuModal } from './modals/mobile-menu-modal/MobileMenuModal';
+export { StorageMobileMenuModal } from './modals/storage-mobile-menu-modal/StorageMobileMenuModal';
+export { MainMobileMenuModal } from './modals/main-mobile-menu-modal/MainMobileMenuModal';
 
 export { Search } from './storage/search/Search';
 export { StorageSize } from './storage/storage-size/StorageSize';

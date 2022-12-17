@@ -29,7 +29,7 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItems }) => {
             </div>
             <div className="track-modal__play">
               <div className="player">
-                <Button Icon={MdPlayArrow} text="Слушать" />
+                <Button color="none-light" Icon={MdPlayArrow} text="Слушать" />
               </div>
             </div>
           </div>
