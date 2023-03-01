@@ -1,5 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { StorageService } from 'services';
+import {
+  AlbumService,
+  DownloadService,
+  FolderService,
+  ItemsService,
+  StorageService,
+  TrackService,
+  UploadService,
+  VideoService,
+} from 'services';
 import { createChangeIsTrashMessage } from 'utils';
 import {
   IChangeColorFilds,
@@ -54,7 +63,7 @@ export const createFolder = createAsyncThunk<IFolder, ICreateFolderFilds>(
   'storage/createFolder',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.createFolder(filds);
+      const { data } = await FolderService.createFolder(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -75,7 +84,7 @@ export const createTrack = createAsyncThunk<ITrack, ICreateTrackFilds>(
   'storage/createTrack',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.createTrack(filds);
+      const { data } = await TrackService.createTrack(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -96,7 +105,7 @@ export const createAlbum = createAsyncThunk<IAlbum, ICreateAlbumFilds>(
   'storage/createAlbum',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.createAlbum(filds);
+      const { data } = await AlbumService.createAlbum(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -117,7 +126,7 @@ export const createVideo = createAsyncThunk<IVideo, ICreateVideoFilds>(
   'storage/createVideo',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.createVideo(filds);
+      const { data } = await VideoService.createVideo(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -140,7 +149,7 @@ export const changeIsTrash = createAsyncThunk<
 >('storage/changeIsTrashServer', async (filds, thunkAPI) => {
   try {
     const { items, isTrash, isCanRestore, prevIsTrash } = filds;
-    const { data } = await StorageService.changeIsTrash({ items, isTrash });
+    const { data } = await ItemsService.changeIsTrash({ items, isTrash });
 
     if (!isCanRestore) {
       thunkAPI.dispatch(
@@ -173,7 +182,7 @@ export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
   'storage/deleteItems',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.deleteItems(filds);
+      const { data } = await ItemsService.deleteItems(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -193,7 +202,7 @@ export const changeColor = createAsyncThunk<IFolder[], IChangeColorFilds>(
   'storage/changeColor',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.changeColor(filds);
+      const { data } = await FolderService.changeColor(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -215,7 +224,7 @@ export const changeName = createAsyncThunk<WorkplaceItem, IChangeNameFilds & ICh
   async (filds, thunkAPI) => {
     try {
       const { id, name, type, isCanRestore, prevName } = filds;
-      const { data } = await StorageService.changeName({ id, name, type });
+      const { data } = await ItemsService.changeName({ id, name, type });
 
       if (!isCanRestore) {
         thunkAPI.dispatch(
@@ -251,7 +260,7 @@ export const changeParent = createAsyncThunk<
 >('storage/changeParent', async (filds, thunkAPI) => {
   try {
     const { items, parent, isCanRestore, prevParent } = filds;
-    const { data } = await StorageService.changeParent({ items, parent });
+    const { data } = await ItemsService.changeParent({ items, parent });
 
     if (!isCanRestore) {
       thunkAPI.dispatch(
@@ -284,7 +293,7 @@ export const createAccessLink = createAsyncThunk<WorkplaceItem, IItemFilds>(
   'storage/createAccessLink',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.createAccessLink(filds);
+      const { data } = await ItemsService.createAccessLink(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -308,7 +317,7 @@ export const changeAccessType = createAsyncThunk<
 >('storage/changeAccessType', async (filds, thunkAPI) => {
   try {
     const { id, type, accessType, prevAccessType, isCanRestore } = filds;
-    const { data } = await StorageService.changeAccessType({ id, type, accessType });
+    const { data } = await ItemsService.changeAccessType({ id, type, accessType });
 
     if (!isCanRestore) {
       thunkAPI.dispatch(
@@ -349,7 +358,7 @@ export const getChildrens = createAsyncThunk<IChildrensData, string>(
         return dataCache;
       }
 
-      const { data } = await StorageService.getChildrens(string);
+      const { data } = await ItemsService.getChildrens(string);
       cacheData.set(string, data, 5000);
 
       return data;
@@ -387,7 +396,7 @@ export const uploadFiles = createAsyncThunk<WorkplaceItem[], IUploadFilesFilds>(
       thunkAPI.dispatch(uploaderActions.setIsUpload(false));
       thunkAPI.dispatch(uploaderActions.setFileNames(filds.files.map((file) => file.name)));
 
-      const { data } = await StorageService.uploadFiles(filds, thunkAPI.dispatch);
+      const { data } = await UploadService.uploadFiles(filds, thunkAPI.dispatch);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -410,7 +419,7 @@ export const copyFiles = createAsyncThunk<WorkplaceItem[], ICopyFilesFilds>(
   'storage/copyFiles',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await StorageService.copyFiles(filds);
+      const { data } = await ItemsService.copyFiles(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -431,7 +440,7 @@ export const downloadFile = createAsyncThunk<any, IDownloadFileFilds>(
   'storage/downloadFiles',
   async (filds, thunkAPI) => {
     try {
-      await StorageService.downloadFile(filds);
+      await DownloadService.downloadFile(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -451,7 +460,7 @@ export const downloadAcrhive = createAsyncThunk<any, IDownloadArchiveFilds>(
   'storage/downloadArhive',
   async (filds, thunkAPI) => {
     try {
-      await StorageService.downloadArchive(filds);
+      await DownloadService.downloadArchive(filds);
 
       thunkAPI.dispatch(
         getActionMessage({

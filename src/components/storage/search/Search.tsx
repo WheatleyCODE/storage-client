@@ -2,7 +2,7 @@ import React, { FC, memo, useState, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { MdErrorOutline } from 'react-icons/md';
-import { StorageService } from 'services';
+import { FinderService, StorageService } from 'services';
 import { useDebounce, useValidInput } from 'hooks';
 import { Input, Popup, PopupMenu } from 'components';
 import { getColorClassName, getWorkplaceIcon, getWorkplaceUrl } from 'utils';
@@ -22,7 +22,7 @@ export const Search: FC = memo(() => {
 
   const searchReuest = async (text: string) => {
     if (text) {
-      const { data } = await StorageService.searchItems(text);
+      const { data } = await FinderService.searchItems(text);
       setItems(data);
     }
   };
