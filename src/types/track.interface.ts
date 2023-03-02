@@ -1,27 +1,12 @@
-import { AccessTypes, ItemTypes } from './storage-workplace.intarface';
+import { IItem } from './item.interface';
 
-export interface ITrack {
-  id: string;
-  user: string;
-  type: ItemTypes;
-  name: string;
-  parent: string;
-  isTrash: boolean;
-  likeCount: number;
-  likedUsers: any[];
-  listenCount: number;
-  starredCount: number;
-  accessType: AccessTypes;
-  accesLink: string;
-  creationDate: number;
-  openDate: number;
-  comments: any[];
+export interface ITrack extends IItem {
   author: string;
   text: string;
   image: string;
   imageSize: number;
-  audio: string;
-  audioSize: number;
+  file: string;
+  fileSize: number;
 }
 
 export interface ICreateTrackFilds {

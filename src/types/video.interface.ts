@@ -1,26 +1,11 @@
-import { AccessTypes, ItemTypes } from './storage-workplace.intarface';
+import { IItem } from './item.interface';
 
-export interface IVideo {
-  id: string;
-  user: string;
-  type: ItemTypes;
-  name: string;
-  parent: string;
-  isTrash: boolean;
-  likeCount: number;
-  likedUsers: any[];
-  listenCount: number;
-  starredCount: number;
-  accessType: AccessTypes;
-  accesLink: string;
-  creationDate: number;
-  openDate: number;
-  comments: any[];
+export interface IVideo extends IItem {
   description: string;
   image: string;
   imageSize: number;
-  video: string;
-  videoSize: number;
+  file: string;
+  fileSize: number;
 }
 
 export interface ICreateVideoFilds {

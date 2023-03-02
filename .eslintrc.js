@@ -43,6 +43,8 @@ module.exports = {
     'react/prop-types': 'off',
     'default-param-last': 'off',
     '@typescript-eslint/default-param-last': 'off',
+    '@typescript-eslint/lines-between-class-members': 'off',
+    'class-methods-use-this': 'off',
     'no-underscore-dangle': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-return-assign': 'off',
@@ -52,7 +54,7 @@ module.exports = {
       {
         singleQuote: true,
         printWidth: 100,
-        endOfLine: "auto"
+        endOfLine: 'auto',
       },
     ],
   },

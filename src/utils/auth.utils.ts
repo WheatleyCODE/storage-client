@@ -19,7 +19,6 @@ export const isEqual = (a: IEqualParam, b: IEqualParam): boolean => {
 };
 
 export const checkRequestStatus = (data: AsyncThunkAction<any, any, any>): boolean => {
-  // * Посмотреть типизацию
   const thunkData = data as any;
 
   if (thunkData?.meta?.requestStatus === 'fulfilled') return true;

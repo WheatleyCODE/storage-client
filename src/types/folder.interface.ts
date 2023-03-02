@@ -1,4 +1,5 @@
-import { ItemTypes, AccessTypes, IItemFilds } from './storage-workplace.intarface';
+import { IItem } from './item.interface';
+import { IItemFilds } from './storage-workplace.intarface';
 
 export enum FolderColors {
   GREY = 'GREY',
@@ -7,22 +8,7 @@ export enum FolderColors {
   YELLOW = 'YELLOW',
 }
 
-export interface IFolder {
-  id: string;
-  user: string;
-  type: ItemTypes;
-  name: string;
-  parent: string;
-  isTrash: boolean;
-  likeCount: number;
-  likedUsers: any[];
-  listenCount: number;
-  starredCount: number;
-  accessType: AccessTypes;
-  accesLink: string;
-  creationDate: number;
-  openDate: number;
-  comments: any[];
+export interface IFolder extends IItem {
   color: FolderColors;
   folderSize: number;
 }

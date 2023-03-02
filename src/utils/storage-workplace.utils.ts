@@ -15,73 +15,73 @@ export const transformAccess = (type: AccessTypes): string => {
   return 'Публичный';
 };
 
-export const calcAndFormatSize = (item: WorkplaceItem, isFolder = false): string => {
-  if (item.type === ItemTypes.FILE) {
-    const { fileSize } = item as IFile;
+// export const calcAndFormatSize = (item: WorkplaceItem, isFolder = false): string => {
+//   if (item.type === ItemTypes.FILE) {
+//     const { fileSize } = item as IFile;
 
-    return formatSize(fileSize);
-  }
+//     return formatSize(fileSize);
+//   }
 
-  if (item.type === ItemTypes.TRACK) {
-    const { audioSize, imageSize } = item as ITrack;
+//   if (item.type === ItemTypes.TRACK) {
+//     const { audioSize, imageSize } = item as ITrack;
 
-    return formatSize(audioSize + (imageSize || 0));
-  }
+//     return formatSize(audioSize + (imageSize || 0));
+//   }
 
-  if (item.type === ItemTypes.VIDEO) {
-    const { videoSize, imageSize } = item as IVideo;
+//   if (item.type === ItemTypes.VIDEO) {
+//     const { videoSize, imageSize } = item as IVideo;
 
-    return formatSize(videoSize + (imageSize || 0));
-  }
+//     return formatSize(videoSize + (imageSize || 0));
+//   }
 
-  if (item.type === ItemTypes.FOLDER && isFolder) {
-    const { folderSize } = item as IFolder;
+//   if (item.type === ItemTypes.FOLDER && isFolder) {
+//     const { folderSize } = item as IFolder;
 
-    return formatSize(folderSize);
-  }
+//     return formatSize(folderSize);
+//   }
 
-  if (item.type === ItemTypes.IMAGE) {
-    const { imageSize } = item as IImage;
+//   if (item.type === ItemTypes.IMAGE) {
+//     const { imageSize } = item as IImage;
 
-    return formatSize(imageSize);
-  }
+//     return formatSize(imageSize);
+//   }
 
-  return '—';
-};
+//   return '—';
+// };
 
-export const getSize = (item: WorkplaceItem, isFolder = false): number => {
-  if (item.type === ItemTypes.FILE) {
-    const { fileSize } = item as IFile;
+// export const getSize = (item: WorkplaceItem, isFolder = false): number => {
+//   if (item.type === ItemTypes.FILE) {
+//     const { fileSize } = item as IFile;
 
-    return fileSize;
-  }
+//     return fileSize;
+//   }
 
-  if (item.type === ItemTypes.TRACK) {
-    const { audioSize, imageSize } = item as ITrack;
+//   if (item.type === ItemTypes.TRACK) {
+//     const { audioSize, imageSize } = item as ITrack;
 
-    return audioSize + (imageSize || 0);
-  }
+//     return audioSize + (imageSize || 0);
+//   }
 
-  if (item.type === ItemTypes.VIDEO) {
-    const { videoSize, imageSize } = item as IVideo;
+//   if (item.type === ItemTypes.VIDEO) {
+//     const { videoSize, imageSize } = item as IVideo;
 
-    return videoSize + (imageSize || 0);
-  }
+//     return videoSize + (imageSize || 0);
+//   }
 
-  if (item.type === ItemTypes.FOLDER && isFolder) {
-    const { folderSize } = item as IFolder;
+//   if (item.type === ItemTypes.FOLDER && isFolder) {
+//     const { folderSize } = item as IFolder;
 
-    return folderSize;
-  }
+//     return folderSize;
+//   }
 
-  if (item.type === ItemTypes.IMAGE) {
-    const { imageSize } = item as IImage;
+//   if (item.type === ItemTypes.IMAGE) {
+//     const { imageSize } = item as IImage;
 
-    return imageSize;
-  }
+//     return imageSize;
+//   }
 
-  return 0;
-};
+//   return 0;
+// };
 
 export const getColorClassName = (item: WorkplaceItem): string => {
   if (item.type === ItemTypes.FOLDER) {
@@ -103,7 +103,7 @@ export const getImageLink = (item: WorkplaceItem): string | false => {
   }
 
   if (item.type === ItemTypes.ALBUM || item.type === ItemTypes.IMAGE) {
-    const { image } = item as IAlbum | IImage;
+    const { image } = item as IAlbum;
 
     return `${BASE_URL}/${image}`;
   }

@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback } from 'react';
 import {
-  calcAndFormatSize,
+  // calcAndFormatSize,
   getColorClassName,
   getImageLink,
   getWorkplaceIcon,
@@ -12,6 +12,7 @@ import { WorkplaceItem } from 'types';
 import './ItemInfo.scss';
 import { useTypedDispatch } from 'hooks';
 import { modalsActions } from 'store';
+import { PropertyFactory } from 'helpers';
 
 export interface IItemInfoProps {
   item: WorkplaceItem;
@@ -24,6 +25,7 @@ export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId, openChangeAcce
   const MemoAccessIcon = memo(storageWorkplaceAccessIcons[item?.accessType]);
   const MemoIcon = memo(getWorkplaceIcon(item));
   const imageLink = getImageLink(item);
+  const ItemData = PropertyFactory.create(item);
 
   const openImage = useCallback(() => {
     dispatch(modalsActions.changeIsModal({ key: 'isImage', boolean: true }));
@@ -31,6 +33,7 @@ export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId, openChangeAcce
 
   return (
     <div className="item-info">
+      {/* // !Fix */}
       <div className={`item-info__img ${getColorClassName(item)}`}>
         {imageLink ? (
           <div aria-hidden onClick={openImage} className="item-info__image">
@@ -47,7 +50,7 @@ export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId, openChangeAcce
           <div className="item-info__access-icon">
             <MemoAccessIcon />
           </div>
-          <div className="item-info__access-text">{transformAccess(item.accessType)}</div>
+          <div className="item-info__access-text">{transformAccess(ItemData.accessType)}</div>
         </div>
         <div aria-hidden onClick={openChangeAccessModal} className="item-info__link">
           Настроить доступ
@@ -60,23 +63,23 @@ export const ItemInfo: FC<IItemInfoProps> = memo(({ item, userId, openChangeAcce
         <div className="item-info__properties-row">
           <div className="item-info__properties-title">Владелец:</div>
           <div className="item-info__properties-text">
-            {userId === item.user ? 'Я' : 'Вы не владелец'}
+            {userId === ItemData.user ? 'Я' : 'Вы не владелец'}
           </div>
         </div>
 
         <div className="item-info__properties-row">
           <div className="item-info__properties-title">Открыто:</div>
-          <div className="item-info__properties-text">{transformDate(item.openDate)}</div>
+          <div className="item-info__properties-text">{transformDate(ItemData.openDate)}</div>
         </div>
 
         <div className="item-info__properties-row">
           <div className="item-info__properties-title">Создано:</div>
-          <div className="item-info__properties-text">{transformDate(item.creationDate)}</div>
+          <div className="item-info__properties-text">{transformDate(ItemData.createDate)}</div>
         </div>
 
         <div className="item-info__properties-row">
           <div className="item-info__properties-title">Размер:</div>
-          <div className="item-info__properties-text">{calcAndFormatSize(item, true)}</div>
+          <div className="item-info__properties-text">{ItemData.getSize()}</div>
         </div>
       </div>
     </div>

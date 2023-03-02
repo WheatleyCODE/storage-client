@@ -1,7 +1,8 @@
 /* eslint-disable max-classes-per-file */
 import { ItemTypesArr } from 'consts';
 import { ItemTypes, SortTypes, WorkplaceItem } from 'types';
-import { getSize } from 'utils';
+import { PropertyFactory } from './item-properties/item-properties.factory';
+// import { getSize } from 'utils';
 
 export class SortMethods {
   static [SortTypes.NAME] = (x: WorkplaceItem, y: WorkplaceItem): number => {
@@ -29,25 +30,24 @@ export class SortMethods {
   };
 
   static [SortTypes.SIZE] = (x: WorkplaceItem, y: WorkplaceItem): number => {
-    return getSize(x) - getSize(y);
+    const xData = PropertyFactory.create(x);
+    const yData = PropertyFactory.create(y);
+    return xData.getSize() - yData.getSize();
   };
 
   static [SortTypes.SIZE_REVERCE] = (x: WorkplaceItem, y: WorkplaceItem): number => {
-    return (getSize(x) - getSize(y)) * -1;
+    const xData = PropertyFactory.create(x);
+    const yData = PropertyFactory.create(y);
+    return xData.getSize() - yData.getSize() * -1;
   };
 }
 
 export class StorageSorter {
   private [ItemTypes.FOLDER]: WorkplaceItem[] = [];
-
   private [ItemTypes.TRACK]: WorkplaceItem[] = [];
-
   private [ItemTypes.FILE]: WorkplaceItem[] = [];
-
   private [ItemTypes.ALBUM]: WorkplaceItem[] = [];
-
   private [ItemTypes.IMAGE]: WorkplaceItem[] = [];
-
   private [ItemTypes.VIDEO]: WorkplaceItem[] = [];
 
   sort(items: WorkplaceItem[], sortType: SortTypes): WorkplaceItem[] {

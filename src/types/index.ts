@@ -13,3 +13,6 @@ export * from './folder.interface';
 export * from './modals.interface';
 export * from './uploader.interface';
 export * from './video.interface';
+export * from './properties.interface';
+export * from './item.interface';
+export * from './image.interface';

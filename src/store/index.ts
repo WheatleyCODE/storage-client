@@ -1,4 +1,5 @@
 export * from './store';
+export * from './items/items.actions';
 export { authSlice, authActions } from './auth/auth.slice';
 export { notifierSlice, notifierActions } from './notifier/notifier.slice';
 export { restoreAsyncThunks } from './storage/storage.restore-actions';

@@ -1,19 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { StorageSorter } from 'helpers';
-import { IFolder, IStorageState, SortTypes, WorkplaceItem } from 'types';
-import { getSize } from 'utils';
+import { PropertyFactory, StorageSorter } from 'helpers';
 import {
-  changeSettings,
-  copyFiles,
-  createAlbum,
-  createFolder,
-  createTrack,
-  createVideo,
-  deleteItems,
-  fetchStorage,
-  getChildrens,
-  uploadFiles,
-} from './storage.actions';
+  IChildrensData,
+  IFolder,
+  IStorageData,
+  IStorageState,
+  SortTypes,
+  WorkplaceItem,
+} from 'types';
+import { changeSettings, fetchStorage } from './storage.actions';
 
 const initialState: IStorageState = {
   id: '',
@@ -51,12 +46,28 @@ export const storageSlice = createSlice({
       }
     },
 
+    changeWorkplaceLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.isWorkplaceLoading = payload;
+    },
+
     setWorkplace: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
       state.workplaceItems = payload;
     },
 
     setParents: (state, { payload }: PayloadAction<IFolder[]>) => {
       state.parents = payload;
+    },
+
+    setChildrens: (state, { payload }: PayloadAction<IChildrensData>) => {
+      const sorter = new StorageSorter();
+      state.parents = payload.parents;
+
+      state.workplaceItems = sorter.sort(
+        payload.childrens.filter((item) => !item.isTrash),
+        state.sortType
+      );
+
+      state.isWorkplaceLoading = false;
     },
 
     setSortType: (state, { payload }: PayloadAction<SortTypes>) => {
@@ -118,61 +129,28 @@ export const storageSlice = createSlice({
 
       state.allItems = sorter.sort([...allItemsArr, ...payload], state.sortType);
       state.workplaceItems = sorter.sort([...workplaceItemsArr, ...payload], state.sortType);
+
+      const size = payload
+        .map((item) => PropertyFactory.create(item))
+        .reduce((acc, item) => acc + item.getSize(), 0);
+
+      state.usedSpace += size;
+    },
+
+    deleteItems: (state, { payload }: PayloadAction<IStorageData>) => {
+      const { diskSpace, usedSpace, folders, tracks, files, albums, images, videos } = payload;
+
+      state.currentItems = [];
+      state.diskSpace = diskSpace;
+      state.usedSpace = usedSpace;
+      state.allItems = [...folders, ...tracks, ...files, ...albums, ...images, ...videos];
+      state.workplaceItems = state.workplaceItems.filter((item) => item.isTrash);
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(copyFiles.fulfilled, (state, { payload }) => {
-        const size = payload.reduce((total, item) => (total += getSize(item)), 0);
-        state.usedSpace += size;
-      })
-      .addCase(uploadFiles.fulfilled, (state, { payload }) => {
-        const size = payload.reduce((total, item) => (total += getSize(item)), 0);
-        state.usedSpace += size;
-      })
       .addCase(changeSettings.fulfilled, (state, { payload }) => {
         state.settings = payload;
-      })
-      .addCase(getChildrens.pending, (state) => {
-        state.isWorkplaceLoading = true;
-      })
-      .addCase(getChildrens.fulfilled, (state, { payload }) => {
-        const sorter = new StorageSorter();
-        state.parents = payload.parents;
-
-        state.workplaceItems = sorter.sort(
-          payload.childrens.filter((item) => !item.isTrash),
-          state.sortType
-        );
-
-        state.isWorkplaceLoading = false;
-      })
-      .addCase(getChildrens.rejected, (state) => {
-        state.isWorkplaceLoading = false;
-      })
-      .addCase(deleteItems.fulfilled, (state, { payload }) => {
-        const { diskSpace, usedSpace, folders, tracks, files, albums, images, videos } = payload;
-
-        state.currentItems = [];
-        state.diskSpace = diskSpace;
-        state.usedSpace = usedSpace;
-        state.allItems = [...folders, ...tracks, ...files, ...albums, ...images, ...videos];
-        state.workplaceItems = state.workplaceItems.filter((item) => item.isTrash);
-      })
-      .addCase(createFolder.fulfilled, (state, { payload }) => {
-        state.usedSpace += payload.folderSize;
-      })
-      .addCase(createTrack.fulfilled, (state, { payload }) => {
-        const { imageSize, audioSize } = payload;
-        state.usedSpace += (imageSize || 0) + audioSize;
-      })
-      .addCase(createVideo.fulfilled, (state, { payload }) => {
-        const { imageSize, videoSize } = payload;
-        state.usedSpace += (imageSize || 0) + videoSize;
-      })
-      .addCase(createAlbum.fulfilled, (state, { payload }) => {
-        const { imageSize } = payload;
-        state.usedSpace += imageSize;
       })
       .addCase(fetchStorage.pending, (state) => {
         state.isLoading = true;

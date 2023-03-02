@@ -4,3 +4,4 @@ export * from './app-loader.helpers';
 export * from './sort.helpers';
 export * from './cache.helpers';
 export * from './emitter.helpers';
+export { PropertyFactory } from './item-properties/item-properties.factory';

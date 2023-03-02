@@ -2,7 +2,7 @@ import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useActions, useTypedDispatch } from 'hooks';
 import {
-  calcAndFormatSize,
+  // calcAndFormatSize,
   getColorClassName,
   getWorkplaceIcon,
   getWorkplaceUrl,
@@ -135,7 +135,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       </div>
       <div className="storage-workplace-item__access">{transformAccess(item.accessType)}</div>
       <div className="storage-workplace-item__open-date">{transformDate(item.openDate)}</div>
-      <div className="storage-workplace-item__size">{calcAndFormatSize(item)}</div>
+      <div className="storage-workplace-item__size">calcAndFormatSizeFix</div>
     </div>
   );
 };

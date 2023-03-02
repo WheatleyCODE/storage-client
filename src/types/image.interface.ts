@@ -1,21 +1,6 @@
-import { AccessTypes, ItemTypes } from './storage-workplace.intarface';
+import { IItem } from './item.interface';
 
-export interface IImage {
-  id: string;
-  user: string;
-  type: ItemTypes;
-  name: string;
-  parent: string;
-  isTrash: boolean;
-  likeCount: number;
-  likedUsers: any[];
-  listenCount: number;
-  starredCount: number;
-  accessType: AccessTypes;
-  accesLink: string;
-  creationDate: number;
-  openDate: number;
-  comments: any[];
-  image: string;
-  imageSize: number;
+export interface IImage extends IItem {
+  file: string;
+  fileSize: number;
 }

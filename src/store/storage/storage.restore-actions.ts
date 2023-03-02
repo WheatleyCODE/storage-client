@@ -1,6 +1,6 @@
+import { changeIsTrash, changeName, changeParent, changeAccessType } from 'store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RestoreActionNames } from 'types';
-import { changeAccessType, changeIsTrash, changeName, changeParent } from './storage.actions';
 
 export type AsyncThunk = ReturnType<typeof createAsyncThunk<any, any>>;
 

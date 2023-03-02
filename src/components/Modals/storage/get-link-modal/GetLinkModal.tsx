@@ -41,7 +41,7 @@ export const GetLinkModal: FC<IGetLinkModal> = ({ currentItems, onClose }) => {
     ref.current.select();
   }, []);
 
-  const isLink = !!item.accesLink;
+  const isLink = !!item.accessLink;
 
   return (
     <Portal>
@@ -58,7 +58,7 @@ export const GetLinkModal: FC<IGetLinkModal> = ({ currentItems, onClose }) => {
               <input
                 readOnly
                 onClick={isLink ? selectLink : undefined}
-                value={item.accesLink || 'Ссылка не сгенерирована'}
+                value={item.accessLink || 'Ссылка не сгенерирована'}
                 ref={ref}
                 className={`get-link-modal__input ${!isLink ? 'grey' : ''}`}
               />

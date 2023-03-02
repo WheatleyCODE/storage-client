@@ -10,9 +10,7 @@ export type IEmitterData = INotifierMessage;
 
 export class Emitter {
   private subscribers: { [propName: string]: Array<(a: IEmitterData) => void> } = {};
-
   private static instance: Emitter;
-
   private static exists: boolean;
 
   constructor() {

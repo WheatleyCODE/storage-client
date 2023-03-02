@@ -1,11 +1,8 @@
 /* eslint-disable no-constructor-return */
 export class CacheData {
   private data: { [key: string]: any } = {};
-
   private timers: { [key: string]: NodeJS.Timeout | null } = {};
-
   private static instance: CacheData;
-
   private static exists: boolean;
 
   constructor() {

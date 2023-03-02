@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { calcAndFormatSize, getWorkplaceIcon } from 'utils';
+import { getWorkplaceIcon } from 'utils';
 import { WorkplaceItem } from 'types';
 import './DeleteWorkplaceItem.scss';
 
@@ -16,7 +16,7 @@ export const DeleteWorkplaceItem: FC<IDeleteWorkplaceItem> = ({ item }) => {
         <MemoIcon />
       </div>
       <div className="delete-workplace-item__name">{item.name}</div>
-      <div className="delete-workplace-item__size">{calcAndFormatSize(item)}</div>
+      <div className="delete-workplace-item__size">calcAndFormatSizeFix</div>
     </div>
   );
 };
