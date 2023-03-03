@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
-import { getWorkplaceIcon } from 'utils';
+import { formatSize, getWorkplaceIcon } from 'utils';
+import { PropertyFactory } from 'helpers';
 import { WorkplaceItem } from 'types';
 import './DeleteWorkplaceItem.scss';
 
@@ -8,15 +9,16 @@ export interface IDeleteWorkplaceItem {
 }
 
 export const DeleteWorkplaceItem: FC<IDeleteWorkplaceItem> = ({ item }) => {
-  const MemoIcon = memo(getWorkplaceIcon(item));
+  const itemData = PropertyFactory.create(item);
+  const MemoIcon = memo(getWorkplaceIcon(itemData));
 
   return (
     <div className="delete-workplace-item">
       <div className="delete-workplace-item__icon">
         <MemoIcon />
       </div>
-      <div className="delete-workplace-item__name">{item.name}</div>
-      <div className="delete-workplace-item__size">calcAndFormatSizeFix</div>
+      <div className="delete-workplace-item__name">{itemData.name}</div>
+      <div className="delete-workplace-item__size">{formatSize(itemData.getSize())}</div>
     </div>
   );
 };

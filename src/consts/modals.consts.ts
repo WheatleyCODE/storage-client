@@ -1,4 +1,4 @@
-import { HashModals, HashModalsToStateKeys, StateKeysToHashModals } from 'types';
+import { HashModals, HashModalsToStateKeys, ItemTypes, StateKeysToHashModals } from 'types';
 
 export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.CREATE_FOLDER]: 'isCreateFolder',

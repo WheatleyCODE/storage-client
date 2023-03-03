@@ -5,6 +5,7 @@ import { WorkplaceModal } from 'components';
 import { getImageLink, getWorkplaceIcon } from 'utils';
 import { WorkplaceItem } from 'types';
 import './ImageModal.scss';
+import { PropertyFactory } from 'helpers';
 
 export interface IImageModalProps {
   currentItems: WorkplaceItem[];
@@ -14,16 +15,16 @@ export interface IImageModalProps {
 export type Size = { width: number; height: number };
 
 export const ImageModal: FC<IImageModalProps> = ({ currentItems, onClose }) => {
-  const item = currentItems[0];
+  const itemData = PropertyFactory.create(currentItems[0]);
   const refImage = useRef<HTMLImageElement | null>(null);
   const refDiv = useRef<HTMLDivElement | null>(null);
   const [size, setSize] = useState<Size>({ width: 0, height: 0 });
   const [initialSize, setInitialSize] = useState<Size>({ width: 0, height: 0 });
   const [aspectRatio, setAspectRatio] = useState<[width: number, height: number]>([1, 1]);
 
-  const imageLink = getImageLink(item);
+  const imageLink = getImageLink(itemData);
   const MemoArrow = memo(MdArrowBack);
-  const MemoIcon = memo(getWorkplaceIcon(item));
+  const MemoIcon = memo(getWorkplaceIcon(itemData));
 
   const stopPropagation = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();

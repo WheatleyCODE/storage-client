@@ -2,7 +2,7 @@ import React, { FC, memo, useState, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { MdErrorOutline } from 'react-icons/md';
-import { FinderService, StorageService } from 'services';
+import { FinderService } from 'services';
 import { useDebounce, useValidInput } from 'hooks';
 import { Input, Popup, PopupMenu } from 'components';
 import { getColorClassName, getWorkplaceIcon, getWorkplaceUrl } from 'utils';
@@ -14,6 +14,7 @@ import {
 } from 'consts';
 import { WorkplaceItem } from 'types';
 import './Search.scss';
+import { PropertyFactory } from 'helpers';
 
 export const Search: FC = memo(() => {
   const [show, setShow] = useState(false);
@@ -49,12 +50,16 @@ export const Search: FC = memo(() => {
 
   const MemoIcon = memo(MdErrorOutline);
 
-  const menuItems = items.map((item) => ({
-    title: item.name,
-    Icon: getWorkplaceIcon(item),
-    path: getWorkplaceUrl(item),
-    iconColor: getColorClassName(item),
-  }));
+  const menuItems = items.map((item) => {
+    const itemData = PropertyFactory.create(item);
+
+    return {
+      title: itemData.name,
+      Icon: getWorkplaceIcon(itemData),
+      path: getWorkplaceUrl(itemData),
+      iconColor: getColorClassName(itemData),
+    };
+  });
 
   const popupHeight = menuItems.length
     ? menuItems.length * POPUP_MENU_ITEM_HEIGHT + POPUP_MENU_PADDING

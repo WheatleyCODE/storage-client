@@ -1,60 +1,31 @@
-import { stateKeysToHashModals } from 'consts';
-import { useTypedSelector, useActions, useTypedDispatch } from 'hooks';
-import { useLocation, useNavigate } from 'react-router';
+import { PropertyFactory } from 'helpers';
+import { useTypedSelector, useActions, useTypedDispatch, useOpenModal } from 'hooks';
+import { useNavigate } from 'react-router';
 import { modalsActions } from 'store';
-import { FolderColors, ItemTypes, ModalsStateKeys } from 'types';
+import { FolderColors } from 'types';
 import { getWorkplaceUrl } from 'utils';
 
 export const useContextMenuHandlers = () => {
   const { currentItems } = useTypedSelector((state) => state.storage);
   const { isAside } = useTypedSelector((state) => state.modals);
   const { changeIsModal } = modalsActions;
-  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { changeIsTrash, changeColor, copyFiles, downloadFile, downloadAcrhive } = useActions();
+  const openModal = useOpenModal();
   const dispatch = useTypedDispatch();
-
-  const getOpenModal = (key: ModalsStateKeys, isHash = true) => {
-    const hash = stateKeysToHashModals[key];
-
-    if (isHash) {
-      return () => {
-        navigate(pathname + hash);
-        dispatch(changeIsModal({ key, boolean: true }));
-      };
-    }
-
-    return () => {
-      dispatch(changeIsModal({ key, boolean: true }));
-    };
-  };
 
   const openWorkpaceItem = () => {
     const item = currentItems[0];
     if (!item) return;
 
-    // ! Fix
-    if (item.type === ItemTypes.IMAGE) {
-      getOpenModal('isImage')();
+    const itemData = PropertyFactory.create(item);
+
+    if (itemData.openModalStateKey) {
+      openModal(itemData.openModalStateKey, true);
       return;
     }
 
-    if (item.type === ItemTypes.VIDEO) {
-      getOpenModal('isVideo')();
-      return;
-    }
-
-    if (item.type === ItemTypes.TRACK) {
-      getOpenModal('isTrack')();
-      return;
-    }
-
-    if (item.type === ItemTypes.ALBUM) {
-      getOpenModal('isAlbum')();
-      return;
-    }
-
-    navigate(getWorkplaceUrl(item));
+    navigate(getWorkplaceUrl(itemData));
   };
 
   const openIsInfo = () => {
@@ -104,7 +75,7 @@ export const useContextMenuHandlers = () => {
   };
 
   return {
-    getOpenModal,
+    openModal,
     changeIsTrashHandler,
     changeColorHandler,
     copyFilesHandler,

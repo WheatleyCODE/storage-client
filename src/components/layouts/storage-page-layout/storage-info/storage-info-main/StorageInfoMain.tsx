@@ -2,23 +2,23 @@ import React, { FC, memo } from 'react';
 import { Button } from 'components';
 import { MdClose } from 'react-icons/md';
 import { FcSafe } from 'react-icons/fc';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import { getColorClassName, getWorkplaceIcon } from 'utils';
 import { DriveInfo } from '../drive-info/DriveInfo';
 import { ItemInfo } from '../item-info/ItemInfo';
 import './StorageInfoMain.scss';
 
 export interface IStorageInfoMainProps {
-  item?: WorkplaceItem;
+  itemData?: IItemProperties;
   onClose: () => void;
   openChangeAccessModal: () => void;
   userId: string;
 }
 
 export const StorageInfoMain: FC<IStorageInfoMainProps> = memo((props) => {
-  const { item, onClose, openChangeAccessModal, userId } = props;
+  const { itemData, onClose, openChangeAccessModal, userId } = props;
 
-  const MemoWPIcon = item ? memo(getWorkplaceIcon(item)) : memo(FcSafe);
+  const MemoWPIcon = itemData ? memo(getWorkplaceIcon(itemData)) : memo(FcSafe);
 
   return (
     <div className="storage-info-main">
@@ -34,17 +34,21 @@ export const StorageInfoMain: FC<IStorageInfoMainProps> = memo((props) => {
       </div>
 
       <div className="storage-info-main__head">
-        <div className={`storage-info-main__icon ${item && getColorClassName(item)}`}>
+        <div className={`storage-info-main__icon ${itemData && getColorClassName(itemData)}`}>
           <MemoWPIcon />
         </div>
-        {item && <div className="storage-info-main__name">{item.name}</div>}
-        {!item && <div className="storage-info-main__name">Хранилище</div>}
+        {itemData && <div className="storage-info-main__name">{itemData.name}</div>}
+        {!itemData && <div className="storage-info-main__name">Хранилище</div>}
       </div>
 
-      {item && (
-        <ItemInfo openChangeAccessModal={openChangeAccessModal} item={item} userId={userId} />
+      {itemData && (
+        <ItemInfo
+          openChangeAccessModal={openChangeAccessModal}
+          itemData={itemData}
+          userId={userId}
+        />
       )}
-      {!item && <DriveInfo />}
+      {!itemData && <DriveInfo />}
     </div>
   );
 });

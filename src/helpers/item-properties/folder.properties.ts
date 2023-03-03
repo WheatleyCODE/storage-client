@@ -1,16 +1,10 @@
-import { IFolder, IProperties } from 'types';
+import { FolderColors, IFolder, IProperties } from 'types';
 import { DefaultProperties } from './default.properties';
 
 export class FolderProperties extends DefaultProperties implements IProperties {
-  description: string | null;
-  text: string | null;
-  author: string | null;
-
   constructor(private folder: IFolder) {
     super(folder);
-    this.description = null;
-    this.text = null;
-    this.author = null;
+    this.color = this.folder.color;
   }
 
   getFilePath(): string | null {

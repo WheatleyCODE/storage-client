@@ -2,7 +2,6 @@ import { $api } from 'api';
 import { AxiosResponse } from 'axios';
 import { IUser } from 'types';
 
-// ! Fix
 export class UserService {
   static async deleteUser(id: string): Promise<AxiosResponse<IUser>> {
     return $api.post<IUser>(`/api/user/delete/${id}`);

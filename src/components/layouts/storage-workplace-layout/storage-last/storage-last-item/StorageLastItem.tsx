@@ -1,3 +1,4 @@
+import { PropertyFactory } from 'helpers';
 import React, { FC, memo } from 'react';
 import { useNavigate } from 'react-router';
 import { WorkplaceItem } from 'types';
@@ -14,14 +15,15 @@ export interface IStorageLastItemProps {
 export const StorageLastItem: FC<IStorageLastItemProps> = memo((props) => {
   const { item, changeActive, index, isActive } = props;
   const navigate = useNavigate();
-  const MemoIcon = memo(getWorkplaceIcon(item));
+  const itemData = PropertyFactory.create(item);
+  const MemoIcon = memo(getWorkplaceIcon(itemData));
 
   const onClick = () => {
     changeActive(index);
   };
 
   const openWorkplaceItem = () => {
-    navigate(getWorkplaceUrl(item));
+    navigate(getWorkplaceUrl(itemData));
   };
 
   return (
@@ -32,10 +34,10 @@ export const StorageLastItem: FC<IStorageLastItemProps> = memo((props) => {
       onDoubleClick={openWorkplaceItem}
       className={`storage-last-item ${isActive ? 'active' : ''}`}
     >
-      <div className={`storage-last-item__icon ${getColorClassName(item)}`}>
+      <div className={`storage-last-item__icon ${getColorClassName(itemData)}`}>
         <MemoIcon />
       </div>
-      <div className="storage-last-item__name">{item.name}</div>
+      <div className="storage-last-item__name">{itemData.name}</div>
     </div>
   );
 });

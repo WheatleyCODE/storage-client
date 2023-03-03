@@ -1,6 +1,12 @@
-import { WorkplaceItem } from 'types';
+import { FolderColors, ModalsStateKeys, openModalKeys, WorkplaceItem } from 'types';
 
 export class DefaultProperties {
+  openModalStateKey: ModalsStateKeys | null;
+  description: string | null = null;
+  text: string | null = null;
+  author: string | null = null;
+  color: FolderColors | null = null;
+
   constructor(
     item: WorkplaceItem,
     readonly id = item.id,
@@ -19,5 +25,7 @@ export class DefaultProperties {
     readonly changeDate = item.changeDate,
     readonly openDate = item.openDate,
     readonly comments = item.comments
-  ) {}
+  ) {
+    this.openModalStateKey = openModalKeys[item.type] || null;
+  }
 }

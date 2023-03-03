@@ -1,3 +1,4 @@
+import { PropertyFactory } from 'helpers';
 import React, { FC, memo, useCallback } from 'react';
 import { HiChevronRight } from 'react-icons/hi';
 import { useNavigate } from 'react-router';
@@ -13,13 +14,17 @@ export interface StoragePathProps {
 
 export const StoragePath: FC<StoragePathProps> = memo(({ parents }) => {
   const navigate = useNavigate();
-  const items = parents.map((parent) => ({
-    title: parent.name,
-    Icon: getWorkplaceIcon(parent),
-    path: getWorkplaceUrl(parent),
-    iconColor: getColorClassName(parent),
-    folder: parent,
-  }));
+  const items = parents.map((parent) => {
+    const itemData = PropertyFactory.create(parent);
+
+    return {
+      title: parent.name,
+      Icon: getWorkplaceIcon(itemData),
+      path: getWorkplaceUrl(itemData),
+      iconColor: getColorClassName(itemData),
+      folder: parent,
+    };
+  });
 
   const MemoIcon = memo(HiChevronRight);
 

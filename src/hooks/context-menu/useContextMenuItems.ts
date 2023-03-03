@@ -46,7 +46,7 @@ export interface IWorkplaceCMI {
 
 export const useContextMenuItems = () => {
   const {
-    getOpenModal,
+    openModal,
     changeIsTrashHandler,
     changeColorHandler,
     openIsInfo,
@@ -61,23 +61,23 @@ export const useContextMenuItems = () => {
       {
         title: 'Создать папку',
         Icon: MdOutlineCreateNewFolder,
-        handler: getOpenModal('isCreateFolder'),
+        handler: () => openModal('isCreateFolder'),
         brBefore: true,
       },
       {
         title: 'Создать альбом',
         Icon: MdLibraryMusic,
-        handler: getOpenModal('isCreateAlbum'),
+        handler: () => openModal('isCreateAlbum'),
       },
       {
         title: 'Создать трек',
         Icon: MdAudiotrack,
-        handler: getOpenModal('isCreateTrack'),
+        handler: () => openModal('isCreateTrack'),
       },
       {
         title: 'Создать видео',
         Icon: MdVideocam,
-        handler: getOpenModal('isCreateVideo'),
+        handler: () => openModal('isCreateVideo'),
         brBefore: true,
       },
       {
@@ -106,27 +106,27 @@ export const useContextMenuItems = () => {
       {
         title: 'Изменить доступ',
         Icon: HiOutlineUserAdd,
-        handler: getOpenModal('isChangeAccess', false),
+        handler: () => openModal('isChangeAccess', false),
       },
       {
         title: 'Получить ссылку',
         Icon: MdOutlineLink,
-        handler: getOpenModal('isGetLink', false),
+        handler: () => openModal('isGetLink', false),
       },
       {
         title: 'Переместить',
         Icon: MdOutlineDriveFileMove,
-        handler: getOpenModal('isChangeParent', false),
+        handler: () => openModal('isChangeParent', false),
       },
       {
         title: 'Добавить в отмеченные',
         Icon: MdOutlineBookmarkAdd,
-        handler: getOpenModal('isSettings'),
+        handler: () => openModal('isSettings'),
       },
       {
         title: 'Переименовать',
         Icon: MdDriveFileRenameOutline,
-        handler: getOpenModal('isRename', false),
+        handler: () => openModal('isRename', false),
       },
       {
         title: 'Показать своства',
@@ -147,7 +147,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Удалить навсегда',
         Icon: BiTrash,
-        handler: getOpenModal('isDelete', false),
+        handler: () => openModal('isDelete', false),
       },
     ],
     []
@@ -220,7 +220,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Редактироввать',
           Icon: MdSettingsSuggest,
-          handler: getOpenModal('isSettings'),
+          handler: () => openModal('isSettings'),
         },
         {
           title: 'Создать копию',
@@ -231,14 +231,14 @@ export const useContextMenuItems = () => {
         {
           title: 'Скачать',
           Icon: BiDownload,
-          handler: getOpenModal('isSettings'),
+          handler: () => openModal('isSettings'),
         },
       ],
       [ItemTypes.TRACK]: [
         {
           title: 'Редактироввать',
           Icon: MdSettingsSuggest,
-          handler: getOpenModal('isSettings'),
+          handler: () => openModal('isSettings'),
         },
         {
           title: 'Создать копию',
@@ -377,17 +377,17 @@ export const useContextMenuItems = () => {
       {
         title: 'Изменить доступ',
         Icon: HiOutlineUserAdd,
-        handler: getOpenModal('isSettings'),
+        handler: () => openModal('isSettings'),
       },
       {
         title: 'Переместить',
         Icon: MdOutlineDriveFileMove,
-        handler: getOpenModal('isChangeParent', false),
+        handler: () => openModal('isChangeParent', false),
       },
       {
         title: 'Добавить в отмеченные',
         Icon: MdOutlineBookmarkAdd,
-        handler: getOpenModal('isSettings'),
+        handler: () => openModal('isSettings'),
       },
     ],
     []

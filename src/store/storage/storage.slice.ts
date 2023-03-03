@@ -8,6 +8,7 @@ import {
   SortTypes,
   WorkplaceItem,
 } from 'types';
+import { copyObject } from 'utils';
 import { changeSettings, fetchStorage } from './storage.actions';
 
 const initialState: IStorageState = {
@@ -74,8 +75,8 @@ export const storageSlice = createSlice({
       const sorter = new StorageSorter();
       state.sortType = payload;
 
-      const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
-      const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
+      const allItemsArr = copyObject(state.allItems);
+      const workplaceItemsArr = copyObject(state.workplaceItems);
 
       state.allItems = sorter.sort(allItemsArr, payload);
       state.workplaceItems = sorter.sort(workplaceItemsArr, payload);
@@ -113,8 +114,8 @@ export const storageSlice = createSlice({
         return item;
       });
 
-      const allItemsArr = JSON.parse(JSON.stringify(newAllItems));
-      const workplaceItemsArr = JSON.parse(JSON.stringify(newWorkplaceItems));
+      const allItemsArr = copyObject(newAllItems);
+      const workplaceItemsArr = copyObject(newWorkplaceItems);
 
       state.allItems = sorter.sort(allItemsArr, state.sortType);
       state.workplaceItems = sorter.sort(workplaceItemsArr, state.sortType);
@@ -124,8 +125,8 @@ export const storageSlice = createSlice({
     addItems: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
       const sorter = new StorageSorter();
 
-      const allItemsArr = JSON.parse(JSON.stringify(state.allItems));
-      const workplaceItemsArr = JSON.parse(JSON.stringify(state.workplaceItems));
+      const allItemsArr = copyObject(state.allItems);
+      const workplaceItemsArr = copyObject(state.workplaceItems);
 
       state.allItems = sorter.sort([...allItemsArr, ...payload], state.sortType);
       state.workplaceItems = sorter.sort([...workplaceItemsArr, ...payload], state.sortType);

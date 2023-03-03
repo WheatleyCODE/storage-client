@@ -1,8 +1,8 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { useActions, useTypedDispatch } from 'hooks';
+import { useActions, useOpenModal, useTypedDispatch } from 'hooks';
 import {
-  // calcAndFormatSize,
+  formatSize,
   getColorClassName,
   getWorkplaceIcon,
   getWorkplaceUrl,
@@ -12,6 +12,7 @@ import {
 import { ItemTypes, ModalsStateKeys, WorkplaceItem } from 'types';
 import { stateKeysToHashModals } from 'consts';
 import { modalsActions } from 'store';
+import { PropertyFactory } from 'helpers';
 import './StorageWorkplaceItem.scss';
 
 export interface IStorageWorkplaceItemProps {
@@ -28,10 +29,11 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const navigate = useNavigate();
   const { uploadFiles } = useActions();
-  const dispatch = useTypedDispatch();
-  const { pathname } = useParams();
+  const openModal = useOpenModal();
 
-  const MemoIcon = memo(getWorkplaceIcon(item));
+  const itemData = PropertyFactory.create(item);
+
+  const MemoIcon = memo(getWorkplaceIcon(itemData));
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.ctrlKey) {
@@ -53,44 +55,30 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     }
   };
 
-  const getOpenModal = (key: ModalsStateKeys, isHash = true) => {
-    const hash = stateKeysToHashModals[key];
+  // ! Fixed
+  // const getOpenModal = (key: ModalsStateKeys, isHash = true) => {
+  //   const hash = stateKeysToHashModals[key];
 
-    if (isHash) {
-      return () => {
-        navigate(pathname + hash);
-        dispatch(modalsActions.changeIsModal({ key, boolean: true }));
-      };
-    }
+  //   if (isHash) {
+  //     return () => {
+  //       navigate(pathname + hash);
+  //       dispatch(modalsActions.changeIsModal({ key, boolean: true }));
+  //     };
+  //   }
 
-    return () => {
-      dispatch(modalsActions.changeIsModal({ key, boolean: true }));
-    };
-  };
+  //   return () => {
+  //     dispatch(modalsActions.changeIsModal({ key, boolean: true }));
+  //   };
+  // };
 
-  // ! Fix
+  // ! Fixed
   const openWorkplaceItem = () => {
-    if (item.type === ItemTypes.IMAGE) {
-      getOpenModal('isImage', false)();
+    if (itemData.openModalStateKey) {
+      openModal(itemData.openModalStateKey, false);
       return;
     }
 
-    if (item.type === ItemTypes.VIDEO) {
-      getOpenModal('isVideo', false)();
-      return;
-    }
-
-    if (item.type === ItemTypes.TRACK) {
-      getOpenModal('isTrack', false)();
-      return;
-    }
-
-    if (item.type === ItemTypes.ALBUM) {
-      getOpenModal('isAlbum', false)();
-      return;
-    }
-
-    navigate(getWorkplaceUrl(item));
+    navigate(getWorkplaceUrl(itemData));
   };
 
   const onDragEnterHandler = useCallback((e: React.DragEvent) => {
@@ -130,12 +118,12 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       } ${isDragEnter && !isFolder ? 'grey' : ''}`}
     >
       <div className="storage-workplace-item__name">
-        <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(item)}`} />
+        <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(itemData)}`} />
         {item.name}
       </div>
-      <div className="storage-workplace-item__access">{transformAccess(item.accessType)}</div>
-      <div className="storage-workplace-item__open-date">{transformDate(item.openDate)}</div>
-      <div className="storage-workplace-item__size">calcAndFormatSizeFix</div>
+      <div className="storage-workplace-item__access">{transformAccess(itemData.accessType)}</div>
+      <div className="storage-workplace-item__open-date">{transformDate(itemData.openDate)}</div>
+      <div className="storage-workplace-item__size">{formatSize(itemData.getSize())}</div>
     </div>
   );
 };

@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { storageActions } from 'store';
 import { ItemsService } from 'services';
 import { getActionMessage } from 'helpers';
-// import { createChangeIsTrashMessage } from 'utils';
 import {
   IChangeAccessTypeFilds,
   IChangeAccessTypeRestore,

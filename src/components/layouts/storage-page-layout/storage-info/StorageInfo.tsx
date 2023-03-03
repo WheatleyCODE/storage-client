@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { modalsActions } from 'store';
 import { Portal, Backdrop, Drawer } from 'components';
 import { useTypedDispatch, useTypedSelector } from 'hooks';
+import { PropertyFactory } from 'helpers';
 import { StorageInfoMain } from './storage-info-main/StorageInfoMain';
 import './StorageInfo.scss';
 
@@ -15,7 +16,7 @@ export const StorageInfo: FC<IStorageInfoProps> = memo(({ onClose }) => {
   const { user } = useTypedSelector((state) => state.auth);
   const dispatch = useTypedDispatch();
 
-  const item = currentItems[0];
+  const itemData = PropertyFactory.create(currentItems[0]);
 
   const openChangeAccess = useCallback(() => {
     dispatch(modalsActions.changeIsModal({ key: 'isChangeAccess', boolean: true }));
@@ -38,7 +39,7 @@ export const StorageInfo: FC<IStorageInfoProps> = memo(({ onClose }) => {
       <div className="storage-info__header" />
 
       <StorageInfoMain
-        item={item}
+        itemData={itemData}
         onClose={onClose}
         openChangeAccessModal={openChangeAccess}
         userId={user.id}
@@ -48,7 +49,7 @@ export const StorageInfo: FC<IStorageInfoProps> = memo(({ onClose }) => {
         <Backdrop className="is-info-modal" onClose={onClose}>
           <Drawer width={320} open="right">
             <StorageInfoMain
-              item={item}
+              itemData={itemData}
               onClose={onClose}
               openChangeAccessModal={openChangeAccessModal}
               userId={user.id}

@@ -1,3 +1,5 @@
+import { ItemTypes } from './storage-workplace.intarface';
+
 export interface IModalsState {
   isSettings: boolean;
   isHotkeys: boolean;
@@ -20,6 +22,13 @@ export interface IModalsState {
 }
 
 export type ModalsStateKeys = keyof IModalsState;
+
+export const openModalKeys: { [key in ItemTypes as string]: ModalsStateKeys } = {
+  [ItemTypes.ALBUM]: 'isAlbum',
+  [ItemTypes.IMAGE]: 'isImage',
+  [ItemTypes.TRACK]: 'isTrack',
+  [ItemTypes.VIDEO]: 'isVideo',
+};
 
 export interface IModalsPayload {
   key: ModalsStateKeys;

@@ -1,4 +1,5 @@
 import { DefaultProperties } from 'helpers/item-properties/default.properties';
+import { FolderColors } from './folder.interface';
 import { AccessTypes, ItemTypes } from './storage-workplace.intarface';
 
 export interface IProperties {
@@ -18,6 +19,7 @@ export interface IProperties {
   changeDate: number;
   openDate: number;
   comments: any[];
+  color: FolderColors | null;
   description: string | null;
   text: string | null;
   author: string | null;
