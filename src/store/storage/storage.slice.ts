@@ -6,7 +6,7 @@ import {
   IStorageData,
   IStorageState,
   SortTypes,
-  WorkplaceItem,
+  IServerItemData,
 } from 'types';
 import { copyObject } from 'utils';
 import { changeSettings, fetchStorage } from './storage.actions';
@@ -35,13 +35,13 @@ export const storageSlice = createSlice({
   initialState,
 
   reducers: {
-    setCurrent: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
+    setCurrent: (state, { payload }: PayloadAction<IServerItemData[]>) => {
       if (JSON.stringify(state.currentItems) !== JSON.stringify(payload)) {
         state.currentItems = payload;
       }
     },
 
-    addCurrent: (state, { payload }: PayloadAction<WorkplaceItem>) => {
+    addCurrent: (state, { payload }: PayloadAction<IServerItemData>) => {
       if (!state.currentItems.find((item) => item.id === payload.id)) {
         state.currentItems = [...state.currentItems, payload];
       }
@@ -51,7 +51,7 @@ export const storageSlice = createSlice({
       state.isWorkplaceLoading = payload;
     },
 
-    setWorkplace: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
+    setWorkplace: (state, { payload }: PayloadAction<IServerItemData[]>) => {
       state.workplaceItems = payload;
     },
 
@@ -82,7 +82,7 @@ export const storageSlice = createSlice({
       state.workplaceItems = sorter.sort(workplaceItemsArr, payload);
     },
 
-    setItems: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
+    setItems: (state, { payload }: PayloadAction<IServerItemData[]>) => {
       const types = payload.map((item) => item.type);
       const sorter = new StorageSorter();
 
@@ -122,7 +122,7 @@ export const storageSlice = createSlice({
       state.parents = newParents;
     },
 
-    addItems: (state, { payload }: PayloadAction<WorkplaceItem[]>) => {
+    addItems: (state, { payload }: PayloadAction<IServerItemData[]>) => {
       const sorter = new StorageSorter();
 
       const allItemsArr = copyObject(state.allItems);

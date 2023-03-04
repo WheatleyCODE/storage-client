@@ -12,19 +12,20 @@ import {
   POPUP_MENU_PADDING,
   POPUP_MENU_PADDING_SCROLL,
 } from 'consts';
-import { WorkplaceItem } from 'types';
-import './Search.scss';
+import { IClientItemData } from 'types';
 import { PropertyFactory } from 'helpers';
+import './Search.scss';
 
 export const Search: FC = memo(() => {
   const [show, setShow] = useState(false);
-  const [items, setItems] = useState<WorkplaceItem[]>([]);
+  const [itemsData, setItemsData] = useState<IClientItemData[]>([]);
   const search = useValidInput();
 
   const searchReuest = async (text: string) => {
     if (text) {
       const { data } = await FinderService.searchItems(text);
-      setItems(data);
+      const iData = data.map((item) => PropertyFactory.create(item));
+      setItemsData(iData);
     }
   };
 
@@ -50,9 +51,7 @@ export const Search: FC = memo(() => {
 
   const MemoIcon = memo(MdErrorOutline);
 
-  const menuItems = items.map((item) => {
-    const itemData = PropertyFactory.create(item);
-
+  const menuItems = itemsData.map((itemData) => {
     return {
       title: itemData.name,
       Icon: getWorkplaceIcon(itemData),
@@ -94,7 +93,7 @@ export const Search: FC = memo(() => {
             }
           >
             <PopupMenu onClose={closePopup} items={menuItems} />
-            {!items.length && (
+            {!itemsData.length && (
               <div className="search__not-found">
                 <MemoIcon className="icon" />
                 Ничего не найдено

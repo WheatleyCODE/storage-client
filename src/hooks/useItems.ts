@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AccessTypes, ItemTypes, WorkplaceItem } from 'types';
+import { AccessTypes, ItemTypes, IServerItemData } from 'types';
 import { useTypedSelector } from './redux/useTypedSelector';
 
 export interface IUseItemsParams {
@@ -10,7 +10,7 @@ export interface IUseItemsParams {
   onlyAccess?: AccessTypes[];
 }
 
-export const useItems = (params: IUseItemsParams): WorkplaceItem[] => {
+export const useItems = (params: IUseItemsParams): IServerItemData[] => {
   const { isTrash = false, isParent = false, sortByDate = false, onlyTypes, onlyAccess } = params;
   const { allItems } = useTypedSelector((state) => state.storage);
 

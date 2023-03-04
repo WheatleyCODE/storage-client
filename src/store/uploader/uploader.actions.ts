@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { storageActions, uploaderActions } from 'store';
 import { UploadService } from 'services';
 import { getActionMessage } from 'helpers';
-import { WorkplaceItem, IUploadFilesFilds } from 'types';
+import { IServerItemData, IUploadFilesFilds } from 'types';
 
-export const uploadFiles = createAsyncThunk<WorkplaceItem[], IUploadFilesFilds>(
+export const uploadFiles = createAsyncThunk<IServerItemData[], IUploadFilesFilds>(
   'storage/uploadFiles',
   async (filds, thunkAPI) => {
     try {

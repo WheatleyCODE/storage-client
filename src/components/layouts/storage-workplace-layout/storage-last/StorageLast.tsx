@@ -2,12 +2,12 @@ import React, { FC, useCallback, useRef, useState } from 'react';
 import { useClickOutside, useResizeObserver, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
 import { ITEM_WIDTH } from 'consts';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import { StorageLastItem } from './storage-last-item/StorageLastItem';
 import './StorageLast.scss';
 
 export interface IStorageLastProps {
-  lastItemsData: IItemProperties[];
+  lastItemsData: IClientItemData[];
 }
 
 export const StorageLast: FC<IStorageLastProps> = ({ lastItemsData }) => {
@@ -25,7 +25,7 @@ export const StorageLast: FC<IStorageLastProps> = ({ lastItemsData }) => {
     (i: number) => {
       setTimeout(() => {
         setActiveItems([i]);
-        dispatch(storageActions.setCurrent([lastItemsData[i].toWorkplaceItem()]));
+        dispatch(storageActions.setCurrent([lastItemsData[i].toServerItemData()]));
       }, 1);
     },
     [lastItemsData]

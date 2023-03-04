@@ -9,14 +9,11 @@ import {
   transformAccess,
   transformDate,
 } from 'utils';
-import { ItemTypes, ModalsStateKeys, WorkplaceItem } from 'types';
-import { stateKeysToHashModals } from 'consts';
-import { modalsActions } from 'store';
-import { PropertyFactory } from 'helpers';
+import { IClientItemData, ItemTypes } from 'types';
 import './StorageWorkplaceItem.scss';
 
 export interface IStorageWorkplaceItemProps {
-  item: WorkplaceItem;
+  itemData: IClientItemData;
   isActive: boolean;
   index: number;
   changeActive: (i: number) => void;
@@ -25,13 +22,11 @@ export interface IStorageWorkplaceItemProps {
 }
 
 export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
-  const { item, isActive, changeActive, addActive, addActiveShift, index } = props;
+  const { itemData, isActive, changeActive, addActive, addActiveShift, index } = props;
   const [isDragEnter, setIsDragEnter] = useState(false);
   const navigate = useNavigate();
   const { uploadFiles } = useActions();
   const openModal = useOpenModal();
-
-  const itemData = PropertyFactory.create(item);
 
   const MemoIcon = memo(getWorkplaceIcon(itemData));
 
@@ -55,23 +50,6 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     }
   };
 
-  // ! Fixed
-  // const getOpenModal = (key: ModalsStateKeys, isHash = true) => {
-  //   const hash = stateKeysToHashModals[key];
-
-  //   if (isHash) {
-  //     return () => {
-  //       navigate(pathname + hash);
-  //       dispatch(modalsActions.changeIsModal({ key, boolean: true }));
-  //     };
-  //   }
-
-  //   return () => {
-  //     dispatch(modalsActions.changeIsModal({ key, boolean: true }));
-  //   };
-  // };
-
-  // ! Fixed
   const openWorkplaceItem = () => {
     if (itemData.openModalStateKey) {
       openModal(itemData.openModalStateKey, false);
@@ -98,10 +76,10 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     e.stopPropagation();
     const files = [...(e.dataTransfer.files as any)];
     setIsDragEnter(false);
-    uploadFiles({ files, parent: item.id });
+    uploadFiles({ files, parent: itemData.id });
   }, []);
 
-  const isFolder = item.type === ItemTypes.FOLDER;
+  const isFolder = itemData.type === ItemTypes.FOLDER;
 
   return (
     <div
@@ -119,7 +97,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     >
       <div className="storage-workplace-item__name">
         <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(itemData)}`} />
-        {item.name}
+        {itemData.name}
       </div>
       <div className="storage-workplace-item__access">{transformAccess(itemData.accessType)}</div>
       <div className="storage-workplace-item__open-date">{transformDate(itemData.openDate)}</div>

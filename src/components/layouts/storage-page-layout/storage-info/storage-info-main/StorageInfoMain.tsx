@@ -2,14 +2,14 @@ import React, { FC, memo } from 'react';
 import { Button } from 'components';
 import { MdClose } from 'react-icons/md';
 import { FcSafe } from 'react-icons/fc';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import { getColorClassName, getWorkplaceIcon } from 'utils';
 import { DriveInfo } from '../drive-info/DriveInfo';
 import { ItemInfo } from '../item-info/ItemInfo';
 import './StorageInfoMain.scss';
 
 export interface IStorageInfoMainProps {
-  itemData?: IItemProperties;
+  itemData?: IClientItemData;
   onClose: () => void;
   openChangeAccessModal: () => void;
   userId: string;

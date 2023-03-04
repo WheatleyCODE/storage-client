@@ -3,12 +3,12 @@ import { WorkplaceModal, Button } from 'components';
 import { MdPlayArrow } from 'react-icons/md';
 import { PropertyFactory } from 'helpers';
 import { getImageLink } from 'utils';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './TrackModal.scss';
 
 export interface ITrackModalProps {
   onClose: () => void;
-  currentItemData: IItemProperties;
+  currentItemData: IClientItemData;
 }
 
 export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) => {

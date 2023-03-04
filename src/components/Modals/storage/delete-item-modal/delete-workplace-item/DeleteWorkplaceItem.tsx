@@ -1,10 +1,10 @@
 import React, { FC, memo } from 'react';
 import { formatSize, getWorkplaceIcon } from 'utils';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './DeleteWorkplaceItem.scss';
 
 export interface IDeleteWorkplaceItem {
-  itemData: IItemProperties;
+  itemData: IClientItemData;
 }
 
 export const DeleteWorkplaceItem: FC<IDeleteWorkplaceItem> = ({ itemData }) => {

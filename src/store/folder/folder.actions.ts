@@ -50,6 +50,7 @@ export const getChildrens = createAsyncThunk<IChildrensData, string>(
   'storage/getChildrens',
   async (string, thunkAPI) => {
     try {
+      thunkAPI.dispatch(storageActions.changeWorkplaceLoading(true));
       const cacheData = CacheData.getInstance();
       const dataCache = cacheData.get<IChildrensData>(string);
 

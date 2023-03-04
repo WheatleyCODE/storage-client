@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import { MdPlayArrow } from 'react-icons/md';
 import { WorkplaceModal, Button } from 'components';
 import { getImageLink } from 'utils';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './AlbumModal.scss';
 
 export interface IAlbumModalProps {
   onClose: () => void;
-  currentItemData: IItemProperties;
+  currentItemData: IClientItemData;
 }
 
 export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) => {

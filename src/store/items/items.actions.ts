@@ -16,7 +16,7 @@ import {
   IItemFilds,
   IStorageData,
   RestoreActionNames,
-  WorkplaceItem,
+  IServerItemData,
 } from 'types';
 
 export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
@@ -41,7 +41,7 @@ export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
 );
 
 export const changeIsTrash = createAsyncThunk<
-  WorkplaceItem[],
+  IServerItemData[],
   IChangeIsTrashFilds & IChangeIsTrashRestore
 >('storage/changeIsTrashServer', async (filds, thunkAPI) => {
   try {
@@ -75,7 +75,7 @@ export const changeIsTrash = createAsyncThunk<
   }
 });
 
-export const changeName = createAsyncThunk<WorkplaceItem, IChangeNameFilds & IChangeNameRestore>(
+export const changeName = createAsyncThunk<IServerItemData, IChangeNameFilds & IChangeNameRestore>(
   'storage/changeName',
   async (filds, thunkAPI) => {
     try {
@@ -111,7 +111,7 @@ export const changeName = createAsyncThunk<WorkplaceItem, IChangeNameFilds & ICh
 );
 
 export const changeParent = createAsyncThunk<
-  WorkplaceItem[],
+  IServerItemData[],
   IChangeParentFilds & IChangeParentRestore
 >('storage/changeParent', async (filds, thunkAPI) => {
   try {
@@ -145,7 +145,7 @@ export const changeParent = createAsyncThunk<
   }
 });
 
-export const createAccessLink = createAsyncThunk<WorkplaceItem, IItemFilds>(
+export const createAccessLink = createAsyncThunk<IServerItemData, IItemFilds>(
   'storage/createAccessLink',
   async (filds, thunkAPI) => {
     try {
@@ -168,7 +168,7 @@ export const createAccessLink = createAsyncThunk<WorkplaceItem, IItemFilds>(
 );
 
 export const changeAccessType = createAsyncThunk<
-  WorkplaceItem,
+  IServerItemData,
   IChangeAccessTypeFilds & IChangeAccessTypeRestore
 >('storage/changeAccessType', async (filds, thunkAPI) => {
   try {
@@ -202,7 +202,7 @@ export const changeAccessType = createAsyncThunk<
   }
 });
 
-export const copyFiles = createAsyncThunk<WorkplaceItem[], ICopyFilesFilds>(
+export const copyFiles = createAsyncThunk<IServerItemData[], ICopyFilesFilds>(
   'storage/copyFiles',
   async (filds, thunkAPI) => {
     try {

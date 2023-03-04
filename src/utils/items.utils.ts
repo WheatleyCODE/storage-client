@@ -1,8 +1,8 @@
 import { IconType } from 'react-icons';
 import { BASE_URL, storageWorkplaceIcons } from 'consts';
-import { AccessTypes, IItemProperties, ItemTypes } from 'types';
+import { AccessTypes, IClientItemData, ItemTypes } from 'types';
 
-export const getColorClassName = (item: IItemProperties): string => {
+export const getColorClassName = (item: IClientItemData): string => {
   if (item.color) {
     return item.color.toLocaleLowerCase();
   }
@@ -18,13 +18,13 @@ export const transformAccess = (type: AccessTypes): string => {
   return 'Публичный';
 };
 
-export const getImageLink = (item: IItemProperties): string | false => {
+export const getImageLink = (item: IClientItemData): string | false => {
   if (!item.getImagePath()) return false;
 
   return `${BASE_URL}/${item.getImagePath()}`;
 };
 
-export const getWorkplaceIcon = (item: IItemProperties): IconType => {
+export const getWorkplaceIcon = (item: IClientItemData): IconType => {
   const { accessType, type } = item;
 
   const isAccess = accessType === AccessTypes.LINK || accessType === AccessTypes.PUBLIC;

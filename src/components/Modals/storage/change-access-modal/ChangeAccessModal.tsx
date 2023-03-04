@@ -2,11 +2,11 @@ import React, { FC, useCallback, useState } from 'react';
 import { Confirm, Select, Backdrop, Modal, Portal } from 'components';
 import { useActions } from 'hooks';
 import { changeAccessItems } from 'consts';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './ChangeAccessModal.scss';
 
 export interface IChangeAccessModal {
-  currentItemData: IItemProperties;
+  currentItemData: IClientItemData;
   onClose: () => void;
 }
 

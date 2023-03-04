@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { Confirm, Portal, Backdrop, Modal } from 'components';
 import { useActions } from 'hooks';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import { DeleteWorkplaceItem } from './delete-workplace-item/DeleteWorkplaceItem';
 import './DeleteModal.scss';
 
 export interface IDeleteModal {
-  currentItemsData: IItemProperties[];
+  currentItemsData: IClientItemData[];
   onClose: () => void;
 }
 

@@ -50,10 +50,10 @@ export interface IStorageSettings {
 
 export interface IStorageState {
   id: string;
-  currentItems: WorkplaceItem[];
-  workplaceItems: WorkplaceItem[];
+  currentItems: IServerItemData[];
+  workplaceItems: IServerItemData[];
   parents: IFolder[];
-  allItems: WorkplaceItem[];
+  allItems: IServerItemData[];
   name: string;
   user: string;
   diskSpace: number;
@@ -65,10 +65,10 @@ export interface IStorageState {
 }
 
 export interface IChildrensData {
-  childrens: WorkplaceItem[];
+  childrens: IServerItemData[];
   parents: IFolder[];
 }
 
 export type ISettingsData = IStorageSettings;
 
-export type WorkplaceItem = IFolder | IFile | IAlbum | ITrack | IImage | IVideo;
+export type IServerItemData = IFolder | IFile | IAlbum | ITrack | IImage | IVideo;

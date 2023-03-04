@@ -3,12 +3,12 @@ import { MdArrowBack } from 'react-icons/md';
 import { useResizeObserver } from 'hooks';
 import { WorkplaceModal } from 'components';
 import { getImageLink, getWorkplaceIcon } from 'utils';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './ImageModal.scss';
 import { PropertyFactory } from 'helpers';
 
 export interface IImageModalProps {
-  currentItemData: IItemProperties;
+  currentItemData: IClientItemData;
   onClose: () => void;
 }
 

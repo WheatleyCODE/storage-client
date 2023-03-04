@@ -10,12 +10,12 @@ import {
   MdOutlineRemoveRedEye,
 } from 'react-icons/md';
 import './WorkplaceModal.scss';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 
 export interface IWorkplaceModalProps {
   onClose: () => void;
   children: React.ReactNode;
-  currentItemData: IItemProperties;
+  currentItemData: IClientItemData;
 }
 
 export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {

@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback } from 'react';
 import { storageWorkplaceAccessIcons } from 'consts';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import { useTypedDispatch } from 'hooks';
 import { modalsActions } from 'store';
 import {
@@ -14,7 +14,7 @@ import {
 import './ItemInfo.scss';
 
 export interface IItemInfoProps {
-  itemData: IItemProperties;
+  itemData: IClientItemData;
   userId: string;
   openChangeAccessModal: () => void;
 }

@@ -2,14 +2,14 @@ import React, { FC, useCallback, useRef, useState, memo, useEffect } from 'react
 import { useLocation, useParams } from 'react-router';
 import { useActions, useClickOutside, useTypedDispatch } from 'hooks';
 import { storageActions } from 'store';
-import { PathRoutes, WorkplaceItem } from 'types';
+import { IClientItemData, PathRoutes } from 'types';
 import { Emitter, EventNames } from 'helpers';
 import { checkPathnameOnPathRoute } from 'utils';
 import { StorageWorkplaceItem } from './storage-workplace-item/StorageWorkplaceItem';
 import './StorageWorkplace.scss';
 
 export interface IStorageWorkplace {
-  workplaceItems: WorkplaceItem[];
+  workplaceItems: IClientItemData[];
 }
 
 export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems }) => {
@@ -41,7 +41,7 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
   const changeActive = useCallback(
     (i: number) => {
       setTimeout(() => {
-        dispatch(storageActions.setCurrent([workplaceItems[i]]));
+        dispatch(storageActions.setCurrent([workplaceItems[i].toServerItemData()]));
         setActiveItems([i]);
       }, 0);
     },
@@ -60,7 +60,7 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
 
   const addActive = useCallback(
     (i: number) => {
-      dispatch(storageActions.addCurrent(workplaceItems[i]));
+      dispatch(storageActions.addCurrent(workplaceItems[i].toServerItemData()));
       setActiveItems((p) => {
         if (!p.includes(i)) return [...p, i];
         return p;
@@ -80,7 +80,7 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
         indexes.push(i + (side ? j : -j));
       }
 
-      const newCurrentItems = indexes.map((num) => workplaceItems[num]);
+      const newCurrentItems = indexes.map((num) => workplaceItems[num].toServerItemData());
 
       dispatch(storageActions.setCurrent(newCurrentItems));
       setActiveItems(indexes);
@@ -141,14 +141,14 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
       className={`storage-workplace ${isDragEnter ? 'drag' : ''}`}
     >
       <div ref={ref}>
-        {workplaceItems.map((item, i) => (
+        {workplaceItems.map((itemData, i) => (
           <StorageWorkplaceItem
             changeActive={changeActive}
             addActive={addActive}
             addActiveShift={addActiveShift}
-            key={item.id}
+            key={itemData.id}
             isActive={activeItems.includes(i)}
-            item={item}
+            itemData={itemData}
             index={i}
           />
         ))}

@@ -1,11 +1,11 @@
 import React, { FC, memo } from 'react';
 import { useNavigate } from 'react-router';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import { getColorClassName, getWorkplaceIcon, getWorkplaceUrl } from 'utils';
 import './StorageLastItem.scss';
 
 export interface IStorageLastItemProps {
-  itemData: IItemProperties;
+  itemData: IClientItemData;
   isActive: boolean;
   changeActive: (i: number) => void;
   index: number;

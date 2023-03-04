@@ -4,13 +4,13 @@ import { FcSafe } from 'react-icons/fc';
 import { Confirm, Portal, Modal, Backdrop } from 'components';
 import { useActions } from 'hooks';
 import { checkPathnameOnPathRoute } from 'utils';
-import { IItemProperties, PathRoutes } from 'types';
+import { IClientItemData, PathRoutes } from 'types';
 import { ChangeParentFolder } from './change-parent-folder/ChangeParentFolder';
 import './ChangeParentModal.scss';
 
 export interface IChangeParentModal {
-  currentItemsData: IItemProperties[];
-  folders: IItemProperties[];
+  currentItemsData: IClientItemData[];
+  folders: IClientItemData[];
   onClose: () => void;
 }
 

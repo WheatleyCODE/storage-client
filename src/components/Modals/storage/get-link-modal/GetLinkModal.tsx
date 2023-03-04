@@ -2,11 +2,11 @@ import React, { FC, useCallback, useRef } from 'react';
 import { Confirm, Backdrop, Modal, Portal } from 'components';
 import { useActions, useTypedDispatch } from 'hooks';
 import { getActionMessage } from 'helpers';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './GetLinkModal.scss';
 
 export interface IGetLinkModal {
-  currentItemData: IItemProperties;
+  currentItemData: IClientItemData;
   onClose: () => void;
 }
 

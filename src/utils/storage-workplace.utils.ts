@@ -1,5 +1,5 @@
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 
-export const getWorkplaceUrl = (item: IItemProperties): string => {
+export const getWorkplaceUrl = (item: IClientItemData): string => {
   return `/storage/${item.type.toLocaleLowerCase()}s/${item.id}`;
 };

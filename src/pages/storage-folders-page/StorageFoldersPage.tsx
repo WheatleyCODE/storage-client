@@ -4,6 +4,7 @@ import { useActions, useTypedSelector } from 'hooks';
 import { StorageWorkplace } from 'components';
 import { PathRoutes } from 'types';
 import { checkRequestStatus } from 'utils';
+import { PropertyFactory } from 'helpers';
 import './StorageFoldersPage.scss';
 
 export const StorageFoldersPage: FC = () => {
@@ -26,9 +27,11 @@ export const StorageFoldersPage: FC = () => {
     fetchChildrens(id);
   }, [id]);
 
+  const workplaceData = workplaceItems.map((item) => PropertyFactory.create(item));
+
   return (
     <div className="storage-folders-page">
-      {!isWorkplaceLoading && <StorageWorkplace workplaceItems={workplaceItems} />}
+      {!isWorkplaceLoading && <StorageWorkplace workplaceItems={workplaceData} />}
     </div>
   );
 };

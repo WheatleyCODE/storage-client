@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { WorkplaceModal } from 'components';
 import { BASE_URL } from 'consts';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './VideoModal.scss';
 
 export interface IVideoModalProps {
   onClose: () => void;
-  currentItemData: IItemProperties;
+  currentItemData: IClientItemData;
 }
 
 export const VideoModal: FC<IVideoModalProps> = ({ onClose, currentItemData }) => {

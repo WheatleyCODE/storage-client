@@ -1,10 +1,10 @@
 import React, { FC, memo, useCallback } from 'react';
 import { MdFolder } from 'react-icons/md';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './ChangeParentFolder.scss';
 
 export interface IChangeParentFolder {
-  folder: IItemProperties;
+  folder: IClientItemData;
   isActive: boolean;
   setActiveHandler: (i: number) => void;
   index: number;

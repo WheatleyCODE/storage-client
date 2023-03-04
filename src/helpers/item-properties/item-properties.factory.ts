@@ -1,4 +1,4 @@
-import { IItemProperties, ItemTypes, WorkplaceItem } from 'types';
+import { IClientItemData, ItemTypes, IServerItemData } from 'types';
 import { AlbumProperties } from './album.properties';
 import { FileProperties } from './file.properties';
 import { FolderProperties } from './folder.properties';
@@ -16,7 +16,7 @@ export class PropertyFactory {
     [ItemTypes.VIDEO]: VideoProperties,
   };
 
-  static create(item: WorkplaceItem): IItemProperties {
+  static create(item: IServerItemData): IClientItemData {
     return new this.list[item.type](item as any);
   }
 }

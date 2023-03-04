@@ -3,11 +3,11 @@ import { Confirm, Input, Portal, Backdrop, Modal } from 'components';
 import { useActions, useValidInput } from 'hooks';
 import { nameValidator } from 'helpers';
 import { getColorClassName, getWorkplaceIcon } from 'utils';
-import { IItemProperties } from 'types';
+import { IClientItemData } from 'types';
 import './RenameModal.scss';
 
 export interface IRenameModalProps {
-  currentItemData: IItemProperties;
+  currentItemData: IClientItemData;
   onClose: () => void;
 }
 

@@ -1,41 +1,41 @@
 /* eslint-disable max-classes-per-file */
 import { ItemTypesArr } from 'consts';
-import { ItemTypes, SortTypes, WorkplaceItem } from 'types';
+import { ItemTypes, SortTypes, IServerItemData } from 'types';
 import { PropertyFactory } from './item-properties/item-properties.factory';
 // import { getSize } from 'utils';
 
 export class SortMethods {
-  static [SortTypes.NAME] = (x: WorkplaceItem, y: WorkplaceItem): number => {
+  static [SortTypes.NAME] = (x: IServerItemData, y: IServerItemData): number => {
     return x.name.localeCompare(y.name);
   };
 
-  static [SortTypes.NAME_REVERCE] = (x: WorkplaceItem, y: WorkplaceItem): number => {
+  static [SortTypes.NAME_REVERCE] = (x: IServerItemData, y: IServerItemData): number => {
     return x.name.localeCompare(y.name) * -1;
   };
 
-  static [SortTypes.ACCESS] = (x: WorkplaceItem, y: WorkplaceItem): number => {
+  static [SortTypes.ACCESS] = (x: IServerItemData, y: IServerItemData): number => {
     return x.accessType.localeCompare(y.accessType);
   };
 
-  static [SortTypes.ACCESS_REVERCE] = (x: WorkplaceItem, y: WorkplaceItem): number => {
+  static [SortTypes.ACCESS_REVERCE] = (x: IServerItemData, y: IServerItemData): number => {
     return x.accessType.localeCompare(y.accessType) * -1;
   };
 
-  static [SortTypes.DATE] = (x: WorkplaceItem, y: WorkplaceItem): number => {
+  static [SortTypes.DATE] = (x: IServerItemData, y: IServerItemData): number => {
     return x.openDate - y.openDate;
   };
 
-  static [SortTypes.DATE_REVERCE] = (x: WorkplaceItem, y: WorkplaceItem): number => {
+  static [SortTypes.DATE_REVERCE] = (x: IServerItemData, y: IServerItemData): number => {
     return (x.openDate - y.openDate) * -1;
   };
 
-  static [SortTypes.SIZE] = (x: WorkplaceItem, y: WorkplaceItem): number => {
+  static [SortTypes.SIZE] = (x: IServerItemData, y: IServerItemData): number => {
     const xData = PropertyFactory.create(x);
     const yData = PropertyFactory.create(y);
     return xData.getSize() - yData.getSize();
   };
 
-  static [SortTypes.SIZE_REVERCE] = (x: WorkplaceItem, y: WorkplaceItem): number => {
+  static [SortTypes.SIZE_REVERCE] = (x: IServerItemData, y: IServerItemData): number => {
     const xData = PropertyFactory.create(x);
     const yData = PropertyFactory.create(y);
     return xData.getSize() - yData.getSize() * -1;
@@ -43,14 +43,14 @@ export class SortMethods {
 }
 
 export class StorageSorter {
-  private [ItemTypes.FOLDER]: WorkplaceItem[] = [];
-  private [ItemTypes.TRACK]: WorkplaceItem[] = [];
-  private [ItemTypes.FILE]: WorkplaceItem[] = [];
-  private [ItemTypes.ALBUM]: WorkplaceItem[] = [];
-  private [ItemTypes.IMAGE]: WorkplaceItem[] = [];
-  private [ItemTypes.VIDEO]: WorkplaceItem[] = [];
+  private [ItemTypes.FOLDER]: IServerItemData[] = [];
+  private [ItemTypes.TRACK]: IServerItemData[] = [];
+  private [ItemTypes.FILE]: IServerItemData[] = [];
+  private [ItemTypes.ALBUM]: IServerItemData[] = [];
+  private [ItemTypes.IMAGE]: IServerItemData[] = [];
+  private [ItemTypes.VIDEO]: IServerItemData[] = [];
 
-  sort(items: WorkplaceItem[], sortType: SortTypes): WorkplaceItem[] {
+  sort(items: IServerItemData[], sortType: SortTypes): IServerItemData[] {
     const sortMethod = SortMethods[sortType];
 
     ItemTypesArr.forEach((type) => {

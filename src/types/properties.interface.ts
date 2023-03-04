@@ -28,4 +28,4 @@ export interface IProperties {
   getSize: () => number;
 }
 
-export type IItemProperties = DefaultProperties & IProperties;
+export type IClientItemData = DefaultProperties & IProperties;
