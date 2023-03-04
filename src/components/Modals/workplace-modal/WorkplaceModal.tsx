@@ -10,16 +10,16 @@ import {
   MdOutlineRemoveRedEye,
 } from 'react-icons/md';
 import './WorkplaceModal.scss';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 
 export interface IWorkplaceModalProps {
   onClose: () => void;
   children: React.ReactNode;
-  currentItems: WorkplaceItem[];
+  currentItemData: IItemProperties;
 }
 
-export const WorkplaceModal: FC<IWorkplaceModalProps> = ({ onClose, children, currentItems }) => {
-  const { name } = currentItems[0];
+export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
+  const { onClose, children, currentItemData } = props;
 
   const stopPropagation = useCallback((e: MouseEvent) => e.stopPropagation(), []);
 
@@ -32,7 +32,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = ({ onClose, children, cu
           <div aria-hidden onClick={stopPropagation} className="workplace-modal__header">
             <div className="workplace-modal__name">
               <Button outline="fill" color="none-light" type="icon" Icon={MdArrowBack} />
-              <div className="workplace-modal__item-name">{name}</div>
+              <div className="workplace-modal__item-name">{currentItemData.name}</div>
             </div>
             <div className="workplace-modal__app">
               <div className="workplace-modal__only-view">

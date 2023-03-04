@@ -2,26 +2,25 @@ import React, { FC, useCallback, useRef } from 'react';
 import { Confirm, Backdrop, Modal, Portal } from 'components';
 import { useActions, useTypedDispatch } from 'hooks';
 import { getActionMessage } from 'helpers';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import './GetLinkModal.scss';
 
 export interface IGetLinkModal {
-  currentItems: WorkplaceItem[];
+  currentItemData: IItemProperties;
   onClose: () => void;
 }
 
-export const GetLinkModal: FC<IGetLinkModal> = ({ currentItems, onClose }) => {
-  const item = currentItems[0];
+export const GetLinkModal: FC<IGetLinkModal> = ({ currentItemData, onClose }) => {
   const dispatch = useTypedDispatch();
   const { createAccessLink } = useActions();
   const ref = useRef<null | HTMLInputElement>(null);
 
   const getLink = useCallback(() => {
-    if (!item) return;
+    if (!currentItemData) return;
 
-    const { id, type } = item;
+    const { id, type } = currentItemData;
     createAccessLink({ id, type });
-  }, [item]);
+  }, [currentItemData]);
 
   const copyLink = useCallback(() => {
     if (!ref.current) return;
@@ -41,7 +40,7 @@ export const GetLinkModal: FC<IGetLinkModal> = ({ currentItems, onClose }) => {
     ref.current.select();
   }, []);
 
-  const isLink = !!item.accessLink;
+  const isLink = !!currentItemData.accessLink;
 
   return (
     <Portal>
@@ -58,7 +57,7 @@ export const GetLinkModal: FC<IGetLinkModal> = ({ currentItems, onClose }) => {
               <input
                 readOnly
                 onClick={isLink ? selectLink : undefined}
-                value={item.accessLink || 'Ссылка не сгенерирована'}
+                value={currentItemData.accessLink || 'Ссылка не сгенерирована'}
                 ref={ref}
                 className={`get-link-modal__input ${!isLink ? 'grey' : ''}`}
               />

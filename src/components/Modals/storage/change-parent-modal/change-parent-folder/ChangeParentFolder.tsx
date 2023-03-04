@@ -1,10 +1,10 @@
 import React, { FC, memo, useCallback } from 'react';
 import { MdFolder } from 'react-icons/md';
-import { IFolder } from 'types';
+import { IItemProperties } from 'types';
 import './ChangeParentFolder.scss';
 
 export interface IChangeParentFolder {
-  folder: IFolder;
+  folder: IItemProperties;
   isActive: boolean;
   setActiveHandler: (i: number) => void;
   index: number;
@@ -26,7 +26,7 @@ export const ChangeParentFolder: FC<IChangeParentFolder> = memo((props) => {
       onClick={onClick}
       className={`change-parent-folder ${isActive ? 'active' : ''}`}
     >
-      <div className={`change-parent-folder__icon ${color.toLocaleLowerCase()}`}>
+      <div className={`change-parent-folder__icon ${color?.toLocaleLowerCase()}`}>
         <MemoIcon />
       </div>
       <div className="change-parent-folder__name">{name}</div>

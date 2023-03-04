@@ -22,7 +22,8 @@ import {
   ChangeAccessModal,
 } from 'components';
 import { hashToStateKeys } from 'consts';
-import { IFolder, ItemTypes, ModalsStateKeys } from 'types';
+import { PropertyFactory } from 'helpers';
+import { ItemTypes, ModalsStateKeys } from 'types';
 
 export const ModalsController: FC = () => {
   const dispatch = useTypedDispatch();
@@ -30,6 +31,15 @@ export const ModalsController: FC = () => {
   const location = useLocation();
   const modals = useTypedSelector((state) => state.modals);
   const { currentItems, allItems } = useTypedSelector((state) => state.storage);
+
+  const folders = useMemo(
+    () => allItems.filter((item) => item.type === ItemTypes.FOLDER),
+    [allItems]
+  );
+
+  const foldersData = folders.map((folder) => PropertyFactory.create(folder));
+  const currentItemsData = currentItems.map((item) => PropertyFactory.create(item));
+  const currentItemData = currentItemsData[0];
 
   const getClose = (key: ModalsStateKeys) => {
     return () => {
@@ -48,43 +58,46 @@ export const ModalsController: FC = () => {
     }
   }, []);
 
-  const folders = useMemo(
-    () => allItems.filter((item) => item.type === ItemTypes.FOLDER),
-    [allItems]
-  ) as IFolder[];
-
   return (
     <AnimatePresence>
       {modals.isCreateFolder && <CreateFolderModal onClose={getClose('isCreateFolder')} />}
       {modals.isCreateAlbum && <CreateAlbumModal onClose={getClose('isCreateAlbum')} />}
       {modals.isCreateTrack && <CreateTrackModal onClose={getClose('isCreateTrack')} />}
+      {modals.isCreateVideo && <CreateVideoModal onClose={getClose('isCreateVideo')} />}
       {modals.isDelete && (
-        <DeleteModal onClose={getClose('isDelete')} currentItems={currentItems} />
+        <DeleteModal onClose={getClose('isDelete')} currentItemsData={currentItemsData} />
       )}
       {modals.isSettings && <SettingsModal onClose={getClose('isSettings')} />}
       {modals.isHotkeys && <HotkeysModal onClose={getClose('isHotkeys')} />}
       {modals.isRename && (
-        <RenameModal currentItems={currentItems} onClose={getClose('isRename')} />
+        <RenameModal currentItemData={currentItemData} onClose={getClose('isRename')} />
       )}
       {modals.isChangeParent && (
         <ChangeParentModal
-          folders={folders}
-          currentItems={currentItems}
+          folders={foldersData}
+          currentItemsData={currentItemsData}
           onClose={getClose('isChangeParent')}
         />
       )}
       {modals.isGetLink && (
-        <GetLinkModal currentItems={currentItems} onClose={getClose('isGetLink')} />
+        <GetLinkModal currentItemData={currentItemData} onClose={getClose('isGetLink')} />
       )}
       {modals.isBuySpace && <BuyMoreSpaceModal onClose={getClose('isBuySpace')} />}
       {modals.isChangeAccess && (
-        <ChangeAccessModal currentItems={currentItems} onClose={getClose('isChangeAccess')} />
+        <ChangeAccessModal currentItemData={currentItemData} onClose={getClose('isChangeAccess')} />
       )}
-      {modals.isImage && <ImageModal currentItems={currentItems} onClose={getClose('isImage')} />}
-      {modals.isVideo && <VideoModal currentItems={currentItems} onClose={getClose('isVideo')} />}
-      {modals.isTrack && <TrackModal currentItems={currentItems} onClose={getClose('isTrack')} />}
-      {modals.isAlbum && <AlbumModal currentItems={currentItems} onClose={getClose('isAlbum')} />}
-      {modals.isCreateVideo && <CreateVideoModal onClose={getClose('isCreateVideo')} />}
+      {modals.isImage && (
+        <ImageModal currentItemData={currentItemData} onClose={getClose('isImage')} />
+      )}
+      {modals.isVideo && (
+        <VideoModal currentItemData={currentItemData} onClose={getClose('isVideo')} />
+      )}
+      {modals.isTrack && (
+        <TrackModal currentItemData={currentItemData} onClose={getClose('isTrack')} />
+      )}
+      {modals.isAlbum && (
+        <AlbumModal currentItemData={currentItemData} onClose={getClose('isAlbum')} />
+      )}
     </AnimatePresence>
   );
 };

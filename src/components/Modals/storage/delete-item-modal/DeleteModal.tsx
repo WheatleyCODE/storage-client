@@ -1,22 +1,22 @@
 import React, { FC } from 'react';
 import { Confirm, Portal, Backdrop, Modal } from 'components';
 import { useActions } from 'hooks';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import { DeleteWorkplaceItem } from './delete-workplace-item/DeleteWorkplaceItem';
 import './DeleteModal.scss';
 
 export interface IDeleteModal {
-  currentItems: WorkplaceItem[];
+  currentItemsData: IItemProperties[];
   onClose: () => void;
 }
 
-export const DeleteModal: FC<IDeleteModal> = ({ currentItems, onClose }) => {
+export const DeleteModal: FC<IDeleteModal> = ({ currentItemsData, onClose }) => {
   const { deleteItems } = useActions();
 
   const deleteHandler = () => {
     onClose();
     deleteItems({
-      items: currentItems.map(({ id, type }) => ({ id, type })),
+      items: currentItemsData.map(({ id, type }) => ({ id, type })),
     });
   };
 
@@ -29,8 +29,8 @@ export const DeleteModal: FC<IDeleteModal> = ({ currentItems, onClose }) => {
               <h1 className="delete-modal__title">Удалить</h1>
 
               <div className="delete-modal__items">
-                {currentItems.map((item) => (
-                  <DeleteWorkplaceItem key={item.id} item={item} />
+                {currentItemsData.map((itemData) => (
+                  <DeleteWorkplaceItem key={itemData.id} itemData={itemData} />
                 ))}
               </div>
             </div>

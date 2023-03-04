@@ -16,7 +16,7 @@ export const StorageInfo: FC<IStorageInfoProps> = memo(({ onClose }) => {
   const { user } = useTypedSelector((state) => state.auth);
   const dispatch = useTypedDispatch();
 
-  const itemData = PropertyFactory.create(currentItems[0]);
+  const itemData = currentItems[0] && PropertyFactory.create(currentItems[0]);
 
   const openChangeAccess = useCallback(() => {
     dispatch(modalsActions.changeIsModal({ key: 'isChangeAccess', boolean: true }));

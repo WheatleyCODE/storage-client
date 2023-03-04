@@ -172,8 +172,8 @@ export const changeAccessType = createAsyncThunk<
   IChangeAccessTypeFilds & IChangeAccessTypeRestore
 >('storage/changeAccessType', async (filds, thunkAPI) => {
   try {
-    const { id, type, accessType, prevAccessType, isCanRestore } = filds;
-    const { data } = await ItemsService.changeAccessType({ id, type, accessType });
+    const { items, accessType, prevAccessType, isCanRestore } = filds;
+    const { data } = await ItemsService.changeAccessType({ items, accessType });
 
     if (!isCanRestore) {
       thunkAPI.dispatch(

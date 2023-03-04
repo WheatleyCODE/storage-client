@@ -3,21 +3,20 @@ import { WorkplaceModal, Button } from 'components';
 import { MdPlayArrow } from 'react-icons/md';
 import { PropertyFactory } from 'helpers';
 import { getImageLink } from 'utils';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import './TrackModal.scss';
 
 export interface ITrackModalProps {
   onClose: () => void;
-  currentItems: WorkplaceItem[];
+  currentItemData: IItemProperties;
 }
 
-export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItems }) => {
-  const itemData = PropertyFactory.create(currentItems[0]);
-
-  const imageLink = getImageLink(itemData);
+export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) => {
+  const imageLink = getImageLink(currentItemData);
+  const { name, author, text } = currentItemData;
 
   return (
-    <WorkplaceModal currentItems={currentItems} onClose={onClose}>
+    <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
       <div className="track-modal">
         <div className="track-modal__header">
           <div className="track-modal__image">
@@ -25,8 +24,8 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItems }) => {
           </div>
           <div className="track-modal__titles">
             <div className="track-modal__track__info">
-              <div className="track-modal__name">{itemData.name}</div>
-              <div className="track-modal__author">{itemData.author}</div>
+              <div className="track-modal__name">{name}</div>
+              <div className="track-modal__author">{author}</div>
             </div>
             <div className="track-modal__play">
               <div className="player">
@@ -35,7 +34,7 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItems }) => {
             </div>
           </div>
         </div>
-        <div className="track-modal__words">{itemData.text}</div>
+        <div className="track-modal__words">{text}</div>
       </div>
     </WorkplaceModal>
   );

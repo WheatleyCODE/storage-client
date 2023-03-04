@@ -1,27 +1,32 @@
 import React, { FC } from 'react';
 import { Confirm, Input, Portal, Backdrop, Modal } from 'components';
 import { useActions, useValidInput } from 'hooks';
-import { nameValidator, PropertyFactory } from 'helpers';
+import { nameValidator } from 'helpers';
 import { getColorClassName, getWorkplaceIcon } from 'utils';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import './RenameModal.scss';
 
 export interface IRenameModalProps {
-  currentItems: WorkplaceItem[];
+  currentItemData: IItemProperties;
   onClose: () => void;
 }
 
-export const RenameModal: FC<IRenameModalProps> = ({ currentItems, onClose }) => {
+export const RenameModal: FC<IRenameModalProps> = ({ currentItemData, onClose }) => {
   const nameInput = useValidInput([nameValidator]);
-  const itemData = PropertyFactory.create(currentItems[0]);
   const { changeName } = useActions();
 
   const renameHandler = () => {
     if (nameInput.isError || !nameInput.value) return;
-    const { id, type } = itemData;
+    const { id, type } = currentItemData;
 
     onClose();
-    changeName({ id, name: nameInput.value, type, isCanRestore: true, prevName: itemData.name });
+    changeName({
+      id,
+      name: nameInput.value,
+      type,
+      isCanRestore: true,
+      prevName: currentItemData.name,
+    });
   };
 
   return (
@@ -29,11 +34,11 @@ export const RenameModal: FC<IRenameModalProps> = ({ currentItems, onClose }) =>
       <Backdrop onClose={onClose}>
         <Modal onClose={onClose}>
           <Confirm upproveText="Переименовать" onClose={onClose} onUpprove={renameHandler}>
-            <div className={`rename-modal ${getColorClassName(itemData)}`}>
+            <div className={`rename-modal ${getColorClassName(currentItemData)}`}>
               <h1 className="rename-modal__title">Переименовать</h1>
 
               <Input
-                Icon={getWorkplaceIcon(itemData)}
+                Icon={getWorkplaceIcon(currentItemData)}
                 value={nameInput.value}
                 type="text"
                 placeholder="Новое имя"

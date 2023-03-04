@@ -4,17 +4,18 @@ import { FcSafe } from 'react-icons/fc';
 import { Confirm, Portal, Modal, Backdrop } from 'components';
 import { useActions } from 'hooks';
 import { checkPathnameOnPathRoute } from 'utils';
-import { IFolder, PathRoutes, WorkplaceItem } from 'types';
+import { IItemProperties, PathRoutes } from 'types';
 import { ChangeParentFolder } from './change-parent-folder/ChangeParentFolder';
 import './ChangeParentModal.scss';
 
 export interface IChangeParentModal {
-  currentItems: WorkplaceItem[];
-  folders: IFolder[];
+  currentItemsData: IItemProperties[];
+  folders: IItemProperties[];
   onClose: () => void;
 }
 
-export const ChangeParentModal: FC<IChangeParentModal> = ({ currentItems, onClose, folders }) => {
+export const ChangeParentModal: FC<IChangeParentModal> = (props) => {
+  const { currentItemsData, onClose, folders } = props;
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const { changeParent } = useActions();
   const params = useParams();
@@ -32,7 +33,7 @@ export const ChangeParentModal: FC<IChangeParentModal> = ({ currentItems, onClos
 
     if (activeIndex === null) {
       changeParent({
-        items: currentItems.map(({ id, type }) => ({ id, type })),
+        items: currentItemsData.map(({ id, type }) => ({ id, type })),
         parent: null,
         prevParent: filds.parent,
         isCanRestore: true,
@@ -47,14 +48,14 @@ export const ChangeParentModal: FC<IChangeParentModal> = ({ currentItems, onClos
     const { id: parent } = folder;
 
     changeParent({
-      items: currentItems.map(({ id, type }) => ({ id, type })),
+      items: currentItemsData.map(({ id, type }) => ({ id, type })),
       parent,
       prevParent: filds.parent,
       isCanRestore: true,
     });
 
     onClose();
-  }, [activeIndex, currentItems, folders]);
+  }, [activeIndex, currentItemsData, folders]);
 
   const MemoIcon = memo(FcSafe);
 

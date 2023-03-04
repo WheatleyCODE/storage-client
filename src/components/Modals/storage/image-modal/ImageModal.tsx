@@ -3,28 +3,27 @@ import { MdArrowBack } from 'react-icons/md';
 import { useResizeObserver } from 'hooks';
 import { WorkplaceModal } from 'components';
 import { getImageLink, getWorkplaceIcon } from 'utils';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import './ImageModal.scss';
 import { PropertyFactory } from 'helpers';
 
 export interface IImageModalProps {
-  currentItems: WorkplaceItem[];
+  currentItemData: IItemProperties;
   onClose: () => void;
 }
 
 export type Size = { width: number; height: number };
 
-export const ImageModal: FC<IImageModalProps> = ({ currentItems, onClose }) => {
-  const itemData = PropertyFactory.create(currentItems[0]);
+export const ImageModal: FC<IImageModalProps> = ({ currentItemData, onClose }) => {
   const refImage = useRef<HTMLImageElement | null>(null);
   const refDiv = useRef<HTMLDivElement | null>(null);
   const [size, setSize] = useState<Size>({ width: 0, height: 0 });
   const [initialSize, setInitialSize] = useState<Size>({ width: 0, height: 0 });
   const [aspectRatio, setAspectRatio] = useState<[width: number, height: number]>([1, 1]);
 
-  const imageLink = getImageLink(itemData);
+  const imageLink = getImageLink(currentItemData);
   const MemoArrow = memo(MdArrowBack);
-  const MemoIcon = memo(getWorkplaceIcon(itemData));
+  const MemoIcon = memo(getWorkplaceIcon(currentItemData));
 
   const stopPropagation = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
@@ -96,7 +95,7 @@ export const ImageModal: FC<IImageModalProps> = ({ currentItems, onClose }) => {
   }, [aspectRatio, containerSize, initialSize.height, initialSize.width, size]);
 
   return (
-    <WorkplaceModal currentItems={currentItems} onClose={onClose}>
+    <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
       <div aria-hidden onClick={stopPropagation} className="image-modal">
         <img
           height={size.height || undefined}

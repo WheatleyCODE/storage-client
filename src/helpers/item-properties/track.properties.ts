@@ -17,6 +17,6 @@ export class TrackProperties extends DefaultProperties implements IProperties {
   }
 
   getSize(): number {
-    return this.track.fileSize + this.track.imageSize;
+    return this.track.fileSize + (this.track.imageSize || 0);
   }
 }

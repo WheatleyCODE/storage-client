@@ -16,6 +16,6 @@ export class VideoProperties extends DefaultProperties implements IProperties {
   }
 
   getSize(): number {
-    return this.video.fileSize + this.video.imageSize;
+    return this.video.fileSize + (this.video.imageSize || 0);
   }
 }

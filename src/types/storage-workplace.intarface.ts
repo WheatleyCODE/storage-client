@@ -30,7 +30,7 @@ export interface IChangeNameFilds extends IItemFilds {
   name: string;
 }
 
-export interface IChangeAccessTypeFilds extends IItemFilds {
+export interface IChangeAccessTypeFilds extends IDeleteItemsFilds {
   accessType: AccessTypes;
 }
 

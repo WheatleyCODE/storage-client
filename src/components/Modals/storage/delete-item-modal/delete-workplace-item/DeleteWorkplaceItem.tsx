@@ -1,15 +1,13 @@
 import React, { FC, memo } from 'react';
 import { formatSize, getWorkplaceIcon } from 'utils';
-import { PropertyFactory } from 'helpers';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import './DeleteWorkplaceItem.scss';
 
 export interface IDeleteWorkplaceItem {
-  item: WorkplaceItem;
+  itemData: IItemProperties;
 }
 
-export const DeleteWorkplaceItem: FC<IDeleteWorkplaceItem> = ({ item }) => {
-  const itemData = PropertyFactory.create(item);
+export const DeleteWorkplaceItem: FC<IDeleteWorkplaceItem> = ({ itemData }) => {
   const MemoIcon = memo(getWorkplaceIcon(itemData));
 
   return (

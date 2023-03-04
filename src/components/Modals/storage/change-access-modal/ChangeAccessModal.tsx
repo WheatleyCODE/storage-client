@@ -2,36 +2,32 @@ import React, { FC, useCallback, useState } from 'react';
 import { Confirm, Select, Backdrop, Modal, Portal } from 'components';
 import { useActions } from 'hooks';
 import { changeAccessItems } from 'consts';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import './ChangeAccessModal.scss';
 
 export interface IChangeAccessModal {
-  currentItems: WorkplaceItem[];
+  currentItemData: IItemProperties;
   onClose: () => void;
 }
 
-export const ChangeAccessModal: FC<IChangeAccessModal> = ({ currentItems, onClose }) => {
-  const item = currentItems[0];
+export const ChangeAccessModal: FC<IChangeAccessModal> = ({ currentItemData, onClose }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(
-    changeAccessItems.findIndex((itm) => itm.value === item.accessType)
+    changeAccessItems.findIndex((itm) => itm.value === currentItemData.accessType)
   );
   const { changeAccessType } = useActions();
 
   const changeAccessTypeHandler = useCallback(() => {
-    if (activeIndex === null || !item) return;
+    if (activeIndex === null || !currentItemData) return;
     const { value } = changeAccessItems[activeIndex];
 
-    const { id, type } = item;
-
     changeAccessType({
-      id,
-      type,
       accessType: value,
-      prevAccessType: item.accessType,
+      prevAccessType: currentItemData.accessType,
       isCanRestore: true,
+      items: [currentItemData],
     });
     onClose();
-  }, [activeIndex, item, changeAccessType, onClose]);
+  }, [activeIndex, currentItemData, changeAccessType, onClose]);
 
   return (
     <Portal>

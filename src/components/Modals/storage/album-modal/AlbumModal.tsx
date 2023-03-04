@@ -1,23 +1,21 @@
 import React, { FC } from 'react';
 import { MdPlayArrow } from 'react-icons/md';
 import { WorkplaceModal, Button } from 'components';
-import { PropertyFactory } from 'helpers';
 import { getImageLink } from 'utils';
-import { WorkplaceItem } from 'types';
+import { IItemProperties } from 'types';
 import './AlbumModal.scss';
 
 export interface IAlbumModalProps {
   onClose: () => void;
-  currentItems: WorkplaceItem[];
+  currentItemData: IItemProperties;
 }
 
-export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItems }) => {
-  const itemData = PropertyFactory.create(currentItems[0]);
-
-  const imageLink = getImageLink(itemData);
+export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) => {
+  const imageLink = getImageLink(currentItemData);
+  const { name, author } = currentItemData;
 
   return (
-    <WorkplaceModal currentItems={currentItems} onClose={onClose}>
+    <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
       <div className="album-modal">
         <div className="album-modal__header">
           <div className="album-modal__image">
@@ -25,8 +23,8 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItems }) => {
           </div>
           <div className="album-modal__titles">
             <div className="album-modal__track__info">
-              <div className="album-modal__name">{itemData.name}</div>
-              <div className="album-modal__author">{itemData.author}</div>
+              <div className="album-modal__name">{name}</div>
+              <div className="album-modal__author">{author}</div>
             </div>
             <div className="album-modal__play">
               <div className="player">

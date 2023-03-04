@@ -61,23 +61,23 @@ export const useContextMenuItems = () => {
       {
         title: 'Создать папку',
         Icon: MdOutlineCreateNewFolder,
-        handler: () => openModal('isCreateFolder'),
+        handler: () => openModal('isCreateFolder', false),
         brBefore: true,
       },
       {
         title: 'Создать альбом',
         Icon: MdLibraryMusic,
-        handler: () => openModal('isCreateAlbum'),
+        handler: () => openModal('isCreateAlbum', false),
       },
       {
         title: 'Создать трек',
         Icon: MdAudiotrack,
-        handler: () => openModal('isCreateTrack'),
+        handler: () => openModal('isCreateTrack', false),
       },
       {
         title: 'Создать видео',
         Icon: MdVideocam,
-        handler: () => openModal('isCreateVideo'),
+        handler: () => openModal('isCreateVideo', false),
         brBefore: true,
       },
       {

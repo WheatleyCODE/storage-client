@@ -55,6 +55,7 @@ export const getChildrens = createAsyncThunk<IChildrensData, string>(
 
       if (dataCache) {
         cacheData.set(string, dataCache, 5000);
+        thunkAPI.dispatch(storageActions.setChildrens(dataCache));
         return dataCache;
       }
 
