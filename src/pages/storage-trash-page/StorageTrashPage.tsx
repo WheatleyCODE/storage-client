@@ -1,16 +1,16 @@
 import React, { FC, useEffect } from 'react';
-import { useTypedDispatch, useTypedSelector } from 'hooks';
+import { useItems, useTypedDispatch, useTypedSelector } from 'hooks';
 import { storageActions } from 'store';
 import { StorageWorkplace } from 'components';
 import './StorageTrashPage.scss';
 
 export const StorageTrashPage: FC = () => {
   const { allItems, workplaceItems } = useTypedSelector((state) => state.storage);
+  const items = useItems({ isTrash: true });
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
-    const newItems = allItems.filter((item) => item.isTrash);
-    dispatch(storageActions.setWorkplace(newItems));
+    dispatch(storageActions.setWorkplace(items));
     dispatch(storageActions.setParents([]));
   }, [allItems]);
 

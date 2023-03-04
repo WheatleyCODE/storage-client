@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { useTypedDispatch, useTypedSelector } from 'hooks';
+import { useItems, useTypedDispatch, useTypedSelector } from 'hooks';
 import { StorageWorkplace } from 'components';
 import { storageActions } from 'store';
 import { AccessTypes } from 'types';
@@ -7,15 +7,11 @@ import './StorageSharedPage.scss';
 
 export const StorageSharedPage: FC = () => {
   const { allItems, workplaceItems } = useTypedSelector((state) => state.storage);
+  const items = useItems({ onlyAccess: [AccessTypes.LINK, AccessTypes.PUBLIC] });
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
-    const newItems = allItems.filter(
-      (item) =>
-        (item.accessType === AccessTypes.PUBLIC || item.accessType === AccessTypes.LINK) &&
-        !item.isTrash
-    );
-    dispatch(storageActions.setWorkplace(newItems));
+    dispatch(storageActions.setWorkplace(items));
     dispatch(storageActions.setParents([]));
   }, [allItems]);
 

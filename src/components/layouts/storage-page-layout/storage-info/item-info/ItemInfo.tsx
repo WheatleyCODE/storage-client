@@ -1,4 +1,8 @@
 import React, { FC, memo, useCallback } from 'react';
+import { storageWorkplaceAccessIcons } from 'consts';
+import { IItemProperties } from 'types';
+import { useTypedDispatch } from 'hooks';
+import { modalsActions } from 'store';
 import {
   getImageLink,
   getWorkplaceIcon,
@@ -7,10 +11,6 @@ import {
   getColorClassName,
   formatSize,
 } from 'utils';
-import { storageWorkplaceAccessIcons } from 'consts';
-import { IItemProperties } from 'types';
-import { useTypedDispatch } from 'hooks';
-import { modalsActions } from 'store';
 import './ItemInfo.scss';
 
 export interface IItemInfoProps {

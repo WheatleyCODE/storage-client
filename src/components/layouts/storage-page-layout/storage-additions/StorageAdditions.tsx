@@ -16,6 +16,7 @@ export interface IStorageAdditionsProps {
 export const StorageAdditions: FC<IStorageAdditionsProps> = memo((props) => {
   const { isOpen, changeActive, active, toggleOpen } = props;
 
+  // ! Fix, add content
   const additionContent = useMemo(
     () => ({
       [AdditionTypes.CALENDAR]: Calendar,

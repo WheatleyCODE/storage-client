@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router';
 import { modalsActions } from 'store';
-import { useTypedDispatch, useTypedSelector } from 'hooks';
+import { useItems, useTypedDispatch, useTypedSelector } from 'hooks';
 import {
   CreateFolderModal,
   CreateAlbumModal,
@@ -30,12 +30,9 @@ export const ModalsController: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const modals = useTypedSelector((state) => state.modals);
-  const { currentItems, allItems } = useTypedSelector((state) => state.storage);
+  const { currentItems } = useTypedSelector((state) => state.storage);
 
-  const folders = useMemo(
-    () => allItems.filter((item) => item.type === ItemTypes.FOLDER),
-    [allItems]
-  );
+  const folders = useItems({ onlyTypes: [ItemTypes.FOLDER], isParent: true });
 
   const foldersData = folders.map((folder) => PropertyFactory.create(folder));
   const currentItemsData = currentItems.map((item) => PropertyFactory.create(item));

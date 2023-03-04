@@ -1,16 +1,16 @@
 import React, { FC, useEffect } from 'react';
 import { storageActions } from 'store';
-import { useTypedDispatch, useTypedSelector } from 'hooks';
+import { useItems, useTypedDispatch, useTypedSelector } from 'hooks';
 import { StorageWorkplace } from 'components';
 import './StorageMyDrivePage.scss';
 
 export const StorageMyDrivePage: FC = () => {
   const { allItems, workplaceItems } = useTypedSelector((state) => state.storage);
+  const items = useItems({});
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
-    const newItems = allItems.filter((item) => !item.isTrash).filter((item) => !item.parent);
-    dispatch(storageActions.setWorkplace(newItems));
+    dispatch(storageActions.setWorkplace(items));
     dispatch(storageActions.setParents([]));
   }, [allItems]);
 

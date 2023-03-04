@@ -1,8 +1,9 @@
-import React, { FC, useMemo, useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router';
 import { StorageSorter, StoragePath, StorageLast, ContextMenu, Portal } from 'components';
-import { useTypedSelector } from 'hooks';
+import { useItems, useTypedSelector } from 'hooks';
+import { PropertyFactory } from 'helpers';
 import { ICoords, PathRoutes } from 'types';
 import './StorageWorkplaceLayout.scss';
 
@@ -17,17 +18,10 @@ export interface IStorageWorkplaceLayoutProps {
 export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = (props) => {
   const { children, isContextMenu, coords, openContextMenu, closeContextMenu } = props;
   const { pathname } = useLocation();
-  const { allItems, parents, settings } = useTypedSelector((state) => state.storage);
+  const { parents, settings } = useTypedSelector((state) => state.storage);
   const ref = useRef<null | HTMLDivElement>(null);
-
-  const lastItems = useMemo(
-    () =>
-      allItems
-        .filter((item) => !item.isTrash)
-        .sort((a, b) => a.openDate - b.openDate)
-        .splice(0),
-    [allItems]
-  );
+  const items = useItems({ sortByDate: true, isParent: true });
+  const lastItemsData = items.map((item) => PropertyFactory.create(item));
 
   const isLast = PathRoutes.STORAGE_MY_DRIVE === pathname && settings.isRecommend;
 
@@ -38,7 +32,7 @@ export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = (props) 
       <StoragePath parents={parents} />
 
       <div onContextMenu={openContextMenu} className="storage-workplace-layout__content">
-        {isLast && <StorageLast lastItems={lastItems} />}
+        {isLast && <StorageLast lastItemsData={lastItemsData} />}
         <StorageSorter />
         {children}
       </div>

@@ -8,7 +8,7 @@ export class DefaultProperties {
   color: FolderColors | null = null;
 
   constructor(
-    item: WorkplaceItem,
+    private item: WorkplaceItem,
     readonly id = item.id,
     readonly user = item.user,
     readonly type = item.type,
@@ -27,5 +27,9 @@ export class DefaultProperties {
     readonly comments = item.comments
   ) {
     this.openModalStateKey = openModalKeys[item.type] || null;
+  }
+
+  toWorkplaceItem(): WorkplaceItem {
+    return this.item;
   }
 }
