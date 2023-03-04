@@ -13,3 +13,17 @@ export interface ICreateAlbumFilds {
   readonly parent?: string;
   readonly image: File;
 }
+
+export interface IChangeAlbumImageFilds {
+  id: string;
+}
+
+export interface IChangeAlbumDataFilds {
+  id: string;
+  name: string;
+  author: string;
+}
+
+export interface ISearchPublicAlbumFilds {
+  text: string;
+}

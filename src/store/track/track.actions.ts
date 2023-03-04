@@ -8,7 +8,7 @@ export const createTrack = createAsyncThunk<ITrack, ICreateTrackFilds>(
   'storage/createTrack',
   async (filds, thunkAPI) => {
     try {
-      const { data } = await TrackService.createTrack(filds);
+      const { data } = await TrackService.create(filds);
 
       thunkAPI.dispatch(
         getActionMessage({

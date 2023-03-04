@@ -10,12 +10,15 @@ import { StorageMenuItem } from './storage-menu-item/StorageMenuItem';
 import './StorageMenu.scss';
 
 export interface IStorageMenuProps {
+  openContextMenu: (e: React.MouseEvent<any>) => Promise<void>;
   isOpen: boolean;
   controls: AnimationControls;
   toggleOpen: () => void;
 }
 
-export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, toggleOpen }) => {
+export const StorageMenu: FC<IStorageMenuProps> = memo((props) => {
+  const { isOpen, controls, toggleOpen, openContextMenu } = props;
+
   const { diskSpace, usedSpace } = useTypedSelector((state) => state.storage);
   const dispatch = useTypedDispatch();
   const openClassName = isOpen ? 'open' : '';
@@ -39,7 +42,8 @@ export const StorageMenu: FC<IStorageMenuProps> = memo(({ isOpen, controls, togg
         Icon={AiOutlinePlus}
         radius="rounded"
         color="blue"
-        text={isOpen ? 'Cоздать' : undefined}
+        onClick={openContextMenu}
+        text={isOpen ? 'Создать' : undefined}
       />
 
       {storageMenu.map(({ title, path, Icon }) => (

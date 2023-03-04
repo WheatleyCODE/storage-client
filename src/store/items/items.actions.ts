@@ -168,7 +168,7 @@ export const createAccessLink = createAsyncThunk<IServerItemData, IItemFilds>(
 );
 
 export const changeAccessType = createAsyncThunk<
-  IServerItemData,
+  IServerItemData[],
   IChangeAccessTypeFilds & IChangeAccessTypeRestore
 >('storage/changeAccessType', async (filds, thunkAPI) => {
   try {
@@ -184,18 +184,19 @@ export const changeAccessType = createAsyncThunk<
       );
     }
 
-    if (isCanRestore) {
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Тип доступа изменен',
-          restoreActionName: RestoreActionNames.CHANGE_ACCESS_TYPE,
-          restoreParams: { ...filds, accessType: prevAccessType, isCanRestore: false },
-        })
-      );
-    }
+    // ! Fix, create restore system
+    // if (isCanRestore) {
+    //   thunkAPI.dispatch(
+    //     getActionMessage({
+    //       color: 'default',
+    //       text: 'Тип доступа изменен',
+    //       restoreActionName: RestoreActionNames.CHANGE_ACCESS_TYPE,
+    //       restoreParams: { ...filds, accessType: prevAccessType, isCanRestore: false },
+    //     })
+    //   );
+    // }
 
-    thunkAPI.dispatch(storageActions.setItems([data]));
+    thunkAPI.dispatch(storageActions.setItems(data));
     return data;
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');

@@ -38,8 +38,8 @@ export class ItemsService {
 
   static async changeAccessType(
     filds: IChangeAccessTypeFilds
-  ): Promise<AxiosResponse<IServerItemData>> {
-    return $api.post<IServerItemData>('/api/items/change/access-type', filds);
+  ): Promise<AxiosResponse<IServerItemData[]>> {
+    return $api.post<IServerItemData[]>('/api/items/change/access-type', filds);
   }
 
   static async getChildrens(id: string): Promise<AxiosResponse<IChildrensData>> {

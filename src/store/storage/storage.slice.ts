@@ -117,6 +117,9 @@ export const storageSlice = createSlice({
       const allItemsArr = copyObject(newAllItems);
       const workplaceItemsArr = copyObject(newWorkplaceItems);
 
+      console.log(workplaceItemsArr);
+      console.log(allItemsArr);
+
       state.allItems = sorter.sort(allItemsArr, state.sortType);
       state.workplaceItems = sorter.sort(workplaceItemsArr, state.sortType);
       state.parents = newParents;

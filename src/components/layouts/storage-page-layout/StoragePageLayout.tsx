@@ -123,7 +123,12 @@ export const StoragePageLayout: FC = () => {
 
       <div className="storage-page-layout__main">
         <div className="storage-page-layout__main-block">
-          <StorageMenu controls={menuControls} isOpen={isOpenMenu} toggleOpen={toggleMenu} />
+          <StorageMenu
+            openContextMenu={openContextMenu}
+            controls={menuControls}
+            isOpen={isOpenMenu}
+            toggleOpen={toggleMenu}
+          />
           <StorageWorkplaceLayout
             coords={coords}
             openContextMenu={openContextMenu}

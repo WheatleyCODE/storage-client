@@ -18,3 +18,22 @@ export interface ICreateTrackFilds {
   readonly audio: File;
   readonly image?: File;
 }
+
+export interface IChangeTrackFileFilds {
+  id: string;
+}
+
+export interface IChangeTrackImageFilds {
+  id: string;
+}
+
+export interface IChangeTrackDataFilds {
+  id: string;
+  name: string;
+  author: string;
+  text: string;
+}
+
+export interface ISearchPublicTrackFilds {
+  text: string;
+}

@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { storageActions } from 'store';
 import { DownloadService } from 'services';
 import { getActionMessage } from 'helpers';
 import { IDownloadFileFilds, IDownloadArchiveFilds } from 'types';
