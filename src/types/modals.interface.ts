@@ -19,6 +19,10 @@ export interface IModalsState {
   isVideo: boolean;
   isTrack: boolean;
   isAlbum: boolean;
+  isFile: boolean;
+  isChangeDataAlbum: boolean;
+  isChangeDataTrack: boolean;
+  isChangeDataVideo: boolean;
 }
 
 export type ModalsStateKeys = keyof IModalsState;
@@ -28,6 +32,7 @@ export const openModalKeys: { [key in ItemTypes as string]: ModalsStateKeys } = 
   [ItemTypes.IMAGE]: 'isImage',
   [ItemTypes.TRACK]: 'isTrack',
   [ItemTypes.VIDEO]: 'isVideo',
+  [ItemTypes.FILE]: 'isFile',
 };
 
 export interface IModalsPayload {
@@ -55,6 +60,10 @@ export enum HashModals {
   VIDEO = '#video',
   TRACK = '#track',
   ALBUM = '#album',
+  FILE = '#file',
+  CHANGE_DATA_ALBUM = '#change-data-album',
+  CHANGE_DATA_TRACK = '#change-data-track',
+  CHANGE_DATA_VIDEO = '#change-data-video',
 }
 
 export type HashModalsToStateKeys = {

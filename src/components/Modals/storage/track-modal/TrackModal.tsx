@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { WorkplaceModal, Button } from 'components';
 import { MdPlayArrow } from 'react-icons/md';
-import { PropertyFactory } from 'helpers';
 import { getImageLink } from 'utils';
 import { IClientItemData } from 'types';
 import './TrackModal.scss';

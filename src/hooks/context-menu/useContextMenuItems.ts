@@ -211,7 +211,7 @@ export const useContextMenuItems = () => {
           brAfter: true,
         },
         {
-          title: 'Скачать СИНГ',
+          title: 'Скачать',
           Icon: BiDownload,
           handler: downloadFileHandler,
         },
@@ -220,7 +220,7 @@ export const useContextMenuItems = () => {
         {
           title: 'Редактироввать',
           Icon: MdSettingsSuggest,
-          handler: () => openModal('isSettings'),
+          handler: () => openModal('isChangeDataAlbum', false),
         },
         {
           title: 'Создать копию',
@@ -236,9 +236,9 @@ export const useContextMenuItems = () => {
       ],
       [ItemTypes.TRACK]: [
         {
-          title: 'Редактироввать',
+          title: 'Редактировать',
           Icon: MdSettingsSuggest,
-          handler: () => openModal('isSettings'),
+          handler: () => openModal('isChangeDataTrack', false),
         },
         {
           title: 'Создать копию',
@@ -247,7 +247,7 @@ export const useContextMenuItems = () => {
           brAfter: true,
         },
         {
-          title: 'Скачать СИНГ',
+          title: 'Скачать',
           Icon: BiDownload,
           handler: downloadFileHandler,
         },
@@ -260,12 +260,17 @@ export const useContextMenuItems = () => {
           brAfter: true,
         },
         {
-          title: 'Скачать СИНГЛ',
+          title: 'Скачать',
           Icon: BiDownload,
           handler: downloadFileHandler,
         },
       ],
       [ItemTypes.VIDEO]: [
+        {
+          title: 'Редактировать',
+          Icon: MdSettingsSuggest,
+          handler: () => openModal('isChangeDataVideo', false),
+        },
         {
           title: 'Создать копию',
           Icon: MdContentCopy,
@@ -273,7 +278,7 @@ export const useContextMenuItems = () => {
           brAfter: true,
         },
         {
-          title: 'Скачать СИНГ',
+          title: 'Скачать',
           Icon: BiDownload,
           handler: downloadFileHandler,
         },

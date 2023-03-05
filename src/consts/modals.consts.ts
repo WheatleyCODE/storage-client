@@ -19,6 +19,10 @@ export const hashToStateKeys: HashModalsToStateKeys = {
   [HashModals.VIDEO]: 'isVideo',
   [HashModals.TRACK]: 'isTrack',
   [HashModals.ALBUM]: 'isAlbum',
+  [HashModals.FILE]: 'isFile',
+  [HashModals.CHANGE_DATA_ALBUM]: 'isChangeDataAlbum',
+  [HashModals.CHANGE_DATA_TRACK]: 'isChangeDataTrack',
+  [HashModals.CHANGE_DATA_VIDEO]: 'isChangeDataVideo',
 };
 
 export const stateKeysToHashModals: StateKeysToHashModals = {
@@ -40,4 +44,8 @@ export const stateKeysToHashModals: StateKeysToHashModals = {
   isVideo: HashModals.VIDEO,
   isTrack: HashModals.TRACK,
   isAlbum: HashModals.ALBUM,
+  isFile: HashModals.FILE,
+  isChangeDataAlbum: HashModals.CHANGE_DATA_ALBUM,
+  isChangeDataTrack: HashModals.CHANGE_DATA_TRACK,
+  isChangeDataVideo: HashModals.CHANGE_DATA_VIDEO,
 };

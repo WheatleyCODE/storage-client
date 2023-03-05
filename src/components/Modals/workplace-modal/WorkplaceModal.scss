@@ -59,13 +59,21 @@
     align-items: center;
   }
 
-  &__only-view {
+  &__only-view, &__correct {
     display: flex;
     align-items: center;
 
     svg {
       font-size: 1.5rem;
       margin-left: 10px;
+    }
+  }
+
+  &__correct {
+    font-size: 1.1rem;
+
+    svg {
+      font-size: 1.4rem;
     }
   }
 }

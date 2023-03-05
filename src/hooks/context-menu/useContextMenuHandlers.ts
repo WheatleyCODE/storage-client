@@ -21,7 +21,7 @@ export const useContextMenuHandlers = () => {
     const itemData = PropertyFactory.create(item);
 
     if (itemData.openModalStateKey) {
-      openModal(itemData.openModalStateKey, true);
+      openModal(itemData.openModalStateKey, false);
       return;
     }
 

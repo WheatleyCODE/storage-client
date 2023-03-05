@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable import/extensions */
 export { MainLayout } from './layouts/main-layout/MainLayout';
 export { AuthPageLayout } from './layouts/auth-page-layout/AuthPageLayout';
 export { StoragePageLayout } from './layouts/storage-page-layout/StoragePageLayout';
@@ -48,6 +50,10 @@ export { SettingsModal } from './modals/storage/settings-modal/SettingsModal';
 export { HotkeysModal } from './modals/storage/hotkeys-modal/HotkeysModal';
 export { VideoModal } from './modals/storage/video-modal/VideoModal';
 export { TrackModal } from './modals/storage/track-modal/TrackModal';
+export { FileModal } from './modals/storage/file-modal/FileModal';
+export { ChangeAlbumDataModal } from './modals/storage/change-album-data-modal/ChangeAlbumDataModal';
+export { ChangeTrackDataModal } from './modals/storage/change-track-data-modal/ChangeTrackDataModal';
+export { ChangeVideoDataModal } from './modals/storage/change-video-data-modal/ChangeVideoDataModal';
 export { CreateVideoModal } from './modals/storage/create-video-modal/CreateVideoModal';
 export { WorkplaceModal } from './modals/workplace-modal/WorkplaceModal';
 export { AlbumModal } from './modals/storage/album-modal/AlbumModal';

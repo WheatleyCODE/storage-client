@@ -14,12 +14,16 @@ import {
   BuyMoreSpaceModal,
   VideoModal,
   TrackModal,
+  FileModal,
   CreateVideoModal,
   AlbumModal,
   RenameModal,
   ChangeParentModal,
   GetLinkModal,
   ChangeAccessModal,
+  ChangeAlbumDataModal,
+  ChangeTrackDataModal,
+  ChangeVideoDataModal,
 } from 'components';
 import { hashToStateKeys } from 'consts';
 import { PropertyFactory } from 'helpers';
@@ -92,8 +96,29 @@ export const ModalsController: FC = () => {
       {modals.isTrack && (
         <TrackModal currentItemData={currentItemData} onClose={getClose('isTrack')} />
       )}
+      {modals.isFile && (
+        <FileModal currentItemData={currentItemData} onClose={getClose('isFile')} />
+      )}
       {modals.isAlbum && (
         <AlbumModal currentItemData={currentItemData} onClose={getClose('isAlbum')} />
+      )}
+      {modals.isChangeDataAlbum && (
+        <ChangeAlbumDataModal
+          currentItemData={currentItemData}
+          onClose={getClose('isChangeDataAlbum')}
+        />
+      )}
+      {modals.isChangeDataTrack && (
+        <ChangeTrackDataModal
+          currentItemData={currentItemData}
+          onClose={getClose('isChangeDataTrack')}
+        />
+      )}
+      {modals.isChangeDataVideo && (
+        <ChangeVideoDataModal
+          currentItemData={currentItemData}
+          onClose={getClose('isChangeDataVideo')}
+        />
       )}
     </AnimatePresence>
   );

@@ -20,6 +20,10 @@ const initialState: IModalsState = {
   isVideo: false,
   isTrack: false,
   isAlbum: false,
+  isFile: false,
+  isChangeDataAlbum: false,
+  isChangeDataTrack: false,
+  isChangeDataVideo: false,
 };
 
 export const modalsSlice = createSlice({

@@ -1,39 +1,45 @@
 @import 'styles/templates.scss';
 
 .album-modal {
-  width: 440px;
-
   &__header {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   &__titles {
-    margin-left: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   &__image {
-    height: 150px;
+    width: 320px;
 
     img {
-      height: 100%;
+      width: 100%;
     }
   }
 
   &__name {
+    padding-top: 15px;
     font-size: 2rem;
     margin-bottom: 10px;
   }
 
   &__author {
-    font-size: 1.5rem;
+    padding-top: 5px;
+    font-size: 1.3rem;
   }
 
-  &__words {
-    margin-top: 40px;
+  &__tracks {
+    width: 320px;
+    margin-top: 30px;
+    padding: 5px;
     max-height: 200px;
+    border-radius: 5px;
     overflow: auto;
+    background-color: rgba(0, 0, 0, 0.07);
   }
 }

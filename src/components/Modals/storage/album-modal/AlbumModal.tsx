@@ -28,7 +28,7 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) =
             </div>
             <div className="album-modal__play">
               <div className="player">
-                <Button Icon={MdPlayArrow} text="Слушать" />
+                <Button color="none-light" Icon={MdPlayArrow} text="Слушать" />
               </div>
             </div>
           </div>
