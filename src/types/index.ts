@@ -16,3 +16,4 @@ export * from './video.interface';
 export * from './properties.interface';
 export * from './item.interface';
 export * from './image.interface';
+export * from './comment.interface';

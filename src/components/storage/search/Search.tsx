@@ -23,7 +23,7 @@ export const Search: FC = memo(() => {
 
   const searchReuest = async (text: string) => {
     if (text) {
-      const { data } = await FinderService.searchItems(text);
+      const { data } = await FinderService.searchStorageItems(text);
       const iData = data.map((item) => PropertyFactory.create(item));
       setItemsData(iData);
     }

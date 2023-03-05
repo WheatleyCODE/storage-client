@@ -7,36 +7,43 @@ export type PopupNumbers = {
   brCount: number;
 };
 
-export const getContextMenuCoords = (e: React.MouseEvent): ICoords => {
-  const pageHeight = document.documentElement.scrollHeight;
-  const normWidth = window.innerWidth / 4.5;
-  const normHeight = window.innerHeight / 12;
-  const { platform } = window.navigator;
-  const newCoords = {} as { top?: number; right?: number; left?: number; bottom?: number };
-  newCoords.top = e.clientY + window.pageYOffset;
-  newCoords.left = e.clientX;
+export const getContextMenuCoords = (e: React.MouseEvent<HTMLDivElement>): ICoords => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const x = e.clientX;
+  const y = e.clientY;
+  const contextWidth = 320;
+  const contextHeight = 500;
+  const mobileWidth = 520;
+  const coords = {} as { top?: number; right?: number; left?: number; bottom?: number };
 
-  if (e.screenX > normWidth * 3) {
-    newCoords.right = 0;
+  coords.top = y;
+  coords.left = x;
 
-    if (pageHeight > window.innerHeight && platform === 'Win32') {
-      newCoords.right = -20;
-    }
-
-    newCoords.right += window.innerWidth - e.clientX;
-    newCoords.left = undefined;
+  if (width < mobileWidth) {
+    return {
+      top: '0px',
+      left: '0px',
+      right: undefined,
+      bottom: undefined,
+    };
   }
 
-  if (e.screenY > normHeight * 8) {
-    newCoords.top = undefined;
-    newCoords.bottom = window.innerHeight - e.clientY - window.pageYOffset;
+  if (width - x < contextWidth) {
+    coords.right = width - e.clientX;
+    coords.left = undefined;
+  }
+
+  if (height - y < contextHeight) {
+    coords.top = undefined;
+    coords.bottom = window.innerHeight - e.clientY;
   }
 
   return {
-    top: newCoords.top ? `${newCoords.top}px` : undefined,
-    left: newCoords.left ? `${newCoords.left}px` : undefined,
-    right: newCoords.right ? `${newCoords.right}px` : undefined,
-    bottom: newCoords.bottom ? `${newCoords.bottom}px` : undefined,
+    top: coords.top ? `${coords.top}px` : undefined,
+    left: coords.left ? `${coords.left}px` : undefined,
+    right: coords.right ? `${coords.right}px` : undefined,
+    bottom: coords.bottom ? `${coords.bottom}px` : undefined,
   };
 };
 
