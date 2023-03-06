@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, useAnimation } from 'framer-motion';
 import { Outlet } from 'react-router';
 import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
-import { ModalsController, Uploader } from 'components';
+import { ModalsController, Player, Uploader } from 'components';
 import { modalsActions } from 'store';
 import { setAppLoader } from 'helpers';
 import { getContextMenuCoords, sleep } from 'utils';
@@ -20,6 +20,7 @@ export const StoragePageLayout: FC = () => {
   const { isLoading, settings } = useTypedSelector((state) => state.storage);
   const { isInfo, isAside } = useTypedSelector((state) => state.modals);
   const { isOpen } = useTypedSelector((state) => state.uploader);
+  const { isOpen: isOpenPlayer } = useTypedSelector((state) => state.player);
   const [isOpenMenu, setIsOpenMenu] = useState(true);
   const [isContextMenu, setIsContextMenu] = useState(false);
   const [coords, setCoords] = useState<ICoords>({});
@@ -151,7 +152,10 @@ export const StoragePageLayout: FC = () => {
         )}
       </div>
       <ModalsController />
-      <AnimatePresence>{isOpen && <Uploader />}</AnimatePresence>
+      <AnimatePresence>
+        {isOpen && <Uploader />}
+        {isOpenPlayer && <Player />}
+      </AnimatePresence>
     </div>
   );
 };

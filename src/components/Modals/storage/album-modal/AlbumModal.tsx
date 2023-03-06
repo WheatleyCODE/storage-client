@@ -27,7 +27,7 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) =
               <div className="album-modal__author">{author}</div>
             </div>
             <div className="album-modal__play">
-              <div className="player">
+              <div className="album-modal__player">
                 <Button color="none-light" Icon={MdPlayArrow} text="Слушать" />
               </div>
             </div>

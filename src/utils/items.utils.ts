@@ -24,6 +24,12 @@ export const getImageLink = (item: IClientItemData): string | false => {
   return `${BASE_URL}/${item.getImagePath()}`;
 };
 
+export const getFileLink = (item: IClientItemData): string | false => {
+  if (!item.getImagePath()) return false;
+
+  return `${BASE_URL}/${item.getFilePath()}`;
+};
+
 export const getWorkplaceIcon = (item: IClientItemData): IconType => {
   const { accessType, type } = item;
 

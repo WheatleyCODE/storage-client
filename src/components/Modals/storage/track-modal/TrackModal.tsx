@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
-import { WorkplaceModal, Button } from 'components';
+import { useDispatch } from 'react-redux';
 import { MdPlayArrow } from 'react-icons/md';
+import { playerActions } from 'store';
+import { WorkplaceModal, Button } from 'components';
 import { getImageLink } from 'utils';
-import { IClientItemData } from 'types';
+import { IClientItemData, ITrack } from 'types';
 import './TrackModal.scss';
 
 export interface ITrackModalProps {
@@ -11,8 +13,15 @@ export interface ITrackModalProps {
 }
 
 export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) => {
+  const dispatch = useDispatch();
   const imageLink = getImageLink(currentItemData);
   const { name, author, text } = currentItemData;
+
+  const setTrack = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    dispatch(playerActions.setCurrent(currentItemData.toServerItemData() as ITrack));
+    dispatch(playerActions.changeOpen(true));
+  };
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
@@ -27,8 +36,8 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) =
               <div className="track-modal__author">{author}</div>
             </div>
             <div className="track-modal__play">
-              <div className="player">
-                <Button color="none-light" Icon={MdPlayArrow} text="Слушать" />
+              <div className="track-modal__player">
+                <Button onClick={setTrack} color="none-light" Icon={MdPlayArrow} text="Слушать" />
               </div>
             </div>
           </div>

@@ -1,0 +1,19 @@
+@import 'styles/templates.scss';
+
+.player-volume {
+  @include flex;
+  position: absolute;
+  right: 5px;
+  bottom: 60px;
+  width: 34px;
+  height: 150px;
+  border-radius: 3px;
+  background-color: $colorWhite;
+  box-shadow: 0 -1px 3px 2px $colorShadow;
+
+  &__input {
+    position: absolute;
+    left: -47px;
+    transform: rotate(-90deg);
+  }
+}

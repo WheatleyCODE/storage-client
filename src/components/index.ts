@@ -7,6 +7,7 @@ export { StoragePath } from './layouts/storage-workplace-layout/storage-path/Sto
 export { StorageSorter } from './layouts/storage-workplace-layout/storage-sorter/StorageSorter';
 export { StorageLast } from './layouts/storage-workplace-layout/storage-last/StorageLast';
 export { StorageInfo } from './layouts/storage-page-layout/storage-info/StorageInfo';
+export { Player } from './layouts/storage-page-layout/player/Player';
 
 export { Button } from './ui/button/Button';
 export { Input } from './ui/input/Input';

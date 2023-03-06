@@ -5,3 +5,4 @@ export * from './storage-workplace.consts';
 export * from './modals.consts';
 export * from './workplace-items.consts';
 export * from './hotkeys.consts';
+export * from './player.consts';

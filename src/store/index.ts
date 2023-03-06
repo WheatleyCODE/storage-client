@@ -6,3 +6,4 @@ export { restoreAsyncThunks } from './storage/storage.restore-actions';
 export { storageSlice, storageActions } from './storage/storage.slice';
 export { modalsActions } from './modals/modals.slice';
 export { uploaderActions } from './uploader/uploader.slice';
+export { playerActions } from './player/player.slice';

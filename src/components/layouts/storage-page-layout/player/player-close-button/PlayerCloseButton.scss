@@ -1,0 +1,8 @@
+@import 'styles/templates.scss';
+
+.player-close-button {
+  @include flex;
+  position: absolute;
+  right: -55px;
+  height: 100%;
+}
