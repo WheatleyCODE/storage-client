@@ -21,6 +21,7 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) =
     e.stopPropagation();
     dispatch(playerActions.setCurrent(currentItemData.toServerItemData() as ITrack));
     dispatch(playerActions.changeOpen(true));
+    dispatch(playerActions.changePlay(true));
   };
 
   return (

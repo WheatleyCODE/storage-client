@@ -12,6 +12,17 @@
   border-bottom: $storageBorder;
   animation: defaultShow $animationDuration forwards;
 
+  .storage-workplace-item__icon.play {
+    transition: $animationDuration;
+    font-size: 2rem;
+    color: $colorBlue;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $colorLightGrey3;
+    }
+  }
+
   &__name, &__access, &__open-date, &__size {
     display: flex;
     align-items: center;
@@ -23,6 +34,7 @@
   }
 
   &__icon {
+    width: 30px;
     font-size: 1.7rem;
     color: $colorDarkGrey2;
     margin-right: 15px;

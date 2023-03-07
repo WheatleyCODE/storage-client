@@ -1,14 +1,15 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import React, { FC } from 'react';
 import { motion } from 'framer-motion';
 import './PlayerVolume.scss';
 
 export interface PlayerVolumeProps {
   value: number;
-  onChange: () => void;
+  min: number;
+  max: number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const PlayerVolume: FC<PlayerVolumeProps> = ({ value, onChange }) => {
+export const PlayerVolume: FC<PlayerVolumeProps> = ({ value, min, max, onChange }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -21,8 +22,8 @@ export const PlayerVolume: FC<PlayerVolumeProps> = ({ value, onChange }) => {
       <input
         className="player-volume__input"
         type="range"
-        min={0}
-        max={100}
+        min={min}
+        max={max}
         value={value}
         onChange={onChange}
       />

@@ -1,6 +1,7 @@
 import React, { FC, memo, useCallback, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { useActions, useOpenModal, useTypedDispatch } from 'hooks';
+import { useNavigate } from 'react-router';
+import { MdPlayArrow } from 'react-icons/md';
+import { useActions, useItems, useOpenModal } from 'hooks';
 import {
   formatSize,
   getColorClassName,
@@ -9,8 +10,10 @@ import {
   transformAccess,
   transformDate,
 } from 'utils';
-import { IClientItemData, ItemTypes } from 'types';
+import { IClientItemData, ItemTypes, ITrack } from 'types';
 import './StorageWorkplaceItem.scss';
+import { useDispatch } from 'react-redux';
+import { playerActions } from 'store';
 
 export interface IStorageWorkplaceItemProps {
   itemData: IClientItemData;
@@ -24,6 +27,9 @@ export interface IStorageWorkplaceItemProps {
 export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const { itemData, isActive, changeActive, addActive, addActiveShift, index } = props;
   const [isDragEnter, setIsDragEnter] = useState(false);
+  const [isShowPlay, setIsShowPlay] = useState(false);
+  const tracks = useItems({ onlyTypes: [ItemTypes.TRACK], isParent: true }, true) as ITrack[];
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { uploadFiles } = useActions();
   const openModal = useOpenModal();
@@ -59,6 +65,18 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     navigate(getWorkplaceUrl(itemData));
   };
 
+  const onEnter = () => {
+    if (itemData.type === ItemTypes.TRACK) {
+      setIsShowPlay(true);
+    }
+  };
+
+  const onLeave = () => {
+    if (itemData.type === ItemTypes.TRACK) {
+      setIsShowPlay(false);
+    }
+  };
+
   const onDragEnterHandler = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -81,10 +99,20 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
 
   const isFolder = itemData.type === ItemTypes.FOLDER;
 
+  const playTrack = () => {
+    console.log(tracks);
+    dispatch(playerActions.setCurrent(itemData.toServerItemData() as ITrack));
+    dispatch(playerActions.setPlaylist(tracks));
+    dispatch(playerActions.changeOpen(true));
+    dispatch(playerActions.changePlay(true));
+  };
+
   return (
     <div
       aria-hidden
       onClick={onClick}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
       onDoubleClick={openWorkplaceItem}
       onContextMenu={onContextMenu}
       onDragEnter={onDragEnterHandler}
@@ -96,7 +124,14 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       } ${isDragEnter && !isFolder ? 'grey' : ''}`}
     >
       <div className="storage-workplace-item__name">
-        <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(itemData)}`} />
+        {isShowPlay && (
+          <div className="storage-workplace-item__play">
+            <MdPlayArrow onClick={playTrack} className="storage-workplace-item__icon play" />
+          </div>
+        )}
+        {!isShowPlay && (
+          <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(itemData)}`} />
+        )}
         {itemData.name}
       </div>
       <div className="storage-workplace-item__access">{transformAccess(itemData.accessType)}</div>

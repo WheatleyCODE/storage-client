@@ -11,5 +11,6 @@ export { useDelayHover } from './useDelayHover';
 export { useFirstRender } from './useFirstRender';
 export { useOpenModal } from './useOpenModal';
 export { useItems } from './useItems';
+export { usePlayerHandlers } from './usePlayer';
 
 export type { IContextOptions, IContextMenuItem } from './context-menu/useContextMenuItems';

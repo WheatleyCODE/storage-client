@@ -25,3 +25,11 @@ export const sleep = (ms: number): Promise<void> => {
     setTimeout(res, ms);
   });
 };
+
+export const getPercentOfNumber = (num: number, perc: number) => (num / 100) * perc;
+export const numOfNumPercent = (numOne: number, numTwo: number) => (numOne / numTwo) * 100;
+export const correctVolume = (volume: number) => volume / 100;
+
+export const formatTime = (s: number) => {
+  return (s - (s %= 60)) / 60 + (s > 9 ? ':' : ':0') + s;
+};
