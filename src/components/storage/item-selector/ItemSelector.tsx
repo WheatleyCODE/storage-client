@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { useItems } from 'hooks';
+import { StorageItem } from 'components';
 import { PropertyFactory } from 'helpers';
 import { IClientItemData, ItemTypes } from 'types';
-import { ItemSelectorElement } from './item-selector-element/ItemSelectorElement';
 import './ItemSelector.scss';
 
 export interface ItemSelectorProps {
@@ -36,12 +36,12 @@ export const ItemSelector: FC<ItemSelectorProps> = (props) => {
   return (
     <div style={{ height: `${height}px` }} className="item-selector">
       {itemsData.map((item) => (
-        <ItemSelectorElement
+        <StorageItem
           key={item.id}
           isSelect={isSelect(item)}
           selectItem={selectItem}
           deleteItem={deleteItem}
-          item={item}
+          itemData={item}
         />
       ))}
     </div>

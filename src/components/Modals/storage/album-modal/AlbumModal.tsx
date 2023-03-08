@@ -45,7 +45,7 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) =
         </div>
         <div className="album-modal__tracks">
           {tracksData.map((track) => (
-            <StorageItem itemData={track} />
+            <StorageItem isDark isPlay itemData={track} />
           ))}
         </div>
       </div>

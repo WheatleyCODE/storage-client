@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'hooks';
 import { playerActions } from 'store';
-import { RepeatType } from 'types';
+import { IClientItemData, ItemTypes, ITrack, RepeatType } from 'types';
 import { repeatSteps } from 'consts';
 
 export const usePlayerHandlers = () => {
@@ -47,5 +47,27 @@ export const usePlayerHandlers = () => {
     dispatch(playerActions.changeRepeatType(repeatSteps[0]));
   }, [repeatType]);
 
-  return { nextTrack, prevTrack, changeRepeatType };
+  const playTrack = useCallback((itemData: IClientItemData, tracks: ITrack[]) => {
+    if (itemData.type === ItemTypes.TRACK) {
+      dispatch(playerActions.setCurrent(itemData.toServerItemData() as ITrack));
+      dispatch(playerActions.setPlaylist(tracks));
+      dispatch(playerActions.changeOpen(true));
+      dispatch(playerActions.changePlay(true));
+      return;
+    }
+
+    if (itemData.type === ItemTypes.ALBUM) {
+      const albumTracks = itemData.tracks;
+
+      if (!albumTracks) return;
+      if (!albumTracks[0]) return;
+
+      dispatch(playerActions.setCurrent(albumTracks[0]));
+      dispatch(playerActions.setPlaylist(albumTracks));
+      dispatch(playerActions.changeOpen(true));
+      dispatch(playerActions.changePlay(true));
+    }
+  }, []);
+
+  return { nextTrack, prevTrack, changeRepeatType, playTrack };
 };

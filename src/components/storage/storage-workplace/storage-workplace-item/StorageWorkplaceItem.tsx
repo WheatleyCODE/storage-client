@@ -1,7 +1,7 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { MdPlayArrow } from 'react-icons/md';
-import { useActions, useItems, useOpenModal } from 'hooks';
+import { useActions, useItems, useOpenModal, usePlayerHandlers } from 'hooks';
 import {
   formatSize,
   getColorClassName,
@@ -12,8 +12,6 @@ import {
 } from 'utils';
 import { IClientItemData, ItemTypes, ITrack } from 'types';
 import './StorageWorkplaceItem.scss';
-import { useDispatch } from 'react-redux';
-import { playerActions } from 'store';
 
 export interface IStorageWorkplaceItemProps {
   itemData: IClientItemData;
@@ -29,8 +27,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const [isShowPlay, setIsShowPlay] = useState(false);
   const tracks = useItems({ onlyTypes: [ItemTypes.TRACK], isParent: true }, true) as ITrack[];
-  const alltracks = useItems({ onlyTypes: [ItemTypes.TRACK] }) as ITrack[];
-  const dispatch = useDispatch();
+  const { playTrack } = usePlayerHandlers();
   const navigate = useNavigate();
   const { uploadFiles } = useActions();
   const openModal = useOpenModal();
@@ -100,28 +97,6 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
 
   const isFolder = itemData.type === ItemTypes.FOLDER;
 
-  const playTrack = () => {
-    if (itemData.type === ItemTypes.TRACK) {
-      dispatch(playerActions.setCurrent(itemData.toServerItemData() as ITrack));
-      dispatch(playerActions.setPlaylist(tracks));
-      dispatch(playerActions.changeOpen(true));
-      dispatch(playerActions.changePlay(true));
-      return;
-    }
-
-    if (itemData.type === ItemTypes.ALBUM) {
-      const albumTracks = itemData.tracks;
-
-      if (!albumTracks) return;
-      if (!albumTracks[0]) return;
-
-      dispatch(playerActions.setCurrent(albumTracks[0]));
-      dispatch(playerActions.setPlaylist(albumTracks));
-      dispatch(playerActions.changeOpen(true));
-      dispatch(playerActions.changePlay(true));
-    }
-  };
-
   return (
     <div
       aria-hidden
@@ -141,7 +116,10 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       <div className="storage-workplace-item__name">
         {isShowPlay && (
           <div className="storage-workplace-item__play">
-            <MdPlayArrow onClick={playTrack} className="storage-workplace-item__icon play" />
+            <MdPlayArrow
+              onClick={() => playTrack(itemData, tracks)}
+              className="storage-workplace-item__icon play"
+            />
           </div>
         )}
         {!isShowPlay && (

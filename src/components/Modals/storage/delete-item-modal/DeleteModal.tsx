@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import { Confirm, Portal, Backdrop, Modal } from 'components';
+import { Confirm, Portal, Backdrop, Modal, StorageItem } from 'components';
 import { useActions } from 'hooks';
 import { IClientItemData } from 'types';
-import { DeleteWorkplaceItem } from './delete-workplace-item/DeleteWorkplaceItem';
 import './DeleteModal.scss';
 
 export interface IDeleteModal {
@@ -30,7 +29,7 @@ export const DeleteModal: FC<IDeleteModal> = ({ currentItemsData, onClose }) => 
 
               <div className="delete-modal__items">
                 {currentItemsData.map((itemData) => (
-                  <DeleteWorkplaceItem key={itemData.id} itemData={itemData} />
+                  <StorageItem isShowSize key={itemData.id} itemData={itemData} />
                 ))}
               </div>
             </div>

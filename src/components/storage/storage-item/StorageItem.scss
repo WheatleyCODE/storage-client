@@ -28,4 +28,38 @@
     width: 30px;
     font-size: 1.7rem;
   }
+
+  &__icon-play {
+    @include flex;
+    margin-right: 15px;
+    width: 30px;
+    font-size: 1.7rem;
+    color: $colorBlue;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $colorLightGrey3;
+    }
+  }
+
+  &.dark {
+    border-color: grey;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.07);
+    }
+
+    .storage-item__icon-play {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  &__size {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+  }
 }
