@@ -36,7 +36,7 @@ export const ModalsController: FC = () => {
   const modals = useTypedSelector((state) => state.modals);
   const { currentItems } = useTypedSelector((state) => state.storage);
 
-  const folders = useItems({ onlyTypes: [ItemTypes.FOLDER], isParent: true });
+  const folders = useItems({ onlyTypes: [ItemTypes.FOLDER], isParent: false, isTrash: false });
 
   const foldersData = folders.map((folder) => PropertyFactory.create(folder));
   const currentItemsData = currentItems.map((item) => PropertyFactory.create(item));

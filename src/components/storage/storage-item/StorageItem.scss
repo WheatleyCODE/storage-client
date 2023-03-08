@@ -1,0 +1,31 @@
+@import 'styles/templates.scss';
+
+.storage-item {
+  @include button-el;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 20px;
+  border-bottom: $storageBorder;
+
+  &:first-child {
+    border-top: $storageBorder;
+  }
+
+  &.selected {
+    color: $colorDarkBlue;
+    background-color: $colorLightBlue2;
+    border-bottom: 1px solid $colorLightBlue1;
+  }
+
+  &.selected:first-child {
+    border-top: 1px solid $colorLightBlue1;
+  }
+
+  &__icon {
+    @include flex;
+    margin-right: 15px;
+    width: 30px;
+    font-size: 1.7rem;
+  }
+}

@@ -29,6 +29,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const [isShowPlay, setIsShowPlay] = useState(false);
   const tracks = useItems({ onlyTypes: [ItemTypes.TRACK], isParent: true }, true) as ITrack[];
+  const alltracks = useItems({ onlyTypes: [ItemTypes.TRACK] }) as ITrack[];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { uploadFiles } = useActions();
@@ -66,13 +67,13 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   };
 
   const onEnter = () => {
-    if (itemData.type === ItemTypes.TRACK) {
+    if (itemData.type === ItemTypes.TRACK || itemData.type === ItemTypes.ALBUM) {
       setIsShowPlay(true);
     }
   };
 
   const onLeave = () => {
-    if (itemData.type === ItemTypes.TRACK) {
+    if (itemData.type === ItemTypes.TRACK || itemData.type === ItemTypes.ALBUM) {
       setIsShowPlay(false);
     }
   };
@@ -100,11 +101,25 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const isFolder = itemData.type === ItemTypes.FOLDER;
 
   const playTrack = () => {
-    console.log(tracks);
-    dispatch(playerActions.setCurrent(itemData.toServerItemData() as ITrack));
-    dispatch(playerActions.setPlaylist(tracks));
-    dispatch(playerActions.changeOpen(true));
-    dispatch(playerActions.changePlay(true));
+    if (itemData.type === ItemTypes.TRACK) {
+      dispatch(playerActions.setCurrent(itemData.toServerItemData() as ITrack));
+      dispatch(playerActions.setPlaylist(tracks));
+      dispatch(playerActions.changeOpen(true));
+      dispatch(playerActions.changePlay(true));
+      return;
+    }
+
+    if (itemData.type === ItemTypes.ALBUM) {
+      const albumTracks = itemData.tracks;
+
+      if (!albumTracks) return;
+      if (!albumTracks[0]) return;
+
+      dispatch(playerActions.setCurrent(albumTracks[0]));
+      dispatch(playerActions.setPlaylist(albumTracks));
+      dispatch(playerActions.changeOpen(true));
+      dispatch(playerActions.changePlay(true));
+    }
   };
 
   return (

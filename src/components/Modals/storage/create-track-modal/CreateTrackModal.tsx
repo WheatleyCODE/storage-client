@@ -82,7 +82,7 @@ export const CreateTrackModal: FC<ICreateTrackModalProps> = ({ onClose }) => {
   return (
     <Portal>
       <Backdrop onClose={onClose}>
-        <Modal className="create-track-modal-modal-width" onClose={onClose}>
+        <Modal className="create-track-modal-width" onClose={onClose}>
           <StepperModal
             title="Создать трек"
             activeStep={activeStep}

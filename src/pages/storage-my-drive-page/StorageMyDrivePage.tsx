@@ -7,7 +7,7 @@ import './StorageMyDrivePage.scss';
 
 export const StorageMyDrivePage: FC = () => {
   const { allItems, workplaceItems } = useTypedSelector((state) => state.storage);
-  const items = useItems({});
+  const items = useItems({ isTrash: false, isParent: false });
   const dispatch = useTypedDispatch();
 
   const workplaceData = workplaceItems.map((item) => PropertyFactory.create(item));

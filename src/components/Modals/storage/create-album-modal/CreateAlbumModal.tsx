@@ -11,11 +11,12 @@ import {
   Portal,
   Modal,
   Backdrop,
+  ItemSelector,
 } from 'components';
 import { nameValidator, nickValidator } from 'helpers';
 import { createAlbumStepTitles } from 'consts';
 import { checkPathnameOnPathRoute } from 'utils';
-import { PathRoutes } from 'types';
+import { IClientItemData, ItemTypes, PathRoutes } from 'types';
 import './CreateAlbumModal.scss';
 
 export interface ICreateAlbumModalProps {
@@ -26,6 +27,7 @@ export const CreateAlbumModal: FC<ICreateAlbumModalProps> = ({ onClose }) => {
   const [image, setImage] = useState<File | null>(null);
   const nameInput = useValidInput([nameValidator]);
   const authorInput = useValidInput([nickValidator]);
+  const [selectedItems, setSelectedItems] = useState<IClientItemData[]>([]);
   const [activeStep, setActiveStep] = useState(0);
   const { createAlbum } = useActions();
   const { id } = useParams();
@@ -58,6 +60,7 @@ export const CreateAlbumModal: FC<ICreateAlbumModalProps> = ({ onClose }) => {
       name: nameInput.value,
       author: authorInput.value,
       image,
+      tracks: selectedItems.map((item) => item.id),
       ...filds,
     });
 
@@ -67,7 +70,7 @@ export const CreateAlbumModal: FC<ICreateAlbumModalProps> = ({ onClose }) => {
   return (
     <Portal>
       <Backdrop onClose={onClose}>
-        <Modal onClose={onClose}>
+        <Modal className="create-album-modal-width" onClose={onClose}>
           <StepperModal
             title="Создать альбом"
             activeStep={activeStep}
@@ -121,6 +124,14 @@ export const CreateAlbumModal: FC<ICreateAlbumModalProps> = ({ onClose }) => {
                     setFile={setImageHandler}
                     accept="image/*"
                     label="Выберите картинку"
+                  />
+                </Step>
+
+                <Step className="create-album-modal__step">
+                  <ItemSelector
+                    selectedItems={selectedItems}
+                    setSelectedItems={setSelectedItems}
+                    onlyTypes={[ItemTypes.TRACK]}
                   />
                 </Step>
               </Stepper>

@@ -7,11 +7,11 @@ import {
   ICreateAlbumFilds,
   ISearchPublicAlbumFilds,
 } from 'types';
+import { createFormData } from 'utils';
 
 export class AlbumService {
   static async createAlbum(filds: ICreateAlbumFilds): Promise<AxiosResponse<IAlbum>> {
-    const formData = new FormData();
-    Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
+    const formData = createFormData(filds);
     return $api.post<IAlbum>('/api/album/create', formData);
   }
 

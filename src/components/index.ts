@@ -80,6 +80,8 @@ export { ContextMenu } from './storage/context-menu/ContextMenu';
 export { ContextMenuItem } from './storage/context-menu/context-menu-item/ContextMenuItem';
 export { StorageWorkplace } from './storage/storage-workplace/StorageWorkplace';
 export { Uploader } from './storage/uploader/Uploader';
+export { ItemSelector } from './storage/item-selector/ItemSelector';
+export { StorageItem } from './storage/storage-item/StorageItem';
 
 export { Notifier } from './notifier/Notifier';
 

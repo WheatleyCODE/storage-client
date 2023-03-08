@@ -1,6 +1,7 @@
 import { DefaultProperties } from 'helpers/item-properties/default.properties';
 import { FolderColors } from './folder.interface';
 import { AccessTypes, ItemTypes } from './storage-workplace.intarface';
+import { ITrack } from './track.interface';
 
 export interface IProperties {
   id: string;
@@ -23,6 +24,7 @@ export interface IProperties {
   description: string | null;
   text: string | null;
   author: string | null;
+  tracks: ITrack[] | null;
   getFilePath: () => string | null;
   getImagePath: () => string | null;
   getSize: () => number;

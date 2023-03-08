@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { MdPlayArrow } from 'react-icons/md';
-import { WorkplaceModal, Button } from 'components';
+import { WorkplaceModal, Button, StorageItem } from 'components';
 import { getImageLink } from 'utils';
 import { IClientItemData } from 'types';
 import './AlbumModal.scss';
+import { PropertyFactory } from 'helpers';
 
 export interface IAlbumModalProps {
   onClose: () => void;
@@ -13,6 +14,15 @@ export interface IAlbumModalProps {
 export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) => {
   const imageLink = getImageLink(currentItemData);
   const { name, author } = currentItemData;
+
+  const albumTracks = currentItemData.tracks;
+
+  if (!albumTracks) {
+    onClose();
+    return <div />;
+  }
+
+  const tracksData = albumTracks.map((track) => PropertyFactory.create(track));
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
@@ -34,9 +44,9 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) =
           </div>
         </div>
         <div className="album-modal__tracks">
-          <div className="album-modal__track">1</div>
-          <div className="album-modal__track">2</div>
-          <div className="album-modal__track">3</div>
+          {tracksData.map((track) => (
+            <StorageItem itemData={track} />
+          ))}
         </div>
       </div>
     </WorkplaceModal>

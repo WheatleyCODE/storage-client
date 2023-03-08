@@ -1,4 +1,4 @@
-import { FolderColors, ModalsStateKeys, openModalKeys, IServerItemData } from 'types';
+import { FolderColors, ModalsStateKeys, openModalKeys, IServerItemData, ITrack } from 'types';
 
 export class DefaultProperties {
   openModalStateKey: ModalsStateKeys | null;
@@ -6,6 +6,7 @@ export class DefaultProperties {
   text: string | null = null;
   author: string | null = null;
   color: FolderColors | null = null;
+  tracks: ITrack[] | null = null;
 
   constructor(
     private item: IServerItemData,

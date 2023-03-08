@@ -33,3 +33,5 @@ export const correctVolume = (volume: number) => volume / 100;
 export const formatTime = (s: number) => {
   return (s - (s %= 60)) / 60 + (s > 9 ? ':' : ':0') + s;
 };
+
+export const isUndefined = (value: any) => typeof value === 'undefined';

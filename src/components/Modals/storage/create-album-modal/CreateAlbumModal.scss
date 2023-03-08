@@ -1,8 +1,6 @@
 @import 'styles/templates.scss';
 
 .create-album-modal {
-  width: 440px;
-
   &__step {
     padding-top: 15px;
     height: 140px;
@@ -24,11 +22,12 @@
       height: 110px;
     }
   }
-
-  .step-title {
-    width: 40%;
-  }
 }
+
+.create-album-modal-width {
+  width: 600px;
+}
+
 
 
 @media screen and (max-width: 500px) {

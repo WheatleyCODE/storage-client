@@ -8,7 +8,7 @@ import './StorageSharedPage.scss';
 
 export const StorageSharedPage: FC = () => {
   const { allItems, workplaceItems } = useTypedSelector((state) => state.storage);
-  const items = useItems({ onlyAccess: [AccessTypes.LINK, AccessTypes.PUBLIC] });
+  const items = useItems({ onlyAccess: [AccessTypes.LINK, AccessTypes.PUBLIC], isTrash: false });
   const dispatch = useTypedDispatch();
 
   const workplaceData = workplaceItems.map((item) => PropertyFactory.create(item));

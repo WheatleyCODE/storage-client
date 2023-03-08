@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { AccessTypes, ItemTypes, IServerItemData } from 'types';
+import { isUndefined } from 'utils';
 import { useTypedSelector } from './redux/useTypedSelector';
 
 export interface IUseItemsParams {
@@ -10,22 +11,23 @@ export interface IUseItemsParams {
   onlyAccess?: AccessTypes[];
 }
 
+// ? Add filters callback
 export const useItems = (params: IUseItemsParams, isWorkplaceItem = false): IServerItemData[] => {
-  const { isTrash = false, isParent = false, sortByDate = false, onlyTypes, onlyAccess } = params;
+  const { isTrash, isParent, sortByDate, onlyTypes, onlyAccess } = params;
   const { allItems, workplaceItems } = useTypedSelector((state) => state.storage);
 
   const items = useMemo(() => {
     let current = isWorkplaceItem ? workplaceItems : allItems;
 
-    if (isTrash) {
+    if (isTrash && !isUndefined(isTrash)) {
       current = current.filter((item) => item.isTrash);
-    } else {
+    } else if (!isTrash && !isUndefined(isTrash)) {
       current = current.filter((item) => !item.isTrash);
     }
 
-    if (isParent) {
+    if (isParent && !isUndefined(isParent)) {
       current = current.filter((item) => item.parent);
-    } else {
+    } else if (!isParent && !isUndefined(isTrash)) {
       current = current.filter((item) => !item.parent);
     }
 
@@ -61,7 +63,7 @@ export const useItems = (params: IUseItemsParams, isWorkplaceItem = false): ISer
       current = current.sort((a, b) => a.openDate - b.openDate);
     }
 
-    return current.splice(0);
+    return current;
   }, [
     allItems,
     isParent,

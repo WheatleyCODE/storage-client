@@ -9,8 +9,9 @@ export const createTrackStepTitles = [
 ];
 
 export const createAlbumStepTitles = [
-  { title: 'Название и автор' },
+  { title: 'Название' },
   { title: 'Загрузка картинки' },
+  { title: 'Выбор треков' },
 ];
 
 export const createVideoStepTitles = [

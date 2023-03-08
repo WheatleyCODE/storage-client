@@ -1,10 +1,11 @@
 import { IItem } from './item.interface';
+import { ITrack } from './track.interface';
 
 export interface IAlbum extends IItem {
   author: string;
   image: string;
   imageSize: number;
-  tracks: any[];
+  tracks: ITrack[];
 }
 
 export interface ICreateAlbumFilds {
@@ -12,6 +13,7 @@ export interface ICreateAlbumFilds {
   readonly author: string;
   readonly parent?: string;
   readonly image: File;
+  readonly tracks?: string[];
 }
 
 export interface IChangeAlbumImageFilds {
