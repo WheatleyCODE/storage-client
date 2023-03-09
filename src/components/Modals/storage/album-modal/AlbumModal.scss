@@ -1,6 +1,17 @@
 @import 'styles/templates.scss';
 
 .album-modal {
+  position: relative;
+  border: 1px solid $colorDarkGrey;
+  border-radius: 10px;
+  padding: 20px;
+
+  &__open-change-modal {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+  }
+
   &__header {
     display: flex;
     flex-direction: column;
@@ -40,11 +51,24 @@
     max-height: 200px;
     border-radius: 5px;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.07);
+  }
+
+  &__tracks::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &__tracks::-webkit-scrollbar-track {
+    background: $colorWhite;
+    width: 10px;
+  }
+
+  &__tracks::-webkit-scrollbar-thumb {
+    background-color: $colorLightGrey2;
+    border: 1px solid $colorWhite;
   }
 
   &__player {
-    margin-top: 30px;
+    margin-top: 25px;
     width: 320px;
   
     .button {

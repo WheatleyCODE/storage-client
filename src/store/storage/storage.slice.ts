@@ -7,6 +7,7 @@ import {
   IStorageState,
   SortTypes,
   IServerItemData,
+  ItemTypes,
 } from 'types';
 import { copyObject } from 'utils';
 import { changeSettings, fetchStorage } from './storage.actions';
@@ -24,10 +25,8 @@ const initialState: IStorageState = {
   isLoading: true,
   isWorkplaceLoading: false,
   sortType: SortTypes.NAME,
-  settings: {
-    isRecommend: true,
-    isTools: true,
-  },
+  isRecommend: true,
+  isTools: true,
 };
 
 export const storageSlice = createSlice({
@@ -117,9 +116,6 @@ export const storageSlice = createSlice({
       const allItemsArr = copyObject(newAllItems);
       const workplaceItemsArr = copyObject(newWorkplaceItems);
 
-      console.log(workplaceItemsArr);
-      console.log(allItemsArr);
-
       state.allItems = sorter.sort(allItemsArr, state.sortType);
       state.workplaceItems = sorter.sort(workplaceItemsArr, state.sortType);
       state.parents = newParents;
@@ -154,9 +150,12 @@ export const storageSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(changeSettings.fulfilled, (state, { payload }) => {
-        state.settings = payload;
+        state.isRecommend = payload.isRecommend;
+        state.isTools = payload.isTools;
       })
       .addCase(fetchStorage.pending, (state) => {
+        state.isTools = true;
+        state.isRecommend = true;
         state.isLoading = true;
         state.id = '';
         state.name = '';
@@ -181,8 +180,12 @@ export const storageSlice = createSlice({
           albums,
           images,
           videos,
+          isRecommend,
+          isTools,
         } = payload;
 
+        state.isTools = isTools;
+        state.isRecommend = isRecommend;
         state.isLoading = false;
         state.id = id;
         state.name = name;

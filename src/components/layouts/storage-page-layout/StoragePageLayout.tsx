@@ -17,7 +17,7 @@ import { StorageInfo } from './storage-info/StorageInfo';
 import './StoragePageLayout.scss';
 
 export const StoragePageLayout: FC = () => {
-  const { isLoading, settings } = useTypedSelector((state) => state.storage);
+  const { isLoading, isTools } = useTypedSelector((state) => state.storage);
   const { isInfo, isAside } = useTypedSelector((state) => state.modals);
   const { isOpen } = useTypedSelector((state) => state.uploader);
   const { isOpen: isOpenPlayer } = useTypedSelector((state) => state.player);
@@ -62,7 +62,7 @@ export const StoragePageLayout: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!settings.isTools) {
+    if (!isTools) {
       asideControls.start('close');
       return;
     }
@@ -73,7 +73,7 @@ export const StoragePageLayout: FC = () => {
     }
 
     asideControls.start('close');
-  }, [isAside, asideControls, settings.isTools]);
+  }, [isAside, asideControls, isTools]);
 
   useEffect(() => {
     if (isOpenMenu) {
@@ -142,7 +142,7 @@ export const StoragePageLayout: FC = () => {
 
         <AnimatePresence>{isInfo && <StorageInfo onClose={closeInfo} />}</AnimatePresence>
 
-        {settings.isTools && (
+        {isTools && (
           <StorageAside
             controls={asideControls}
             isOpen={isAside}

@@ -13,7 +13,7 @@ export const ChangeVideoDataModal: FC<IChangeVideoDataModalProps> = (props) => {
   const { name } = currentItemData;
 
   return (
-    <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
+    <WorkplaceModal isChange currentItemData={currentItemData} onClose={onClose}>
       <div className="change-data-video-modal">
         <h1>Функционал в разработке =(</h1>
         <h1>change-data-video-modal</h1>

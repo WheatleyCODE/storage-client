@@ -35,6 +35,12 @@ export const openModalKeys: { [key in ItemTypes as string]: ModalsStateKeys } = 
   [ItemTypes.FILE]: 'isFile',
 };
 
+export const openChangeModalKeys: { [key in ItemTypes as string]: ModalsStateKeys } = {
+  [ItemTypes.ALBUM]: 'isChangeDataAlbum',
+  [ItemTypes.TRACK]: 'isChangeDataTrack',
+  [ItemTypes.VIDEO]: 'isChangeDataVideo',
+};
+
 export interface IModalsPayload {
   key: ModalsStateKeys;
   boolean: boolean;

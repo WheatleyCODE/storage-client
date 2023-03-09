@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
-import { MdPlayArrow } from 'react-icons/md';
+import { MdOutlineEdit, MdPlayArrow } from 'react-icons/md';
 import { WorkplaceModal, Button, StorageItem } from 'components';
 import { getImageLink } from 'utils';
 import { IClientItemData } from 'types';
 import './AlbumModal.scss';
 import { PropertyFactory } from 'helpers';
+import { modalsActions } from 'store';
+import { useDispatch } from 'react-redux';
 
 export interface IAlbumModalProps {
   onClose: () => void;
@@ -12,6 +14,7 @@ export interface IAlbumModalProps {
 }
 
 export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) => {
+  const dispatch = useDispatch();
   const imageLink = getImageLink(currentItemData);
   const { name, author } = currentItemData;
 
@@ -23,10 +26,25 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) =
   }
 
   const tracksData = albumTracks.map((track) => PropertyFactory.create(track));
+  const isNoTracks = !!tracksData.length;
+
+  const openChangeModal = () => {
+    onClose();
+    dispatch(modalsActions.changeIsModal({ key: 'isChangeDataAlbum', boolean: true }));
+  };
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
-      <div className="album-modal">
+      <div aria-hidden onClick={(e) => e.stopPropagation()} className="album-modal">
+        <div className="album-modal__open-change-modal">
+          <Button
+            onClick={openChangeModal}
+            outline="fill"
+            color="none-light"
+            type="icon"
+            Icon={MdOutlineEdit}
+          />
+        </div>
         <div className="album-modal__header">
           <div className="album-modal__image">
             {imageLink && <img src={imageLink} alt="Картинка трека" />}
@@ -44,8 +62,9 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) =
           </div>
         </div>
         <div className="album-modal__tracks">
+          {!isNoTracks && <div>Треков нет</div>}
           {tracksData.map((track) => (
-            <StorageItem isDark isPlay itemData={track} />
+            <StorageItem key={track.id} isDark isPlay itemData={track} />
           ))}
         </div>
       </div>

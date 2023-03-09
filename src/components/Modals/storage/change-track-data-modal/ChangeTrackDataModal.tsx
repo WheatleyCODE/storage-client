@@ -13,7 +13,7 @@ export const ChangeTrackDataModal: FC<IChangeTrackDataModalProps> = (props) => {
   const { name } = currentItemData;
 
   return (
-    <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
+    <WorkplaceModal isChange currentItemData={currentItemData} onClose={onClose}>
       <div className="change-data-track-modal">
         <h1>Функционал в разработке =(</h1>
         <h1>change-data-track-modal</h1>

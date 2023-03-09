@@ -41,6 +41,8 @@ export interface IStorageData {
   tracks: ITrack[];
   images: IImage[];
   videos: IVideo[];
+  isTools: boolean;
+  isRecommend: boolean;
 }
 
 export interface IStorageSettings {
@@ -61,7 +63,8 @@ export interface IStorageState {
   isLoading: boolean;
   isWorkplaceLoading: boolean;
   sortType: SortTypes;
-  settings: IStorageSettings;
+  isTools: boolean;
+  isRecommend: boolean;
 }
 
 export interface IChildrensData {

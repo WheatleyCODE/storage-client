@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { MdPlayArrow } from 'react-icons/md';
-import { playerActions } from 'store';
+import { MdOutlineEdit, MdPlayArrow } from 'react-icons/md';
+import { modalsActions, playerActions } from 'store';
 import { WorkplaceModal, Button } from 'components';
 import { getImageLink } from 'utils';
 import { IClientItemData, ITrack } from 'types';
@@ -24,9 +24,23 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) =
     dispatch(playerActions.changePlay(true));
   };
 
+  const openChangeModal = () => {
+    onClose();
+    dispatch(modalsActions.changeIsModal({ key: 'isChangeDataTrack', boolean: true }));
+  };
+
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
-      <div className="track-modal">
+      <div aria-hidden onClick={(e) => e.stopPropagation()} className="track-modal">
+        <div className="track-modal__open-change-modal">
+          <Button
+            onClick={openChangeModal}
+            outline="fill"
+            color="none-light"
+            type="icon"
+            Icon={MdOutlineEdit}
+          />
+        </div>
         <div className="track-modal__header">
           <div className="track-modal__image">
             {imageLink && <img src={imageLink} alt="Картинка трека" />}

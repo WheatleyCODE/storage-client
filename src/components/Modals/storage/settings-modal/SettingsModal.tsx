@@ -8,18 +8,18 @@ export interface ISettingsModalProps {
 }
 
 export const SettingsModal: FC<ISettingsModalProps> = ({ onClose }) => {
-  const { diskSpace, usedSpace, settings } = useTypedSelector((state) => state.storage);
-  const [isTools, setIsTools] = useState(settings.isTools);
-  const [isRecommend, setIsRecommend] = useState(settings.isRecommend);
+  const { diskSpace, usedSpace, isRecommend, isTools } = useTypedSelector((state) => state.storage);
+  const [isShowTools, setIsShowTools] = useState(isTools);
+  const [isShowRecommend, setIsShowRecommend] = useState(isRecommend);
   const { changeSettings } = useActions();
 
-  const toggleIsTools = useCallback(() => setIsTools((p) => !p), []);
-  const toggleIsRecommend = useCallback(() => setIsRecommend((p) => !p), []);
+  const toggleIsTools = useCallback(() => setIsShowTools((p) => !p), []);
+  const toggleIsRecommend = useCallback(() => setIsShowRecommend((p) => !p), []);
 
   const changeSettingsHandler = useCallback(() => {
-    changeSettings({ isRecommend, isTools });
+    changeSettings({ isRecommend: isShowRecommend, isTools: isShowTools });
     onClose();
-  }, [isRecommend, isTools, onClose]);
+  }, [isShowRecommend, isShowTools, onClose]);
 
   return (
     <Portal>
@@ -32,14 +32,14 @@ export const SettingsModal: FC<ISettingsModalProps> = ({ onClose }) => {
               <div className="settings-modal__checkboxes">
                 <div className="settings-modal__checkbox">
                   <Checkbox
-                    value={isTools}
+                    value={isShowTools}
                     label="Показывать дополнительные модули"
                     onClick={toggleIsTools}
                   />
                 </div>
                 <div className="settings-modal__checkbox">
                   <Checkbox
-                    value={isRecommend}
+                    value={isShowRecommend}
                     label="Показывать рекомендуемые файлы"
                     onClick={toggleIsRecommend}
                   />

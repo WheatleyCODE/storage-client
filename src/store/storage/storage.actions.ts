@@ -16,11 +16,11 @@ export const fetchStorage = createAsyncThunk<IStorageData>(
   }
 );
 
-export const changeSettings = createAsyncThunk<ISettingsData, IStorageSettings>(
+export const changeSettings = createAsyncThunk<IStorageData, IStorageSettings>(
   'storage/changeSettings',
   async (settings, thunkAPI) => {
     try {
-      // Todo сделать настройки на сервере и сделать запрос
+      const { data } = await StorageService.changeSettings(settings);
 
       thunkAPI.dispatch(
         getActionMessage({
@@ -29,7 +29,7 @@ export const changeSettings = createAsyncThunk<ISettingsData, IStorageSettings>(
         })
       );
 
-      return settings;
+      return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }

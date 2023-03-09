@@ -1,7 +1,15 @@
-import { FolderColors, ModalsStateKeys, openModalKeys, IServerItemData, ITrack } from 'types';
+import {
+  FolderColors,
+  ModalsStateKeys,
+  openModalKeys,
+  IServerItemData,
+  ITrack,
+  openChangeModalKeys,
+} from 'types';
 
 export class DefaultProperties {
   openModalStateKey: ModalsStateKeys | null;
+  openChangeModalStateKey: ModalsStateKeys | null;
   description: string | null = null;
   text: string | null = null;
   author: string | null = null;
@@ -28,6 +36,7 @@ export class DefaultProperties {
     readonly comments = item.comments
   ) {
     this.openModalStateKey = openModalKeys[item.type] || null;
+    this.openChangeModalStateKey = openChangeModalKeys[item.type] || null;
   }
 
   toServerItemData(): IServerItemData {

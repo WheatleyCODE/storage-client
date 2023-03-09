@@ -10,8 +10,11 @@ import {
   MdOutlineRemoveRedEye,
   MdCreate,
 } from 'react-icons/md';
-import { useActions } from 'hooks';
+import { useActions, useTypedSelector } from 'hooks';
 import { IClientItemData } from 'types';
+import { useDispatch } from 'react-redux';
+import { modalsActions, storageActions } from 'store';
+import { PropertyFactory } from 'helpers';
 import './WorkplaceModal.scss';
 
 export interface IWorkplaceModalProps {
@@ -23,6 +26,8 @@ export interface IWorkplaceModalProps {
 
 export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
   const { onClose, children, currentItemData, isChange = false } = props;
+  const { workplaceItems } = useTypedSelector((state) => state.storage);
+  const dispatch = useDispatch();
   const { downloadFile } = useActions();
 
   const stopPropagation = useCallback((e: MouseEvent) => e.stopPropagation(), []);
@@ -35,6 +40,44 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
     const { id, type } = currentItemData;
     downloadFile({ id, type });
   };
+
+  const changeCurrent = (num: number) => {
+    const index = workplaceItems.findIndex((item) => item.id === currentItemData.id);
+
+    const newItem = workplaceItems[index + num];
+
+    if (index !== -1 && newItem) {
+      if (newItem.type !== currentItemData.type) {
+        const itemData = PropertyFactory.create(newItem);
+        const key = isChange ? itemData.openChangeModalStateKey : itemData.openModalStateKey;
+
+        if (!key) return;
+
+        onClose();
+        dispatch(storageActions.setCurrent([newItem]));
+        dispatch(modalsActions.changeIsModal({ key, boolean: true }));
+        return;
+      }
+
+      dispatch(storageActions.setCurrent([newItem]));
+    }
+  };
+
+  const addCurrent = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      changeCurrent(1);
+    },
+    [currentItemData]
+  );
+
+  const subCurrent = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      changeCurrent(-1);
+    },
+    [currentItemData]
+  );
 
   return (
     <Portal>
@@ -78,7 +121,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
           <div className="workplace-modal__right">
             <div className="workplace-modal__icon">
               <Button
-                onClick={stopPropagation}
+                onClick={addCurrent}
                 outline="fill"
                 color="black"
                 type="icon"
@@ -89,7 +132,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
           <div className="workplace-modal__left">
             <div className="workplace-modal__icon">
               <Button
-                onClick={stopPropagation}
+                onClick={subCurrent}
                 outline="fill"
                 color="black"
                 type="icon"

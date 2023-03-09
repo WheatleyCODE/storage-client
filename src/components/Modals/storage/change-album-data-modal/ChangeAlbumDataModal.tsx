@@ -13,7 +13,7 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
   const { name } = currentItemData;
 
   return (
-    <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
+    <WorkplaceModal isChange currentItemData={currentItemData} onClose={onClose}>
       <div className="change-data-album-modal">
         <h1>Функционал в разработке =(</h1>
         <h1>change-data-album-modal</h1>

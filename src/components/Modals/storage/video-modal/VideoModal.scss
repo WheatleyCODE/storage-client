@@ -1,3 +1,14 @@
 @import 'styles/templates.scss';
 
-.track-modal {}
+.video-modal {
+  position: relative;
+  border: 1px solid $colorDarkGrey;
+  border-radius: 10px;
+  padding: 20px;
+
+  &__open-change-modal {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+  }
+}
