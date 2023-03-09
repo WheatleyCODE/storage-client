@@ -1,9 +1,15 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { MdOutlineEdit, MdPlayArrow } from 'react-icons/md';
+import {
+  MdOutlineEdit,
+  MdOutlineThumbUpAlt,
+  MdPeopleAlt,
+  MdPlayArrow,
+  MdStar,
+  MdThumbUpAlt,
+} from 'react-icons/md';
 import { modalsActions, playerActions } from 'store';
-import { WorkplaceModal, Button } from 'components';
-import { getImageLink } from 'utils';
+import { WorkplaceModal, Button, Image } from 'components';
 import { IClientItemData, ITrack } from 'types';
 import './TrackModal.scss';
 
@@ -14,8 +20,7 @@ export interface ITrackModalProps {
 
 export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) => {
   const dispatch = useDispatch();
-  const imageLink = getImageLink(currentItemData);
-  const { name, author, text } = currentItemData;
+  const { name, author, text, listenCount } = currentItemData;
 
   const setTrack = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -34,6 +39,7 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) =
       <div aria-hidden onClick={(e) => e.stopPropagation()} className="track-modal">
         <div className="track-modal__open-change-modal">
           <Button
+            className="icon-size"
             onClick={openChangeModal}
             outline="fill"
             color="none-light"
@@ -43,16 +49,34 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) =
         </div>
         <div className="track-modal__header">
           <div className="track-modal__image">
-            {imageLink && <img src={imageLink} alt="Картинка трека" />}
+            <Image fontSize={170} className="track-modal__img" itemData={currentItemData} />
           </div>
           <div className="track-modal__titles">
             <div className="track-modal__track__info">
+              <div className="track-modal__type">Трек</div>
               <div className="track-modal__name">{name}</div>
-              <div className="track-modal__author">{author}</div>
+              <div className="track-modal__author">Автор: {author}</div>
+              <div className="track-modal__likes">
+                <div className="track-modal__listen">
+                  <MdPeopleAlt />: {listenCount}
+                </div>
+                <div className="track-modal__listen">
+                  <MdThumbUpAlt />: {listenCount}
+                </div>
+                <div className="track-modal__listen">
+                  <MdStar />: {listenCount}
+                </div>
+              </div>
             </div>
             <div className="track-modal__play">
               <div className="track-modal__player">
                 <Button onClick={setTrack} color="none-light" Icon={MdPlayArrow} text="Слушать" />
+                <Button
+                  className="icon-size"
+                  type="icon"
+                  color="none-light"
+                  Icon={MdOutlineThumbUpAlt}
+                />
               </div>
             </div>
           </div>

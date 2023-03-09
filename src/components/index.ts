@@ -18,6 +18,7 @@ export { Stepper } from './ui/stepper/Stepper';
 export { Step } from './ui/stepper/step/Step';
 export { Textarea } from './ui/textarea/Textarea';
 export { FileUploader } from './ui/file-uploader/FileUploader';
+export { Image } from './ui/image/Image';
 
 export { Hills } from './design/hills/Hills';
 export { Mountains } from './design/mountains/Mountains';

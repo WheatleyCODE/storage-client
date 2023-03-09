@@ -1,1 +1,5 @@
-.change-data-track-modal {}
+.change-data-track-modal {
+  &__image, &__track, &__data {
+    display: flex;
+  }
+}
