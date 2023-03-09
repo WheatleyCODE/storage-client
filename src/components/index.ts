@@ -1,13 +1,13 @@
 /* eslint-disable max-len */
 /* eslint-disable import/extensions */
-export { MainLayout } from './layouts/main-layout/MainLayout';
-export { AuthPageLayout } from './layouts/auth-page-layout/AuthPageLayout';
-export { StoragePageLayout } from './layouts/storage-page-layout/StoragePageLayout';
-export { StoragePath } from './layouts/storage-workplace-layout/storage-path/StoragePath';
-export { StorageSorter } from './layouts/storage-workplace-layout/storage-sorter/StorageSorter';
-export { StorageLast } from './layouts/storage-workplace-layout/storage-last/StorageLast';
-export { StorageInfo } from './layouts/storage-page-layout/storage-info/StorageInfo';
-export { Player } from './layouts/storage-page-layout/player/Player';
+export { MainLayout } from './main-layouts/main-layout/MainLayout';
+export { AuthPageLayout } from './main-layouts/auth-page-layout/AuthPageLayout';
+export { StoragePageLayout } from './main-layouts/storage-page-layout/StoragePageLayout';
+export { StoragePath } from './main-layouts/storage-workplace-layout/storage-path/StoragePath';
+export { StorageSorter } from './main-layouts/storage-workplace-layout/storage-sorter/StorageSorter';
+export { StorageLast } from './main-layouts/storage-workplace-layout/storage-last/StorageLast';
+export { StorageInfo } from './main-layouts/storage-page-layout/storage-info/StorageInfo';
+export { Player } from './main-layouts/storage-page-layout/player/Player';
 
 export { Button } from './ui/button/Button';
 export { Input } from './ui/input/Input';
@@ -30,6 +30,9 @@ export { RegisterForm } from './forms/register-form/RegisterForm';
 export { ResetPasswordForm } from './forms/reset-password-from/ResetPasswordForm';
 export { ChangePasswordForm } from './forms/change-password-form/ChangePasswordForm';
 export { LoginForm } from './forms/login-form/LoginForm';
+
+export { ViewItemLayout } from './items/view-item-layout/ViewItemLayout';
+export { MusicItemInfo } from './items/music-item-info/MusicItemInfo';
 
 export { Portal } from './hoc/Portal';
 export { AppProvider } from './hoc/AppProvider';

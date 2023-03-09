@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import { Button, WorkplaceModal } from 'components';
+import { useDispatch } from 'react-redux';
+import { modalsActions } from 'store';
+import { ViewItemLayout, WorkplaceModal } from 'components';
 import { BASE_URL } from 'consts';
 import { IClientItemData } from 'types';
 import './VideoModal.scss';
-import { MdOutlineEdit } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
-import { modalsActions } from 'store';
 
 export interface IVideoModalProps {
   onClose: () => void;
@@ -22,21 +21,14 @@ export const VideoModal: FC<IVideoModalProps> = ({ onClose, currentItemData }) =
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
-      <div className="video-modal">
-        <div className="video-modal__open-change-modal">
-          <Button
-            onClick={openChangeModal}
-            outline="fill"
-            color="none-light"
-            type="icon"
-            Icon={MdOutlineEdit}
-          />
+      <ViewItemLayout isChange onClick={openChangeModal}>
+        <div className="video-modal">
+          <video controls width="500" height="300">
+            <track kind="captions" />
+            <source src={`${BASE_URL}/${currentItemData.getFilePath()}`} type="video/mp4" />
+          </video>
         </div>
-        <video controls width="500" height="400">
-          <track kind="captions" />
-          <source src={`${BASE_URL}/${currentItemData.getFilePath()}`} type="video/mp4" />
-        </video>
-      </div>
+      </ViewItemLayout>
     </WorkplaceModal>
   );
 };

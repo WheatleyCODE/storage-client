@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { WorkplaceModal } from 'components';
+import { ViewItemLayout, WorkplaceModal } from 'components';
 import { IClientItemData } from 'types';
 import './FileModal.scss';
 
@@ -13,10 +13,11 @@ export const FileModal: FC<IFileModalProps> = ({ onClose, currentItemData }) => 
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
-      <div className="file-modal">
-        <h1>Функционал в разработке =(</h1>
-        <h2>{name}</h2>
-      </div>
+      <ViewItemLayout>
+        <div className="file-modal">
+          <h1>{name}</h1>
+        </div>
+      </ViewItemLayout>
     </WorkplaceModal>
   );
 };

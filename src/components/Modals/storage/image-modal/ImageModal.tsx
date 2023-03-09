@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useRef } from 'react';
-import { WorkplaceModal } from 'components';
+import { ViewItemLayout, WorkplaceModal } from 'components';
 import { getImageLink } from 'utils';
 import { IClientItemData } from 'types';
 import './ImageModal.scss';
@@ -22,9 +22,11 @@ export const ImageModal: FC<IImageModalProps> = ({ currentItemData, onClose }) =
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
-      <div aria-hidden onClick={stopPropagation} className="image-modal">
-        <img ref={refImage} src={imageLink || ''} alt="Картика" />
-      </div>
+      <ViewItemLayout>
+        <div aria-hidden onClick={stopPropagation} className="image-modal">
+          <img ref={refImage} src={imageLink || ''} alt="Картика" />
+        </div>
+      </ViewItemLayout>
     </WorkplaceModal>
   );
 };

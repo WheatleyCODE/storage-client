@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { Button, WorkplaceModal } from 'components';
+import { Button, Image, StorageItem, WorkplaceModal } from 'components';
 import { IClientItemData } from 'types';
 import './ChangeTrackDataModal.scss';
+import { MdOutlineEdit } from 'react-icons/md';
 import { getImageLink } from 'utils';
 
 export interface IChangeTrackDataModalProps {
@@ -11,30 +12,59 @@ export interface IChangeTrackDataModalProps {
 
 export const ChangeTrackDataModal: FC<IChangeTrackDataModalProps> = (props) => {
   const { onClose, currentItemData } = props;
-  const imageLink = getImageLink(currentItemData);
-  const { name, author } = currentItemData;
+  const { name, author, text } = currentItemData;
 
   return (
     <WorkplaceModal isChange currentItemData={currentItemData} onClose={onClose}>
       <div className="change-data-track-modal">
         <div className="change-data-track-modal__image">
-          {imageLink && <img src={imageLink} alt="Картинка трека" />}
-          <Button color="black" text="Изменить картинку" />
+          <Image
+            fontSize={100}
+            className="change-data-track-modal__img"
+            itemData={currentItemData}
+          />
+          <div className="change-data-track-modal__id">ID: {currentItemData.id}</div>
+          <div className="change-data-track-modal__button">
+            <Button
+              className="font-size"
+              outline="fill"
+              color="none-light"
+              type="icon"
+              Icon={MdOutlineEdit}
+            />
+          </div>
         </div>
 
         <div className="change-data-track-modal__track">
-          <div className="change-data-track-modal__track-data">
-            <div className="change-data-track-modal__name">{name}</div>
-            <div className="change-data-track-modal__name">{author}</div>
+          <div className="change-data-track-modal__current">
+            <StorageItem isShowSize isDark isPlay itemData={currentItemData} />
           </div>
-          <Button color="black" text="Изменить трек" />
+          <div className="change-data-track-modal__button">
+            <Button
+              className="font-size"
+              outline="fill"
+              color="none-light"
+              type="icon"
+              Icon={MdOutlineEdit}
+            />
+          </div>
         </div>
 
         <div className="change-data-track-modal__data">
-          <Button color="black" text="Изменить описание" />
-        </div>
-        <div className="change-data-track-modal__data">
-          <Button outline="fill" color="green" text="Сохранить" />
+          <div className="change-data-track-modal__track-data">
+            <div className="change-data-track-modal__name">Название: {name}</div>
+            <div className="change-data-track-modal__name">Автор: {author}</div>
+            <div className="change-data-track-modal__name">Текст: {text}</div>
+          </div>
+          <div className="change-data-track-modal__button">
+            <Button
+              className="font-size"
+              outline="fill"
+              color="none-light"
+              type="icon"
+              Icon={MdOutlineEdit}
+            />
+          </div>
         </div>
       </div>
     </WorkplaceModal>

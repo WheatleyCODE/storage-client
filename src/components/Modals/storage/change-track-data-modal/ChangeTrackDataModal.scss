@@ -1,5 +1,62 @@
+@import 'styles/templates.scss';
+
 .change-data-track-modal {
+  position: relative;
+  width: 400px;
+  border: 1px solid $colorDarkGrey2;
+  border-radius: 5px;
+  padding: 30px;
+  padding-top: 45px;
+  background-color: rgba(0, 0, 0, 0.1);
+
   &__image, &__track, &__data {
     display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    justify-content: space-between;
+  }
+
+  &__button {
+    margin-left: 20px;
+  }
+
+  &__id {
+    font-size: 0.9rem;
+    position: absolute;
+    color: $colorLightGrey1;
+    top: 7px;
+    right: 10px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid $colorDarkGrey2;
+  }
+
+  .font-size {
+    svg {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__data {
+    margin-bottom: 0;
+  }
+
+  &__current {
+    width: 100%;
+  }
+
+  &__img {
+    height: 100px;
+    width: inherit;
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
+
+  &__name:last-child {
+    padding-bottom: 0px;
   }
 }
