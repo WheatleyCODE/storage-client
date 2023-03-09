@@ -33,6 +33,8 @@ export { LoginForm } from './forms/login-form/LoginForm';
 
 export { ViewItemLayout } from './items/view-item-layout/ViewItemLayout';
 export { MusicItemInfo } from './items/music-item-info/MusicItemInfo';
+export { StorageItem } from './items/storage-item/StorageItem';
+export { ItemSelector } from './items/item-selector/ItemSelector';
 
 export { Portal } from './hoc/Portal';
 export { AppProvider } from './hoc/AppProvider';
@@ -84,8 +86,6 @@ export { ContextMenu } from './storage/context-menu/ContextMenu';
 export { ContextMenuItem } from './storage/context-menu/context-menu-item/ContextMenuItem';
 export { StorageWorkplace } from './storage/storage-workplace/StorageWorkplace';
 export { Uploader } from './storage/uploader/Uploader';
-export { ItemSelector } from './storage/item-selector/ItemSelector';
-export { StorageItem } from './storage/storage-item/StorageItem';
 
 export { Notifier } from './notifier/Notifier';
 
