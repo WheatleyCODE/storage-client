@@ -17,8 +17,7 @@ export class AlbumService {
   }
 
   static async changeImage(filds: IChangeAlbumImageFilds): Promise<AxiosResponse<IAlbum>> {
-    const formData = new FormData();
-    Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
+    const formData = createFormData(filds);
     return $api.post<IAlbum>('/api/album/change/image', formData);
   }
 
