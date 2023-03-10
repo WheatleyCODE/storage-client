@@ -5,7 +5,8 @@ export type EventTypes = 'click' | 'contextmenu';
 export const useClickOutside = <T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,
   handler: (event: MouseEvent) => void,
-  eventTypes: EventTypes[] = ['click']
+  eventTypes: EventTypes[] = ['click'],
+  refOut?: RefObject<HTMLDivElement>
 ) => {
   useEffect(() => {
     const fn = (event: MouseEvent) => {
@@ -17,6 +18,22 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
 
       handler(event);
     };
+
+    if (refOut) {
+      const cur = refOut.current;
+
+      if (!cur) return () => {};
+
+      eventTypes.forEach((event) => {
+        cur.addEventListener(event, fn);
+      });
+
+      return () => {
+        eventTypes.forEach((event) => {
+          cur.addEventListener(event, fn);
+        });
+      };
+    }
 
     eventTypes.forEach((event) => {
       document.body.addEventListener(event, fn);

@@ -29,9 +29,7 @@ export class TrackService {
   }
 
   static async changeData(filds: IChangeTrackDataFilds): Promise<AxiosResponse<ITrack>> {
-    const formData = new FormData();
-    Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
-    return $api.post<ITrack>('/api/track/change/data', formData);
+    return $api.post<ITrack>('/api/track/change/data', filds);
   }
 
   static async getAllPublic(count: number, offset: number): Promise<AxiosResponse<ITrack[]>> {

@@ -17,15 +17,21 @@ export interface ICreateAlbumFilds {
 }
 
 export interface IChangeAlbumImageFilds {
-  id: string;
+  readonly id: string;
+  readonly image: File;
 }
 
 export interface IChangeAlbumDataFilds {
-  id: string;
-  name: string;
-  author: string;
+  readonly id: string;
+  readonly name: string;
+  readonly author: string;
+}
+
+export interface IChangeAlbumTracksFilds {
+  readonly id: string;
+  readonly tracks: string[];
 }
 
 export interface ISearchPublicAlbumFilds {
-  text: string;
+  readonly text: string;
 }

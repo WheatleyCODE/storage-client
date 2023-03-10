@@ -26,7 +26,7 @@ export const TrackModal: FC<ITrackModalProps> = ({ onClose, currentItemData }) =
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
-      <ViewItemLayout onClick={openChangeModal} isChange>
+      <ViewItemLayout onClickButton={openChangeModal} isChange>
         <div className="track-modal">
           <MusicItemInfo itemData={currentItemData} typeName="Альбом" onPlayHandler={playTrack}>
             <div className="track-modal__words">Текст великий</div>

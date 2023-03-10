@@ -4,6 +4,7 @@ import {
   IAlbum,
   IChangeAlbumDataFilds,
   IChangeAlbumImageFilds,
+  IChangeAlbumTracksFilds,
   ICreateAlbumFilds,
   ISearchPublicAlbumFilds,
 } from 'types';
@@ -22,9 +23,11 @@ export class AlbumService {
   }
 
   static async changeData(filds: IChangeAlbumDataFilds): Promise<AxiosResponse<IAlbum>> {
-    const formData = new FormData();
-    Object.keys(filds).forEach((key) => formData.append(key, (filds as any)[key]));
-    return $api.post<IAlbum>('/api/album/change/data', formData);
+    return $api.post<IAlbum>('/api/album/change/data', filds);
+  }
+
+  static async changeTracks(filds: IChangeAlbumTracksFilds): Promise<AxiosResponse<IAlbum>> {
+    return $api.post<IAlbum>('/api/album/change/tracks', filds);
   }
 
   static async getAllPublic(count: number, offset: number): Promise<AxiosResponse<IAlbum[]>> {

@@ -19,6 +19,7 @@ export { Step } from './ui/stepper/step/Step';
 export { Textarea } from './ui/textarea/Textarea';
 export { FileUploader } from './ui/file-uploader/FileUploader';
 export { Image } from './ui/image/Image';
+export { ActionWindow } from './ui/action-window/ActionWindow';
 
 export { Hills } from './design/hills/Hills';
 export { Mountains } from './design/mountains/Mountains';

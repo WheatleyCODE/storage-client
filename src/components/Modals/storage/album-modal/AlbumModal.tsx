@@ -37,7 +37,7 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) =
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
-      <ViewItemLayout onClick={openChangeModal} isChange>
+      <ViewItemLayout onClickButton={openChangeModal} isChange>
         <div className="album-modal">
           <MusicItemInfo itemData={currentItemData} typeName="Альбом" onPlayHandler={playAlbum}>
             <div className="album-modal__tracks">

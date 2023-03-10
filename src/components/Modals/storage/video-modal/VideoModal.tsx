@@ -21,7 +21,7 @@ export const VideoModal: FC<IVideoModalProps> = ({ onClose, currentItemData }) =
 
   return (
     <WorkplaceModal currentItemData={currentItemData} onClose={onClose}>
-      <ViewItemLayout isChange onClick={openChangeModal}>
+      <ViewItemLayout isChange onClickButton={openChangeModal}>
         <div className="video-modal">
           <video controls width="500" height="300">
             <track kind="captions" />

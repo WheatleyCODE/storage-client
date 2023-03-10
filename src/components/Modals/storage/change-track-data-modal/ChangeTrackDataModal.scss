@@ -1,13 +1,7 @@
 @import 'styles/templates.scss';
 
 .change-data-track-modal {
-  position: relative;
   width: 400px;
-  border: 1px solid $colorDarkGrey2;
-  border-radius: 5px;
-  padding: 30px;
-  padding-top: 45px;
-  background-color: rgba(0, 0, 0, 0.1);
 
   &__image, &__track, &__data {
     display: flex;
@@ -18,6 +12,37 @@
 
   &__button {
     margin-left: 20px;
+  }
+
+  .change-file {
+    height: 100%;
+    width: 100%;
+    padding-top: 30px;
+  }
+
+  .change-data {
+    height: 100%;
+    width: 100%;
+    padding-top: 30px;
+
+    .input {
+      margin-bottom: 20px;
+    }
+  }
+
+  .file-window-image {
+    top: 0;
+    right: 0;
+  }
+
+  .file-window-file {
+    top: 0;
+    right: 0;
+  }
+
+  .file-window-data {
+    bottom: 0;
+    right: 0;
   }
 
   &__id {

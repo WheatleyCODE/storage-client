@@ -1,0 +1,21 @@
+@import 'styles/templates.scss';
+
+.action-window {
+  z-index: 100;
+  padding: 10px;
+  overflow: hidden;
+  color: $colorBlack;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 5px $colorShadow;
+  position: absolute;
+  background-color: $colorWhite;
+  padding-bottom: 70px;
+
+  &__buttons {
+    width: calc(100% - 20px);
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 10px;
+  }
+}

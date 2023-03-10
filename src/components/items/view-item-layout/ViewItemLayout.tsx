@@ -5,18 +5,25 @@ import './ViewItemLayout.scss';
 
 export interface IViewItemLayoutProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClickButton?: () => void;
+  onClickContainer?: () => void;
   isChange?: boolean;
 }
 
-export const ViewItemLayout: FC<IViewItemLayoutProps> = ({ children, onClick, isChange }) => {
+export const ViewItemLayout: FC<IViewItemLayoutProps> = (props) => {
+  const { children, onClickButton, onClickContainer, isChange } = props;
   const onClickHandler = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (onClick) onClick();
+    if (onClickButton) onClickButton();
+  };
+
+  const stopPropagation = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onClickContainer) onClickContainer();
   };
 
   return (
-    <div aria-hidden onClick={(e) => e.stopPropagation()} className="view-item-layout">
+    <div aria-hidden onClick={stopPropagation} className="view-item-layout">
       {isChange && (
         <Button
           className="view-item-layout__change-modal"

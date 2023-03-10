@@ -19,18 +19,30 @@ import './WorkplaceModal.scss';
 
 export interface IWorkplaceModalProps {
   onClose: () => void;
+  onChangeCurrent?: () => void;
+  onClickHeader?: () => void;
   children: React.ReactNode;
   currentItemData: IClientItemData;
   isChange?: boolean;
 }
 
 export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
-  const { onClose, children, currentItemData, isChange = false } = props;
+  const {
+    onClose,
+    children,
+    currentItemData,
+    isChange = false,
+    onChangeCurrent,
+    onClickHeader,
+  } = props;
   const { workplaceItems } = useTypedSelector((state) => state.storage);
   const dispatch = useDispatch();
   const { downloadFile } = useActions();
 
-  const stopPropagation = useCallback((e: MouseEvent) => e.stopPropagation(), []);
+  const stopPropagation = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+    if (onClickHeader) onClickHeader();
+  }, []);
 
   const MemoEye = memo(MdOutlineRemoveRedEye);
   const MemoCreate = memo(MdCreate);
@@ -66,6 +78,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
   const addCurrent = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
+      if (onChangeCurrent) onChangeCurrent();
       changeCurrent(1);
     },
     [currentItemData]
@@ -74,6 +87,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
   const subCurrent = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
+      if (onChangeCurrent) onChangeCurrent();
       changeCurrent(-1);
     },
     [currentItemData]

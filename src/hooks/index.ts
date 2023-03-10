@@ -12,5 +12,6 @@ export { useFirstRender } from './useFirstRender';
 export { useOpenModal } from './useOpenModal';
 export { useItems } from './useItems';
 export { usePlayerHandlers } from './usePlayerHandlers';
+export { useChangeDataWindows } from './useChangeDataWindows';
 
 export type { IContextOptions, IContextMenuItem } from './context-menu/useContextMenuItems';

@@ -20,15 +20,17 @@ export interface ICreateTrackFilds {
 }
 
 export interface IChangeTrackFileFilds {
-  id: string;
+  readonly id: string;
+  readonly audio: File;
 }
 
 export interface IChangeTrackImageFilds {
-  id: string;
+  readonly id: string;
+  readonly image: File;
 }
 
 export interface IChangeTrackDataFilds {
-  id: string;
+  readonly id: string;
   name: string;
   author: string;
   text: string;
