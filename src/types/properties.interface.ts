@@ -20,6 +20,7 @@ export interface IProperties {
   changeDate: number;
   openDate: number;
   comments: any[];
+  fileExt: string | null;
   color: FolderColors | null;
   description: string | null;
   text: string | null;

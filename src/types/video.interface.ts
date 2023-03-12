@@ -6,22 +6,25 @@ export interface IVideo extends IItem {
   imageSize: number;
   file: string;
   fileSize: number;
+  fileExt: string;
 }
 
 export interface ICreateVideoFilds {
-  readonly name: string;
-  readonly description: string;
-  readonly parent?: string;
-  readonly video: File;
-  readonly image?: File;
+  name: string;
+  description: string;
+  parent?: string;
+  video: File;
+  image?: File;
 }
 
 export interface IChangeVideoFileFilds {
   id: string;
+  video: File;
 }
 
 export interface IChangeVideoImageFilds {
   id: string;
+  image: File;
 }
 
 export interface IChangeVideoDataFilds {

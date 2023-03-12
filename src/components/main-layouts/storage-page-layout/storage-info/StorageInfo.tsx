@@ -29,7 +29,7 @@ export const StorageInfo: FC<IStorageInfoProps> = memo(({ onClose }) => {
 
   return (
     <motion.div
-      transition={{ duration: 0.15 }}
+      transition={{ duration: 0.1 }}
       initial={{ width: 0, opacity: 1 }}
       animate={{ width: 320, opacity: 1 }}
       exit={{ width: 0, opacity: 1 }}

@@ -15,6 +15,7 @@ export class DefaultProperties {
   author: string | null = null;
   color: FolderColors | null = null;
   tracks: ITrack[] | null = null;
+  fileExt: string | null = null;
 
   constructor(
     private item: IServerItemData,

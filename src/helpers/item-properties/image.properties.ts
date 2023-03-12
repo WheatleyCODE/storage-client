@@ -4,6 +4,7 @@ import { DefaultProperties } from './default.properties';
 export class ImageProperties extends DefaultProperties implements IProperties {
   constructor(private image: IImage) {
     super(image);
+    this.fileExt = image.fileExt;
   }
 
   getFilePath(): string | null {

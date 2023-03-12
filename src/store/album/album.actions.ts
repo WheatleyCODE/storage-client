@@ -37,6 +37,8 @@ export const changeAlbumTracks = createAsyncThunk<IAlbum, IChangeAlbumTracksFild
     try {
       const { data } = await AlbumService.changeTracks(filds);
 
+      console.log(data);
+
       thunkAPI.dispatch(
         getActionMessage({
           color: 'default',

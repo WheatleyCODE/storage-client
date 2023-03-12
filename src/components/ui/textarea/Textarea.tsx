@@ -66,7 +66,7 @@ export const Textarea: FC<ITextareaProps> = memo((props) => {
           className="textarea__valid-error"
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.1 }}
         >
           {validError}
         </motion.div>
@@ -78,7 +78,7 @@ export const Textarea: FC<ITextareaProps> = memo((props) => {
           animate={placeholderControls}
           className="textarea__placeholder"
           initial="default"
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.1 }}
           variants={{
             active: isIcon
               ? { translateY: -27, translateX: -27, scale: 0.9 }

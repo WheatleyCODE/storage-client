@@ -30,7 +30,7 @@ export const StorageMenu: FC<IStorageMenuProps> = memo((props) => {
   return (
     <motion.div
       animate={controls}
-      transition={{ duration: 0.15 }}
+      transition={{ duration: 0.1 }}
       variants={{
         open: { width: 270 },
         close: { width: 80 },

@@ -63,7 +63,7 @@ export const Input: FC<IInputProps> = memo((props) => {
           className="input__valid-error"
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.1 }}
         >
           {validError}
         </motion.div>
@@ -75,7 +75,7 @@ export const Input: FC<IInputProps> = memo((props) => {
           animate={placeholderControls}
           className="input__placeholder"
           initial="default"
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.1 }}
           variants={{
             active: isIcon
               ? { translateY: -23, translateX: -27, scale: 0.9 }

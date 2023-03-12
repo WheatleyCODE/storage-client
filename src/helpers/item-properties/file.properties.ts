@@ -4,6 +4,7 @@ import { DefaultProperties } from './default.properties';
 export class FileProperties extends DefaultProperties implements IProperties {
   constructor(private file: IFile) {
     super(file);
+    this.fileExt = file.fileExt;
   }
 
   getFilePath(): string | null {

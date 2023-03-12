@@ -7,13 +7,14 @@ import {
   FileUploader,
   Image,
   Input,
+  ItemSelector,
   StorageItem,
   ViewItemLayout,
   WorkplaceModal,
 } from 'components';
 import { useActions, useValidInput, useChangeDataWindows } from 'hooks';
 import { nameValidator, nickValidator, PropertyFactory } from 'helpers';
-import { IClientItemData } from 'types';
+import { IClientItemData, ItemTypes } from 'types';
 import './ChangeAlbumDataModal.scss';
 
 export interface IChangeAlbumDataModalProps {
@@ -23,6 +24,9 @@ export interface IChangeAlbumDataModalProps {
 
 export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
   const { onClose, currentItemData } = props;
+  const albumTracks = [...(currentItemData.tracks || [])].map((track) =>
+    PropertyFactory.create(track)
+  );
   const {
     isData,
     isImage,
@@ -38,8 +42,9 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
   const [image, setImage] = useState<File | null>(null);
   const nameInput = useValidInput([nameValidator]);
   const authorInput = useValidInput([nickValidator]);
+  const [selectedItems, setSelectedItems] = useState<IClientItemData[]>(albumTracks);
   const { changeAlbumImage, changeAlbumTracks, changeAlbumData } = useActions();
-  const { name, author, text } = currentItemData;
+  const { name, author } = currentItemData;
 
   useLayoutEffect(() => {
     nameInput.changeValue(name);
@@ -55,10 +60,9 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
   }, [image]);
 
   const changeTracks = useCallback(() => {
-    if (!File) return;
-    changeAlbumTracks({ tracks: [], id: currentItemData.id });
+    changeAlbumTracks({ tracks: selectedItems.map((item) => item.id), id: currentItemData.id });
     closeIsFile();
-  }, [File]);
+  }, [selectedItems]);
 
   const changeData = () => {
     if (!nameInput.value || nameInput.isError) return;
@@ -71,16 +75,6 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
     });
     closeIsData();
   };
-
-  const albumTracks = currentItemData.tracks;
-
-  if (!albumTracks) {
-    onClose();
-    return <div />;
-  }
-
-  const tracksData = albumTracks.map((track) => PropertyFactory.create(track));
-  const isNoTracks = !!tracksData.length;
 
   return (
     <WorkplaceModal
@@ -140,7 +134,7 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
 
           <div className="change-data-album-modal__track">
             <div className="change-data-album-modal__current">
-              {tracksData.map((track) => (
+              {albumTracks.map((track) => (
                 <StorageItem isShowSize key={track.id} isDark isPlay itemData={track} />
               ))}
             </div>
@@ -159,7 +153,7 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
                     <ActionWindow
                       initialHeiht={0}
                       initialWidth={0}
-                      animateHeiht={180}
+                      animateHeiht={300}
                       animateWidth={400}
                       exitHeiht={0}
                       exitWidth={0}
@@ -168,8 +162,13 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
                       actionName="Изменить трек"
                       className="file-window-file"
                     >
-                      <div className="change-file">
-                        <h1>Files</h1>
+                      <div className="change-tracks">
+                        <ItemSelector
+                          height={160}
+                          selectedItems={selectedItems}
+                          setSelectedItems={setSelectedItems}
+                          onlyTypes={[ItemTypes.TRACK]}
+                        />
                       </div>
                     </ActionWindow>
                   )}
@@ -182,7 +181,6 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
             <div className="change-data-album-modal__File-data">
               <div className="change-data-album-modal__name">Название: {name}</div>
               <div className="change-data-album-modal__name">Автор: {author}</div>
-              <div className="change-data-album-modal__name">Текст: {text}</div>
             </div>
             <div className="change-data-album-modal__button">
               <div className="relative">

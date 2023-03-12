@@ -22,7 +22,7 @@ export const Drawer: FC<IDrawerProps> = ({ children, open, isFull = true, width 
       onClick={stopPropagation}
       initial={initial}
       animate={animate}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.1 }}
       exit={exit}
       className={`drawer ${open} ${isFull ? 'full' : ''}`}
     >

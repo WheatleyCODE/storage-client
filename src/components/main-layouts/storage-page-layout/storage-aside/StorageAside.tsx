@@ -50,7 +50,7 @@ export const StorageAside: FC<IStorageAsideProps> = memo((props) => {
     <div className="storage-aside">
       <motion.div
         animate={controls}
-        transition={{ duration: 0.15 }}
+        transition={{ duration: 0.1 }}
         variants={{
           open: { width: 380 },
           close: { width: 50 },

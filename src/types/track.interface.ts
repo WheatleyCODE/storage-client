@@ -7,30 +7,31 @@ export interface ITrack extends IItem {
   imageSize: number;
   file: string;
   fileSize: number;
+  fileExt: string;
 }
 
 export interface ICreateTrackFilds {
-  readonly name: string;
-  readonly author: string;
-  readonly text: string;
-  readonly parent?: string;
-  readonly album?: string;
-  readonly audio: File;
-  readonly image?: File;
+  name: string;
+  author: string;
+  text: string;
+  parent?: string;
+  album?: string;
+  audio: File;
+  image?: File;
 }
 
 export interface IChangeTrackFileFilds {
-  readonly id: string;
-  readonly audio: File;
+  id: string;
+  audio: File;
 }
 
 export interface IChangeTrackImageFilds {
-  readonly id: string;
-  readonly image: File;
+  id: string;
+  image: File;
 }
 
 export interface IChangeTrackDataFilds {
-  readonly id: string;
+  id: string;
   name: string;
   author: string;
   text: string;

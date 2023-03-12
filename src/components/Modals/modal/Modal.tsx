@@ -32,7 +32,7 @@ export const Modal: FC<IModalProps> = ({ children, onClose, className }) => {
     <motion.div
       initial={{ translateY: -30, opacity: 0 }}
       animate={{ translateY: 0, opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.1 }}
       exit={{ translateY: -30, opacity: 0 }}
       onClick={stopPropagation}
       className={`modal ${className}`}

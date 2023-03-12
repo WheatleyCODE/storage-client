@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import { MdAudiotrack, MdShortText } from 'react-icons/md';
+import { MdShortText, MdVideocam } from 'react-icons/md';
 import {
   StepperModal,
   Stepper,
@@ -92,7 +92,7 @@ export const CreateVideoModal: FC<ICreateVideoModalProps> = ({ onClose }) => {
               >
                 <Step className="create-video__step">
                   <Input
-                    Icon={MdAudiotrack}
+                    Icon={MdVideocam}
                     value={nameInput.value}
                     type="text"
                     placeholder="Название"

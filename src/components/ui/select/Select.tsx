@@ -87,7 +87,7 @@ export const Select: FC<ISelectProps> = memo((props) => {
           animate={placeholderControls}
           className="select__placeholder"
           initial="default"
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.1 }}
           variants={{
             active: isIcon
               ? { translateY: -23, translateX: 2, scale: 0.9 }
@@ -103,7 +103,7 @@ export const Select: FC<ISelectProps> = memo((props) => {
         animate={itemsControls}
         className={`select__items ${isClose ? 'close' : ''}`}
         initial="default"
-        transition={{ duration: 0.15 }}
+        transition={{ duration: 0.1 }}
         variants={{
           open: {
             opacity: 1,

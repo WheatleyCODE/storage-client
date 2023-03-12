@@ -17,9 +17,12 @@ export const ItemSelector: FC<ItemSelectorProps> = (props) => {
   const items = useItems({ onlyTypes });
   const itemsData = items.map((item) => PropertyFactory.create(item));
 
-  useEffect(() => {
-    setSelectedItems(selectedItems);
-  }, [selectedItems]);
+  // console.log(itemsData, 'ddddd');
+  // console.log(selectedItems, 'dddd');
+
+  // useEffect(() => {
+  //   setSelectedItems(selectedItems);
+  // }, [selectedItems]);
 
   const selectItem = useCallback((item: IClientItemData) => {
     setSelectedItems((prev) => [...prev, item]);
@@ -30,20 +33,28 @@ export const ItemSelector: FC<ItemSelectorProps> = (props) => {
   }, []);
 
   const isSelect = (item: IClientItemData) => {
+    // console.log(item, 'item');
+    // console.log(selectedItems, 'selectedItems');
+    // console.log(
+    //   selectedItems.find((itm) => item.id === itm.id),
+    //   'find'
+    // );
     return !!selectedItems.find((itm) => item.id === itm.id);
   };
 
   return (
     <div style={{ height: `${height}px` }} className="item-selector">
-      {itemsData.map((item) => (
-        <StorageItem
-          key={item.id}
-          isSelect={isSelect(item)}
-          selectItem={selectItem}
-          deleteItem={deleteItem}
-          itemData={item}
-        />
-      ))}
+      {itemsData.map((item) => {
+        return (
+          <StorageItem
+            key={item.id}
+            isSelect={isSelect(item)}
+            selectItem={selectItem}
+            deleteItem={deleteItem}
+            itemData={item}
+          />
+        );
+      })}
     </div>
   );
 };

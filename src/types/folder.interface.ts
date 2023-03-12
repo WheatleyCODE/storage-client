@@ -14,8 +14,8 @@ export interface IFolder extends IItem {
 }
 
 export interface ICreateFolderFilds {
-  readonly name: string;
-  readonly parent?: string;
+  name: string;
+  parent?: string;
 }
 
 export interface IChangeColorFilds {

@@ -12,7 +12,7 @@ export const StorageUser: FC<IStorageUserProps> = memo(({ isOpen, controls }) =>
   return (
     <motion.div
       animate={controls}
-      transition={{ duration: 0.15 }}
+      transition={{ duration: 0.1 }}
       variants={{
         open: { width: 380 },
         close: { width: 50 },

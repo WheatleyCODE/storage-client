@@ -18,7 +18,7 @@ export const StorageLogo: FC<IStorageLogoProps> = memo(({ isOpen, controls }) =>
   return (
     <motion.div
       animate={controls}
-      transition={{ duration: 0.15 }}
+      transition={{ duration: 0.1 }}
       variants={{
         open: { width: 260 },
         close: { width: 70 },

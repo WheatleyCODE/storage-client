@@ -147,7 +147,7 @@ export const Player: FC = () => {
       initial={{ opacity: 0, translateY: 65 }}
       animate={{ opacity: 1, translateY: 0 }}
       exit={{ opacity: 0, translateY: 65 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.1 }}
       className="player"
       onClick={(e) => e.stopPropagation()}
     >

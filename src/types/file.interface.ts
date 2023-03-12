@@ -3,9 +3,10 @@ import { IItem } from './item.interface';
 export interface IFile extends IItem {
   file: string;
   fileSize: number;
+  fileExt: string;
 }
 
 export interface IUploadFilesFilds {
-  readonly files: File[];
+  files: File[];
   parent?: string;
 }

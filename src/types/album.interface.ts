@@ -9,29 +9,29 @@ export interface IAlbum extends IItem {
 }
 
 export interface ICreateAlbumFilds {
-  readonly name: string;
-  readonly author: string;
-  readonly parent?: string;
-  readonly image: File;
-  readonly tracks?: string[];
+  name: string;
+  author: string;
+  parent?: string;
+  image: File;
+  tracks?: string[];
 }
 
 export interface IChangeAlbumImageFilds {
-  readonly id: string;
-  readonly image: File;
+  id: string;
+  image: File;
 }
 
 export interface IChangeAlbumDataFilds {
-  readonly id: string;
-  readonly name: string;
-  readonly author: string;
+  id: string;
+  name: string;
+  author: string;
 }
 
 export interface IChangeAlbumTracksFilds {
-  readonly id: string;
-  readonly tracks: string[];
+  id: string;
+  tracks: string[];
 }
 
 export interface ISearchPublicAlbumFilds {
-  readonly text: string;
+  text: string;
 }

@@ -6,6 +6,7 @@ export class TrackProperties extends DefaultProperties implements IProperties {
     super(track);
     this.text = this.track.text;
     this.author = this.track.author;
+    this.fileExt = track.fileExt;
   }
 
   getFilePath(): string | null {

@@ -27,8 +27,7 @@ export class VideoService {
   }
 
   static async changeData(filds: IChangeVideoDataFilds): Promise<AxiosResponse<IVideo>> {
-    const formData = createFormData(filds);
-    return $api.post<IVideo>('/api/video/change/data', formData);
+    return $api.post<IVideo>('/api/video/change/data', filds);
   }
 
   static async getAllPublic(count: number, offset: number): Promise<AxiosResponse<IVideo[]>> {

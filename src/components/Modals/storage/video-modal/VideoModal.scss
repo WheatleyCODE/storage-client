@@ -1,3 +1,30 @@
 @import 'styles/templates.scss';
 
-.video-modal {}
+.video-modal {
+
+  &__view {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__video {
+    margin-bottom: 10px;
+  }
+
+  &__stats {
+    display: flex;
+    align-items: center;
+  }
+
+  &__listen-count, &__like-count, &__star-count {
+    font-size: 1.1rem;
+    margin-right: 3px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+  }
+}

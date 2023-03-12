@@ -43,7 +43,7 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ message }) => {
       initial={{ opacity: 0, translateX: -300 }}
       animate={{ opacity: 1, translateX: 0 }}
       exit={{ opacity: 0, translateX: -300 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.1 }}
       className={`notifier-message ${color}`}
       onClick={(e) => e.stopPropagation()}
     >

@@ -26,7 +26,7 @@ export const Uploader: FC = () => {
       initial={{ opacity: 0, translateY: height }}
       animate={{ opacity: 1, translateY: 0 }}
       exit={{ opacity: 0, translateY: height }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.1 }}
       className="uploader"
     >
       <div className="uploader__header">
@@ -61,7 +61,7 @@ export const Uploader: FC = () => {
             initial={{ height: 0 }}
             animate={{ height }}
             exit={{ height: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.1 }}
             className="uploader__items"
           >
             {fileNames.map((name) => (
