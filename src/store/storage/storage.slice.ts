@@ -27,6 +27,8 @@ const initialState: IStorageState = {
   sortType: SortTypes.NAME,
   isRecommend: true,
   isTools: true,
+  likedItems: [],
+  staredItems: [],
 };
 
 export const storageSlice = createSlice({
@@ -50,12 +52,68 @@ export const storageSlice = createSlice({
       state.isWorkplaceLoading = payload;
     },
 
+    changeLiked: (state, { payload }: PayloadAction<{ id: string; isLike: boolean }>) => {
+      const { id, isLike } = payload;
+      let liked = [...state.likedItems];
+      const item = liked.find((str) => str === id);
+
+      if (!item && isLike) {
+        liked.push(id);
+      }
+
+      if (item && !isLike) {
+        liked = liked.filter((str) => str !== id);
+      }
+
+      state.likedItems = liked;
+    },
+
+    changeStared: (state, { payload }: PayloadAction<{ id: string; isStar: boolean }>) => {
+      const { id, isStar } = payload;
+      let stared = [...state.likedItems];
+      const item = stared.find((str) => str === id);
+
+      if (!item && isStar) {
+        stared.push(id);
+      }
+
+      if (item && !isStar) {
+        stared = stared.filter((str) => str !== id);
+      }
+
+      state.staredItems = stared;
+    },
+
     setWorkplace: (state, { payload }: PayloadAction<IServerItemData[]>) => {
       state.workplaceItems = payload;
     },
 
     setParents: (state, { payload }: PayloadAction<IFolder[]>) => {
       state.parents = payload;
+    },
+
+    changeOpenDate: (state, { payload }: PayloadAction<string>) => {
+      const allIndex = state.allItems.findIndex((item) => item.id === payload);
+      const workIndex = state.workplaceItems.findIndex((item) => item.id === payload);
+      const parentIndex = state.parents.findIndex((item) => item.id === payload);
+
+      if (allIndex !== -1) {
+        const item = state.allItems[allIndex];
+        item.openDate = Date.now();
+        state.allItems[allIndex] = item;
+      }
+
+      if (workIndex !== -1) {
+        const item = state.workplaceItems[workIndex];
+        item.openDate = Date.now();
+        state.workplaceItems[workIndex] = item;
+      }
+
+      if (parentIndex !== -1) {
+        const item = state.parents[parentIndex];
+        item.openDate = Date.now();
+        state.parents[parentIndex] = item;
+      }
     },
 
     setChildrens: (state, { payload }: PayloadAction<IChildrensData>) => {
@@ -165,6 +223,8 @@ export const storageSlice = createSlice({
         state.allItems = [];
         state.currentItems = [];
         state.parents = [];
+        state.likedItems = [];
+        state.staredItems = [];
       })
       .addCase(fetchStorage.fulfilled, (state, { payload }) => {
         const sorter = new StorageSorter();
@@ -182,6 +242,8 @@ export const storageSlice = createSlice({
           videos,
           isRecommend,
           isTools,
+          likedItems,
+          staredItems,
         } = payload;
 
         state.isTools = isTools;
@@ -196,6 +258,8 @@ export const storageSlice = createSlice({
           [...folders, ...tracks, ...files, ...albums, ...images, ...videos],
           state.sortType
         );
+        state.likedItems = likedItems;
+        state.staredItems = staredItems;
       })
       .addCase(fetchStorage.rejected, (state) => {
         state.isLoading = false;

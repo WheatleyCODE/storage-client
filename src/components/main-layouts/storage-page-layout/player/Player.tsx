@@ -11,6 +11,7 @@ import {
 } from 'react-icons/md';
 import { playerActions } from 'store';
 import { Button } from 'components';
+import { ItemsService } from 'services';
 import { useDelayHover, usePlayerHandlers, useTypedSelector } from 'hooks';
 import { RepeatIcons } from 'consts';
 import { PropertyFactory } from 'helpers';
@@ -49,6 +50,10 @@ export const Player: FC = () => {
   const RepeatIcon = RepeatIcons[repeatType].Icon;
   const repeatColor = RepeatIcons[repeatType].color;
 
+  const addListen = () => {
+    ItemsService.addListen({ id: currentTrack.id, type: currentTrack.type });
+  };
+
   useEffect(() => {
     audio.onended = () => {
       if (repeatType === RepeatType.NONE) {
@@ -58,6 +63,7 @@ export const Player: FC = () => {
 
       if (repeatType === RepeatType.TRACK) {
         audio.play();
+        ItemsService.addListen({ id: currentTrack.id, type: currentTrack.type });
         return;
       }
 
@@ -78,6 +84,8 @@ export const Player: FC = () => {
   useEffect(() => {
     const path = getFileLink(currentTrackData);
     if (!path) return;
+
+    ItemsService.addListen({ id: currentTrack.id, type: currentTrack.type });
 
     audio.src = path;
     audio.volume = correctVolume(volume);

@@ -14,6 +14,10 @@ export class FinderService {
     return $api.get<IServerItemData[]>(`/api/finder/public?count=${count}&offset=${offset}`);
   }
 
+  static async getStared(): Promise<AxiosResponse<IServerItemData[]>> {
+    return $api.get<IServerItemData[]>('/api/finder/stared');
+  }
+
   // ! Fix
   static async searchPublic(
     count: number,

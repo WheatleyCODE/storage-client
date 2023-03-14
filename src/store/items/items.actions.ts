@@ -17,6 +17,8 @@ import {
   IStorageData,
   RestoreActionNames,
   IServerItemData,
+  IChangeLikeFilds,
+  IChangeStarFilds,
 } from 'types';
 
 export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
@@ -217,6 +219,50 @@ export const copyFiles = createAsyncThunk<IServerItemData[], ICopyFilesFilds>(
       );
 
       thunkAPI.dispatch(storageActions.addItems(data));
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const changeLike = createAsyncThunk<IServerItemData, IChangeLikeFilds>(
+  'storage/changeLike',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await ItemsService.changeLike(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: filds.isLike ? 'Лайк поставлен' : 'Лайк удален',
+        })
+      );
+
+      thunkAPI.dispatch(storageActions.setItems([data]));
+      thunkAPI.dispatch(storageActions.setCurrent([data]));
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const changeStar = createAsyncThunk<IServerItemData[], IChangeStarFilds>(
+  'storage/changeStar',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await ItemsService.changeStar(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: filds.isStar ? 'Добавлено в избранное' : 'Удалено из избранного',
+        })
+      );
+
+      thunkAPI.dispatch(storageActions.setItems(data));
+      thunkAPI.dispatch(storageActions.setCurrent(data));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');

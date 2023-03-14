@@ -36,6 +36,8 @@ export { ViewItemLayout } from './items/view-item-layout/ViewItemLayout';
 export { MusicItemInfo } from './items/music-item-info/MusicItemInfo';
 export { StorageItem } from './items/storage-item/StorageItem';
 export { ItemSelector } from './items/item-selector/ItemSelector';
+export { ItemModalInfo } from './items/item-modal-info/ItemModalInfo';
+export { FileItemInfo } from './items/file-item-info/FileItemInfo';
 
 export { Portal } from './hoc/Portal';
 export { AppProvider } from './hoc/AppProvider';

@@ -40,7 +40,7 @@ export const sortItems = [
     sortTypeReverce: SortTypes.ACCESS_REVERCE,
   },
   {
-    title: 'Дата открытия',
+    title: 'Дата изм',
     sortType: SortTypes.DATE,
     sortTypeReverce: SortTypes.DATE_REVERCE,
   },

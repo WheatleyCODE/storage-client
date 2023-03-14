@@ -60,7 +60,7 @@ export const useItems = (params: IUseItemsParams, isWorkplaceItem = false): ISer
     }
 
     if (sortByDate) {
-      current = current.sort((a, b) => a.openDate - b.openDate);
+      current = [...current].sort((a, b) => b.openDate - a.openDate);
     }
 
     return current;

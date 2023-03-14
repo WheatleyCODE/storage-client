@@ -43,6 +43,8 @@ export interface IStorageData {
   videos: IVideo[];
   isTools: boolean;
   isRecommend: boolean;
+  staredItems: string[];
+  likedItems: string[];
 }
 
 export interface IStorageSettings {
@@ -65,6 +67,8 @@ export interface IStorageState {
   sortType: SortTypes;
   isTools: boolean;
   isRecommend: boolean;
+  staredItems: string[];
+  likedItems: string[];
 }
 
 export interface IChildrensData {

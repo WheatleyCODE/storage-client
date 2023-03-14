@@ -1,0 +1,30 @@
+.file-item-info {
+  padding-top: 10px;
+
+  &__name {
+    font-size: 1.1rem;
+  }
+
+  &__name, &__ext,  &__size {
+    padding-top: 2px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__buttons {
+    display: flex;
+
+    .icon-size {
+      svg {
+        font-size: 1.5rem;
+      }
+    }
+
+    .margin-left {
+      margin-left: 10px;
+    }
+  }
+}

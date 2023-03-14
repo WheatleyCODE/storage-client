@@ -1,0 +1,14 @@
+.item-modal-info {
+  display: flex;
+
+  &__listen-count, &__like-count, &__star-count {
+    font-size: 1rem;
+    padding: 10px 0;
+    display: flex;
+    margin-right: 5px;
+  }
+
+  .icon {
+    font-size: 1.2rem;
+  }
+}

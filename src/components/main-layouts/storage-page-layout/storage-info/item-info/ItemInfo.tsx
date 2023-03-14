@@ -65,13 +65,18 @@ export const ItemInfo: FC<IItemInfoProps> = memo(({ itemData, userId, openChange
         </div>
 
         <div className="item-info__properties-row">
-          <div className="item-info__properties-title">Открыто:</div>
+          <div className="item-info__properties-title">Дата открытия:</div>
           <div className="item-info__properties-text">{transformDate(itemData.openDate)}</div>
         </div>
 
         <div className="item-info__properties-row">
-          <div className="item-info__properties-title">Создано:</div>
+          <div className="item-info__properties-title">Дата создания:</div>
           <div className="item-info__properties-text">{transformDate(itemData.createDate)}</div>
+        </div>
+
+        <div className="item-info__properties-row">
+          <div className="item-info__properties-title">Дата изменения:</div>
+          <div className="item-info__properties-text">{transformDate(itemData.changeDate)}</div>
         </div>
 
         <div className="item-info__properties-row">

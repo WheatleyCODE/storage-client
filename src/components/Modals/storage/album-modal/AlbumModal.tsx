@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { modalsActions } from 'store';
 import { WorkplaceModal, StorageItem, ViewItemLayout, MusicItemInfo } from 'components';
+import { ItemsService } from 'services';
 import { usePlayerHandlers } from 'hooks';
 import { PropertyFactory } from 'helpers';
 import { IClientItemData } from 'types';
@@ -15,8 +16,11 @@ export interface IAlbumModalProps {
 export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) => {
   const dispatch = useDispatch();
   const { playTrack } = usePlayerHandlers();
-
   const albumTracks = currentItemData.tracks;
+
+  useEffect(() => {
+    ItemsService.addListen({ id: currentItemData.id, type: currentItemData.type });
+  }, []);
 
   if (!albumTracks) {
     onClose();

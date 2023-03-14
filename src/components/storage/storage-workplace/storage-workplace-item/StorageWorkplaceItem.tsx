@@ -128,7 +128,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
         {itemData.name}
       </div>
       <div className="storage-workplace-item__access">{transformAccess(itemData.accessType)}</div>
-      <div className="storage-workplace-item__open-date">{transformDate(itemData.openDate)}</div>
+      <div className="storage-workplace-item__open-date">{transformDate(itemData.changeDate)}</div>
       <div className="storage-workplace-item__size">{formatSize(itemData.getSize())}</div>
     </div>
   );

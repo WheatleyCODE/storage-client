@@ -63,6 +63,7 @@ export const getChildrens = createAsyncThunk<IChildrensData, string>(
       const { data } = await ItemsService.getChildrens(string);
       cacheData.set(string, data, 5000);
 
+      thunkAPI.dispatch(storageActions.changeOpenDate(string));
       thunkAPI.dispatch(storageActions.setChildrens(data));
       thunkAPI.dispatch(storageActions.changeWorkplaceLoading(false));
       return data;

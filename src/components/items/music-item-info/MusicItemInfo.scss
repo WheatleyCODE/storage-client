@@ -19,18 +19,6 @@
     height: 170px;
   }
 
-  &__likes {
-    display: flex;
-  }
-
-  &__listen-count, &__like-count, &__star-count {
-    font-size: 1rem;
-    padding: 10px 0;
-    display: flex;
-    align-items: center;
-    margin-right: 5px;
-  }
-
   &__type {
     font-size: 0.9rem;
     letter-spacing: 0.2px;

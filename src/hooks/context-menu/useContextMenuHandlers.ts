@@ -6,11 +6,12 @@ import { FolderColors } from 'types';
 import { getWorkplaceUrl } from 'utils';
 
 export const useContextMenuHandlers = () => {
-  const { currentItems } = useTypedSelector((state) => state.storage);
+  const { currentItems, user } = useTypedSelector((state) => state.storage);
   const { isAside } = useTypedSelector((state) => state.modals);
   const { changeIsModal } = modalsActions;
   const navigate = useNavigate();
-  const { changeIsTrash, changeColor, copyFiles, downloadFile, downloadAcrhive } = useActions();
+  const { changeIsTrash, changeColor, copyFiles, downloadFile, downloadAcrhive, changeStar } =
+    useActions();
   const openModal = useOpenModal();
   const dispatch = useTypedDispatch();
 
@@ -42,6 +43,14 @@ export const useContextMenuHandlers = () => {
       isTrash,
       prevIsTrash: !isTrash,
       isCanRestore: true,
+    });
+  };
+
+  const changeStared = (isStar: boolean) => {
+    changeStar({
+      items: currentItems.map(({ id, type }) => ({ id, type })),
+      isStar,
+      user,
     });
   };
 
@@ -83,5 +92,6 @@ export const useContextMenuHandlers = () => {
     openWorkpaceItem,
     downloadFileHandler,
     downloadArchiveHandler,
+    changeStared,
   };
 };

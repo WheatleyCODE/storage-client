@@ -20,7 +20,7 @@ export const StorageWorkplaceLayout: FC<IStorageWorkplaceLayoutProps> = (props) 
   const { pathname } = useLocation();
   const { parents, isRecommend } = useTypedSelector((state) => state.storage);
   const ref = useRef<null | HTMLDivElement>(null);
-  const items = useItems({ sortByDate: true, isParent: true });
+  const items = useItems({ sortByDate: true });
   const lastItemsData = items.map((item) => PropertyFactory.create(item));
 
   const isLast = PathRoutes.STORAGE_MY_DRIVE === pathname && isRecommend;

@@ -11,6 +11,9 @@ import {
   IItemFilds,
   IStorageData,
   IServerItemData,
+  IAddListenFilds,
+  IChangeLikeFilds,
+  IChangeStarFilds,
 } from 'types';
 
 export class ItemsService {
@@ -36,6 +39,14 @@ export class ItemsService {
     return $api.post<IServerItemData>('/api/items/create/access-link', filds);
   }
 
+  static async changeLike(filds: IChangeLikeFilds): Promise<AxiosResponse<IServerItemData>> {
+    return $api.post<IServerItemData>('/api/items/change/like', filds);
+  }
+
+  static async changeStar(filds: IChangeStarFilds): Promise<AxiosResponse<IServerItemData[]>> {
+    return $api.post<IServerItemData[]>('/api/items/change/star', filds);
+  }
+
   static async changeAccessType(
     filds: IChangeAccessTypeFilds
   ): Promise<AxiosResponse<IServerItemData[]>> {
@@ -48,5 +59,9 @@ export class ItemsService {
 
   static async copyFiles(filds: ICopyFilesFilds): Promise<AxiosResponse<IServerItemData[]>> {
     return $api.post<IServerItemData[]>('/api/items/copy', filds);
+  }
+
+  static async addListen(filds: IAddListenFilds): Promise<AxiosResponse<IServerItemData[]>> {
+    return $api.post<IServerItemData[]>('/api/items/add/listen', filds);
   }
 }

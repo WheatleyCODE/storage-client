@@ -30,6 +30,16 @@ export interface IChangeNameFilds extends IItemFilds {
   name: string;
 }
 
+export interface IChangeLikeFilds extends IItemFilds {
+  user: string;
+  isLike: boolean;
+}
+
+export interface IChangeStarFilds extends IDeleteItemsFilds {
+  user: string;
+  isStar: boolean;
+}
+
 export interface IChangeAccessTypeFilds extends IDeleteItemsFilds {
   accessType: AccessTypes;
 }
@@ -41,3 +51,4 @@ export interface IChangeParentFilds extends IDeleteItemsFilds {
 export type ICopyFilesFilds = IDeleteItemsFilds;
 export type IDownloadArchiveFilds = IDeleteItemsFilds;
 export type IDownloadFileFilds = IItemFilds;
+export type IAddListenFilds = IItemFilds;

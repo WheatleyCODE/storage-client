@@ -54,6 +54,7 @@ export const useContextMenuItems = () => {
     copyFilesHandler,
     downloadFileHandler,
     downloadArchiveHandler,
+    changeStared,
   } = useContextMenuHandlers();
 
   const createCMI: IContextMenuItem[] = useMemo(
@@ -121,7 +122,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Добавить в отмеченные',
         Icon: MdOutlineBookmarkAdd,
-        handler: () => openModal('isSettings'),
+        handler: () => changeStared(true),
       },
       {
         title: 'Переименовать',
@@ -392,7 +393,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Добавить в отмеченные',
         Icon: MdOutlineBookmarkAdd,
-        handler: () => openModal('isSettings'),
+        handler: () => changeStared(true),
       },
     ],
     []

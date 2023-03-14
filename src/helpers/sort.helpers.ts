@@ -22,11 +22,11 @@ export class SortMethods {
   };
 
   static [SortTypes.DATE] = (x: IServerItemData, y: IServerItemData): number => {
-    return x.openDate - y.openDate;
+    return x.changeDate - y.changeDate;
   };
 
   static [SortTypes.DATE_REVERCE] = (x: IServerItemData, y: IServerItemData): number => {
-    return (x.openDate - y.openDate) * -1;
+    return (x.changeDate - y.changeDate) * -1;
   };
 
   static [SortTypes.SIZE] = (x: IServerItemData, y: IServerItemData): number => {

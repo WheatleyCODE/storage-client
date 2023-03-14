@@ -5,6 +5,7 @@ export class VideoProperties extends DefaultProperties implements IProperties {
   constructor(private video: IVideo) {
     super(video);
     this.description = this.video.description;
+    this.fileExt = this.video.fileExt;
   }
 
   getFilePath(): string | null {

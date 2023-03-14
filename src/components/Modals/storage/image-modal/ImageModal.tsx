@@ -1,6 +1,7 @@
-import React, { FC, useCallback, useRef } from 'react';
-import { ViewItemLayout, WorkplaceModal } from 'components';
-import { formatSize, getImageLink } from 'utils';
+import React, { FC, useCallback, useRef, useEffect } from 'react';
+import { FileItemInfo, ViewItemLayout, WorkplaceModal } from 'components';
+import { ItemsService } from 'services';
+import { getImageLink } from 'utils';
 import { IClientItemData } from 'types';
 import './ImageModal.scss';
 
@@ -12,10 +13,13 @@ export interface IImageModalProps {
 export type Size = { width: number; height: number };
 
 export const ImageModal: FC<IImageModalProps> = ({ currentItemData, onClose }) => {
-  const { name, fileExt } = currentItemData;
   const refImage = useRef<HTMLImageElement | null>(null);
 
   const imageLink = getImageLink(currentItemData);
+
+  useEffect(() => {
+    ItemsService.addListen({ id: currentItemData.id, type: currentItemData.type });
+  }, []);
 
   const stopPropagation = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
@@ -26,9 +30,7 @@ export const ImageModal: FC<IImageModalProps> = ({ currentItemData, onClose }) =
       <ViewItemLayout>
         <div aria-hidden onClick={stopPropagation} className="image-modal">
           <img ref={refImage} src={imageLink || ''} alt="Картика" />
-          <div className="image-modal__name">Название: {name}</div>
-          <div className="image-modal__ext">Разширение: .{fileExt}</div>
-          <div className="image-modal__ext">Размер: {formatSize(currentItemData.getSize())}</div>
+          <FileItemInfo itemData={currentItemData} />
         </div>
       </ViewItemLayout>
     </WorkplaceModal>
