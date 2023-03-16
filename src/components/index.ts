@@ -7,7 +7,6 @@ export { StoragePath } from './main-layouts/storage-workplace-layout/storage-pat
 export { StorageSorter } from './main-layouts/storage-workplace-layout/storage-sorter/StorageSorter';
 export { StorageLast } from './main-layouts/storage-workplace-layout/storage-last/StorageLast';
 export { StorageInfo } from './main-layouts/storage-page-layout/storage-info/StorageInfo';
-export { Player } from './main-layouts/storage-page-layout/player/Player';
 
 export { Button } from './ui/button/Button';
 export { Input } from './ui/input/Input';
@@ -20,6 +19,10 @@ export { Textarea } from './ui/textarea/Textarea';
 export { FileUploader } from './ui/file-uploader/FileUploader';
 export { Image } from './ui/image/Image';
 export { ActionWindow } from './ui/action-window/ActionWindow';
+export { Player } from './ui/audio-player/AudioPlayer';
+export { PlayerProgress } from './ui/audio-player/player-progress/PlayerProress';
+export { PlayerVolume } from './ui/audio-player/player-volume/PlayerVolume';
+export { VideoPlayer } from './ui/video-player/VideoPlayer';
 
 export { Hills } from './design/hills/Hills';
 export { Mountains } from './design/mountains/Mountains';

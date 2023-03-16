@@ -20,7 +20,7 @@ import { RepeatType } from 'types';
 import { PlayerCloseButton } from './player-close-button/PlayerCloseButton';
 import { PlayerProgress } from './player-progress/PlayerProress';
 import { PlayerVolume } from './player-volume/PlayerVolume';
-import './Player.scss';
+import './AudioPlayer.scss';
 
 const audio = new Audio();
 

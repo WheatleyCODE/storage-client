@@ -1,0 +1,45 @@
+@import 'styles/templates.scss';
+
+.video-controls {
+  &__progress-bar-wrapper {
+    background-color: rgb(41, 41, 41);
+    width: 100%;
+  }
+
+  &__progress-bar {
+    background-color: $colorDarkYellow;
+  }
+
+  .player-progress {
+    height: 12px;
+    background-color: $colorLightGrey;
+  }
+
+  &__buttons {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+  }
+
+  &__volume {
+    flex: 1;
+    margin-left: 16px;
+  }
+
+  &__volume-button {
+    width: 45px;
+    position: relative;
+  }
+
+  .play {
+    margin-right: 16px;
+  }
+
+  .right {
+    margin-left: 8px;
+  }
+
+  .full {
+    margin-left: 16px;
+  }
+}

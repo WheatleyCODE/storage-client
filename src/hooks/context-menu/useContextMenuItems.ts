@@ -52,7 +52,6 @@ export const useContextMenuItems = () => {
     openIsInfo,
     openWorkpaceItem,
     copyFilesHandler,
-    downloadFileHandler,
     downloadArchiveHandler,
     changeStared,
   } = useContextMenuHandlers();
@@ -134,6 +133,11 @@ export const useContextMenuItems = () => {
         Icon: BiInfoCircle,
         handler: openIsInfo,
       },
+      {
+        title: 'Скачать',
+        Icon: BiDownload,
+        handler: downloadArchiveHandler,
+      },
     ],
     []
   );
@@ -211,11 +215,6 @@ export const useContextMenuItems = () => {
           handler: copyFilesHandler,
           brAfter: true,
         },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: downloadFileHandler,
-        },
       ],
       [ItemTypes.ALBUM]: [
         {
@@ -247,11 +246,6 @@ export const useContextMenuItems = () => {
           handler: copyFilesHandler,
           brAfter: true,
         },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: downloadFileHandler,
-        },
       ],
       [ItemTypes.IMAGE]: [
         {
@@ -259,11 +253,6 @@ export const useContextMenuItems = () => {
           Icon: MdContentCopy,
           handler: copyFilesHandler,
           brAfter: true,
-        },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: downloadFileHandler,
         },
       ],
       [ItemTypes.VIDEO]: [
@@ -277,11 +266,6 @@ export const useContextMenuItems = () => {
           Icon: MdContentCopy,
           handler: copyFilesHandler,
           brAfter: true,
-        },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: downloadFileHandler,
         },
       ],
     }),
@@ -394,6 +378,11 @@ export const useContextMenuItems = () => {
         title: 'Добавить в отмеченные',
         Icon: MdOutlineBookmarkAdd,
         handler: () => changeStared(true),
+      },
+      {
+        title: 'Скачать',
+        Icon: BiDownload,
+        handler: downloadArchiveHandler,
       },
     ],
     []

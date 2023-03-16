@@ -37,7 +37,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
   } = props;
   const { workplaceItems } = useTypedSelector((state) => state.storage);
   const dispatch = useDispatch();
-  const { downloadFile } = useActions();
+  const { downloadAcrhive } = useActions();
 
   const stopPropagation = useCallback((e: MouseEvent) => {
     e.stopPropagation();
@@ -50,7 +50,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
   const download = (e: React.MouseEvent) => {
     e.stopPropagation();
     const { id, type } = currentItemData;
-    downloadFile({ id, type });
+    downloadAcrhive({ items: [{ id, type }] });
   };
 
   const changeCurrent = (num: number) => {

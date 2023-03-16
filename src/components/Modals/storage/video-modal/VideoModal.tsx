@@ -1,9 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { modalsActions } from 'store';
-import { FileItemInfo, ViewItemLayout, WorkplaceModal } from 'components';
+import { FileItemInfo, VideoPlayer, ViewItemLayout, WorkplaceModal } from 'components';
 import { ItemsService } from 'services';
-import { getFileLink } from 'utils';
 import { IClientItemData } from 'types';
 import './VideoModal.scss';
 
@@ -29,10 +28,7 @@ export const VideoModal: FC<IVideoModalProps> = ({ onClose, currentItemData }) =
       <ViewItemLayout isChange onClickButton={openChangeModal}>
         <div className="video-modal">
           <div className="video-modal__video">
-            <video controls width="500" height="300">
-              <track kind="captions" />
-              <source src={getFileLink(currentItemData) || ''} type="video/mp4" />
-            </video>
+            <VideoPlayer videoData={currentItemData} />
           </div>
 
           <FileItemInfo itemData={currentItemData} />

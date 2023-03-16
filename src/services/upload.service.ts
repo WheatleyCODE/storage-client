@@ -3,14 +3,14 @@ import { IUploadFilesFilds, IServerItemData } from 'types';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { uploaderActions } from 'store';
-import { createFormData } from 'utils';
 
 export class UploadService {
   static async uploadFiles(
     filds: IUploadFilesFilds,
     dispatch: ThunkDispatch<any, any, any>
   ): Promise<AxiosResponse<IServerItemData[]>> {
-    const formData = createFormData(filds);
+    const formData: any = new FormData();
+    filds.files.forEach((file) => formData.append('files', file));
 
     if (filds.parent) {
       formData.append('parent', filds.parent);

@@ -18,3 +18,4 @@ export * from './item.interface';
 export * from './image.interface';
 export * from './comment.interface';
 export * from './player.interface';
+export * from './video-player.interface';

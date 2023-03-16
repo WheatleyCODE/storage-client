@@ -196,13 +196,39 @@ export const storageSlice = createSlice({
     },
 
     deleteItems: (state, { payload }: PayloadAction<IStorageData>) => {
-      const { diskSpace, usedSpace, folders, tracks, files, albums, images, videos } = payload;
+      const sorter = new StorageSorter();
+      const {
+        id,
+        name,
+        user,
+        diskSpace,
+        usedSpace,
+        folders,
+        tracks,
+        files,
+        albums,
+        images,
+        videos,
+        isRecommend,
+        isTools,
+        likedItems,
+        staredItems,
+      } = payload;
 
-      state.currentItems = [];
+      state.isTools = isTools;
+      state.isRecommend = isRecommend;
+      state.isLoading = false;
+      state.id = id;
+      state.name = name;
+      state.user = user;
       state.diskSpace = diskSpace;
       state.usedSpace = usedSpace;
-      state.allItems = [...folders, ...tracks, ...files, ...albums, ...images, ...videos];
-      state.workplaceItems = state.workplaceItems.filter((item) => item.isTrash);
+      state.allItems = sorter.sort(
+        [...folders, ...tracks, ...files, ...albums, ...images, ...videos],
+        state.sortType
+      );
+      state.likedItems = likedItems;
+      state.staredItems = staredItems;
     },
   },
   extraReducers(builder) {

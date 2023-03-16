@@ -25,6 +25,7 @@
   }
 
   &__title {
+    color: $colorBlack;
     @include flex;
     font-size: 0.8rem;
     position: absolute;

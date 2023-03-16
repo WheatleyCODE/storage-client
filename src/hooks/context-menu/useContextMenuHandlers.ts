@@ -10,8 +10,7 @@ export const useContextMenuHandlers = () => {
   const { isAside } = useTypedSelector((state) => state.modals);
   const { changeIsModal } = modalsActions;
   const navigate = useNavigate();
-  const { changeIsTrash, changeColor, copyFiles, downloadFile, downloadAcrhive, changeStar } =
-    useActions();
+  const { changeIsTrash, changeColor, copyFiles, downloadAcrhive, changeStar } = useActions();
   const openModal = useOpenModal();
   const dispatch = useTypedDispatch();
 
@@ -67,16 +66,6 @@ export const useContextMenuHandlers = () => {
     });
   };
 
-  const downloadFileHandler = () => {
-    const arr = currentItems.map(({ id, type }) => ({ id, type }));
-    const { id, type } = arr[0];
-
-    downloadFile({
-      id,
-      type,
-    });
-  };
-
   const downloadArchiveHandler = () => {
     downloadAcrhive({
       items: currentItems.map(({ id, type }) => ({ id, type })),
@@ -90,7 +79,6 @@ export const useContextMenuHandlers = () => {
     copyFilesHandler,
     openIsInfo,
     openWorkpaceItem,
-    downloadFileHandler,
     downloadArchiveHandler,
     changeStared,
   };

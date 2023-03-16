@@ -1,0 +1,17 @@
+@import 'styles/templates.scss';
+
+.video-player {
+  position: relative;
+  cursor: pointer;
+
+  &__controls {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    position: absolute;
+    bottom: 3px;
+  }
+
+  &__video {
+    width: 100%;
+  }
+}
