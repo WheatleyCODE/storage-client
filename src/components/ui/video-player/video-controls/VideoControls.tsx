@@ -40,7 +40,7 @@ export const VideoControls: FC<IVideoControlsProps> = memo((props) => {
     changeVolume,
     toggleIsMute,
   } = props;
-  const { videoTime, currentTime, isPlaying, isRepeat, volume, isMute } = status;
+  const { duration, currentTime, isPlaying, isRepeat, volume, isMute } = status;
   const { onMouseEnter, onMouseLeave, onMouseMove, isShow } = useDelayHover(false, 1000);
 
   const changeVolumeHandler = useCallback(
@@ -60,7 +60,7 @@ export const VideoControls: FC<IVideoControlsProps> = memo((props) => {
   return (
     <div className="video-controls">
       <PlayerProgress
-        duration={videoTime}
+        duration={duration}
         currentTime={currentTime}
         changeCurrentTime={changeCurrentTime}
       />

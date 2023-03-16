@@ -9,8 +9,7 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
   const [status, setStatus] = useState<IVideoStatus>({
     isPlaying: false,
     currentTime: 0,
-    videoTime: 0,
-    progress: 0,
+    duration: 0,
     isRepeat: false,
     isMute: false,
     volume: 30,
@@ -99,7 +98,7 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
 
     const updateProgress = () => {
       setStatus((p) => ({ ...p, currentTime: video.currentTime }));
-      setStatus((p) => ({ ...p, progress: (video.currentTime / status.videoTime) * 100 }));
+      setStatus((p) => ({ ...p, progress: (video.currentTime / status.duration) * 100 }));
     };
 
     video.addEventListener('timeupdate', updateProgress);
@@ -107,7 +106,7 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
     return () => {
       video.removeEventListener('timeupdate', updateProgress);
     };
-  }, [status.videoTime]);
+  }, [status.duration]);
 
   useEffect(() => {
     const { current } = videoRef;
@@ -140,7 +139,7 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
     return () => {
       current.removeEventListener('keydown', handleKeyDown);
     };
-  }, [toggleVideo]);
+  }, [forward, fullScreen, revert, toggleVideo]);
 
   return useMemo(
     () => ({
@@ -155,6 +154,16 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
       fullScreen,
       status,
     }),
-    [changeCurrentTime, changeVolume, status, toggleIsMute, toggleIsRepeat, toggleVideo]
+    [
+      changeCurrentTime,
+      changeVolume,
+      forward,
+      fullScreen,
+      revert,
+      status,
+      toggleIsMute,
+      toggleIsRepeat,
+      toggleVideo,
+    ]
   );
 };

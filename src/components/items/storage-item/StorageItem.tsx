@@ -1,6 +1,6 @@
-import { usePlayerHandlers } from 'hooks';
 import React, { FC, memo, useState, useCallback } from 'react';
 import { MdPlayArrow } from 'react-icons/md';
+import { useAudioPlayerHandlers } from 'hooks';
 import { IClientItemData } from 'types';
 import { formatSize, getWorkplaceIcon } from 'utils';
 import './StorageItem.scss';
@@ -17,7 +17,7 @@ export interface StorageItemProps {
 
 export const StorageItem: FC<StorageItemProps> = memo(
   ({ itemData, isSelect, selectItem, deleteItem, isShowSize, isPlay, isDark }) => {
-    const { playTrack } = usePlayerHandlers();
+    const { setTrack } = useAudioPlayerHandlers();
     const [isShowPlay, setIsShowPlay] = useState(false);
     const MemoIcon = memo(getWorkplaceIcon(itemData));
 
@@ -34,6 +34,10 @@ export const StorageItem: FC<StorageItemProps> = memo(
       setIsShowPlay(false);
     }, []);
 
+    const setTrackHandler = useCallback(() => {
+      setTrack(itemData, []);
+    }, [itemData, setTrack]);
+
     return (
       <div
         onMouseEnter={isPlay ? onEnter : undefined}
@@ -44,10 +48,7 @@ export const StorageItem: FC<StorageItemProps> = memo(
       >
         {isPlay && isShowPlay && (
           <div className="storage-item__play">
-            <MdPlayArrow
-              onClick={() => playTrack(itemData, [])}
-              className="storage-item__icon-play"
-            />
+            <MdPlayArrow onClick={setTrackHandler} className="storage-item__icon-play" />
           </div>
         )}
         {isPlay && !isShowPlay && (

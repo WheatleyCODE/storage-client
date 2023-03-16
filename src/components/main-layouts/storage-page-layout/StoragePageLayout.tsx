@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, useAnimation } from 'framer-motion';
 import { Outlet } from 'react-router';
 import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
-import { ModalsController, Player, Uploader } from 'components';
+import { ModalsController, AudioPlayer, Uploader } from 'components';
 import { modalsActions } from 'store';
 import { setAppLoader } from 'helpers';
 import { getContextMenuCoords, sleep } from 'utils';
@@ -154,7 +154,7 @@ export const StoragePageLayout: FC = () => {
       <ModalsController />
       <AnimatePresence>
         {isOpen && <Uploader />}
-        {isOpenPlayer && <Player />}
+        {isOpenPlayer && <AudioPlayer />}
       </AnimatePresence>
     </div>
   );

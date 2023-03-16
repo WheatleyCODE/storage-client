@@ -1,9 +1,9 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { modalsActions } from 'store';
 import { WorkplaceModal, StorageItem, ViewItemLayout, MusicItemInfo } from 'components';
 import { ItemsService } from 'services';
-import { usePlayerHandlers } from 'hooks';
+import { useAudioPlayerHandlers } from 'hooks';
 import { PropertyFactory } from 'helpers';
 import { IClientItemData } from 'types';
 import './AlbumModal.scss';
@@ -15,8 +15,12 @@ export interface IAlbumModalProps {
 
 export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) => {
   const dispatch = useDispatch();
-  const { playTrack } = usePlayerHandlers();
+  const { setTrack } = useAudioPlayerHandlers();
   const albumTracks = currentItemData.tracks;
+
+  const playAlbum = useCallback(() => {
+    setTrack(currentItemData, currentItemData.tracks || []);
+  }, [currentItemData, setTrack]);
 
   useEffect(() => {
     ItemsService.addListen({ id: currentItemData.id, type: currentItemData.type });
@@ -33,10 +37,6 @@ export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) =
   const openChangeModal = () => {
     onClose();
     dispatch(modalsActions.changeIsModal({ key: 'isChangeDataAlbum', boolean: true }));
-  };
-
-  const playAlbum = () => {
-    playTrack(currentItemData, currentItemData.tracks || []);
   };
 
   return (

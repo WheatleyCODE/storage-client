@@ -11,8 +11,9 @@ export { useDelayHover } from './useDelayHover';
 export { useFirstRender } from './useFirstRender';
 export { useOpenModal } from './useOpenModal';
 export { useItems } from './useItems';
-export { usePlayerHandlers } from './usePlayerHandlers';
 export { useChangeDataWindows } from './useChangeDataWindows';
-export { useVideoPlayer } from './useVideoPlayer';
+export { useVideoPlayer } from './players/useVideoPlayer';
+export { useAudioPlayer } from './players/useAudioPlayer';
+export { useAudioPlayerHandlers } from './players/useAudioPlayerHandlers';
 
 export type { IContextOptions, IContextMenuItem } from './context-menu/useContextMenuItems';

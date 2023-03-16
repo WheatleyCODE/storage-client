@@ -1,7 +1,7 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { MdPlayArrow } from 'react-icons/md';
-import { useActions, useItems, useOpenModal, usePlayerHandlers } from 'hooks';
+import { useActions, useItems, useOpenModal, useAudioPlayerHandlers } from 'hooks';
 import {
   formatSize,
   getColorClassName,
@@ -27,7 +27,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const [isShowPlay, setIsShowPlay] = useState(false);
   const tracks = useItems({ onlyTypes: [ItemTypes.TRACK], isParent: true }, true) as ITrack[];
-  const { playTrack } = usePlayerHandlers();
+  const { setTrack } = useAudioPlayerHandlers();
   const navigate = useNavigate();
   const { uploadFiles } = useActions();
   const openModal = useOpenModal();
@@ -97,6 +97,10 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
 
   const isFolder = itemData.type === ItemTypes.FOLDER;
 
+  const setTrackHandler = useCallback(() => {
+    setTrack(itemData, tracks);
+  }, [itemData, setTrack, tracks]);
+
   return (
     <div
       aria-hidden
@@ -116,10 +120,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       <div className="storage-workplace-item__name">
         {isShowPlay && (
           <div className="storage-workplace-item__play">
-            <MdPlayArrow
-              onClick={() => playTrack(itemData, tracks)}
-              className="storage-workplace-item__icon play"
-            />
+            <MdPlayArrow onClick={setTrackHandler} className="storage-workplace-item__icon play" />
           </div>
         )}
         {!isShowPlay && (
