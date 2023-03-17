@@ -8,6 +8,8 @@ import {
   SortTypes,
   IServerItemData,
   ItemTypes,
+  ITrack,
+  IAlbum,
 } from 'types';
 import { copyObject } from 'utils';
 import { changeSettings, fetchStorage } from './storage.actions';
@@ -50,6 +52,45 @@ export const storageSlice = createSlice({
 
     changeWorkplaceLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isWorkplaceLoading = payload;
+    },
+
+    changeAlbumTracks: (state, { payload }: PayloadAction<ITrack[]>) => {
+      const allItems = copyObject(state.allItems).map((item) => {
+        if (item.type === ItemTypes.ALBUM) {
+          const album = item as IAlbum;
+
+          const newTracks = [...album.tracks].map((track) => {
+            const newTrack = payload.find((trck) => track.id === trck.id);
+            if (newTrack) return newTrack;
+            return track;
+          });
+
+          album.tracks = newTracks;
+          return album;
+        }
+
+        return item;
+      });
+
+      const workItems = copyObject(state.workplaceItems).map((item) => {
+        if (item.type === ItemTypes.ALBUM) {
+          const album = item as IAlbum;
+
+          const newTracks = [...album.tracks].map((track) => {
+            const newTrack = payload.find((trck) => track.id === trck.id);
+            if (newTrack) return newTrack;
+            return track;
+          });
+
+          album.tracks = newTracks;
+          return album;
+        }
+
+        return item;
+      });
+
+      state.allItems = allItems;
+      state.workplaceItems = workItems;
     },
 
     changeLiked: (state, { payload }: PayloadAction<{ id: string; isLike: boolean }>) => {

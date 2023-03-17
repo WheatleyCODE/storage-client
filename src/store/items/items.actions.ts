@@ -19,6 +19,8 @@ import {
   IServerItemData,
   IChangeLikeFilds,
   IChangeStarFilds,
+  ItemTypes,
+  ITrack,
 } from 'types';
 
 export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
@@ -102,6 +104,10 @@ export const changeName = createAsyncThunk<IServerItemData, IChangeNameFilds & I
             restoreParams: { ...filds, name: prevName, isCanRestore: false },
           })
         );
+      }
+
+      if (data.type === ItemTypes.TRACK) {
+        thunkAPI.dispatch(storageActions.changeAlbumTracks([data as ITrack]));
       }
 
       thunkAPI.dispatch(storageActions.setItems([data]));

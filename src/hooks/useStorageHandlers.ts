@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { modalsActions } from 'store';
+import { modalsActions, storageActions } from 'store';
 import { useActions, useOpenModal, useTypedSelector } from 'hooks';
 import { PropertyFactory } from 'helpers';
 import { getWorkplaceUrl } from 'utils';
@@ -9,7 +9,7 @@ import { FolderColors } from 'types';
 
 export const useStorageHandlers = () => {
   const { changeIsModal } = modalsActions;
-  const { currentItems, user } = useTypedSelector((state) => state.storage);
+  const { currentItems, user, workplaceItems } = useTypedSelector((state) => state.storage);
   const { isAside } = useTypedSelector((state) => state.modals);
   const { changeIsTrash, changeColor, copyFiles, downloadAcrhive, changeStar } = useActions();
   const dispatch = useDispatch();
@@ -18,6 +18,20 @@ export const useStorageHandlers = () => {
 
   const currentItem = currentItems[0];
   const items = useMemo(() => currentItems.map(({ id, type }) => ({ id, type })), [currentItems]);
+
+  const changeCurrentArrow = useCallback(
+    (num: number) => {
+      if (!currentItem) return;
+
+      const index = workplaceItems.findIndex((item) => item.id === currentItem.id);
+      const newItem = workplaceItems[index + num];
+
+      if (index !== -1 && newItem) {
+        dispatch(storageActions.setCurrent([newItem]));
+      }
+    },
+    [workplaceItems, currentItem]
+  );
 
   const openInfo = useCallback(() => {
     if (isAside) {
@@ -105,5 +119,6 @@ export const useStorageHandlers = () => {
     openChangeModal,
     downloadArchiveHandler,
     changeStared,
+    changeCurrentArrow,
   };
 };

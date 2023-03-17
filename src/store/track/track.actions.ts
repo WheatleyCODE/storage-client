@@ -46,6 +46,7 @@ export const changeTrackFile = createAsyncThunk<ITrack, IChangeTrackFileFilds>(
 
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));
+      thunkAPI.dispatch(storageActions.changeAlbumTracks([data]));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -68,6 +69,7 @@ export const changeTrackImage = createAsyncThunk<ITrack, IChangeTrackImageFilds>
 
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));
+      thunkAPI.dispatch(storageActions.changeAlbumTracks([data]));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -90,6 +92,7 @@ export const changeTrackData = createAsyncThunk<ITrack, IChangeTrackDataFilds>(
 
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));
+      thunkAPI.dispatch(storageActions.changeAlbumTracks([data]));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');

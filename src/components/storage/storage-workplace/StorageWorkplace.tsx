@@ -1,8 +1,16 @@
 import React, { FC, useCallback, useRef, useState, memo, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router';
-import { useActions, useClickOutside, useTypedDispatch } from 'hooks';
+import {
+  useActions,
+  useAudioPlayerHandlers,
+  useClickOutside,
+  useItems,
+  useStorageHandlers,
+  useTypedDispatch,
+  useTypedSelector,
+} from 'hooks';
 import { storageActions } from 'store';
-import { IClientItemData, PathRoutes } from 'types';
+import { IClientItemData, ItemTypes, ITrack, PathRoutes } from 'types';
 import { Emitter, EventNames } from 'helpers';
 import { checkPathnameOnPathRoute } from 'utils';
 import { StorageWorkplaceItem } from './storage-workplace-item/StorageWorkplaceItem';
@@ -17,10 +25,15 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
   const [isDragEnter, setIsDragEnter] = useState(false);
   const ref = useRef<null | HTMLDivElement>(null);
   const refInput = useRef<null | HTMLInputElement>(null);
-  const dispatch = useTypedDispatch();
-  const { uploadFiles } = useActions();
   const params = useParams();
   const { pathname } = useLocation();
+  const dispatch = useTypedDispatch();
+
+  const { staredItems } = useTypedSelector((state) => state.storage);
+  const { uploadFiles } = useActions();
+  const tracks = useItems({ onlyTypes: [ItemTypes.TRACK], isParent: true }, true) as ITrack[];
+  const { setTrack } = useAudioPlayerHandlers();
+  const { openWorkpaceItem } = useStorageHandlers();
 
   const openFiles = useCallback(() => {
     if (refInput.current) {
@@ -141,17 +154,26 @@ export const StorageWorkplace: FC<IStorageWorkplace> = memo(({ workplaceItems })
       className={`storage-workplace ${isDragEnter ? 'drag' : ''}`}
     >
       <div ref={ref}>
-        {workplaceItems.map((itemData, i) => (
-          <StorageWorkplaceItem
-            changeActive={changeActive}
-            addActive={addActive}
-            addActiveShift={addActiveShift}
-            key={itemData.id}
-            isActive={activeItems.includes(i)}
-            itemData={itemData}
-            index={i}
-          />
-        ))}
+        {workplaceItems.map((itemData, i) => {
+          const isStar = staredItems.includes(itemData.id);
+
+          return (
+            <StorageWorkplaceItem
+              setTrack={setTrack}
+              openWorkpaceItem={openWorkpaceItem}
+              uploadFiles={uploadFiles}
+              isStar={isStar}
+              tracks={tracks}
+              changeActive={changeActive}
+              addActive={addActive}
+              addActiveShift={addActiveShift}
+              key={itemData.id}
+              isActive={activeItems.includes(i)}
+              itemData={itemData}
+              index={i}
+            />
+          );
+        })}
       </div>
 
       <input

@@ -9,7 +9,7 @@ export const useStorageHotkeys = () => {
   const {
     openModal,
     changeIsTrashHandler,
-    changeColorHandler,
+    changeCurrentArrow,
     openChangeModal,
     copyFilesHandler,
     openInfo,
@@ -82,12 +82,14 @@ export const useStorageHotkeys = () => {
 
       switch (key) {
         case 'arrowup': {
-          console.log('ArrowUp');
+          // ! Fix
+          // changeCurrentArrow(1);
           break;
         }
 
         case 'arrowdown': {
-          console.log('ArrowDown');
+          // ! Fix
+          // changeCurrentArrow(-1);
           break;
         }
 

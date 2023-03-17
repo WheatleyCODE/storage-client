@@ -1,86 +1,84 @@
 import React, { FC, memo, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { AsyncThunk } from '@reduxjs/toolkit';
 import { MdBookmark, MdPlayArrow } from 'react-icons/md';
-import {
-  useActions,
-  useItems,
-  useOpenModal,
-  useAudioPlayerHandlers,
-  useTypedSelector,
-} from 'hooks';
 import {
   formatSize,
   getColorClassName,
   getWorkplaceIcon,
-  getWorkplaceUrl,
   transformAccess,
   transformDate,
 } from 'utils';
-import { IClientItemData, ItemTypes, ITrack } from 'types';
+import { IClientItemData, IServerItemData, ItemTypes, ITrack, IUploadFilesFilds } from 'types';
 import './StorageWorkplaceItem.scss';
 
 export interface IStorageWorkplaceItemProps {
   itemData: IClientItemData;
+  tracks: ITrack[];
+  isStar: boolean;
   isActive: boolean;
   index: number;
   changeActive: (i: number) => void;
   addActive: (i: number) => void;
   addActiveShift: (i: number) => void;
+  setTrack: (itemData: IClientItemData, tracks: ITrack[]) => void;
+  uploadFiles: AsyncThunk<IServerItemData[], IUploadFilesFilds, any>;
+  openWorkpaceItem: () => void;
 }
 
 export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
-  const { itemData, isActive, changeActive, addActive, addActiveShift, index } = props;
+  const {
+    itemData,
+    isActive,
+    changeActive,
+    addActive,
+    addActiveShift,
+    index,
+    tracks,
+    isStar,
+    setTrack,
+    uploadFiles,
+    openWorkpaceItem,
+  } = props;
   const [isDragEnter, setIsDragEnter] = useState(false);
   const [isShowPlay, setIsShowPlay] = useState(false);
-  const tracks = useItems({ onlyTypes: [ItemTypes.TRACK], isParent: true }, true) as ITrack[];
-  const { staredItems } = useTypedSelector((state) => state.storage);
-  const { setTrack } = useAudioPlayerHandlers();
-  const navigate = useNavigate();
-  const { uploadFiles } = useActions();
-  const openModal = useOpenModal();
 
   const MemoIcon = memo(getWorkplaceIcon(itemData));
+  const MemoMark = memo(MdBookmark);
 
-  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.ctrlKey) {
-      addActive(index);
-      return;
-    }
+  const onClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.ctrlKey) {
+        addActive(index);
+        return;
+      }
 
-    if (e.shiftKey) {
-      addActiveShift(index);
-      return;
-    }
+      if (e.shiftKey) {
+        addActiveShift(index);
+        return;
+      }
 
-    changeActive(index);
-  };
+      changeActive(index);
+    },
+    [index, addActive, changeActive]
+  );
 
-  const onContextMenu = () => {
+  const onContextMenu = useCallback(() => {
     if (!isActive) {
       changeActive(index);
     }
-  };
+  }, [isActive, changeActive, index]);
 
-  const openWorkplaceItem = () => {
-    if (itemData.openModalStateKey) {
-      openModal(itemData.openModalStateKey, false);
-      return;
-    }
-
-    navigate(getWorkplaceUrl(itemData));
-  };
-
-  const onEnter = () => {
+  const onEnter = useCallback(() => {
     if (itemData.type === ItemTypes.TRACK || itemData.type === ItemTypes.ALBUM) {
       setIsShowPlay(true);
     }
-  };
+  }, [itemData.type]);
 
-  const onLeave = () => {
+  const onLeave = useCallback(() => {
     if (itemData.type === ItemTypes.TRACK || itemData.type === ItemTypes.ALBUM) {
       setIsShowPlay(false);
     }
-  };
+  }, [itemData.type]);
 
   const onDragEnterHandler = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -106,9 +104,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
 
   const setTrackHandler = useCallback(() => {
     setTrack(itemData, tracks);
-  }, [itemData, setTrack, tracks]);
-
-  const isStar = staredItems.includes(itemData.id);
+  }, [itemData, tracks]);
 
   return (
     <div
@@ -116,7 +112,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
       onClick={onClick}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      onDoubleClick={openWorkplaceItem}
+      onDoubleClick={openWorkpaceItem}
       onContextMenu={onContextMenu}
       onDragEnter={onDragEnterHandler}
       onDragLeave={onDragLeaveHandler}
@@ -132,13 +128,16 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
             <MdPlayArrow onClick={setTrackHandler} className="storage-workplace-item__icon play" />
           </div>
         )}
+
         {!isShowPlay && (
           <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(itemData)}`} />
         )}
+
         {itemData.name}
+
         {isStar && (
           <div className="storage-workplace-item__star">
-            <MdBookmark className="storage-workplace-item__star-icon" />
+            <MemoMark className="storage-workplace-item__star-icon" />
           </div>
         )}
       </div>
