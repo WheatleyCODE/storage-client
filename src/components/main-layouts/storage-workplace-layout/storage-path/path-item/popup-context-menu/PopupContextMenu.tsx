@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { IContextMenuItem } from 'hooks';
+import { IContextMenuItem } from 'types';
 import { ContextMenuItem } from 'components';
 import './PopupContextMenu.scss';
 

@@ -38,7 +38,7 @@ export const StoragePageLayout: FC = () => {
 
       if (isContextMenu) setIsContextMenu(false);
 
-      await sleep(120);
+      await sleep(100);
 
       setTimeout(() => {
         setCoords(getContextMenuCoords(e));

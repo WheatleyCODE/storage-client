@@ -2,9 +2,10 @@ import React, { FC, memo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { IconType } from 'react-icons';
 import { HiChevronRight } from 'react-icons/hi';
-import { IContextOptions, useDelayHover } from 'hooks';
+import { useDelayHover } from 'hooks';
 import { Popup } from 'components';
 import { POPUP_MENU_ITEM_HEIGHT, POPUP_MENU_PADDING } from 'consts';
+import { IContextOptions } from 'types';
 import { ContextMenuPopup } from './context-menu-popup/ContextMenuPopup';
 import './ContextMenuItem.scss';
 

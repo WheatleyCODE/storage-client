@@ -14,4 +14,8 @@
     border-bottom: $storageBorder;
     margin: 5px 0;
   }
+
+  &.hide {
+    overflow: hidden;
+  }
 }

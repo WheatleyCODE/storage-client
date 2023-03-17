@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IContextOptions } from 'hooks';
+import { IContextOptions } from 'types';
 import { ContextMenuPopupOption } from './context-menu-popup-option/ContextMenuPopupOption';
 import './ContextMenuPopup.scss';
 

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router';
 import { useTypedSelector } from 'hooks';
-import { ItemTypes, PathRoutes } from 'types';
-import { IContextMenuItem, useContextMenuItems } from './useContextMenuItems';
+import { IContextMenuItem, PathRoutes } from 'types';
+import { useContextMenuItems } from './useContextMenuItems';
 
 export interface IUseContextMenu {
   contextMenuItems: IContextMenuItem[];
@@ -10,30 +10,13 @@ export interface IUseContextMenu {
   brCount: number;
 }
 
-// ! Временно так
-// Todo переделать после корректировки сервера
-// Todo сделать корректное генерирование
-// Todo добавить скачку сущностей которые в данный момент не доступны
-
-// Todo одновременно с фиксом методов сервера пофиксить и генерацию с запросами
-// * (-_-)... ♪
-
 export const useContextMenu = (isPopup = false): IUseContextMenu => {
   const { pathname } = useLocation();
   const { currentItems } = useTypedSelector((state) => state.storage);
   const types = currentItems.map((item) => item.type);
   const typesArr = Array.from(new Set(types));
-  const {
-    createCMI,
-    defaultCMI,
-    trashCMI,
-    deleteCMI,
-    openCMI,
-    copyCMI,
-    workplaceCMI,
-    workplaceMoreCMI,
-    defaultMoreCMI,
-  } = useContextMenuItems();
+  const { createCMI, defaultCMI, trashCMI, openCMI, specialCMI, specialMoreCMI, defaultMoreCMI } =
+    useContextMenuItems();
 
   const CMI = useMemo(() => {
     if (types.length === 1) {
@@ -44,27 +27,23 @@ export const useContextMenu = (isPopup = false): IUseContextMenu => {
         create = createCMI;
       }
 
-      return [
-        ...create,
-        ...(isPopup ? [] : openCMI),
-        ...defaultCMI,
-        ...workplaceCMI[types[0]],
-        ...deleteCMI,
-      ];
+      const specialItems = specialCMI[types[0]];
+      const items = [...defaultCMI];
+      items.splice(6, 0, ...specialItems);
+
+      return [...create, ...(isPopup ? [] : openCMI), ...items];
     }
 
     return [...createCMI];
-  }, [createCMI, defaultCMI, deleteCMI, currentItems, workplaceCMI, isPopup]);
+  }, [createCMI, defaultCMI, currentItems, specialCMI, isPopup]);
 
   const moreCMI = useMemo(() => {
     if (typesArr.length === 1) {
-      return [...defaultMoreCMI, ...workplaceMoreCMI[typesArr[0]], ...deleteCMI];
+      return [...defaultMoreCMI, ...specialMoreCMI[typesArr[0]]];
     }
 
-    const addCMI = types.includes(ItemTypes.FOLDER) ? copyCMI : workplaceMoreCMI.TRACK;
-
-    return [...defaultMoreCMI, ...addCMI, ...deleteCMI];
-  }, [copyCMI, defaultMoreCMI, deleteCMI, currentItems, workplaceMoreCMI]);
+    return [...defaultMoreCMI, ...specialMoreCMI.TRACK];
+  }, [defaultMoreCMI, currentItems, specialMoreCMI]);
 
   if (pathname === PathRoutes.STORAGE_TRASH) {
     if (types.length === 0) {

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IContextOptions } from 'hooks';
+import { IContextOptions } from 'types';
 import './ContextMenuOption.scss';
 
 export interface IContextMenuOptionProps {

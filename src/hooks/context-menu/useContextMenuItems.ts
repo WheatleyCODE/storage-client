@@ -17,32 +17,9 @@ import {
   MdUploadFile,
 } from 'react-icons/md';
 import { BiDownload, BiInfoCircle, BiTrash } from 'react-icons/bi';
-import { IconType } from 'react-icons';
 import { useStorageHandlers } from 'hooks';
 import { emitOpenFiles } from 'helpers';
-import { FolderColors, ItemTypes } from 'types';
-
-export interface IContextOptions {
-  color: FolderColors;
-  handler: () => void;
-}
-export interface IContextMenuItem {
-  title: string;
-  Icon: IconType;
-  handler?: () => void;
-  brAfter?: boolean;
-  brBefore?: boolean;
-  options?: IContextOptions[];
-}
-
-export interface IWorkplaceCMI {
-  [ItemTypes.FOLDER]: IContextMenuItem[];
-  [ItemTypes.FILE]: IContextMenuItem[];
-  [ItemTypes.ALBUM]: IContextMenuItem[];
-  [ItemTypes.TRACK]: IContextMenuItem[];
-  [ItemTypes.IMAGE]: IContextMenuItem[];
-  [ItemTypes.VIDEO]: IContextMenuItem[];
-}
+import { FolderColors, IContextMenuItem, IListCMI, ItemTypes } from 'types';
 
 export const useContextMenuItems = () => {
   const {
@@ -101,6 +78,22 @@ export const useContextMenuItems = () => {
     []
   );
 
+  const trashCMI: IContextMenuItem[] = useMemo(
+    () => [
+      {
+        title: 'Востановить',
+        Icon: MdRestore,
+        handler: () => changeIsTrashHandler(false),
+      },
+      {
+        title: 'Удалить навсегда',
+        Icon: BiTrash,
+        handler: () => openModal('isDelete', false),
+      },
+    ],
+    []
+  );
+
   const defaultCMI: IContextMenuItem[] = useMemo(
     () => [
       {
@@ -134,32 +127,16 @@ export const useContextMenuItems = () => {
         handler: openInfo,
       },
       {
+        title: 'Создать копию',
+        Icon: MdContentCopy,
+        handler: copyFilesHandler,
+        brAfter: true,
+      },
+      {
         title: 'Скачать',
         Icon: BiDownload,
         handler: downloadArchiveHandler,
       },
-    ],
-    []
-  );
-
-  const trashCMI: IContextMenuItem[] = useMemo(
-    () => [
-      {
-        title: 'Востановить',
-        Icon: MdRestore,
-        handler: () => changeIsTrashHandler(false),
-      },
-      {
-        title: 'Удалить навсегда',
-        Icon: BiTrash,
-        handler: () => openModal('isDelete', false),
-      },
-    ],
-    []
-  );
-
-  const deleteCMI: IContextMenuItem[] = useMemo(
-    () => [
       {
         title: 'Удалить',
         Icon: BiTrash,
@@ -170,19 +147,7 @@ export const useContextMenuItems = () => {
     []
   );
 
-  const copyCMI: IContextMenuItem[] = useMemo(
-    () => [
-      {
-        title: 'Создать копию',
-        Icon: MdContentCopy,
-        handler: copyFilesHandler,
-        brAfter: true,
-      },
-    ],
-    []
-  );
-
-  const workplaceCMI: IWorkplaceCMI = useMemo(
+  const specialCMI: IListCMI = useMemo(
     () => ({
       [ItemTypes.FOLDER]: [
         {
@@ -208,30 +173,12 @@ export const useContextMenuItems = () => {
           ],
         },
       ],
-      [ItemTypes.FILE]: [
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
-      ],
+      [ItemTypes.FILE]: [],
       [ItemTypes.ALBUM]: [
         {
-          title: 'Редактироввать',
+          title: 'Редактировать',
           Icon: MdSettingsSuggest,
           handler: () => openModal('isChangeDataAlbum', false),
-        },
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: () => openModal('isSettings'),
         },
       ],
       [ItemTypes.TRACK]: [
@@ -240,39 +187,20 @@ export const useContextMenuItems = () => {
           Icon: MdSettingsSuggest,
           handler: () => openModal('isChangeDataTrack', false),
         },
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
       ],
-      [ItemTypes.IMAGE]: [
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
-      ],
+      [ItemTypes.IMAGE]: [],
       [ItemTypes.VIDEO]: [
         {
           title: 'Редактировать',
           Icon: MdSettingsSuggest,
           handler: () => openModal('isChangeDataVideo', false),
         },
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
       ],
     }),
-    [changeColorHandler]
+    []
   );
 
-  const workplaceMoreCMI: IWorkplaceCMI = useMemo(
+  const specialMoreCMI: IListCMI = useMemo(
     () => ({
       [ItemTypes.FOLDER]: [
         {
@@ -299,67 +227,13 @@ export const useContextMenuItems = () => {
           ],
         },
       ],
-      [ItemTypes.FILE]: [
-        {
-          title: 'Скачать МОРЕ',
-          Icon: BiDownload,
-          handler: downloadArchiveHandler,
-        },
-      ],
-      [ItemTypes.ALBUM]: [
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: downloadArchiveHandler,
-        },
-      ],
-      [ItemTypes.TRACK]: [
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: downloadArchiveHandler,
-        },
-      ],
-      [ItemTypes.IMAGE]: [
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: downloadArchiveHandler,
-        },
-      ],
-      [ItemTypes.VIDEO]: [
-        {
-          title: 'Создать копию',
-          Icon: MdContentCopy,
-          handler: copyFilesHandler,
-          brAfter: true,
-        },
-        {
-          title: 'Скачать',
-          Icon: BiDownload,
-          handler: downloadArchiveHandler,
-        },
-      ],
+      [ItemTypes.FILE]: [],
+      [ItemTypes.ALBUM]: [],
+      [ItemTypes.TRACK]: [],
+      [ItemTypes.IMAGE]: [],
+      [ItemTypes.VIDEO]: [],
     }),
-    [changeColorHandler]
+    []
   );
 
   const defaultMoreCMI: IContextMenuItem[] = useMemo(
@@ -380,9 +254,21 @@ export const useContextMenuItems = () => {
         handler: () => changeStared(true),
       },
       {
+        title: 'Создать копию',
+        Icon: MdContentCopy,
+        handler: copyFilesHandler,
+        brAfter: true,
+      },
+      {
         title: 'Скачать',
         Icon: BiDownload,
         handler: downloadArchiveHandler,
+      },
+      {
+        title: 'Удалить',
+        Icon: BiTrash,
+        handler: () => changeIsTrashHandler(true),
+        brAfter: true,
       },
     ],
     []
@@ -392,11 +278,9 @@ export const useContextMenuItems = () => {
     createCMI,
     defaultCMI,
     trashCMI,
-    deleteCMI,
     openCMI,
-    copyCMI,
-    workplaceCMI,
-    workplaceMoreCMI,
+    specialCMI,
+    specialMoreCMI,
     defaultMoreCMI,
   };
 };

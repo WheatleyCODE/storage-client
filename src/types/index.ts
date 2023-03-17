@@ -18,3 +18,4 @@ export * from './item.interface';
 export * from './image.interface';
 export * from './comment.interface';
 export * from './players.interface';
+export * from './context-menu.interface';
