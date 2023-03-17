@@ -17,13 +17,6 @@ export const ItemSelector: FC<ItemSelectorProps> = (props) => {
   const items = useItems({ onlyTypes });
   const itemsData = items.map((item) => PropertyFactory.create(item));
 
-  // console.log(itemsData, 'ddddd');
-  // console.log(selectedItems, 'dddd');
-
-  // useEffect(() => {
-  //   setSelectedItems(selectedItems);
-  // }, [selectedItems]);
-
   const selectItem = useCallback((item: IClientItemData) => {
     setSelectedItems((prev) => [...prev, item]);
   }, []);
@@ -33,12 +26,6 @@ export const ItemSelector: FC<ItemSelectorProps> = (props) => {
   }, []);
 
   const isSelect = (item: IClientItemData) => {
-    // console.log(item, 'item');
-    // console.log(selectedItems, 'selectedItems');
-    // console.log(
-    //   selectedItems.find((itm) => item.id === itm.id),
-    //   'find'
-    // );
     return !!selectedItems.find((itm) => item.id === itm.id);
   };
 

@@ -19,25 +19,17 @@ export const useItems = (params: IUseItemsParams, isWorkplaceItem = false): ISer
   const items = useMemo(() => {
     let current = isWorkplaceItem ? workplaceItems : allItems;
 
-    // console.log(current);
-
     if (isTrash && !isUndefined(isTrash)) {
       current = current.filter((item) => item.isTrash);
     } else if (!isTrash && !isUndefined(isTrash)) {
       current = current.filter((item) => !item.isTrash);
     }
 
-    // console.log(current);
-    // console.log(isParent);
-    // console.log(!isUndefined(isParent));
-
     if (isParent && !isUndefined(isParent)) {
       current = current.filter((item) => item.parent);
     } else if (!isParent && !isUndefined(isTrash)) {
       current = current.filter((item) => !item.parent);
     }
-
-    // console.log(current, 'cur');
 
     if (onlyTypes) {
       current = current.filter((item) => {
