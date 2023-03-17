@@ -29,7 +29,7 @@ export const FileItemInfo: FC<IFileItemInfoProps> = ({ itemData }) => {
   }, [changeLike, id, isEqualLike, type, user.id]);
 
   const changeStarHandler = useCallback(() => {
-    dispatch(storageActions.changeStared({ id, isStar: !isEqualStar }));
+    dispatch(storageActions.changeStared({ ids: [id], isStar: !isEqualStar }));
     changeStar({ items: [{ id, type }], user: user.id, isStar: !isEqualStar });
   }, [changeLike, id, isEqualStar, type, user.id]);
 

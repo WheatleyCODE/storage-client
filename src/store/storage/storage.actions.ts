@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { StorageService } from 'services';
-import { IStorageData, ISettingsData, IStorageSettings } from 'types';
+import { IStorageData, IStorageSettings } from 'types';
 import { getActionMessage } from 'helpers';
 
 export const fetchStorage = createAsyncThunk<IStorageData>(

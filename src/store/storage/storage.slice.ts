@@ -68,17 +68,16 @@ export const storageSlice = createSlice({
       state.likedItems = liked;
     },
 
-    changeStared: (state, { payload }: PayloadAction<{ id: string; isStar: boolean }>) => {
-      const { id, isStar } = payload;
-      let stared = [...state.likedItems];
-      const item = stared.find((str) => str === id);
+    changeStared: (state, { payload }: PayloadAction<{ ids: string[]; isStar: boolean }>) => {
+      const { ids, isStar } = payload;
+      let stared = [...state.staredItems];
 
-      if (!item && isStar) {
-        stared.push(id);
+      if (isStar) {
+        stared = Array.from(new Set([...stared, ...ids]));
       }
 
-      if (item && !isStar) {
-        stared = stared.filter((str) => str !== id);
+      if (!isStar) {
+        stared = stared.filter((str) => ids.includes(str));
       }
 
       state.staredItems = stared;

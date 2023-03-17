@@ -241,6 +241,7 @@ export const changeLike = createAsyncThunk<IServerItemData, IChangeLikeFilds>(
 
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));
+      thunkAPI.dispatch(storageActions.changeLiked({ id: data.id, isLike: filds.isLike }));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
@@ -261,8 +262,11 @@ export const changeStar = createAsyncThunk<IServerItemData[], IChangeStarFilds>(
         })
       );
 
+      const ids = data.map((item) => item.id);
+
       thunkAPI.dispatch(storageActions.setItems(data));
       thunkAPI.dispatch(storageActions.setCurrent(data));
+      thunkAPI.dispatch(storageActions.changeStared({ ids, isStar: filds.isStar }));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
