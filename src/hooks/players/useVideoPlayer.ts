@@ -23,7 +23,7 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
   useEffect(() => {
     const originalDuration = videoRef.current?.duration;
     if (originalDuration) {
-      setStatus((p) => ({ ...p, videoTime: originalDuration }));
+      setStatus((p) => ({ ...p, duration: originalDuration }));
     }
   }, [videoRef.current?.duration]);
 
@@ -98,7 +98,6 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
 
     const updateProgress = () => {
       setStatus((p) => ({ ...p, currentTime: video.currentTime }));
-      setStatus((p) => ({ ...p, progress: (video.currentTime / status.duration) * 100 }));
     };
 
     video.addEventListener('timeupdate', updateProgress);
@@ -113,6 +112,7 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
     if (!current) return;
 
     current.tabIndex = -1;
+    current.focus();
 
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
@@ -129,6 +129,14 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
         case 'f':
           fullScreen();
           break;
+        case 'r':
+          e.preventDefault();
+          toggleIsRepeat();
+          break;
+        case 'm':
+          e.preventDefault();
+          toggleIsMute();
+          break;
 
         default:
       }
@@ -139,7 +147,7 @@ export const useVideoPlayer = (videoData: IClientItemData) => {
     return () => {
       current.removeEventListener('keydown', handleKeyDown);
     };
-  }, [forward, fullScreen, revert, toggleVideo]);
+  }, [forward, fullScreen, revert, toggleIsMute, toggleIsRepeat, toggleVideo]);
 
   return useMemo(
     () => ({

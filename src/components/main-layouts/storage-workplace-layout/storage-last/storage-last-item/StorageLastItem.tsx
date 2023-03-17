@@ -1,3 +1,4 @@
+import { Image } from 'components/ui/image/Image';
 import React, { FC, memo } from 'react';
 import { useNavigate } from 'react-router';
 import { IClientItemData } from 'types';
@@ -33,7 +34,9 @@ export const StorageLastItem: FC<IStorageLastItemProps> = memo((props) => {
       className={`storage-last-item ${isActive ? 'active' : ''}`}
     >
       <div className={`storage-last-item__icon ${getColorClassName(itemData)}`}>
-        <MemoIcon />
+        <div className="storage-last-item__image">
+          <Image itemData={itemData} />
+        </div>
       </div>
       <div className="storage-last-item__name">{itemData.name}</div>
     </div>

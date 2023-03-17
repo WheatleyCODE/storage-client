@@ -13,8 +13,6 @@ export const Image: FC<IImageProps> = memo((props) => {
   const imageLink = getImageLink(itemData);
   const MemoIcon = memo(getWorkplaceIcon(itemData));
 
-  // ? Возможно добавить открытие модалки с картинкой ?
-
   return (
     <div aria-hidden {...anotherProps} className={`image ${className || ''}`}>
       {imageLink && <img src={imageLink} alt="Картинка" />}

@@ -80,7 +80,6 @@ export { MainMobileMenuModal } from './modals/main-mobile-menu-modal/MainMobileM
 
 export { Search } from './storage/search/Search';
 export { StorageSize } from './storage/storage-size/StorageSize';
-export { Apps } from './storage/apps/Apps';
 export { SearchMobile } from './storage/search-mobile/SearchMobile';
 export { Settings } from './storage/settings/Settings';
 export { Logo } from './storage/logo/Logo';

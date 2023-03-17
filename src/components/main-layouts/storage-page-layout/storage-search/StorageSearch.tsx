@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { User, Search, Apps, Settings, SearchMobile } from 'components';
+import { User, Search, Settings, SearchMobile } from 'components';
 import './StorageSearch.scss';
 
 export const StorageSearch: FC = memo(() => {
@@ -7,9 +7,6 @@ export const StorageSearch: FC = memo(() => {
     <div className="storage-search">
       <div className="storage-search__user-icon">
         <User />
-      </div>
-      <div className="storage-search__apps-icon">
-        <Apps />
       </div>
       <div className="storage-search__settings-icon">
         <Settings />

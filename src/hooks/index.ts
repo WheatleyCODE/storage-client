@@ -15,5 +15,7 @@ export { useChangeDataWindows } from './useChangeDataWindows';
 export { useVideoPlayer } from './players/useVideoPlayer';
 export { useAudioPlayer } from './players/useAudioPlayer';
 export { useAudioPlayerHandlers } from './players/useAudioPlayerHandlers';
+export { useStorageHotkeys } from './useStorageHotkeys';
+export { useStorageHandlers } from './useStorageHandlers';
 
 export type { IContextOptions, IContextMenuItem } from './context-menu/useContextMenuItems';

@@ -1,13 +1,13 @@
 import { stateKeysToHashModals } from 'consts';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { modalsActions } from 'store';
+import { useTypedDispatch } from 'hooks';
 import { ModalsStateKeys } from 'types';
-import { useTypedDispatch } from './redux/useTypedDispatch';
 
 export const useOpenModal = () => {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
-  const { pathname } = useParams();
+  const { pathname } = useLocation();
 
   return (key: ModalsStateKeys, isHash = true) => {
     const hash = stateKeysToHashModals[key];

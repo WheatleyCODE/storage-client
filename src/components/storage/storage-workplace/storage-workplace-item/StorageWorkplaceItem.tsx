@@ -1,7 +1,13 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { MdPlayArrow } from 'react-icons/md';
-import { useActions, useItems, useOpenModal, useAudioPlayerHandlers } from 'hooks';
+import { MdBookmark, MdPlayArrow } from 'react-icons/md';
+import {
+  useActions,
+  useItems,
+  useOpenModal,
+  useAudioPlayerHandlers,
+  useTypedSelector,
+} from 'hooks';
 import {
   formatSize,
   getColorClassName,
@@ -27,6 +33,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const [isShowPlay, setIsShowPlay] = useState(false);
   const tracks = useItems({ onlyTypes: [ItemTypes.TRACK], isParent: true }, true) as ITrack[];
+  const { staredItems } = useTypedSelector((state) => state.storage);
   const { setTrack } = useAudioPlayerHandlers();
   const navigate = useNavigate();
   const { uploadFiles } = useActions();
@@ -101,6 +108,8 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
     setTrack(itemData, tracks);
   }, [itemData, setTrack, tracks]);
 
+  const isStar = staredItems.includes(itemData.id);
+
   return (
     <div
       aria-hidden
@@ -127,6 +136,11 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
           <MemoIcon className={`storage-workplace-item__icon ${getColorClassName(itemData)}`} />
         )}
         {itemData.name}
+        {isStar && (
+          <div className="storage-workplace-item__star">
+            <MdBookmark className="storage-workplace-item__star-icon" />
+          </div>
+        )}
       </div>
       <div className="storage-workplace-item__access">{transformAccess(itemData.accessType)}</div>
       <div className="storage-workplace-item__open-date">{transformDate(itemData.changeDate)}</div>

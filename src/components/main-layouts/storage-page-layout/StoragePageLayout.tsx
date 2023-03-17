@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, useAnimation } from 'framer-motion';
 import { Outlet } from 'react-router';
-import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
+import { useActions, useStorageHotkeys, useTypedDispatch, useTypedSelector } from 'hooks';
 import { ModalsController, AudioPlayer, Uploader } from 'components';
 import { modalsActions } from 'store';
 import { setAppLoader } from 'helpers';
@@ -107,12 +107,16 @@ export const StoragePageLayout: FC = () => {
     setAppLoader(isLoading);
   }, [isLoading]);
 
+  const { workplaceRef } = useStorageHotkeys();
+
   return (
     <div
       aria-hidden
       onClick={closeContextMenu}
       onContextMenu={lockContextMenu}
       className="storage-page-layout"
+      tabIndex={-2}
+      ref={workplaceRef}
     >
       <div className="storage-page-layout__header">
         <div className="storage-page-layout__header-block">

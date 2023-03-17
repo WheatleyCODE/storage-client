@@ -18,9 +18,9 @@ import {
 } from 'react-icons/md';
 import { BiDownload, BiInfoCircle, BiTrash } from 'react-icons/bi';
 import { IconType } from 'react-icons';
+import { useStorageHandlers } from 'hooks';
 import { emitOpenFiles } from 'helpers';
 import { FolderColors, ItemTypes } from 'types';
-import { useContextMenuHandlers } from './useContextMenuHandlers';
 
 export interface IContextOptions {
   color: FolderColors;
@@ -49,12 +49,12 @@ export const useContextMenuItems = () => {
     openModal,
     changeIsTrashHandler,
     changeColorHandler,
-    openIsInfo,
+    openInfo,
     openWorkpaceItem,
     copyFilesHandler,
     downloadArchiveHandler,
     changeStared,
-  } = useContextMenuHandlers();
+  } = useStorageHandlers();
 
   const createCMI: IContextMenuItem[] = useMemo(
     () => [
@@ -131,7 +131,7 @@ export const useContextMenuItems = () => {
       {
         title: 'Показать своства',
         Icon: BiInfoCircle,
-        handler: openIsInfo,
+        handler: openInfo,
       },
       {
         title: 'Скачать',

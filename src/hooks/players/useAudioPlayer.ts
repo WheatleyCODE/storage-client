@@ -167,6 +167,8 @@ export const useAudioPlayer = (audio: HTMLAudioElement) => {
     if (!current) return;
     current.tabIndex = -1;
 
+    current.focus();
+
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
         case 'ArrowRight':

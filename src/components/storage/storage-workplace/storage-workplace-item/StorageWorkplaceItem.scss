@@ -61,6 +61,16 @@
     width: 30px;
   }
 
+  &__star {
+    @include flex;
+    margin-left: 12px;
+  }
+
+  &__star-icon {
+    color: $colorLightRed;
+    font-size: 1rem;
+  }
+
   &.active {
     color: $colorDarkBlue;
     background-color: $colorLightBlue2;
