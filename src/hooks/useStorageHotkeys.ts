@@ -1,4 +1,5 @@
 /* eslint-disable consistent-return */
+import { emitOpenFiles } from 'helpers';
 import { useRef, useEffect } from 'react';
 import { useTypedSelector } from './redux/useTypedSelector';
 import { useStorageHandlers } from './useStorageHandlers';
@@ -8,6 +9,7 @@ export const useStorageHotkeys = () => {
   const { currentItems } = useTypedSelector((state) => state.storage);
   const {
     openModal,
+    openModalCheck,
     changeIsTrashHandler,
     changeCurrentArrow,
     openChangeModal,
@@ -35,48 +37,48 @@ export const useStorageHotkeys = () => {
         switch (key) {
           case 'f': {
             openModal('isCreateFolder', false);
-            break;
+            return;
           }
 
           case 'a': {
             openModal('isCreateAlbum', false);
-            break;
+            return;
           }
 
           case 't': {
             openModal('isCreateTrack', false);
-            break;
+            return;
           }
 
           case 'v': {
             openModal('isCreateVideo', false);
-            break;
+            return;
           }
 
           case 's': {
             openModal('isSettings');
-            break;
+            return;
           }
 
           case 'h': {
             openModal('isHotkeys');
-            break;
+            return;
           }
 
           default:
-            break;
+            return;
         }
       }
 
       if (cntr) {
         switch (key) {
           case 'u': {
-            console.log('upload');
-            break;
+            emitOpenFiles();
+            return;
           }
 
           default:
-            break;
+            return;
         }
       }
 
@@ -84,64 +86,64 @@ export const useStorageHotkeys = () => {
         case 'arrowup': {
           // ! Fix
           // changeCurrentArrow(1);
-          break;
+          return;
         }
 
         case 'arrowdown': {
           // ! Fix
           // changeCurrentArrow(-1);
-          break;
+          return;
         }
 
         case 'enter': {
           openWorkpaceItem();
-          break;
+          return;
         }
 
         case 'delete': {
           changeIsTrashHandler(true);
-          break;
+          return;
         }
 
         case 'a': {
-          openModal('isChangeAccess', false);
-          break;
+          openModalCheck('isChangeAccess', false);
+          return;
         }
 
         case 's': {
           // ! fix
           changeStared(true);
-          break;
+          return;
         }
 
         case 'l': {
-          openModal('isGetLink', false);
-          break;
+          openModalCheck('isGetLink', false);
+          return;
         }
 
         case 'n': {
-          openModal('isRename', false);
-          break;
+          openModalCheck('isRename', false);
+          return;
         }
 
         case 'z': {
-          openModal('isChangeParent', false);
-          break;
+          openModalCheck('isChangeParent', false);
+          return;
         }
 
         case 'i': {
           openInfo();
-          break;
+          return;
         }
 
         case 'd': {
           downloadArchiveHandler();
-          break;
+          return;
         }
 
         case 'e': {
           openChangeModal();
-          break;
+          return;
         }
 
         case 'c': {

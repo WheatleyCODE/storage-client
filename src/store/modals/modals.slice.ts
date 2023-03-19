@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { emitFocusMain } from 'helpers';
 import { IModalsPayload, IModalsState } from 'types';
 
 const initialState: IModalsState = {
@@ -34,6 +35,10 @@ export const modalsSlice = createSlice({
     changeIsModal: (state, { payload }: PayloadAction<IModalsPayload>) => {
       const { key, boolean } = payload;
       state[key] = boolean;
+
+      if (!boolean) {
+        emitFocusMain();
+      }
     },
 
     closeAllModals: (state) => {

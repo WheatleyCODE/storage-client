@@ -5,10 +5,6 @@
   height: 100vh;
   transition: all $animationDuration;
 
-  &:focus {
-    background-color: rgb(173, 188, 255);
-  }
-
   &__header {
     display: flex;
     justify-content: space-between;

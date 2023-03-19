@@ -5,6 +5,7 @@ import { MdHorizontalRule } from 'react-icons/md';
 import { Button, StorageSize } from 'components';
 import { storageActions } from 'store';
 import { useTypedDispatch, useTypedSelector } from 'hooks';
+import { emitFocusMain } from 'helpers';
 import { storageMenu } from 'consts';
 import { StorageMenuItem } from './storage-menu-item/StorageMenuItem';
 import './StorageMenu.scss';
@@ -25,6 +26,7 @@ export const StorageMenu: FC<IStorageMenuProps> = memo((props) => {
 
   const clearCurrentItems = useCallback(() => {
     dispatch(storageActions.setCurrent([]));
+    emitFocusMain();
   }, []);
 
   return (

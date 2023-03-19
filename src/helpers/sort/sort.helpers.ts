@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import { ItemTypesArr } from 'consts';
 import { ItemTypes, SortTypes, IServerItemData } from 'types';
-import { PropertyFactory } from './item-properties/item-properties.factory';
+import { PropertyFactory } from '../item-properties/item-properties.factory';
 // import { getSize } from 'utils';
 
 export class SortMethods {

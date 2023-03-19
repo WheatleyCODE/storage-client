@@ -10,8 +10,8 @@ import {
   useTypedSelector,
 } from 'hooks';
 import { storageActions } from 'store';
-import { IClientItemData, ItemTypes, ITrack, PathRoutes } from 'types';
-import { Emitter, EventNames } from 'helpers';
+import { IClientItemData, ItemTypes, ITrack, PathRoutes, EventNames } from 'types';
+import { Emitter } from 'helpers';
 import { checkPathnameOnPathRoute } from 'utils';
 import { StorageWorkplaceItem } from './storage-workplace-item/StorageWorkplaceItem';
 import './StorageWorkplace.scss';

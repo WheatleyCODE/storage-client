@@ -5,7 +5,7 @@ import { modalsActions, storageActions } from 'store';
 import { useActions, useOpenModal, useTypedSelector } from 'hooks';
 import { PropertyFactory } from 'helpers';
 import { getWorkplaceUrl } from 'utils';
-import { FolderColors } from 'types';
+import { FolderColors, ModalsStateKeys } from 'types';
 
 export const useStorageHandlers = () => {
   const { changeIsModal } = modalsActions;
@@ -31,6 +31,15 @@ export const useStorageHandlers = () => {
       }
     },
     [workplaceItems, currentItem]
+  );
+
+  const openModalCheck = useCallback(
+    (key: ModalsStateKeys, isHash: boolean) => {
+      if (!currentItem) return;
+
+      openModal(key, isHash);
+    },
+    [currentItem]
   );
 
   const openInfo = useCallback(() => {
@@ -66,6 +75,8 @@ export const useStorageHandlers = () => {
 
   const changeIsTrashHandler = useCallback(
     (isTrash: boolean) => {
+      if (!items.length) return;
+
       changeIsTrash({
         items,
         isTrash,
@@ -78,6 +89,8 @@ export const useStorageHandlers = () => {
 
   const changeStared = useCallback(
     (isStar: boolean) => {
+      if (!items.length) return;
+
       changeStar({
         items,
         isStar,
@@ -89,6 +102,8 @@ export const useStorageHandlers = () => {
 
   const changeColorHandler = useCallback(
     (color: FolderColors) => {
+      if (!items.length) return;
+
       changeColor({
         items,
         color,
@@ -98,12 +113,16 @@ export const useStorageHandlers = () => {
   );
 
   const copyFilesHandler = useCallback(() => {
+    if (!items.length) return;
+
     copyFiles({
       items,
     });
   }, [items]);
 
   const downloadArchiveHandler = useCallback(() => {
+    if (!items.length) return;
+
     downloadAcrhive({
       items,
     });
@@ -111,6 +130,7 @@ export const useStorageHandlers = () => {
 
   return {
     openModal,
+    openModalCheck,
     changeIsTrashHandler,
     changeColorHandler,
     copyFilesHandler,

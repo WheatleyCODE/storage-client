@@ -4,9 +4,9 @@ import { Outlet } from 'react-router';
 import { useActions, useStorageHotkeys, useTypedDispatch, useTypedSelector } from 'hooks';
 import { ModalsController, AudioPlayer, Uploader } from 'components';
 import { modalsActions } from 'store';
-import { setAppLoader } from 'helpers';
+import { emitFocusMain, Emitter, setAppLoader } from 'helpers';
 import { getContextMenuCoords, sleep } from 'utils';
-import { ICoords } from 'types';
+import { EventNames, ICoords } from 'types';
 import { StorageWorkplaceLayout } from '../storage-workplace-layout/StorageWorkplaceLayout';
 import { StorageAside } from './storage-aside/StorageAside';
 import { StorageLogo } from './storage-logo/StorageLogo';
@@ -92,7 +92,10 @@ export const StoragePageLayout: FC = () => {
     dispatch(changeIsModal({ key: 'isAside', boolean: false }));
   }, []);
 
-  const toggleMenu = useCallback(() => setIsOpenMenu((p) => !p), []);
+  const toggleMenu = useCallback(() => {
+    setIsOpenMenu((p) => !p);
+    emitFocusMain();
+  }, []);
 
   const closeInfo = useCallback(() => {
     dispatch(changeIsModal({ key: 'isInfo', boolean: false }));
@@ -108,6 +111,16 @@ export const StoragePageLayout: FC = () => {
   }, [isLoading]);
 
   const { workplaceRef } = useStorageHotkeys();
+
+  useEffect(() => {
+    const emitter = Emitter.getInstance();
+
+    const unsub = emitter.subscribe(EventNames.FOCUS_MAIN, () => {
+      workplaceRef.current?.focus();
+    });
+
+    return unsub;
+  }, [workplaceRef]);
 
   return (
     <div
