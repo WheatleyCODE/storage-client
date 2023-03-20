@@ -1,6 +1,7 @@
 @import 'styles/templates.scss';
 
 .storage-workplace {
+  position: relative;
   height: 100%;
   border: 1px solid $colorWhite;
 
@@ -11,5 +12,12 @@
   &.drag {
     background-color: $colorLightBlue2;
     border: 1px solid $colorBlue;
+  }
+
+  .select-square {
+    z-index: 200;
+    position: absolute;
+    background-color: rgba(170, 170, 170, 0.3);
+    border: 1px solid rgba(170, 170, 170, 0.4);
   }
 }

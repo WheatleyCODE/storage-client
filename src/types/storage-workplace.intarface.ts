@@ -13,6 +13,15 @@ export enum ItemTypes {
   VIDEO = 'VIDEO',
 }
 
+export type SelectSquare = {
+  top?: number;
+  left?: number;
+  bottom?: number;
+  right?: number;
+  height?: number;
+  width?: number;
+};
+
 export interface IItemFilds {
   id: string;
   type: ItemTypes;

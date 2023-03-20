@@ -59,7 +59,7 @@ export const StorageWorkplaceItem: FC<IStorageWorkplaceItemProps> = (props) => {
 
       changeActive(index);
     },
-    [index, addActive, changeActive]
+    [changeActive, index, addActive, addActiveShift]
   );
 
   const onContextMenu = useCallback(() => {
