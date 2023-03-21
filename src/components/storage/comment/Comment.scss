@@ -1,0 +1,100 @@
+@import 'styles/templates.scss';
+
+.comment {
+  overflow: hidden;
+  width: 320px;
+  transition: all 0.1s;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: $colorWhite;
+  color: $colorBlack;
+
+  &__user {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__user-name {
+    font-size: 1.1rem;
+    padding-bottom: 4px;
+  }
+
+  &__user-time {
+    font-size: 0.8rem;
+  }
+
+  &__letter {
+    @include flex;
+    color: $colorWhite;
+    font-size: 1.4rem;
+    background-color: $colorOrange;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-right: 13px;
+  }
+
+  &__user-buttons {
+    position: absolute;
+    right: 0;
+    display: flex;
+
+    .button:first-child {
+      margin-right: 7px;
+    }
+
+    svg {
+      color: $colorDarkGrey3;
+      font-size: 1.6rem;
+    }
+  }
+
+  &__user-answer-icon {
+    svg {
+      font-size: 2.2rem;
+    }
+  }
+
+  &__data {
+    position: relative;
+    margin-top: 15px;
+  }
+
+  &__count {
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: 0px;
+    right: 70px;
+  }
+
+  &__answer {
+    transition: all 0.1s;
+    cursor: pointer;
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    color: $colorDarkBlue;
+    border-bottom: 1px solid $colorDarkBlue;
+  }
+
+  &__answer:hover {
+    border-bottom: 1px solid $colorWhite;
+  }
+
+  &__text {
+    padding-bottom: 20px;
+  }
+
+  &__answers {
+    overflow: hidden;
+    padding-bottom: 5px;
+  }
+
+  &.outline {
+    outline: 4px solid $colorBlue;
+  }
+}

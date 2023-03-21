@@ -1,15 +1,13 @@
 import { $api } from 'api';
 import { AxiosResponse } from 'axios';
-import { IComment } from 'types';
+import { IComment, ICreateCommentFilds, IDeleteCommentFilds } from 'types';
 
 export class CommentService {
-  // ! Fix
-  static async create(filds: any): Promise<AxiosResponse<IComment>> {
+  static async create(filds: ICreateCommentFilds): Promise<AxiosResponse<IComment>> {
     return $api.post<IComment>('/api/commentator/create', filds);
   }
 
-  // ! Fix
-  static async delete(filds: any): Promise<AxiosResponse<IComment>> {
-    return $api.post<IComment>('/api/commentator/delete', filds);
+  static async delete(filds: IDeleteCommentFilds): Promise<AxiosResponse<IComment[]>> {
+    return $api.post<IComment[]>('/api/commentator/delete', filds);
   }
 }

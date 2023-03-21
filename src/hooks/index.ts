@@ -17,3 +17,5 @@ export { useAudioPlayer } from './players/useAudioPlayer';
 export { useAudioPlayerHandlers } from './players/useAudioPlayerHandlers';
 export { useStorageHotkeys } from './useStorageHotkeys';
 export { useStorageHandlers } from './useStorageHandlers';
+export { useRequest } from './useRequest';
+export { useComments } from './useComments';

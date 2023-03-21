@@ -1,16 +1,16 @@
-import React, { FC, MouseEvent, useCallback, memo } from 'react';
-import { Portal, Backdrop, Button } from 'components';
+import React, { FC, MouseEvent, useCallback, memo, useState } from 'react';
+import { Portal, Backdrop, Button, Comment, CommentCreator } from 'components';
+import { AnimatePresence } from 'framer-motion';
 import {
   MdArrowBack,
   MdArrowLeft,
   MdArrowRight,
-  MdDragIndicator,
   MdFileDownload,
   MdOutlineAddComment,
   MdOutlineRemoveRedEye,
   MdCreate,
 } from 'react-icons/md';
-import { useActions, useTypedSelector } from 'hooks';
+import { useActions, useComments, useTypedSelector } from 'hooks';
 import { IClientItemData } from 'types';
 import { useDispatch } from 'react-redux';
 import { modalsActions, storageActions } from 'store';
@@ -35,31 +35,51 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
     onChangeCurrent,
     onClickHeader,
   } = props;
+  const [anwerId, setAnwerId] = useState<string | undefined>();
+  const [isShowCreate, setIsShowCreate] = useState(false);
   const { workplaceItems } = useTypedSelector((state) => state.storage);
+  const { user } = useTypedSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { downloadAcrhive } = useActions();
+  const { id, type, name } = currentItemData;
+  const { comments, createCommentAsync, deleteCommentAsync, isLoading } = useComments({
+    id,
+    type,
+  });
+
+  const MemoEye = memo(MdOutlineRemoveRedEye);
+  const MemoCreate = memo(MdCreate);
 
   const stopPropagation = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     if (onClickHeader) onClickHeader();
   }, []);
 
-  const MemoEye = memo(MdOutlineRemoveRedEye);
-  const MemoCreate = memo(MdCreate);
+  const download = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      downloadAcrhive({ items: [{ id, type }] });
+    },
+    [id, type]
+  );
 
-  const download = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const { id, type } = currentItemData;
-    downloadAcrhive({ items: [{ id, type }] });
-  };
+  const toggleIsShowCreate = useCallback(() => {
+    setIsShowCreate((p) => !p);
+    setAnwerId(undefined);
+  }, []);
+
+  const closeIsShowCreate = useCallback(() => {
+    setIsShowCreate(false);
+    setAnwerId(undefined);
+  }, []);
 
   const changeCurrent = (num: number) => {
-    const index = workplaceItems.findIndex((item) => item.id === currentItemData.id);
+    const index = workplaceItems.findIndex((item) => item.id === id);
 
     const newItem = workplaceItems[index + num];
 
     if (index !== -1 && newItem) {
-      if (newItem.type !== currentItemData.type) {
+      if (newItem.type !== type) {
         const itemData = PropertyFactory.create(newItem);
         const key = isChange ? itemData.openChangeModalStateKey : itemData.openModalStateKey;
 
@@ -93,6 +113,27 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
     [currentItemData]
   );
 
+  const createComment = useCallback(
+    (text: string, answerFor?: string) => {
+      createCommentAsync({ id, type, text, answerFor });
+    },
+    [createCommentAsync, id, type]
+  );
+
+  const deleteComment = useCallback(
+    (comment: string) => {
+      deleteCommentAsync({ id, type, comment });
+    },
+    [deleteCommentAsync, id, type]
+  );
+
+  const setAnwerIdHandler = useCallback((anwrId: string) => {
+    setAnwerId(anwrId);
+    setIsShowCreate(true);
+  }, []);
+
+  const commentsItems = [...comments].filter((com) => !com.answerFor);
+
   return (
     <Portal>
       <Backdrop isDark onClose={onClose}>
@@ -106,7 +147,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
                 type="icon"
                 Icon={MdArrowBack}
               />
-              <div className="workplace-modal__item-name">{currentItemData.name}</div>
+              <div className="workplace-modal__item-name">{name}</div>
             </div>
             <div className="workplace-modal__app">
               {isChange ? (
@@ -120,7 +161,13 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
               )}
             </div>
             <div className="workplace-modal__buttons">
-              <Button outline="fill" color="none-light" type="icon" Icon={MdOutlineAddComment} />
+              <Button
+                onClick={toggleIsShowCreate}
+                outline="fill"
+                color="none-light"
+                type="icon"
+                Icon={MdOutlineAddComment}
+              />
               <Button
                 onClick={download}
                 outline="fill"
@@ -128,10 +175,8 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
                 type="icon"
                 Icon={MdFileDownload}
               />
-              <Button outline="fill" color="none-light" type="icon" Icon={MdDragIndicator} />
             </div>
           </div>
-
           <div className="workplace-modal__right">
             <div className="workplace-modal__icon">
               <Button
@@ -154,7 +199,43 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
               />
             </div>
           </div>
-          <div className="workplace-modal__item">{children}</div>
+          <div className="workplace-modal__item">
+            {children}
+
+            <div className="workplace-modal__comments">
+              <div className="workplace-modal__comments-items">
+                <AnimatePresence>
+                  {commentsItems.map((comment) => {
+                    const answers = [...comments].filter((com) => comment.id === com.answerFor);
+
+                    return (
+                      <Comment
+                        deleteComment={deleteComment}
+                        answers={answers}
+                        isSelect={anwerId === comment.id}
+                        setAnwerIdHandler={setAnwerIdHandler}
+                        key={comment.id}
+                        comment={comment}
+                      />
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+
+              <div className="workplace-modal__comments-creator">
+                <AnimatePresence>
+                  {isShowCreate && (
+                    <CommentCreator
+                      answerId={anwerId}
+                      createComment={createComment}
+                      onClose={closeIsShowCreate}
+                      name={user.name}
+                    />
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
         </div>
       </Backdrop>
     </Portal>

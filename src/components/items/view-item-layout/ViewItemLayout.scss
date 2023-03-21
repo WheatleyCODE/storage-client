@@ -9,13 +9,11 @@
 
   &__change-modal {
     position: absolute;
-    top: -50px;
-    right: -50px;
+    top: 10px;
+    right: 10px;
 
-    .icon-size {
-      svg {
-        font-size: 1.8rem;
-      }
+    svg {
+      font-size: 1.6rem;
     }
   }
 }

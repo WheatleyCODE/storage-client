@@ -91,6 +91,8 @@ export { ContextMenu } from './storage/context-menu/ContextMenu';
 export { ContextMenuItem } from './storage/context-menu/context-menu-item/ContextMenuItem';
 export { StorageWorkplace } from './storage/storage-workplace/StorageWorkplace';
 export { Uploader } from './storage/uploader/Uploader';
+export { Comment } from './storage/comment/Comment';
+export { CommentCreator } from './storage/comment/comment-creator/CommentCreator';
 
 export { Notifier } from './notifier/Notifier';
 

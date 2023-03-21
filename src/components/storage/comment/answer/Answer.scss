@@ -1,0 +1,59 @@
+@import 'styles/templates.scss';
+
+.answer {
+  transition: all 0.1s;
+  display: flex;
+  flex-direction: column;
+  border-top: $storageBorder;
+  margin-top: 12px;
+  padding-top: 13px;
+  padding-left: 10px;
+  background-color: $colorWhite;
+  color: $colorBlack;
+
+  &__user {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__user-name {
+    font-size: 1.1rem;
+    padding-bottom: 4px;
+  }
+
+  &__user-time {
+    font-size: 0.8rem;
+  }
+
+  &__letter {
+    @include flex;
+    color: $colorWhite;
+    font-size: 1.4rem;
+    background-color: $colorOrange;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-right: 13px;
+  }
+
+  &__user-buttons {
+    position: absolute;
+    right: 0;
+    display: flex;
+
+    .button:first-child {
+      margin-right: 7px;
+    }
+
+    svg {
+      color: $colorDarkGrey3;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__data {
+    position: relative;
+    margin-top: 15px;
+  }
+}
