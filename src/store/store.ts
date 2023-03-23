@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { errorLogger } from './middlewares/error.middleware';
+import { errorMiddleware } from './middlewares/error.middleware';
+import { restoreMiddleware } from './middlewares/restore.middleware';
 import { rootReducer } from './root-reducer';
 
 export const setupStore = () =>
   configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(errorLogger),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(errorMiddleware, restoreMiddleware),
   });
 
 export const store = setupStore();

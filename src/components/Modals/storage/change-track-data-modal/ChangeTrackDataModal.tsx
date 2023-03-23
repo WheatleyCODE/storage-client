@@ -55,13 +55,13 @@ export const ChangeTrackDataModal: FC<IChangeTrackDataModalProps> = (props) => {
 
   const changeImage = useCallback(() => {
     if (!image) return;
-    changeTrackImage({ image, id: currentItemData.id });
+    changeTrackImage({ image, id: currentItemData.id, type: currentItemData.type });
     closeIsImage();
   }, [image]);
 
   const changeTrack = useCallback(() => {
     if (!track) return;
-    changeTrackFile({ audio: track, id: currentItemData.id });
+    changeTrackFile({ audio: track, id: currentItemData.id, type: currentItemData.type });
     closeIsFile();
   }, [track]);
 
@@ -75,6 +75,7 @@ export const ChangeTrackDataModal: FC<IChangeTrackDataModalProps> = (props) => {
       author: authorInput.value,
       text: textInput.value,
       id: currentItemData.id,
+      type: currentItemData.type,
     });
     closeIsData();
   };

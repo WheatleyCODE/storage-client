@@ -1,6 +1,5 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { MdCheck } from 'react-icons/md';
-import { emitMessage } from 'helpers';
 import { formatSize } from 'utils';
 import './FileUploader.scss';
 
@@ -38,7 +37,9 @@ export const FileUploader: FC<IFileUploaderProps> = memo((props) => {
         const ext = file.name.split('.').pop() || '';
 
         if (!acceptExt.includes(ext)) {
-          emitMessage({ color: 'red', text: `Для загрузки доступны только [${acceptExt}] файлы` });
+          // ! fix dispatch
+          // eslint-disable-next-line max-len
+          // emitMessage({ color: 'red', text: `Для загрузки доступны только [${acceptExt}] файлы` });
           return;
         }
 
@@ -46,7 +47,7 @@ export const FileUploader: FC<IFileUploaderProps> = memo((props) => {
         setFile(file);
       }
     },
-    [setFile, emitMessage]
+    [setFile]
   );
 
   return (

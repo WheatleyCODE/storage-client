@@ -26,6 +26,7 @@ export const changeSettings = createAsyncThunk<IStorageData, IStorageSettings>(
         getActionMessage({
           color: 'default',
           text: 'Настроки сохранены',
+          isRestore: false,
         })
       );
 

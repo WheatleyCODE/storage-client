@@ -20,6 +20,7 @@ export const createVideo = createAsyncThunk<IVideo, ICreateVideoFilds>(
         getActionMessage({
           color: 'default',
           text: `Создано новое видео: ${data.name}`,
+          isRestore: false,
         })
       );
 
@@ -40,7 +41,8 @@ export const changeVideoFile = createAsyncThunk<IVideo, IChangeVideoFileFilds>(
       thunkAPI.dispatch(
         getActionMessage({
           color: 'default',
-          text: 'Треки были изменены',
+          text: 'Видео было изменено',
+          isRestore: false,
         })
       );
 
@@ -63,6 +65,7 @@ export const changeVideoImage = createAsyncThunk<IVideo, IChangeVideoImageFilds>
         getActionMessage({
           color: 'default',
           text: 'Картинка была изменена',
+          isRestore: false,
         })
       );
 
@@ -80,13 +83,6 @@ export const changeVideoData = createAsyncThunk<IVideo, IChangeVideoDataFilds>(
   async (filds, thunkAPI) => {
     try {
       const { data } = await VideoService.changeData(filds);
-
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Информация была изменена',
-        })
-      );
 
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));

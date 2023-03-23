@@ -31,6 +31,7 @@ export const GetLinkModal: FC<IGetLinkModal> = ({ currentItemData, onClose }) =>
       getActionMessage({
         color: 'default',
         text: 'Ссылка скопирована',
+        isRestore: false,
       })
     );
   }, []);

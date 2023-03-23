@@ -35,3 +35,29 @@ export const formatTime = (s: number) => {
 };
 
 export const isUndefined = (value: any) => typeof value === 'undefined';
+
+export const isManyItems = (obj: { items: any[] }) => obj.items.length > 1;
+
+export const isTypePending = (str: string): boolean => {
+  const arr = str.split('/');
+
+  if (arr.pop() === 'pending') return true;
+
+  return false;
+};
+
+export const isTypeFulfilled = (str: string): boolean => {
+  const arr = str.split('/');
+
+  if (arr.pop() === 'fulfilled') return true;
+
+  return false;
+};
+
+export const isTypeRejected = (str: string): boolean => {
+  const arr = str.split('/');
+
+  if (arr.pop() === 'rejected') return true;
+
+  return false;
+};

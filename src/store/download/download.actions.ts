@@ -13,6 +13,7 @@ export const downloadAcrhive = createAsyncThunk<any, IDownloadArchiveFilds>(
         getActionMessage({
           color: 'default',
           text: 'Загрузка архива',
+          isRestore: false,
         })
       );
 

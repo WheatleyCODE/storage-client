@@ -22,8 +22,6 @@ export const ChangeAccessModal: FC<IChangeAccessModal> = ({ currentItemData, onC
 
     changeAccessType({
       accessType: value,
-      prevAccessType: currentItemData.accessType,
-      isCanRestore: true,
       items: [currentItemData],
     });
     onClose();

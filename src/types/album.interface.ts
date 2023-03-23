@@ -1,4 +1,5 @@
 import { IItem } from './item.interface';
+import { ItemTypes } from './storage-workplace.intarface';
 import { ITrack } from './track.interface';
 
 export interface IAlbum extends IItem {
@@ -18,17 +19,20 @@ export interface ICreateAlbumFilds {
 
 export interface IChangeAlbumImageFilds {
   id: string;
+  type: ItemTypes;
   image: File;
 }
 
 export interface IChangeAlbumDataFilds {
   id: string;
+  type: ItemTypes;
   name: string;
   author: string;
 }
 
 export interface IChangeAlbumTracksFilds {
   id: string;
+  type: ItemTypes;
   tracks: string[];
 }
 

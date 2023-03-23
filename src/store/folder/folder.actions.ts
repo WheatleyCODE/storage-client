@@ -3,6 +3,7 @@ import { storageActions } from 'store';
 import { FolderService, ItemsService } from 'services';
 import { CacheData, getActionMessage } from 'helpers';
 import { IChangeColorFilds, ICreateFolderFilds, IFolder, IChildrensData } from 'types';
+// import { isManyItems } from 'utils';
 
 export const createFolder = createAsyncThunk<IFolder, ICreateFolderFilds>(
   'storage/createFolder',
@@ -14,6 +15,7 @@ export const createFolder = createAsyncThunk<IFolder, ICreateFolderFilds>(
         getActionMessage({
           color: 'default',
           text: `Создана новая папка: ${data.name}`,
+          isRestore: false,
         })
       );
 
@@ -31,13 +33,6 @@ export const changeColor = createAsyncThunk<IFolder[], IChangeColorFilds>(
     try {
       const { data } = await FolderService.changeColor(filds);
 
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Цвет изменен',
-        })
-      );
-
       thunkAPI.dispatch(storageActions.setItems(data));
       return data;
     } catch (e: any) {
@@ -46,6 +41,7 @@ export const changeColor = createAsyncThunk<IFolder[], IChangeColorFilds>(
   }
 );
 
+// ! Fix check change open date
 export const getChildrens = createAsyncThunk<IChildrensData, string>(
   'storage/getChildrens',
   async (string, thunkAPI) => {

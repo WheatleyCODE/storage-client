@@ -14,7 +14,7 @@ import { useActions, useComments, useTypedSelector } from 'hooks';
 import { IClientItemData } from 'types';
 import { useDispatch } from 'react-redux';
 import { modalsActions, storageActions } from 'store';
-import { PropertyFactory } from 'helpers';
+import { getActionMessage, PropertyFactory } from 'helpers';
 import './WorkplaceModal.scss';
 
 export interface IWorkplaceModalProps {
@@ -42,7 +42,7 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
   const dispatch = useDispatch();
   const { downloadAcrhive } = useActions();
   const { id, type, name } = currentItemData;
-  const { comments, createCommentAsync, deleteCommentAsync, isLoading } = useComments({
+  const { comments, createCommentAsync, deleteCommentAsync } = useComments({
     id,
     type,
   });
@@ -116,6 +116,10 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
   const createComment = useCallback(
     (text: string, answerFor?: string) => {
       createCommentAsync({ id, type, text, answerFor });
+
+      dispatch(
+        getActionMessage({ color: 'default', text: 'Комментарий добавлен', isRestore: false })
+      );
     },
     [createCommentAsync, id, type]
   );
@@ -123,6 +127,10 @@ export const WorkplaceModal: FC<IWorkplaceModalProps> = (props) => {
   const deleteComment = useCallback(
     (comment: string) => {
       deleteCommentAsync({ id, type, comment });
+
+      dispatch(
+        getActionMessage({ color: 'default', text: 'Комментарий удален', isRestore: false })
+      );
     },
     [deleteCommentAsync, id, type]
   );

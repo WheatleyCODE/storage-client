@@ -1,36 +1,44 @@
 import React, { FC, useCallback, useEffect, memo } from 'react';
 import { motion } from 'framer-motion';
-import { useTypedDispatch } from 'hooks';
+import { useActions, useTypedDispatch, useTypedSelector } from 'hooks';
 import { FaCheck, FaExclamationTriangle, FaInfoCircle, FaFireAlt, FaTimes } from 'react-icons/fa';
-import { notifierSlice, restoreAsyncThunks } from 'store';
-import { INotifierMessage } from 'types';
+import { restoreActions } from 'store';
+import { IRestoreMessage } from 'types';
 import './NotifierMessage.scss';
 
 export interface INotifierMessageProps {
-  message: INotifierMessage;
+  message: IRestoreMessage;
 }
 
 export const NotifierMessage: FC<INotifierMessageProps> = ({ message }) => {
-  const { id, text, color, restoreActionName, restoreParams } = message;
+  const { text, color, isRestore, clientId } = message;
+  const { restoreItemsReq } = useActions();
   const dispath = useTypedDispatch();
+  const { restoreItems } = useTypedSelector((state) => state.restore);
 
   const removeMessage = useCallback(() => {
-    dispath(notifierSlice.actions.notifierRemoveMessage(id));
-  }, [dispath, id]);
+    if (isRestore) {
+      dispath(restoreActions.deleteCurrentMessage(clientId));
+      return;
+    }
+
+    dispath(restoreActions.deleteMessageAndPrevItem(clientId));
+  }, [clientId]);
+
+  const restoreItemsHandler = useCallback(() => {
+    const restoreItem = restoreItems.find((item) => item.clientId === clientId);
+    if (!restoreItem) return;
+
+    restoreItemsReq(restoreItem);
+
+    dispath(restoreActions.deleteMessageAndPrevItem(clientId));
+  }, [restoreItems, clientId]);
 
   useEffect(() => {
     setTimeout(() => {
       removeMessage();
     }, 10000);
   }, [removeMessage]);
-
-  const restore = useCallback(() => {
-    if (restoreActionName && restoreParams) {
-      dispath(restoreAsyncThunks[restoreActionName](restoreParams));
-    }
-
-    removeMessage();
-  }, [removeMessage, restoreActionName, restoreParams]);
 
   const MemoFaCheck = memo(FaCheck);
   const MemoFaExclamation = memo(FaExclamationTriangle);
@@ -54,8 +62,8 @@ export const NotifierMessage: FC<INotifierMessageProps> = ({ message }) => {
         {color === 'default' && <MemoFaInfoCircle />}
       </div>
       <div className="notifier-message__text">{text}</div>
-      {restoreActionName && (
-        <div aria-hidden onClick={restore} className="notifier-message__restore">
+      {isRestore && (
+        <div onClick={restoreItemsHandler} aria-hidden className="notifier-message__restore">
           ОТМЕНИТЬ
         </div>
       )}

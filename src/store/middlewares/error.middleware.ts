@@ -1,18 +1,15 @@
-import { emitMessage } from 'helpers';
+import { getActionMessage } from 'helpers';
 import { isRejectedWithValue } from '@reduxjs/toolkit';
 import { Middleware } from 'redux';
 import { checkAuth } from 'store/auth/auth.actions';
 
-export const errorLogger: Middleware = () => (next) => (action) => {
+export const errorMiddleware: Middleware = (api) => (next) => (action) => {
   if (isRejectedWithValue(action)) {
     if (action.type === checkAuth.rejected.type) {
       return next(action);
     }
 
-    emitMessage({
-      color: 'red',
-      text: action.payload,
-    });
+    api.dispatch(getActionMessage({ color: 'red', text: action.payload, isRestore: false }));
   }
 
   return next(action);

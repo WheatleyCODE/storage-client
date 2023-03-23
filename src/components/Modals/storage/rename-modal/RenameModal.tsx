@@ -24,8 +24,6 @@ export const RenameModal: FC<IRenameModalProps> = ({ currentItemData, onClose })
       id,
       name: nameInput.value,
       type,
-      isCanRestore: true,
-      prevName: currentItemData.name,
     });
   };
 

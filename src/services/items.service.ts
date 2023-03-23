@@ -14,6 +14,7 @@ import {
   IAddListenFilds,
   IChangeLikeFilds,
   IChangeStarFilds,
+  IRestoreItemsFilds,
 } from 'types';
 
 export class ItemsService {
@@ -63,5 +64,9 @@ export class ItemsService {
 
   static async addListen(filds: IAddListenFilds): Promise<AxiosResponse<IServerItemData[]>> {
     return $api.post<IServerItemData[]>('/api/items/add/listen', filds);
+  }
+
+  static async restore(filds: IRestoreItemsFilds): Promise<AxiosResponse<IServerItemData[]>> {
+    return $api.post<IServerItemData[]>('/api/items/restore', filds);
   }
 }

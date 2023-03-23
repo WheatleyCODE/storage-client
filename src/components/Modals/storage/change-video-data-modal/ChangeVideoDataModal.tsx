@@ -53,14 +53,14 @@ export const ChangeVideoDataModal: FC<IChangeVideoDataModalProps> = (props) => {
 
   const changeImage = useCallback(() => {
     if (!image) return;
-    changeVideoImage({ id: currentItemData.id, image });
+    changeVideoImage({ id: currentItemData.id, image, type: currentItemData.type });
     closeIsImage();
   }, [image]);
 
   const changeFile = useCallback(() => {
     if (!video) return;
 
-    changeVideoFile({ video, id: currentItemData.id });
+    changeVideoFile({ video, id: currentItemData.id, type: currentItemData.type });
     closeIsFile();
   }, [video]);
 
@@ -72,6 +72,7 @@ export const ChangeVideoDataModal: FC<IChangeVideoDataModalProps> = (props) => {
       name: nameInput.value,
       description: descriptionInput.value,
       id: currentItemData.id,
+      type: currentItemData.type,
     });
     closeIsData();
   };

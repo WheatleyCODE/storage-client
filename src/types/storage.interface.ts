@@ -79,3 +79,7 @@ export interface IChildrensData {
 export type ISettingsData = IStorageSettings;
 
 export type IServerItemData = IFolder | IFile | IAlbum | ITrack | IImage | IVideo;
+
+export interface IRestoreItemsFilds {
+  items: IServerItemData[];
+}

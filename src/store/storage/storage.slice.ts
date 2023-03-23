@@ -118,7 +118,7 @@ export const storageSlice = createSlice({
       }
 
       if (!isStar) {
-        stared = stared.filter((str) => ids.includes(str));
+        stared = stared.filter((str) => !ids.includes(str));
       }
 
       state.staredItems = stared;

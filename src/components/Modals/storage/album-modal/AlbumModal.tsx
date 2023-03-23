@@ -16,6 +16,7 @@ export interface IAlbumModalProps {
 export const AlbumModal: FC<IAlbumModalProps> = ({ onClose, currentItemData }) => {
   const dispatch = useDispatch();
   const { setTrack } = useAudioPlayerHandlers();
+
   const albumTracks = currentItemData.tracks;
 
   const playAlbum = useCallback(() => {

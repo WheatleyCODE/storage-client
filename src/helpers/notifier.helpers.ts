@@ -1,17 +1,10 @@
-import { notifierActions } from 'store';
-import { INotifierCreateMessage } from 'types';
+import { restoreActions } from 'store';
+import { IRestoreAlertMessage } from 'types';
 
-export const getActionMessage = ({
-  color,
-  text,
-  restoreActionName,
-  restoreParams,
-}: INotifierCreateMessage) => {
-  return notifierActions.notifierAddMessage({
-    id: Date.now(),
+export const getActionMessage = ({ color, text, isRestore }: IRestoreAlertMessage) => {
+  return restoreActions.addCurrentMessage({
     color,
     text,
-    restoreActionName,
-    restoreParams,
+    isRestore,
   });
 };

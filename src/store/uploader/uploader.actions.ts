@@ -18,6 +18,7 @@ export const uploadFiles = createAsyncThunk<IServerItemData[], IUploadFilesFilds
         getActionMessage({
           color: 'default',
           text: 'Загрузка завершена',
+          isRestore: false,
         })
       );
 

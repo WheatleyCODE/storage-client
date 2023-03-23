@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { modalsActions, storageActions } from 'store';
+import { modalsActions, storageActions, restoreActions } from 'store';
 import { useActions, useOpenModal, useTypedSelector } from 'hooks';
 import { PropertyFactory } from 'helpers';
 import { getWorkplaceUrl } from 'utils';
@@ -10,14 +10,26 @@ import { FolderColors, ModalsStateKeys } from 'types';
 export const useStorageHandlers = () => {
   const { changeIsModal } = modalsActions;
   const { currentItems, user, workplaceItems } = useTypedSelector((state) => state.storage);
+  const { restoreItems } = useTypedSelector((state) => state.restore);
   const { isAside } = useTypedSelector((state) => state.modals);
-  const { changeIsTrash, changeColor, copyFiles, downloadAcrhive, changeStar } = useActions();
+  const { changeIsTrash, changeColor, copyFiles, downloadAcrhive, changeStar, restoreItemsReq } =
+    useActions();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const openModal = useOpenModal();
 
   const currentItem = currentItems[0];
   const items = useMemo(() => currentItems.map(({ id, type }) => ({ id, type })), [currentItems]);
+
+  const restoreItemsHandler = useCallback(() => {
+    const restoreItem = restoreItems[restoreItems.length - 1];
+
+    if (!restoreItem) return;
+
+    restoreItemsReq(restoreItem);
+
+    dispatch(restoreActions.deleteMessageAndPrevItem(restoreItem.clientId));
+  }, [restoreItems]);
 
   const changeCurrentArrow = useCallback(
     (num: number) => {
@@ -80,8 +92,6 @@ export const useStorageHandlers = () => {
       changeIsTrash({
         items,
         isTrash,
-        prevIsTrash: !isTrash,
-        isCanRestore: true,
       });
     },
     [items]
@@ -135,6 +145,7 @@ export const useStorageHandlers = () => {
     changeColorHandler,
     copyFilesHandler,
     openInfo,
+    restoreItemsHandler,
     openWorkpaceItem,
     openChangeModal,
     downloadArchiveHandler,

@@ -20,6 +20,7 @@ export const createTrack = createAsyncThunk<ITrack, ICreateTrackFilds>(
         getActionMessage({
           color: 'default',
           text: `Создан новый трек: ${data.name}`,
+          isRestore: false,
         })
       );
 
@@ -41,6 +42,7 @@ export const changeTrackFile = createAsyncThunk<ITrack, IChangeTrackFileFilds>(
         getActionMessage({
           color: 'default',
           text: 'Аудио файл был изменен',
+          isRestore: false,
         })
       );
 
@@ -64,6 +66,7 @@ export const changeTrackImage = createAsyncThunk<ITrack, IChangeTrackImageFilds>
         getActionMessage({
           color: 'default',
           text: 'Картинка была изменена',
+          isRestore: false,
         })
       );
 
@@ -78,17 +81,10 @@ export const changeTrackImage = createAsyncThunk<ITrack, IChangeTrackImageFilds>
 );
 
 export const changeTrackData = createAsyncThunk<ITrack, IChangeTrackDataFilds>(
-  'storage/changeTrackImage',
+  'storage/changeTrackData',
   async (filds, thunkAPI) => {
     try {
       const { data } = await TrackService.changeData(filds);
-
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Информация была изменена',
-        })
-      );
 
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));

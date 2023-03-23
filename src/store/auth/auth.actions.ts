@@ -21,6 +21,7 @@ export const register = createAsyncThunk<IAuthData, IRegisterFilds>(
         getActionMessage({
           color: 'default',
           text: `На вашу: ${email} почту было выслано письмо для активации аккаунта`,
+          isRestore: false,
         })
       );
 
@@ -43,6 +44,7 @@ export const login = createAsyncThunk<IAuthData, ILoginFilds>(
         getActionMessage({
           color: 'green',
           text: 'Вы успешно вошли в систему',
+          isRestore: false,
         })
       );
 
@@ -63,6 +65,7 @@ export const checkAuth = createAsyncThunk<IAuthData>('auth/checkAuth', async (_,
       getActionMessage({
         color: 'green',
         text: 'Вы успешно вошли в систему',
+        isRestore: false,
       })
     );
 
@@ -80,6 +83,7 @@ export const logout = createAsyncThunk<void>('auth/logout', async (_, thunkAPI) 
       getActionMessage({
         color: 'default',
         text: 'Вы вышли из системы',
+        isRestore: false,
       })
     );
 
@@ -101,6 +105,7 @@ export const activateAndLogin = createAsyncThunk<IAuthData, string>(
         getActionMessage({
           color: 'green',
           text: 'Вы успешно активировали аккаунт',
+          isRestore: false,
         })
       );
 
@@ -121,6 +126,7 @@ export const resetPassword = createAsyncThunk<IResetPasswordData, string>(
         getActionMessage({
           color: 'default',
           text: `На вашу почту: ${email} было выслано письмо с ссылкой для сброса пароля`,
+          isRestore: false,
         })
       );
 
@@ -141,6 +147,7 @@ export const changePassword = createAsyncThunk<IChangePasswordData, IChangePassw
         getActionMessage({
           color: 'green',
           text: 'Ваш пароль успешно изменён',
+          isRestore: false,
         })
       );
 

@@ -39,7 +39,7 @@ export const MusicItemInfo: FC<IMusicItemInfoProps> = (props) => {
   const changeStarHandler = useCallback(() => {
     dispatch(storageActions.changeStared({ ids: [id], isStar: !isEqualStar }));
     changeStar({ items: [{ id, type }], user: user.id, isStar: !isEqualStar });
-  }, [changeLike, id, isEqualStar, type, user.id]);
+  }, [changeStar, id, isEqualStar, type, user.id]);
 
   return (
     <div className="music-item-info">

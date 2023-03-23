@@ -12,6 +12,7 @@ export const useStorageHotkeys = () => {
     openModalCheck,
     changeIsTrashHandler,
     changeCurrentArrow,
+    restoreItemsHandler,
     openChangeModal,
     copyFilesHandler,
     openInfo,
@@ -74,6 +75,11 @@ export const useStorageHotkeys = () => {
         switch (key) {
           case 'u': {
             emitOpenFiles();
+            return;
+          }
+
+          case 'z': {
+            restoreItemsHandler();
             return;
           }
 
@@ -161,7 +167,7 @@ export const useStorageHotkeys = () => {
     return () => {
       current.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentItems]);
+  }, [currentItems, restoreItemsHandler]);
 
   return {
     workplaceRef,

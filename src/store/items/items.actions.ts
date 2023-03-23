@@ -2,37 +2,36 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { storageActions } from 'store';
 import { ItemsService } from 'services';
 import { getActionMessage } from 'helpers';
+import { isManyItems } from 'utils';
 import {
   IChangeAccessTypeFilds,
-  IChangeAccessTypeRestore,
   IChangeIsTrashFilds,
-  IChangeIsTrashRestore,
   IChangeNameFilds,
-  IChangeNameRestore,
   IChangeParentFilds,
-  IChangeParentRestore,
   ICopyFilesFilds,
   IDeleteItemsFilds,
   IItemFilds,
   IStorageData,
-  RestoreActionNames,
   IServerItemData,
   IChangeLikeFilds,
   IChangeStarFilds,
   ItemTypes,
   ITrack,
+  IRestoreItemsFilds,
 } from 'types';
 
 export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
   'storage/deleteItems',
   async (filds, thunkAPI) => {
     try {
+      const isMany = isManyItems(filds);
       const { data } = await ItemsService.deleteItems(filds);
 
       thunkAPI.dispatch(
         getActionMessage({
           color: 'default',
-          text: 'Удалено (Нужна генерация)',
+          text: isMany ? 'Элементы удалены' : 'Элемент удален',
+          isRestore: false,
         })
       );
 
@@ -44,67 +43,25 @@ export const deleteItems = createAsyncThunk<IStorageData, IDeleteItemsFilds>(
   }
 );
 
-export const changeIsTrash = createAsyncThunk<
-  IServerItemData[],
-  IChangeIsTrashFilds & IChangeIsTrashRestore
->('storage/changeIsTrashServer', async (filds, thunkAPI) => {
-  try {
-    const { items, isTrash, isCanRestore, prevIsTrash } = filds;
-    const { data } = await ItemsService.changeIsTrash({ items, isTrash });
+export const changeIsTrash = createAsyncThunk<IServerItemData[], IChangeIsTrashFilds>(
+  'storage/changeIsTrashServer',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await ItemsService.changeIsTrash(filds);
 
-    if (!isCanRestore) {
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Действие отменено',
-        })
-      );
+      thunkAPI.dispatch(storageActions.setItems(data));
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
-
-    if (isCanRestore) {
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'createChangeIsTrashMessage(filds)',
-          restoreActionName: RestoreActionNames.CHANGE_IS_THASH,
-          restoreParams: { ...filds, isTrash: prevIsTrash, isCanRestore: false },
-        })
-      );
-    }
-
-    thunkAPI.dispatch(storageActions.setItems(data));
-    return data;
-  } catch (e: any) {
-    return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
   }
-});
+);
 
-export const changeName = createAsyncThunk<IServerItemData, IChangeNameFilds & IChangeNameRestore>(
+export const changeName = createAsyncThunk<IServerItemData, IChangeNameFilds>(
   'storage/changeName',
   async (filds, thunkAPI) => {
     try {
-      const { id, name, type, isCanRestore, prevName } = filds;
-      const { data } = await ItemsService.changeName({ id, name, type });
-
-      if (!isCanRestore) {
-        thunkAPI.dispatch(
-          getActionMessage({
-            color: 'default',
-            text: 'Переименование отменено',
-          })
-        );
-      }
-
-      if (isCanRestore) {
-        thunkAPI.dispatch(
-          getActionMessage({
-            color: 'default',
-            text: 'Имя изменено',
-            restoreActionName: RestoreActionNames.CHANGE_NAME,
-            restoreParams: { ...filds, name: prevName, isCanRestore: false },
-          })
-        );
-      }
+      const { data } = await ItemsService.changeName(filds);
 
       if (data.type === ItemTypes.TRACK) {
         thunkAPI.dispatch(storageActions.changeAlbumTracks([data as ITrack]));
@@ -118,53 +75,25 @@ export const changeName = createAsyncThunk<IServerItemData, IChangeNameFilds & I
   }
 );
 
-export const changeParent = createAsyncThunk<
-  IServerItemData[],
-  IChangeParentFilds & IChangeParentRestore
->('storage/changeParent', async (filds, thunkAPI) => {
-  try {
-    const { items, parent, isCanRestore, prevParent } = filds;
-    const { data } = await ItemsService.changeParent({ items, parent });
+export const changeParent = createAsyncThunk<IServerItemData[], IChangeParentFilds>(
+  'storage/changeParent',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await ItemsService.changeParent(filds);
 
-    if (!isCanRestore) {
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Перемещение отменено',
-        })
-      );
+      thunkAPI.dispatch(storageActions.setItems(data));
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
-
-    if (isCanRestore) {
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Перемещение',
-          restoreActionName: RestoreActionNames.CHANGE_PARENT,
-          restoreParams: { ...filds, parent: prevParent, isCanRestore: false },
-        })
-      );
-    }
-
-    thunkAPI.dispatch(storageActions.setItems(data));
-    return data;
-  } catch (e: any) {
-    return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
   }
-});
+);
 
 export const createAccessLink = createAsyncThunk<IServerItemData, IItemFilds>(
   'storage/createAccessLink',
   async (filds, thunkAPI) => {
     try {
       const { data } = await ItemsService.createAccessLink(filds);
-
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Ссылка создана',
-        })
-      );
 
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));
@@ -175,41 +104,19 @@ export const createAccessLink = createAsyncThunk<IServerItemData, IItemFilds>(
   }
 );
 
-export const changeAccessType = createAsyncThunk<
-  IServerItemData[],
-  IChangeAccessTypeFilds & IChangeAccessTypeRestore
->('storage/changeAccessType', async (filds, thunkAPI) => {
-  try {
-    const { items, accessType, prevAccessType, isCanRestore } = filds;
-    const { data } = await ItemsService.changeAccessType({ items, accessType });
+export const changeAccessType = createAsyncThunk<IServerItemData[], IChangeAccessTypeFilds>(
+  'storage/changeAccessType',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await ItemsService.changeAccessType(filds);
 
-    if (!isCanRestore) {
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Изменение типа доступа отменено',
-        })
-      );
+      thunkAPI.dispatch(storageActions.setItems(data));
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
     }
-
-    // ! Fix, create restore system
-    // if (isCanRestore) {
-    //   thunkAPI.dispatch(
-    //     getActionMessage({
-    //       color: 'default',
-    //       text: 'Тип доступа изменен',
-    //       restoreActionName: RestoreActionNames.CHANGE_ACCESS_TYPE,
-    //       restoreParams: { ...filds, accessType: prevAccessType, isCanRestore: false },
-    //     })
-    //   );
-    // }
-
-    thunkAPI.dispatch(storageActions.setItems(data));
-    return data;
-  } catch (e: any) {
-    return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
   }
-});
+);
 
 export const copyFiles = createAsyncThunk<IServerItemData[], ICopyFilesFilds>(
   'storage/copyFiles',
@@ -221,9 +128,9 @@ export const copyFiles = createAsyncThunk<IServerItemData[], ICopyFilesFilds>(
         getActionMessage({
           color: 'default',
           text: 'Копирование файлов',
+          isRestore: false,
         })
       );
-
       thunkAPI.dispatch(storageActions.addItems(data));
       return data;
     } catch (e: any) {
@@ -242,9 +149,9 @@ export const changeLike = createAsyncThunk<IServerItemData, IChangeLikeFilds>(
         getActionMessage({
           color: 'default',
           text: filds.isLike ? 'Лайк поставлен' : 'Лайк удален',
+          isRestore: false,
         })
       );
-
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));
       thunkAPI.dispatch(storageActions.changeLiked({ id: data.id, isLike: filds.isLike }));
@@ -261,18 +168,44 @@ export const changeStar = createAsyncThunk<IServerItemData[], IChangeStarFilds>(
     try {
       const { data } = await ItemsService.changeStar(filds);
 
+      const ids = data.map((item) => item.id);
+
       thunkAPI.dispatch(
         getActionMessage({
           color: 'default',
           text: filds.isStar ? 'Добавлено в избранное' : 'Удалено из избранного',
+          isRestore: false,
         })
       );
-
-      const ids = data.map((item) => item.id);
 
       thunkAPI.dispatch(storageActions.setItems(data));
       thunkAPI.dispatch(storageActions.setCurrent(data));
       thunkAPI.dispatch(storageActions.changeStared({ ids, isStar: filds.isStar }));
+      return data;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');
+    }
+  }
+);
+
+export const restoreItemsReq = createAsyncThunk<IServerItemData[], IRestoreItemsFilds>(
+  'storage/restoreItemsReq',
+  async (filds, thunkAPI) => {
+    try {
+      const { data } = await ItemsService.restore(filds);
+
+      thunkAPI.dispatch(
+        getActionMessage({
+          color: 'default',
+          text: 'Действие отменено',
+          isRestore: false,
+        })
+      );
+
+      console.log(data, 'data');
+
+      thunkAPI.dispatch(storageActions.setItems(data));
+      thunkAPI.dispatch(storageActions.setCurrent(data));
       return data;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || 'Ошибка');

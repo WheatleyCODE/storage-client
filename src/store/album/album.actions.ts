@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { storageActions } from 'store';
 import { AlbumService } from 'services';
 import { getActionMessage } from 'helpers';
+
 import {
   ICreateAlbumFilds,
   IAlbum,
@@ -20,6 +21,7 @@ export const createAlbum = createAsyncThunk<IAlbum, ICreateAlbumFilds>(
         getActionMessage({
           color: 'default',
           text: `Создан новый альбом: ${data.name}`,
+          isRestore: false,
         })
       );
 
@@ -41,6 +43,7 @@ export const changeAlbumTracks = createAsyncThunk<IAlbum, IChangeAlbumTracksFild
         getActionMessage({
           color: 'default',
           text: 'Треки были изменены',
+          isRestore: false,
         })
       );
 
@@ -63,6 +66,7 @@ export const changeAlbumImage = createAsyncThunk<IAlbum, IChangeAlbumImageFilds>
         getActionMessage({
           color: 'default',
           text: 'Картинка была изменена',
+          isRestore: false,
         })
       );
 
@@ -76,17 +80,10 @@ export const changeAlbumImage = createAsyncThunk<IAlbum, IChangeAlbumImageFilds>
 );
 
 export const changeAlbumData = createAsyncThunk<IAlbum, IChangeAlbumDataFilds>(
-  'storage/changeAlbumImage',
+  'storage/changeAlbumData',
   async (filds, thunkAPI) => {
     try {
       const { data } = await AlbumService.changeData(filds);
-
-      thunkAPI.dispatch(
-        getActionMessage({
-          color: 'default',
-          text: 'Информация была изменена',
-        })
-      );
 
       thunkAPI.dispatch(storageActions.setItems([data]));
       thunkAPI.dispatch(storageActions.setCurrent([data]));

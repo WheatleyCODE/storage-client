@@ -35,8 +35,6 @@ export const ChangeParentModal: FC<IChangeParentModal> = (props) => {
       changeParent({
         items: currentItemsData.map(({ id, type }) => ({ id, type })),
         parent: null,
-        prevParent: filds.parent,
-        isCanRestore: true,
       });
 
       onClose();
@@ -50,8 +48,6 @@ export const ChangeParentModal: FC<IChangeParentModal> = (props) => {
     changeParent({
       items: currentItemsData.map(({ id, type }) => ({ id, type })),
       parent,
-      prevParent: filds.parent,
-      isCanRestore: true,
     });
 
     onClose();

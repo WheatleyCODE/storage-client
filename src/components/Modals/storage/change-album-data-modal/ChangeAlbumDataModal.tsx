@@ -24,6 +24,7 @@ export interface IChangeAlbumDataModalProps {
 
 export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
   const { onClose, currentItemData } = props;
+
   const albumTracks = [...(currentItemData.tracks || [])].map((track) =>
     PropertyFactory.create(track)
   );
@@ -55,12 +56,16 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
 
   const changeImage = useCallback(() => {
     if (!image) return;
-    changeAlbumImage({ image, id: currentItemData.id });
+    changeAlbumImage({ image, id: currentItemData.id, type: currentItemData.type });
     closeIsImage();
   }, [image]);
 
   const changeTracks = useCallback(() => {
-    changeAlbumTracks({ tracks: selectedItems.map((item) => item.id), id: currentItemData.id });
+    changeAlbumTracks({
+      tracks: selectedItems.map((item) => item.id),
+      id: currentItemData.id,
+      type: currentItemData.type,
+    });
     closeIsFile();
   }, [selectedItems]);
 
@@ -72,6 +77,7 @@ export const ChangeAlbumDataModal: FC<IChangeAlbumDataModalProps> = (props) => {
       name: nameInput.value,
       author: authorInput.value,
       id: currentItemData.id,
+      type: currentItemData.type,
     });
     closeIsData();
   };
